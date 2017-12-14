@@ -35,7 +35,7 @@ task :remote_environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use', 'ruby-2.3.3@global'
+  invoke :'rvm:use', 'ruby-2.3.3'
 end
 
 # Put any custom commands you need to run at setup
