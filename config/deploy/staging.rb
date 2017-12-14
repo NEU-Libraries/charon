@@ -1,5 +1,5 @@
 set :domain, 'charon.library.northeastern.edu'
-set :deploy_to, '/opt/charon/current'
+set :deploy_to, '/opt/charon'
 set :repository, 'https://github.com/NEU-Libraries/charon.git'
 set :branch, 'master'
 set :user, 'charon'
