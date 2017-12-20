@@ -19,5 +19,8 @@ test:
     - patron1@example.com
     - leland_himself@example.com
 
+staging:
+  # Add roles for users here.
+  
 production:
   # Add roles for users here.
