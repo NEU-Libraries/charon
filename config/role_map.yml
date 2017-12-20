@@ -20,7 +20,8 @@ test:
     - leland_himself@example.com
 
 staging:
-  # Add roles for users here.
-  
+  archivist:
+    - archivist1@example.com
+
 production:
   # Add roles for users here.
