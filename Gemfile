@@ -42,6 +42,9 @@ gem 'mina-multistage', require: false
 # Mysql/MariaDB for staging and production
 gem 'mysql2'
 
+# Figaro because ITS login manager seems to mess with environment variables
+gem 'figaro'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
