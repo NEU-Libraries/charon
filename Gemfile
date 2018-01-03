@@ -39,6 +39,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'mina', group: :development
 gem 'mina-multistage', require: false
 
+# Mysql/MariaDB for staging and production
+gem 'mysql2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

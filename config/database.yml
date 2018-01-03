@@ -25,5 +25,10 @@ production:
   database: db/production.sqlite3
 
 staging:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: charon
+  username: charon
+  password: <%= ENV["MYSQL_PASSWD"] %>
+  host: localhost
+  port: 3306

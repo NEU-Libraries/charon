@@ -27,3 +27,5 @@
 .nfs*
 
 .DS_Store
+
+/config/secrets.yml

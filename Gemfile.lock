@@ -446,6 +446,7 @@ GEM
     multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mysql2 (0.4.10)
     nest (2.1.0)
       redic
     net-http-persistent (2.9.4)
@@ -725,6 +726,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mina
   mina-multistage
+  mysql2
   puma (~> 3.0)
   rails (~> 5.0.6)
   rsolr (>= 1.0)
