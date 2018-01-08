@@ -6,8 +6,8 @@ development:
 staging:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: http://127.0.0.1:<%= ENV['FCREPO_DEVELOPMENT_PORT'] || 8080 %>/rest
-  base_path: /fcrepo-webapp-4.7.4
+  url: http://127.0.0.1:<%= ENV['FCREPO_DEVELOPMENT_PORT'] || 8080 %>/fcrepo-webapp-4.7.4/rest
+  base_path:
 test:
   user: fedoraAdmin
   password: fedoraAdmin
