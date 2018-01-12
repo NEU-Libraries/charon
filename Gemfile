@@ -45,6 +45,9 @@ gem 'mysql2'
 # Figaro because ITS login manager seems to mess with environment variables
 gem 'figaro'
 
+# Role management
+gem 'hydra-role-management'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
