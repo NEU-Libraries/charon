@@ -54,4 +54,5 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.default_url_options = { :host => "charon.library.northeastern.edu" }
 end
