@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
+
   mount Blacklight::Engine => '/'
-  
+
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+
+  scope module: 'users' do
+    resources :mass_invitations, :only => [:new, :create]
+  end
+
   mount Hydra::RoleManagement::Engine => '/'
 
   mount Qa::Engine => '/authorities'
