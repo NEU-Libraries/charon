@@ -732,6 +732,7 @@ DEPENDENCIES
   devise_invitable
   fcrepo_wrapper
   figaro
+  haml
   hydra-role-management
   hyrax (= 2.0.0)
   jbuilder (~> 2.5)

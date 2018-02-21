@@ -8,10 +8,11 @@ Rails.application.routes.draw do
     concerns :searchable
   end
 
-  devise_for :users
+  devise_for :users, :controllers => { :invitations => 'invitations' }
 
-  scope module: 'users' do
-    resources :mass_invitations, :only => [:new, :create]
+  devise_scope :user do
+    get 'users/invitation/mass_invite' => 'users/invitations#mass_invite'
+    post 'users/invitation/mass_invitation' => 'users/invitations#mass_invitation'
   end
 
   mount Hydra::RoleManagement::Engine => '/'
