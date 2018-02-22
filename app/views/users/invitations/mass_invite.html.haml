@@ -1,0 +1,33 @@
+.container
+  .panel.panel-default
+    .panel-heading Bootstrap Jquery Add More Field Example
+    .panel-body
+      %form{action: "action.php"}
+        .input-group.control-group.after-add-more
+          %input.form-control{name: "addmore[]", placeholder: "Enter Name Here", type: "text"}/
+          .input-group-btn
+            %button.btn.btn-success.add-more{type: "button"}
+              %i.glyphicon.glyphicon-plus
+      / Copy Fields
+      .copy.hide
+        .control-group.input-group{style: "margin-top:10px"}
+          %input.form-control{name: "addmore[]", placeholder: "Enter Name Here", type: "text"}/
+          .input-group-btn
+            %button.btn.btn-danger.remove{type: "button"}
+              %i.glyphicon.glyphicon-remove
+:javascript
+  $(document).ready(function() {
+
+
+    $(".add-more").click(function(){
+        var html = $(".copy").html();
+        $(".after-add-more").after(html);
+    });
+
+
+    $("body").on("click",".remove",function(){
+        $(this).parents(".control-group").remove();
+    });
+
+
+  });
