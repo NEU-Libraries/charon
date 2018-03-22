@@ -39,7 +39,7 @@ gem 'mina', group: :development
 gem 'mina-multistage', require: false
 
 # Mysql/MariaDB for staging and production
-gem 'mysql2'
+gem 'mysql2', '~> 0.4.10'
 
 # Figaro because ITS login manager seems to mess with environment variables
 gem 'figaro'
