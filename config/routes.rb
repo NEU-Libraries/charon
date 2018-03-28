@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     concerns :searchable
   end
 
-  devise_for :users, :controllers => { :invitations => 'invitations' }
+  devise_for :users, :controllers => { :invitations => 'users/invitations' }
 
   devise_scope :user do
-    get 'users/invitation/mass_invite' => 'users/invitations#mass_invite'
+    # get 'users/invitation/mass_invite' => 'users/invitations#mass_invite'
     post 'users/invitation/mass_invitation' => 'users/invitations#mass_invitation'
   end
 
