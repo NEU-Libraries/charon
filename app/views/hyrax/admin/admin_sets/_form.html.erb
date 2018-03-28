@@ -1,0 +1,55 @@
+<div class="panel panel-default tabs" id="admin-set-controls">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+      <a href="#description" role="tab" data-toggle="tab"><%= t('.tabs.description') %></a>
+    </li>
+    <% if @form.persisted? %>
+      <!-- <li>
+        <a href="#participants" role="tab" data-toggle="tab"><%= t('.tabs.participants') %></a>
+      </li> -->
+      <li>
+        <a href="#visibility" role="tab" data-toggle="tab"><%= t('.tabs.visibility') %></a>
+      </li>
+      <li>
+        <a href="#workflow" role="tab" data-toggle="tab"><%= t('.tabs.workflow') %></a>
+      </li>
+      <li>
+        <a href="#users" role="tab" data-toggle="tab"><%= t('.tabs.users') %></a>
+      </li>
+      <li>
+        <a href="#invite" role="tab" data-toggle="tab"><%= t('.tabs.invite') %></a>
+      </li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div id="description" class="tab-pane active">
+      <div class="panel panel-default labels">
+        <%= simple_form_for @form, url: [hyrax, :admin, @form] do |f| %>
+          <div class="panel-body">
+            <%= render 'form_metadata', f: f %>
+
+            <% if f.object.persisted? && f.object.member_ids.present? %>
+              <%# we're loading these values dynamically to speed page load %>
+              <%= f.input :thumbnail_id,
+                          input_html: { data: { text: f.object.thumbnail_title } } %>
+            <% end %>
+
+          </div>
+
+          <div class="panel-footer">
+            <% cancel_path = f.object.persisted? ? hyrax.admin_admin_set_path(f.object) : hyrax.dashboard_collections_path %>
+            <%= link_to t('.cancel'), cancel_path, class: 'btn btn-default pull-right' %>
+            <%= f.button :submit, class: 'btn btn-primary pull-right'%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% if @form.persisted? %>
+      <!-- <%= render 'form_participants' %> -->
+      <%= render 'form_visibility' %>
+      <%= render 'form_workflow' %>
+      <%= render 'form_users' %>
+      <%= render 'form_invite' %>
+    <% end %>
+  </div>
+</div>
