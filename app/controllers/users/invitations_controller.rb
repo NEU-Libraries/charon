@@ -10,14 +10,13 @@ class Users::InvitationsController < Devise::InvitationsController
       render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
     else
       begin
+        # Does the user have permissions?
         @admin_set = AdminSet.find(params[:id])
         authorize! :edit, @admin_set
       rescue CanCan::AccessDenied
-        render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+        render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false and return
       end
     end
-
-    # Does the user have permissions?
 
     # Are there email addresses?
 
