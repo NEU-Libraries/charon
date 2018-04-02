@@ -38,6 +38,7 @@ class Users::InvitationsController < Devise::InvitationsController
       User.invite!(:email => email)
     end
 
+    flash[:notice] = "Mass Invitation of users sent."
     redirect_to edit_admin_admin_set_path(params[:id])
   end
 end
