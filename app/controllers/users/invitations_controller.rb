@@ -1,9 +1,14 @@
 class Users::InvitationsController < Devise::InvitationsController
   def mass_invitation
     # Are they logged in?
-    if !current_user.blank?
+    if current_user.blank?
+      render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false and return
+    end
 
     # Is there a pid, and is it an admin set?
+    if params[:id].blank? || AdminSet.find(params[:id]).blank?
+      render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+    end
 
     # Does the user have permissions?
 
@@ -12,8 +17,5 @@ class Users::InvitationsController < Devise::InvitationsController
     # Are they valid (basic regex)?
 
     # Loop and process
-  else # must be logged in to mass invite
-      render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false and return
-    end
   end
 end
