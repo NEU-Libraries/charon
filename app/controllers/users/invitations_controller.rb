@@ -6,8 +6,15 @@ class Users::InvitationsController < Devise::InvitationsController
     end
 
     # Is there a pid, and is it an admin set?
-    if params[:id].blank? || AdminSet.find(params[:id]).blank?
+    if params[:id].blank?
       render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+    else
+      begin
+        @admin_set = AdminSet.find(params[:id])
+        authorize! :edit, @admin_set
+      rescue CanCan::AccessDenied
+        render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+      end
     end
 
     # Does the user have permissions?
