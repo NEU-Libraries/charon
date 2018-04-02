@@ -1,6 +1,6 @@
 #invite.tab-pane
   .panel.panel-default.labels
-    %form{:action => ""}
+    %form{:action => users_invitation_mass_invitation_path(params[:id])}
       .input-group.control-group.after-add-more
         %input.form-control{:name => "emails[]", :placeholder => "Enter Name Here", :type => "text"}/
         .input-group-btn
