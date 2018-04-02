@@ -30,9 +30,13 @@ class Users::InvitationsController < Devise::InvitationsController
     emails.each do |email_str|
       if !(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.match?(email_str))
         # Raise custom error and flash to tell the user their input was bad
+        render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
       end
     end
 
     # Loop and process
+    emails.each do |email|
+      User.invite!(:email => email)
+    end
   end
 end
