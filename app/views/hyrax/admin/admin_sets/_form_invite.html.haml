@@ -1,20 +1,25 @@
 #invite.tab-pane
   .panel.panel-default.labels
-    %form{:action => users_invitation_mass_invitation_path(params[:id])}
-      .input-group.control-group.after-add-more
-        %input.form-control{:name => "emails[]", :placeholder => "Enter Name Here", :type => "text"}/
-        .input-group-btn
-          %button.btn.btn-success.add-more{:type => "button"}
-            %i.glyphicon.glyphicon-plus
-            Add
-      / Copy Fields-These are the fields which we get through jquery and then add after the above input,
-      .copy-fields.hide
-        .control-group.input-group{:style => "margin-top:10px"}
+    = form_tag do
+      .panel-body
+        .input-group.control-group.after-add-more
           %input.form-control{:name => "emails[]", :placeholder => "Enter Name Here", :type => "text"}/
           .input-group-btn
-            %button.btn.btn-danger.remove{:type => "button"}
-              %i.glyphicon.glyphicon-remove
-              Remove
+            %button.btn.btn-success.add-more{:type => "button"}
+              %i.glyphicon.glyphicon-plus
+              Add
+        / Copy Fields-These are the fields which we get through jquery and then add after the above input,
+        .copy-fields.hide
+          .control-group.input-group{:style => "margin-top:10px"}
+            %input.form-control{:name => "emails[]", :placeholder => "Enter Name Here", :type => "text"}/
+            .input-group-btn
+              %button.btn.btn-danger.remove{:type => "button"}
+                %i.glyphicon.glyphicon-remove
+                Remove
+      .panel-footer
+        = link_to t('.cancel'), hyrax.admin_admin_sets_path, class: 'btn btn-default pull-right'
+        = submit_tag "Invite", class: 'btn btn-primary pull-right'
+
 :javascript
   $(document).ready(function() {
     //here first get the contents of the div with name class copy-fields and add it to after "after-add-more" div class.

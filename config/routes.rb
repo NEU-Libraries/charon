@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     # get 'users/invitation/mass_invite' => 'users/invitations#mass_invite'
-    post 'users/invitation/mass_invitation' => 'users/invitations#mass_invitation'
+    post 'users/invitation/mass_invitation/:id' => 'users/invitations#mass_invitation', as: :mass_invitation
   end
 
   mount Hydra::RoleManagement::Engine => '/'
