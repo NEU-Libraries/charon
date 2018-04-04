@@ -1,4 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
+  include Rails.application.routes.url_helpers #why is is this necessary?
   def mass_invitation
     # Are they logged in?
     if current_user.blank?
@@ -24,7 +25,7 @@ class Users::InvitationsController < Devise::InvitationsController
     end
 
     # Are they valid (basic regex)?
-    emails = params[:emails]
+    emails = params[:emails].reject { |x| x.empty? }
 
     # regex from https://stackoverflow.com/questions/742451/what-is-the-simplest-regular-expression-to-validate-emails-to-not-accept-them-bl
     emails.each do |email_str|
@@ -35,7 +36,12 @@ class Users::InvitationsController < Devise::InvitationsController
 
     # Loop and process
     emails.each do |email|
+      # check if user exists
       User.invite!(:email => email)
+
+      # check if permissions exists
+      # ActiveRecord::RecordInvalid (Validation failed: Access has already been taken)
+
       # Add them as viewers of the admin set
       Hyrax::PermissionTemplateAccess.create!(permission_template: @admin_set.permission_template,
                                                   agent_type: 'user',
