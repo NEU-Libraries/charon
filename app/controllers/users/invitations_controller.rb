@@ -36,6 +36,11 @@ class Users::InvitationsController < Devise::InvitationsController
     # Loop and process
     emails.each do |email|
       User.invite!(:email => email)
+      # Add them as viewers of the admin set
+      Hyrax::PermissionTemplateAccess.create!(permission_template: @admin_set.permission_template,
+                                                  agent_type: 'user',
+                                                  agent_id: email,
+                                                  access: Hyrax::PermissionTemplateAccess::VIEW)
     end
 
     flash[:notice] = "Mass Invitation of users sent."
