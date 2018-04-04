@@ -4,25 +4,25 @@ class Users::InvitationsController < Devise::InvitationsController
   def mass_invitation
     # Are they logged in?
     if current_user.blank?
-      render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false and return
+      http_error(403)
     end
 
     # Is there a pid, and is it an admin set?
     if params[:id].blank?
-      render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+      http_error(400)
     else
       begin
         # Does the user have permissions?
         @admin_set = AdminSet.find(params[:id])
         authorize! :edit, @admin_set
       rescue CanCan::AccessDenied
-        render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false and return
+        http_error(403)
       end
     end
 
     # Are there email addresses?
     if params[:emails].blank?
-      render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+      http_error(400)
     end
 
     # Are they valid (basic regex)?
@@ -31,7 +31,7 @@ class Users::InvitationsController < Devise::InvitationsController
     # regex from https://stackoverflow.com/questions/742451/what-is-the-simplest-regular-expression-to-validate-emails-to-not-accept-them-bl
     emails.each do |email_str|
       if !(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.match?(email_str))
-        render :file => "#{Rails.root}/public/400.html", :status => 400, :layout => false and return
+        http_error(400)
       end
     end
 
