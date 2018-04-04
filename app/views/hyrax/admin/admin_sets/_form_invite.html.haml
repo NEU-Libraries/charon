@@ -1,6 +1,6 @@
 #invite.tab-pane
   .panel.panel-default.labels
-    = form_tag do
+    = form_tag Rails.application.routes.url_helpers.mass_invitation_path(params[:id]) do
       .panel-body
         .input-group.control-group.after-add-more
           %input.form-control{:name => "emails[]", :placeholder => "Enter Name Here", :type => "text"}/
