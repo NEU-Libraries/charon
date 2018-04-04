@@ -43,8 +43,6 @@ class Users::InvitationsController < Devise::InvitationsController
       end
 
       # check if permissions exists
-      # ActiveRecord::RecordInvalid (Validation failed: Access has already been taken)
-
       begin
         # Add them as viewers of the admin set
         Hyrax::PermissionTemplateAccess.create!(permission_template: @admin_set.permission_template,
@@ -52,6 +50,7 @@ class Users::InvitationsController < Devise::InvitationsController
                                                     agent_id: email,
                                                     access: Hyrax::PermissionTemplateAccess::VIEW)
       rescue ActiveRecord::RecordInvalid
+        # ActiveRecord::RecordInvalid (Validation failed: Access has already been taken)
         flash[:error] = "View permission already exists for - #{email}"
       end
 
