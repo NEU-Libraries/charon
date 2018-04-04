@@ -1,5 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
-  include Rails.application.routes.url_helpers #why is is this necessary?
+  include Hydra::Controller::ControllerBehavior
+
   def mass_invitation
     # Are they logged in?
     if current_user.blank?
@@ -37,19 +38,26 @@ class Users::InvitationsController < Devise::InvitationsController
     # Loop and process
     emails.each do |email|
       # check if user exists
-      User.invite!(:email => email)
+      if User.find_by_email(email).blank?
+        User.invite!(:email => email)
+      end
 
       # check if permissions exists
       # ActiveRecord::RecordInvalid (Validation failed: Access has already been taken)
 
-      # Add them as viewers of the admin set
-      Hyrax::PermissionTemplateAccess.create!(permission_template: @admin_set.permission_template,
-                                                  agent_type: 'user',
-                                                  agent_id: email,
-                                                  access: Hyrax::PermissionTemplateAccess::VIEW)
+      begin
+        # Add them as viewers of the admin set
+        Hyrax::PermissionTemplateAccess.create!(permission_template: @admin_set.permission_template,
+                                                    agent_type: 'user',
+                                                    agent_id: email,
+                                                    access: Hyrax::PermissionTemplateAccess::VIEW)
+      rescue ActiveRecord::RecordInvalid
+        flash[:error] = "View permission already exists for - #{email}"
+      end
+
     end
 
     flash[:notice] = "Mass Invitation of users sent."
-    redirect_to edit_admin_admin_set_path(params[:id])
+    redirect_to hyrax.edit_admin_admin_set_path(params[:id])
   end
 end
