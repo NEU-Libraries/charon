@@ -10,6 +10,23 @@
             %th Manager
             %th Depositor
             %th Viewer
+          - ptas.each do |pta|
+            %tr
+              %td
+                = pta.agent_id
+              %td
+                .checkbox
+                  %label
+                    %input{:type => "checkbox"}/
+              %td
+                .checkbox
+                  %label
+                    %input{:type => "checkbox"}/
+              %td
+                .checkbox
+                  %label
+                    %input{:type => "checkbox"}/
+
       .panel-footer
         = link_to t('.cancel'), hyrax.admin_admin_sets_path, class: 'btn btn-default pull-right'
         = submit_tag "Adjust", class: 'btn btn-primary pull-right'
