@@ -3,6 +3,11 @@
     = form_tag do
       .panel-body
         %table.table.table-striped
+          %tr
+            %th Email
+            %th Manager
+            %th Depositor
+            %th Viewer
       .panel-footer
         = link_to t('.cancel'), hyrax.admin_admin_sets_path, class: 'btn btn-default pull-right'
         = submit_tag "Adjust", class: 'btn btn-primary pull-right'
