@@ -1,3 +1,5 @@
+- pt = Hyrax::PermissionTemplate.where("source_id = ?", params[:id])
+- ptas = Hyrax::PermissionTemplateAccess.where("permission_template_id = ?", 1)
 #users.tab-pane
   .panel.panel-default.labels
     = form_tag do
