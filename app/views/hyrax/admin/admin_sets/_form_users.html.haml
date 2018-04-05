@@ -1,4 +1,8 @@
 #users.tab-pane
   .panel.panel-default.labels
-    .panel-body
-      %table.table.table-striped
+    = form_tag do
+      .panel-body
+        %table.table.table-striped
+      .panel-footer
+        = link_to t('.cancel'), hyrax.admin_admin_sets_path, class: 'btn btn-default pull-right'
+        = submit_tag "Adjust", class: 'btn btn-primary pull-right'
