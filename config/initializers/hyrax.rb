@@ -1,4 +1,5 @@
 Hyrax.config do |config|
+  config.iiif_image_server = true
   # Injected via `rails g hyrax:work Work`
   config.register_curation_concern :work
   # Register roles that are expected by your implementation.
