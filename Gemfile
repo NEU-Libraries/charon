@@ -71,7 +71,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'hyrax', '2.0.0'
-gem 'hyrax', github: 'samvera/hyrax'
+gem 'hyrax', github: 'samvera/hyrax', :ref => '25154c5d05baff45daab737a9d08e69293cb0814'
 
 group :development, :test do
   gem 'solr_wrapper'
