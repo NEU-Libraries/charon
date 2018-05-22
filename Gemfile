@@ -85,3 +85,5 @@ group :development, :test do
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
 end
+
+gem 'riiif', '~> 1.1'
