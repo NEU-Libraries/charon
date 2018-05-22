@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.public_file_server.enabled = true
   config.active_job.queue_adapter = :inline
   # Settings specified here will take precedence over those in config/application.rb.
 
