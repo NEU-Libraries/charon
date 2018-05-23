@@ -1,4 +1,15 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+
+  jobs_web_constraint = lambda do |request|
+    current_user = request.env['warden'].user
+    (current_user.present? && current_user.ability.admin?)
+  end
+
+  constraints jobs_web_constraint do
+    mount Sidekiq::Web => '/jobs'
+  end
 
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   mount Blacklight::Engine => '/'
