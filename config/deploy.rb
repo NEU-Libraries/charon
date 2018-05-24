@@ -56,7 +56,6 @@ task :deploy do
     command %{export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8; export LC_ALL=en_US.UTF-8}
 
     invoke :'git:clone'
-    invoke :'sidekiq:quiet'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
