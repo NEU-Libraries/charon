@@ -461,8 +461,6 @@ GEM
       rake
     mina-multistage (1.0.3)
       mina (~> 1.0)
-    mina-sidekiq (1.0.3)
-      mina (>= 1.0.2)
     mini_magick (4.8.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -771,7 +769,6 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mina
   mina-multistage
-  mina-sidekiq
   mysql2 (~> 0.4.10)
   puma
   rails

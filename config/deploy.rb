@@ -3,7 +3,6 @@ require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 require 'mina/rvm'    # for rvm support. (https://rvm.io)
-require 'mina_sidekiq/tasks'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -69,7 +68,7 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
         command %{sudo /bin/systemctl restart httpd.service}
-        invoke :'sidekiq:restart'
+        command %{sudo /bin/systemctl restart sidekiq.service}
       end
     end
   end
