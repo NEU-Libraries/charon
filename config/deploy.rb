@@ -1,3 +1,5 @@
+require 'fileutils'
+
 require 'mina/multistage'
 require 'mina/rails'
 require 'mina/git'
@@ -42,8 +44,10 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   # command %{rbenv install 2.3.0 --skip-existing}
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/pids/")
-  command %(mkdir -p "#{fetch(:deploy_to)}/shared/log/")
+  dirname = File.dirname("/opt/charon/derivatives")
+  unless File.directory?(dirname)
+    FileUtils.mkdir_p(dirname)
+  end
 end
 
 desc "Deploys the current version to the server."

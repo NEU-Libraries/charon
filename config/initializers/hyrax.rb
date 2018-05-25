@@ -180,6 +180,9 @@ Hyrax.config do |config|
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
   # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
+  if !(Rails.env.development? || Rails.env.test?)
+    config.derivatives_path = "/opt/charon/derivatives"
+  end
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true
