@@ -87,8 +87,8 @@ cd /home/vagrant
 gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 \curl -sSL https://get.rvm.io | bash -s stable --autolibs=enabled
 source /home/vagrant/.rvm/scripts/rvm
-rvm install ruby-2.3.3
-rvm use ruby-2.3.3
+rvm install ruby-2.4
+rvm use ruby-2.4
 
 echo "Setting timezone for vm so embargo doesn't get confused"
 echo 'export TZ=America/New_York' >> /home/vagrant/.zshrc
