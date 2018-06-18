@@ -1,4 +1,4 @@
-class WarehouseUploader < CarrierWave::Uploader::Base
+class GenericUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
