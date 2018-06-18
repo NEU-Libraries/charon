@@ -1,0 +1,2 @@
+class GenericUploadsController < ApplicationController
+end
