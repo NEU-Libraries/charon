@@ -4,13 +4,10 @@ class GenericUploadsController < ApplicationController
   end
 
   def create
-    puts params.inspect
-
     gu = GenericUpload.new(params[:generic_upload].permit({generics: []}))
     gu.save!
+  end
 
-    puts gu.generics[0].url # => '/url/to/file.png'
-    puts gu.generics[0].current_path # => 'path/to/file.png'
-    puts gu.generics[0].identifier # => 'file.png'
+  def index
   end
 end
