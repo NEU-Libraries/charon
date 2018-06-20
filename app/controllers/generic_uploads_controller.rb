@@ -11,6 +11,8 @@ class GenericUploadsController < ApplicationController
   end
 
   def index
+    # u.avatars[0].identifier # => 'file.png'
+    @uploads = GenericUpload.all
   end
 
   def show
