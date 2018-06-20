@@ -1,6 +1,8 @@
 Hyrax.config do |config|
   # Injected via `rails g hyrax:work Work`
   config.register_curation_concern :work
+  # Injected via `rails g hyrax:work Composition`
+  config.register_curation_concern :composition
   # Register roles that are expected by your implementation.
   # @see Hyrax::RoleRegistry for additional details.
   # @note there are magical roles as defined in Hyrax::RoleRegistry::MAGIC_ROLES
