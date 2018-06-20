@@ -6,8 +6,13 @@ class GenericUploadsController < ApplicationController
   def create
     gu = GenericUpload.new(params[:generic_upload].permit({generics: []}))
     gu.save!
+
+    render 'index'
   end
 
   def index
+  end
+
+  def show
   end
 end
