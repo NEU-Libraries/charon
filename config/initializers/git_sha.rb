@@ -16,19 +16,3 @@ HYRAX_VERSION =
     else
       "Unknown"
     end
-
-HYRAX_BRANCH =
-    if File.exist?('Gemfile.lock')
-      branch_match = `grep branch Gemfile.lock`
-      branch_match.present? ? branch_match.lines.first.chomp.lstrip.split(/ /)[1] : nil
-    else
-      "Unknown"
-    end
-
-HYRAX_BRANCH_REVISION =
-    if File.exist?('Gemfile.lock')
-      revision_match = `grep revision Gemfile.lock`
-      revision_match.present? ? revision_match.lines.first.chomp.lstrip.split(/ /)[1] : nil
-    else
-      "Unknown"
-    end
