@@ -11,8 +11,6 @@ class Page < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  belongs_to :composition, :class_name => "Composition", predicate: ActiveFedora::RDF::Fcrepo::RelsExt.isPartOf
-
   def page?
     true
   end

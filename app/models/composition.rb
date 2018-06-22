@@ -14,8 +14,6 @@ class Composition < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
 
-  has_many :pages
-
   def page?
     false
   end
