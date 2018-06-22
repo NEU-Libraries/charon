@@ -1,7 +1,5 @@
 class Page < ActiveFedora::Base
-  include Hydra::AccessControls::Permissions
-  include Hydra::PCDM::ObjectBehavior
-  include Hydra::Works::FileSetBehavior
+  include ::Hyrax::FileSetBehavior
 
   property :page_number, predicate: ::RDF::URI.new('http://opaquenamespace.org/hydra/pageNumber'), multiple: false do |index|
     index.as :stored_searchable
