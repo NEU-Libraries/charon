@@ -1,6 +1,4 @@
-class Page < ActiveFedora::Base
-  include ::Hyrax::FileSetBehavior
-
+class Page < FileSet
   property :page_number, predicate: ::RDF::URI.new('http://opaquenamespace.org/hydra/pageNumber'), multiple: false do |index|
     index.as :stored_searchable
     index.type :integer
