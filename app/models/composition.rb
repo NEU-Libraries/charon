@@ -3,6 +3,8 @@
 class Composition < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
+  filters_association :members, as: :pages, condition: :page?
+
   self.indexer = CompositionIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
@@ -13,4 +15,8 @@ class Composition < ActiveFedora::Base
   include ::Hyrax::BasicMetadata
 
   has_many :pages
+
+  def page?
+    false
+  end
 end
