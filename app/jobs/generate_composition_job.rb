@@ -35,6 +35,7 @@ class GenerateCompositionJob < ApplicationJob
         txt = parser.parse_image(file_path, i)
         page_list[file_name] = txt
 
+        Hydra::Works::UploadFileToFileSet.call(page, File.open(file_path))
         page.text = txt
         page.save!
 
