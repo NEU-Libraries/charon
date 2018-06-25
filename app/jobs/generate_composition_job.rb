@@ -1,7 +1,9 @@
 class GenerateCompositionJob < ApplicationJob
   queue_as :default
 
-  def perform(pdf_location, working_dir)
+  def perform(composition_title, pdf_location, working_dir)
+    comp = Composition.new(:title => ["#{composition_title}"])
+
     parser = Libera::Parser.new
 
     file_list = []
@@ -15,6 +17,9 @@ class GenerateCompositionJob < ApplicationJob
 
     for i in 0..page_count
       begin
+        page = Page.create
+        page.page_number = i + 1
+
         pdf = Magick::ImageList.new(pdf_location + "[#{i}]") {self.density = Libera.configuration.density; self.quality = Libera.configuration.quality}
         page_img = pdf.first
 
@@ -29,6 +34,11 @@ class GenerateCompositionJob < ApplicationJob
 
         txt = parser.parse_image(file_path, i)
         page_list[file_name] = txt
+
+        page.text = txt
+        page.save!
+
+        comp.members << page
       ensure
         pdf.destroy! && page_img.destroy!
       end
