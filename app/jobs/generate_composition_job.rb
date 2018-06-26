@@ -3,6 +3,7 @@ class GenerateCompositionJob < ApplicationJob
 
   def perform(composition_title, pdf_location, working_dir)
     comp = Composition.new(:title => ["#{composition_title}"])
+    puts "Composition id: #{comp.id}"
 
     parser = Libera::Parser.new
 
@@ -18,6 +19,7 @@ class GenerateCompositionJob < ApplicationJob
     for i in 0..page_count
       begin
         page = Page.create
+        puts "Page id: #{page.id}"
         page.page_number = i + 1
 
         pdf = Magick::ImageList.new(pdf_location + "[#{i}]") {self.density = Libera.configuration.density; self.quality = Libera.configuration.quality}
@@ -45,6 +47,13 @@ class GenerateCompositionJob < ApplicationJob
       end
     end
 
+    tei_doc = TeiDocument.create
+    puts "Tei Doc id: #{tei_doc.id}"
     parser.generate_tei(page_list)
+
+    tei_path = "#{working_dir}/tei.xml"
+    tei_doc.text = File.read(tei_path)
+
+    tei_doc.save!
   end
 end
