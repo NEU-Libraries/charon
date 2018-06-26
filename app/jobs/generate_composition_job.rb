@@ -1,9 +1,9 @@
 class GenerateCompositionJob < ApplicationJob
   queue_as :default
 
-  def perform(composition_title, pdf_location, working_dir)
-    comp = Composition.new(:title => ["#{composition_title}"])
-    puts "Composition id: #{comp.id}"
+  def perform(composition_id, pdf_location, working_dir)
+    comp = Composition.find(composition_id)
+    puts "Composition id: #{composition_id}"
 
     parser = Libera::Parser.new
 
@@ -55,5 +55,7 @@ class GenerateCompositionJob < ApplicationJob
     tei_doc.text = File.read(tei_path)
 
     tei_doc.save!
+
+    return comp
   end
 end
