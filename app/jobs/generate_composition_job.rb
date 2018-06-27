@@ -2,6 +2,10 @@ class GenerateCompositionJob < ApplicationJob
   queue_as :default
 
   def perform(composition_id, pdf_location, working_dir)
+    if [composition_id, pdf_location, working_dir].any? {|arg| arg.blank?}
+      raise "GenerateCompositionJob must have valid non-blank values for all arguments"
+    end
+
     comp = Composition.find(composition_id)
     puts "Composition id: #{composition_id}"
 

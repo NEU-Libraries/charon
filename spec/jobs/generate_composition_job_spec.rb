@@ -4,7 +4,7 @@ RSpec.describe GenerateCompositionJob, type: :job do
   include ActiveJob::TestHelper
 
   let(:composition) { Composition.create(:title => ["Test Composition"]) }
-  # subject(:job) { described_class.perform_later(composition.id, "", "") }
+  subject(:job) { described_class.perform_later(composition.id, "", "") }
 
   it "matches with enqueued job" do
     ActiveJob::Base.queue_adapter = :test
@@ -18,5 +18,6 @@ RSpec.describe GenerateCompositionJob, type: :job do
   end
 
   it "creates pages" do
+    perform_enqueued_jobs { job }
   end
 end
