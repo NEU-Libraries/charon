@@ -17,4 +17,10 @@ class GenericUploadsController < ApplicationController
 
   def show
   end
+
+  def generate_composition
+    gu = GenericUpload.find(params[:id])
+    # gu.generics_identifiers.first
+    GenerateCompositionJob.perform_later()
+  end
 end
