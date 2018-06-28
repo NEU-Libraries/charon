@@ -7,11 +7,12 @@ class GenericUploadsController < ApplicationController
     gu = GenericUpload.new(params[:generic_upload].permit({generics: []}))
     gu.save!
 
-    render 'index'
+    redirect_to action: "index"
   end
 
   def index
     # u.avatars[0].identifier # => 'file.png'
+    puts "DGC DEBUG: #{GenericUpload.count}"
     @uploads = GenericUpload.all
   end
 
@@ -20,7 +21,9 @@ class GenericUploadsController < ApplicationController
 
   def generate_composition
     gu = GenericUpload.find(params[:id])
-    # gu.generics_identifiers.first
-    GenerateCompositionJob.perform_later()
+    pdf_path = gu.generics.first.file.path
+    comp = Composition.create(:title => ["Test Composition"])
+    working_dir = "#{Rails.root}/tmp/libera-#{Time.now.to_f.to_s.gsub!('.','')}"
+    GenerateCompositionJob.perform_later(comp.id, pdf_path, working_dir)
   end
 end

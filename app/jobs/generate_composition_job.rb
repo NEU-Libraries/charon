@@ -6,10 +6,13 @@ class GenerateCompositionJob < ApplicationJob
       raise "GenerateCompositionJob must have valid non-blank values for all arguments"
     end
 
+    Libera.configuration.working_dir = working_dir
+
     comp = Composition.find(composition_id)
     puts "Composition id: #{composition_id}"
 
     parser = Libera::Parser.new
+    parser.mk_working_dir
 
     file_list = []
 
