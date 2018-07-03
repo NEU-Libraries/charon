@@ -63,6 +63,8 @@ class GenerateCompositionJob < ApplicationJob
 
     tei_doc.save!
 
+    comp.members << tei_doc
+
     return comp
   end
 end
