@@ -51,5 +51,7 @@ Rails.application.routes.draw do
   resources :generic_uploads
   get 'generic_uploads/:id/generate_composition' => 'generic_uploads#generate_composition', as: :generate_composition
 
+  get 'editor/:id' => 'cwrc#show'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
