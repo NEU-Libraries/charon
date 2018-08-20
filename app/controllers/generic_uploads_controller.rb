@@ -24,6 +24,12 @@ class GenericUploadsController < ApplicationController
     pdf_path = gu.generics.first.file.path
     comp = Composition.create(:title => ["Test Composition"])
     working_dir = "#{Rails.root}/tmp/libera-#{Time.now.to_f.to_s.gsub!('.','')}"
+
+    current_ability = Ability.new(user)
+    env = Hyrax::Actors::Environment.new(comp, current_ability, {})
+    status = Hyrax::CurationConcern.actor.create(env)
+    puts "DGC DEBUG: #{status.inspect}"
+
     GenerateCompositionJob.perform_later(comp.id, pdf_path, working_dir)
   end
 end
