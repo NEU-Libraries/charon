@@ -1,8 +1,0 @@
-pt-BR:
-  hyrax:
-    icons:
-      composition:     'fa fa-file-text-o'
-    select_type:
-      composition:
-        description:        "Composition trabalhos"
-        name:               "Composition"

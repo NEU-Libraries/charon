@@ -1,6 +1,0 @@
-set :domain, 'charon.library.northeastern.edu'
-set :deploy_to, '/opt/charon'
-set :repository, 'https://github.com/NEU-Libraries/charon.git'
-set :branch, 'master'
-set :user, 'charon'
-set :rails_env, 'staging'
