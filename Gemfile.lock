@@ -70,6 +70,8 @@ GEM
       kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (~> 5.0)
+    bootsnap (1.3.2)
+      msgpack (~> 1.0)
     builder (3.2.3)
     concurrent-ruby (1.1.3)
     crass (1.0.4)
@@ -124,6 +126,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
       faraday
+    ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hamster (3.0.0)
@@ -163,6 +166,10 @@ GEM
       rdf-vocab (>= 0.8)
       slop
     link_header (0.0.8)
+    listen (3.1.5)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -175,6 +182,7 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.4)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nio4r (2.3.1)
@@ -209,6 +217,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (12.3.1)
+    rb-fsevent (0.10.3)
+    rb-inotify (0.9.10)
+      ffi (>= 0.5.0, < 2)
     rdf (3.0.6)
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
@@ -235,6 +246,7 @@ GEM
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
     ruby-progressbar (1.10.0)
+    ruby_dep (1.5.0)
     slop (4.6.2)
     solrizer (4.1.0)
       activesupport
@@ -280,6 +292,8 @@ PLATFORMS
 
 DEPENDENCIES
   blacklight (~> 7.0.0.rc1)
+  bootsnap
+  listen
   rails
   valkyrie
 
