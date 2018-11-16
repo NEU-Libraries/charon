@@ -7,31 +7,24 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
 
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
 /node_modules
 /yarn-error.log
 
+/public/assets
 .byebug_history
-.vagrant
 
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
+# Ignore master key for decrypting credentials and more.
+/config/master.key
 
 .DS_Store
-
-/config/secrets.yml
-
-# Ignore application configuration
-/config/application.yml
-
-# Temporary exclude
-/public/uploads
+.nfs*

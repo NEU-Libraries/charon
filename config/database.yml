@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: example
+  pool: 5
+
+development:
+  <<: *default
+  database: charon_development
+
+test:
+  <<: *default
+  database: charon_test
