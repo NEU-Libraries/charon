@@ -2,21 +2,18 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'valkyrie'
-gem 'blacklight', '~> 7.0.0.rc1'
+gem 'hydra-head', '~> 11.0.0.rc1'
+gem 'blacklight', '~> 7.0.0.rc2'
 gem 'devise'
-gem 'hydra-head'
 gem 'hydra-role-management'
+gem 'haml-rails'
 
 # Rails gems
 gem 'bootsnap'
+gem 'sass-rails'
 
 group :development do
   gem 'listen'
-end
-
-# Blacklight
-group :development, :test do
-  gem 'solr_wrapper', '>= 0.3'
 end
 
 # Blacklight
@@ -27,7 +24,7 @@ gem 'popper_js'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'jquery-rails'
 
+# Blacklight
 group :development, :test do
-  gem 'fcrepo_wrapper'
-  gem 'rspec-rails'
+  gem 'solr_wrapper', '>= 0.3'
 end

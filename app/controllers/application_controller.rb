@@ -3,5 +3,4 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include Hydra::Controller::ControllerBehavior
   layout :determine_layout
-
 end

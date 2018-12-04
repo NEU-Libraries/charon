@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   mount Blacklight::Engine => '/'
-  root to: "catalog#index"
+  # root to: "catalog#index"
+
   concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -21,5 +22,6 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  root to: "pages#home"
 end

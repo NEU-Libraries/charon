@@ -1,0 +1,37 @@
+%nav.navbar.navbar-expand-md.navbar-dark.bg-dark.topbar{:role => "navigation"}
+  %div{:class => container_classes}
+    = link_to application_name, root_path, class: 'mb-0 navbar-brand'
+    %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "user-util-collapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#user-util-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #user-util-collapse.collapse.navbar-collapse.justify-content-md-end
+      = render 'shared/user_util_links'
+%main{:role => "main"}
+  / Main jumbotron for a primary marketing message or call to action
+  .jumbotron
+    .container
+      %h1.display-3 Hello, world!
+      %p This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+      %p
+        %a.btn.btn-primary.btn-lg{:href => "#", :role => "button"} Learn more »
+  .container
+    / Example row of columns
+    .row
+      .col-md-4
+        %h2 Heading
+        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        %p
+          %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
+      .col-md-4
+        %h2 Heading
+        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        %p
+          %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
+      .col-md-4
+        %h2 Heading
+        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        %p
+          %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
+    %hr/
+  / /container
+%footer.container
+  %p © Company 2017-2018
