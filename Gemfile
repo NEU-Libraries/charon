@@ -7,9 +7,11 @@ gem 'blacklight', '~> 7.0.0.rc2'
 gem 'devise'
 gem 'hydra-role-management'
 gem 'haml-rails'
+gem 'carrierwave'
 
 # NEU gems
 gem 'minerva'
+gem 'libera'
 
 # Rails gems
 gem 'bootsnap'
