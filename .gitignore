@@ -28,3 +28,5 @@
 
 .DS_Store
 .nfs*
+
+/public/uploads

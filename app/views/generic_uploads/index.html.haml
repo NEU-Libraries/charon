@@ -1,21 +1,13 @@
-%h1 Listing generic_uploads
+%h1
+  Uploaded Files
 
-%table
-  %thead
+%table.table.table-striped
+  - @uploads.each_with_index do |upload, i|
     %tr
-      %th Generics
-      %th
-      %th
-      %th
-
-  %tbody
-    - @generic_uploads.each do |generic_upload|
-      %tr
-        %td= generic_upload.generics
-        %td= link_to 'Show', generic_upload
-        %td= link_to 'Edit', edit_generic_upload_path(generic_upload)
-        %td= link_to 'Destroy', generic_upload, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Generic upload', new_generic_upload_path
+      %td
+        = i
+      - upload.generics_identifiers.each do |ident|
+        %td
+          = ident
+        %td
+          %button.btn.btn-success.btn-add{:href => "", :type => "button", "data-toggle"=>"tooltip", :title => "Assign Workflow"} Assign Workflow
