@@ -1,0 +1,13 @@
+= form_for @generic_upload do |f|
+  - if @generic_upload.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@generic_upload.errors.count, "error")} prohibited this generic_upload from being saved:"
+      %ul
+        - @generic_upload.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :generics
+    = f.text_field :generics
+  .actions
+    = f.submit 'Save'

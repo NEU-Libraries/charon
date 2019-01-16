@@ -1,0 +1,21 @@
+%h1 Listing generic_uploads
+
+%table
+  %thead
+    %tr
+      %th Generics
+      %th
+      %th
+      %th
+
+  %tbody
+    - @generic_uploads.each do |generic_upload|
+      %tr
+        %td= generic_upload.generics
+        %td= link_to 'Show', generic_upload
+        %td= link_to 'Edit', edit_generic_upload_path(generic_upload)
+        %td= link_to 'Destroy', generic_upload, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Generic upload', new_generic_upload_path

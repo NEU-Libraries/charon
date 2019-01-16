@@ -1,0 +1,2 @@
+module GenericUploadsHelper
+end

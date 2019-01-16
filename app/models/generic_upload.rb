@@ -1,0 +1,2 @@
+class GenericUpload < ApplicationRecord
+end
