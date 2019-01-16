@@ -8,6 +8,9 @@ gem 'devise'
 gem 'hydra-role-management'
 gem 'haml-rails'
 
+# NEU gems
+gem 'minerva'
+
 # Rails gems
 gem 'bootsnap'
 gem 'sass-rails'

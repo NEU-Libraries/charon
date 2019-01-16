@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_150226) do
+ActiveRecord::Schema.define(version: 2019_01_16_181137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,85 @@ ActiveRecord::Schema.define(version: 2018_11_20_150226) do
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "minerva_assignments", force: :cascade do |t|
+    t.string "title"
+    t.boolean "automated"
+    t.integer "interface_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["interface_id"], name: "index_minerva_assignments_on_interface_id"
+  end
+
+  create_table "minerva_interfaces", force: :cascade do |t|
+    t.string "title"
+    t.string "code_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "minerva_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "auid", null: false
+    t.index ["auid"], name: "index_minerva_projects_on_auid", unique: true
+  end
+
+  create_table "minerva_roles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "auid", null: false
+    t.index ["auid"], name: "index_minerva_roles_on_auid", unique: true
+  end
+
+  create_table "minerva_states", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "user_id"
+    t.integer "role_id"
+    t.integer "work_id"
+    t.integer "minerva_assignment_id"
+    t.integer "minerva_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_minerva_states_on_creator_id"
+    t.index ["minerva_assignment_id"], name: "index_minerva_states_on_minerva_assignment_id"
+    t.index ["minerva_status_id"], name: "index_minerva_states_on_minerva_status_id"
+    t.index ["role_id"], name: "index_minerva_states_on_role_id"
+    t.index ["user_id"], name: "index_minerva_states_on_user_id"
+    t.index ["work_id"], name: "index_minerva_states_on_work_id"
+  end
+
+  create_table "minerva_statuses", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "minerva_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "auid", null: false
+    t.index ["auid"], name: "index_minerva_users_on_auid", unique: true
+  end
+
+  create_table "minerva_workflows", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "project_id"
+    t.text "task_list"
+    t.string "title"
+    t.boolean "ordered"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_minerva_workflows_on_creator_id"
+    t.index ["project_id"], name: "index_minerva_workflows_on_project_id"
+  end
+
+  create_table "minerva_works", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "auid", null: false
+    t.index ["auid"], name: "index_minerva_works_on_auid", unique: true
   end
 
   create_table "searches", id: :serial, force: :cascade do |t|
@@ -48,4 +127,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_150226) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "minerva_assignments", "minerva_interfaces", column: "interface_id"
+  add_foreign_key "minerva_states", "minerva_assignments"
+  add_foreign_key "minerva_states", "minerva_statuses"
 end
