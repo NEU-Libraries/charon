@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  resources :users, only: [:index]
+
   mount Blacklight::Engine => '/'
   # root to: "catalog#index"
 
