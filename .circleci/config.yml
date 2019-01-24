@@ -36,9 +36,12 @@ jobs:
           paths:
             - ~/caches/charon.tar
       - run:
-          name: Start container and verify it is working
+          name: Start container
           command: |
             set -x
             docker-compose up -d
+      - run:
+          name: Verify container is working
+          command: |
             docker-compose exec web \
               curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3000
