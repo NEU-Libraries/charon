@@ -16,12 +16,12 @@ jobs:
           keys:
             - v1-{{ .Branch }}
           paths:
-            - /caches/charon.tar
+            - ~/caches/charon.tar
       - run:
           name: Load Docker image layer cache
           command: |
             set +o pipefail
-            docker load -i /caches/charon.tar | true
+            docker load -i ~/caches/charon.tar | true
       - run:
           name: Build application Docker image
           command: |
@@ -29,9 +29,9 @@ jobs:
       - run:
           name: Save Docker image layer cache
           command: |
-            mkdir -p /caches
-            docker save -o /caches/charon.tar charon
+            mkdir -p ~/caches
+            docker save -o ~/caches/charon.tar charon
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
-            - /caches/charon.tar
+            - ~/caches/charon.tar
