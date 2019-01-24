@@ -1,21 +1,18 @@
-%nav.navbar.navbar-expand-md.navbar-dark.bg-dark.topbar{:role => "navigation"}
-  %div{:class => container_classes}
-    = link_to application_name, root_path, class: 'mb-0 navbar-brand'
-    %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "user-util-collapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#user-util-collapse", "data-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #user-util-collapse.collapse.navbar-collapse.justify-content-md-end
-      = render 'shared/user_util_links'
-%main{:role => "main"}
-  / Main jumbotron for a primary marketing message or call to action
-  .jumbotron
-    .container
-      %h1.display-5 Users
-  .container
-    %ul
-      - @users.each do |user|
-        %li= user.first_name
-        %li= user.last_name
-    %hr/
-  / /container
-%footer.container
-  %p © Company 2017-2018
+%h1
+  Users
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} First Name
+      %th{:scope => "col"} Last Name
+  %tbody
+    - @users.each_with_index do |user, i|
+      %tr
+        %td.align-middle
+          = i + 1
+        %td.align-middle
+          = user.first_name
+        %td.align-middle
+          = user.last_name

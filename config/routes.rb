@@ -31,4 +31,8 @@ Rails.application.routes.draw do
   resources :generic_uploads
 
   root to: "pages#home"
+
+  get '/workflow/assign' => 'workflow#assign'
+  get '/workflow/claim' => 'workflow#claim'
+  get '/workflow/history/:id' => 'workflow#history'
 end

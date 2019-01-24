@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  generics: MyString
+one: {}
+  # generics: MyString
 
-two:
-  generics: MyString
+two: {}
+  # generics: MyString

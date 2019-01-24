@@ -11,8 +11,6 @@ class GenericUploadsController < ApplicationController
   end
 
   def index
-    # u.avatars[0].identifier # => 'file.png'
-    puts "DGC DEBUG: #{GenericUpload.count}"
     @uploads = GenericUpload.all
   end
 

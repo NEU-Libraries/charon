@@ -1,13 +1,13 @@
 %h1
   Uploaded Files
 
-%table.table.table-striped
+%table.table.table-bordered
   - @uploads.each_with_index do |upload, i|
     %tr
-      %td
+      %td.align-middle
         = i
       - upload.generics_identifiers.each do |ident|
-        %td
+        %td.align-middle
           = ident
         %td
           %button.btn.btn-success.btn-add{:href => "", :type => "button", "data-toggle"=>"tooltip", :title => "Assign Workflow"} Assign Workflow
