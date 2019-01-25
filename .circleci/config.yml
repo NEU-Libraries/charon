@@ -39,7 +39,7 @@ jobs:
           name: Start container
           command: |
             set -x
-            docker-compose up -f docker-compose.yml -f docker-compose.ci.yml -d
+            docker-compose -f docker-compose.yml -f docker-compose.ci.yml -d up
       - run:
           name: install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
