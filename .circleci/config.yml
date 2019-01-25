@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    machine: true
     working_directory: ~/charon
     docker:
       - image: circleci/ruby:2.5-node-browsers
