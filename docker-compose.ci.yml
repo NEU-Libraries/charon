@@ -1,11 +1,14 @@
 # Use postgres/example user/password credentials
 version: '3.7'
 services:
+  db:
+    volumes:
+      - /home/circleci/db:/var/lib/postgresql/data/pgdata
   web:
     build: /home/circleci/charon
     volumes:
       - /home/circleci/charon:/charon
   solr:
     volumes:
-    - /home/circleci/charon/solr:/opt/solr/server/solr/mycores
+    - solr:/opt/solr/server/solr/mycores
     - /home/circleci/charon/solr:/solr_config
