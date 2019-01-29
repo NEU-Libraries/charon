@@ -1,5 +1,5 @@
 class WorkChangeSet < Valkyrie::ChangeSet
   property :title
-  property :member_of_collections_id
+  property :a_member_of
   validates :title, presence: true
 end
