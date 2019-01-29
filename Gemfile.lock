@@ -128,23 +128,23 @@ GEM
     dry-core (0.4.7)
       concurrent-ruby (~> 1.0)
     dry-equalizer (0.2.1)
-    dry-logic (0.4.2)
+    dry-inflector (0.1.2)
+    dry-logic (0.5.0)
       dry-container (~> 0.2, >= 0.2.6)
       dry-core (~> 0.2)
       dry-equalizer (~> 0.2)
-    dry-struct (0.4.0)
-      dry-core (~> 0.4, >= 0.4.1)
+    dry-struct (0.6.0)
+      dry-core (~> 0.4, >= 0.4.3)
       dry-equalizer (~> 0.2)
-      dry-types (~> 0.12, >= 0.12.2)
+      dry-types (~> 0.13)
       ice_nine (~> 0.11)
-    dry-types (0.12.3)
+    dry-types (0.13.4)
       concurrent-ruby (~> 1.0)
-      dry-configurable (~> 0.1)
       dry-container (~> 0.3)
-      dry-core (~> 0.2, >= 0.2.1)
+      dry-core (~> 0.4, >= 0.4.4)
       dry-equalizer (~> 0.2)
+      dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 0.4, >= 0.4.2)
-      inflecto (~> 0.0.0, >= 0.0.2)
     ebnf (1.1.3)
       rdf (~> 3.0)
       sxp (~> 1.0)
@@ -198,7 +198,6 @@ GEM
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    inflecto (0.0.2)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -318,7 +317,7 @@ GEM
       link_header (~> 0.0, >= 0.0.8)
     rdf-isomorphic (3.0.0)
       rdf (~> 3.0)
-    rdf-turtle (3.0.3)
+    rdf-turtle (3.0.4)
       ebnf (~> 1.1)
       rdf (~> 3.0)
     rdf-vocab (3.0.4)
@@ -409,22 +408,23 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    valkyrie (1.4.0)
-      active-fedora
+    valkyrie (2.0.0.RC1)
       active-triples
       activemodel
       activerecord
       activesupport
       draper
       dry-struct
-      dry-types (~> 0.12.0)
+      dry-types (~> 0.13.0)
       json
       json-ld
+      ldp
       pg
       railties
       rdf
       reform
       reform-rails
+      rsolr
     warden (1.2.8)
       rack (>= 2.0.6)
     websocket-driver (0.7.0)
@@ -436,13 +436,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 7.0.0.rc2)
+  blacklight (= 7.0.1)
   bootsnap
   bootstrap (~> 4.0)
   carrierwave
   devise
   haml-rails
-  hydra-head (~> 11.0.0.rc1)
+  hydra-head (= 11.0.0.rc1)
   hydra-role-management
   jquery-rails
   libera
@@ -455,7 +455,7 @@ DEPENDENCIES
   solr_wrapper (>= 0.3)
   turbolinks
   twitter-typeahead-rails (= 0.11.1.pre.corejavascript)
-  valkyrie
+  valkyrie (= 2.0.0.RC1)
 
 BUNDLED WITH
    1.17.1

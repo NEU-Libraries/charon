@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'valkyrie'
-gem 'hydra-head', '~> 11.0.0.rc1'
-gem 'blacklight', '~> 7.0.0.rc2'
+gem 'valkyrie', '2.0.0.RC1'
+gem 'hydra-head', '11.0.0.rc1'
+gem 'blacklight', '7.0.1'
 gem 'devise'
 gem 'hydra-role-management'
 gem 'haml-rails'
