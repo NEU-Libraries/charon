@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'valkyrie', '2.0.0.RC1'
+gem 'valkyrie', '1.4.0'
 gem 'hydra-head', '11.0.0.rc1'
 gem 'blacklight', '7.0.1'
 gem 'devise'
