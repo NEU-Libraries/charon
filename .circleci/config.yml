@@ -71,18 +71,3 @@ jobs:
           name: Run Specs
           command: |
             docker-compose exec web rake
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build

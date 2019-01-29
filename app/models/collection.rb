@@ -3,6 +3,5 @@
 class Collection < Valkyrie::Resource
   include Valkyrie::Resource::AccessControls
   attribute :title, Valkyrie::Types::String
-  attribute :member_of_collection_id, Valkyrie::Types::ID
-  attribute :member_of_project_id, Valkyrie::Types::ID
+  attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
 end
