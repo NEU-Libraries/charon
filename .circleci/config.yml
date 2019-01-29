@@ -3,6 +3,9 @@ jobs:
   build:
     machine: true
     working_directory: ~/charon
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - run:
