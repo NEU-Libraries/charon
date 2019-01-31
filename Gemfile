@@ -2,10 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'valkyrie', '1.4.0'
-gem 'hydra-head', '11.0.0.rc1'
 gem 'blacklight', '7.0.1'
 gem 'devise'
-gem 'hydra-role-management'
 gem 'haml-rails'
 gem 'carrierwave'
 

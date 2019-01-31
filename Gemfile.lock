@@ -75,20 +75,13 @@ GEM
       kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (~> 5.1)
-    blacklight-access_controls (0.7.0)
-      blacklight (> 6.0, < 8)
-      cancancan (~> 1.8)
-      deprecation (~> 1.0)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
     bootstrap (4.2.1)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
-    bootstrap_form (4.0.0)
-      rails (>= 5.0)
     builder (3.2.3)
-    cancancan (1.17.0)
     carrierwave (1.3.1)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -178,24 +171,6 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     http_logger (0.5.1)
-    hydra-access-controls (11.0.0.rc1)
-      active-fedora (~> 12.0)
-      activesupport (>= 4, < 6)
-      blacklight (>= 5.16)
-      blacklight-access_controls (~> 0.7.0.rc1)
-      cancancan (~> 1.8)
-      deprecation (~> 1.0)
-    hydra-core (11.0.0.rc1)
-      hydra-access-controls (= 11.0.0.rc1)
-      railties (>= 4.0.0, < 6)
-    hydra-head (11.0.0.rc1)
-      hydra-access-controls (= 11.0.0.rc1)
-      hydra-core (= 11.0.0.rc1)
-      rails (>= 3.2.6)
-    hydra-role-management (1.0.0)
-      blacklight
-      bootstrap_form
-      cancancan
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -460,8 +435,6 @@ DEPENDENCIES
   carrierwave
   devise
   haml-rails
-  hydra-head (= 11.0.0.rc1)
-  hydra-role-management
   jquery-rails
   libera
   listen
