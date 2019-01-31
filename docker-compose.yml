@@ -35,6 +35,7 @@ services:
     - docker-entrypoint.sh
     - solr-precreate
     - blacklight-core
+    - blacklight-core-test
     - "/solr_config/config"
     healthcheck:
       test:

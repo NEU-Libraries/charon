@@ -9,4 +9,8 @@ class ProjectIndexer
   def metadata_adapter
     Valkyrie.config.metadata_adapter
   end
+
+  def to_solr
+    return {}
+  end
 end
