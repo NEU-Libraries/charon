@@ -3,6 +3,11 @@ require 'blacklight/catalog'
 
 class CatalogController < ApplicationController
   include Blacklight::Catalog
+  include Blacklight::AccessControls::Catalog
+
+  # Apply the blacklight-access_controls
+  before_action :enforce_show_permissions, only: :show
+
   include Blacklight::DefaultComponentConfiguration
 
   configure_blacklight do |config|

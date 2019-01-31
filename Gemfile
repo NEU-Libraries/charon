@@ -6,6 +6,7 @@ gem 'blacklight', '7.0.1'
 gem 'devise'
 gem 'haml-rails'
 gem 'carrierwave'
+gem 'blacklight-access_controls'
 
 # NEU gems
 gem 'minerva'
