@@ -20,4 +20,28 @@ Rails.application.config.to_prepare do
     Valkyrie::Storage::Memory.new,
     :memory
   )
+
+  Valkyrie::MetadataAdapter.register(
+    Valkyrie::Persistence::Solr::MetadataAdapter.new(
+        connection: Blacklight.default_index.connection,
+        resource_indexer: Valkyrie::Persistence::Solr::CompositeIndexer.new(
+            Valkyrie::Indexers::AccessControlsIndexer,
+            ProjectIndexer,
+            CollectionIndexer,
+            WorkIndexer
+        )
+    ),
+    :index_solr
+  )
+
+  Valkyrie::MetadataAdapter.register(
+    Valkyrie::AdapterContainer.new(
+      persister: Valkyrie::Persistence::CompositePersister.new(
+        Valkyrie.config.metadata_adapter.persister,
+        Valkyrie::MetadataAdapter.find(:index_solr).persister
+      ),
+      query_service: Valkyrie.config.metadata_adapter.query_service
+    ),
+    :composite_persister
+  )
 end
