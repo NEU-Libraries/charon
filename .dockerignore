@@ -1,6 +1,4 @@
 .circleci
-.git
-.gitignore
 LICENSE
 VERSION
 README.md
