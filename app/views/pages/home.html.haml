@@ -33,6 +33,12 @@
         %p Upload a file to begin the process of creating a scholarly Work.
         %p
           %a.btn.btn-secondary{:href => "#", :role => "button"} Upload »
+    .row
+      .col-lg
+        %br
+        %h2 Recent Progress
+        %p
+          = simple_format(@git_log)
     %hr/
 %footer.container
   %p © Company 2017-2018
