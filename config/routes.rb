@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   end
 
   resources :generic_uploads
+  resources :projects
+  resources :collections
 
   root to: "pages#home"
 
