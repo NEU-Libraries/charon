@@ -1,7 +1,15 @@
 = form_for @generic_upload do |f|
   .form-group
     .custom-file
+      = f.file_field :generics, multiple: false, class: "custom-file-input"
       %label.custom-file-label{:for => "generics"} Choose file
-      = f.file_field :generics, multiple: true, class: "custom-file-input"
   .form-group
     = f.submit "Upload", class: 'btn btn-primary'
+
+:javascript
+  $('#generic_upload_generics').on('change',function(){
+      //get the file name
+      var fileName = $(this).val();
+      //replace the "Choose a file" label
+      $(this).next('.custom-file-label').html(fileName);
+  })
