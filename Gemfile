@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'valkyrie', '1.5.0'
+gem 'valkyrie', '1.5.1'
 gem 'blacklight', '7.0.1'
 gem 'pg'
 gem 'devise'

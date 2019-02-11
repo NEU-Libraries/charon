@@ -300,7 +300,7 @@ GEM
       link_header (~> 0.0, >= 0.0.8)
     rdf-isomorphic (3.0.0)
       rdf (~> 3.0)
-    rdf-turtle (3.0.4)
+    rdf-turtle (3.0.5)
       ebnf (~> 1.1)
       rdf (~> 3.0)
     rdf-vocab (3.0.4)
@@ -408,7 +408,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    valkyrie (1.5.0)
+    valkyrie (1.5.1)
       active-fedora
       active-triples
       activemodel
@@ -455,7 +455,7 @@ DEPENDENCIES
   solr_wrapper (>= 0.3)
   turbolinks
   twitter-typeahead-rails (= 0.11.1.pre.corejavascript)
-  valkyrie (= 1.5.0)
+  valkyrie (= 1.5.1)
 
 BUNDLED WITH
    1.17.1
