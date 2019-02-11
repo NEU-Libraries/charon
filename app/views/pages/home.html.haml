@@ -37,11 +37,13 @@
       .col-lg
         %br
         %h2 Recent Progress
+        %br
         %table.table.table-bordered
           - @git_log.each do |commit|
             %tr
               %td.align-middle
-                = commit[0]
+                %a{:href => "https://github.com/NEU-Libraries/charon/commit/#{commit[0]}"}
+                  = commit[0]
               %td
                 = commit[1]
     %hr/
