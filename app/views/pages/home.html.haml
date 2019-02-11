@@ -37,8 +37,13 @@
       .col-lg
         %br
         %h2 Recent Progress
-        %p
-          = simple_format(@git_log)
+        %table.table.table-bordered
+          - @git_log.each do |commit|
+            %tr
+              %td.align-middle
+                = commit[0]
+              %td
+                = commit[1]
     %hr/
 %footer.container
   %p © Company 2017-2018
