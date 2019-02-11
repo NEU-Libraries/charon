@@ -1,3 +1,7 @@
 = form_for @generic_upload do |f|
-  = f.file_field :generics, multiple: true
-  = f.button :submit, class: 'btn btn-primary'
+  .form-group
+    .custom-file
+      %label.custom-file-label{:for => "generics"} Choose file
+      = f.file_field :generics, multiple: true, class: "custom-file-input"
+  .form-group
+    = f.submit "Upload", class: 'btn btn-primary'
