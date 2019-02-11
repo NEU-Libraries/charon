@@ -35,9 +35,7 @@
           %a.btn.btn-secondary{:href => "generic_uploads/new", :role => "button"} Upload »
     .row
       .col-lg
-        %br
-        %h2 Recent Progress
-        %br
+        %h2.py-3 Recent Progress
         %table.table.table-bordered
           - @git_log.each do |commit|
             %tr
@@ -46,6 +44,30 @@
                   = commit[0]
               %td
                 = commit[1]
-    %hr/
-%footer.container
-  %p © Company 2017-2018
+%footer.footer.mt-auto.py-3
+  .container
+    .row
+      .col-4
+        = image_tag "https://repository.library.northeastern.edu/assets/brand-footer-image/brand-footer-image-97ba83d694a9c06016352fb992ce7f67.svg"
+      .col
+        %ul.list-inline.float-right
+          %li.list-inline-item
+            %a{:href => "http://myneu.neu.edu/cp/home/displaylogin"} MyNEU
+          %li.list-inline-item
+            %a{:href => "https://psoft.neu.edu/psc/neuhrprdpub/EMPLOYEE/HRMS/c/NEU_HR.NEU_EE_DIR.GBL?&"} Find Faculty &amp; Staff
+          %li.list-inline-item
+            %a{:href => "https://www.northeastern.edu/neuhome/adminlinks/findaz.html"} Find A-Z
+          %li.list-inline-item
+            %a{:href => "https://www.northeastern.edu/emergency/index.html"} Emergency Information
+          %li.list-inline-item
+            %a{:href => "https://www.northeastern.edu/search/index.html"} Search
+          %li.list-inline-item
+            %a{:href => "http://assistive.usablenet.com/tt/https://www.northeastern.edu/index.html"} Text Only
+    .row
+      .col
+        .float-right.small
+          360 Huntington Ave., Boston, Massachusetts 02115 · 617.373.2000 · TTY 617.373.3768
+          %br/
+          ©
+          %span.the-year 2019
+          Northeastern University
