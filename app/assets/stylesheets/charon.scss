@@ -6,4 +6,22 @@
   li:last-child:after{
     content: "";
   }
+  .nu-social{
+    li{
+      float: right;
+      display: block;
+      a{
+        -webkit-transition: opacity 1s;
+        -moz-transition: opacity 1s;
+        -o-transition: opacity 1s;
+        transition: opacity 1s;
+        padding: 0.25em;
+        font-size: 1.3em;
+        // opacity: 0.5;
+      }
+    }
+    li:after {
+      content: "";
+    }
+  }
 }

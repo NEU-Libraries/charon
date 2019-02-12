@@ -8,6 +8,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'carrierwave'
 gem 'blacklight-access_controls'
+gem 'font-awesome-rails'
 
 # NEU gems
 gem 'minerva'
