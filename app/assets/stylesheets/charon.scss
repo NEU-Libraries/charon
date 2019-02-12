@@ -1,27 +1,22 @@
 .footer {
-  // background-color: #9e1522;
-  // background-color: #dd3333;
   background-color: #385775;
-  color: #e6e6e6;
+  color: $light;
 
   .logo {
     width: 175px;
   }
 
-  .copyright {
-    // color: #a6a6a6;
-  }
-
   a {
-    // color: #e6e6e6;
-    color: #fff;
+    color: $light;
   }
 
-  li:after {
+  li.list-inline-item:before {
     content: "\20\00b7";
+    margin-right: 8px;
   }
-  li:last-child:after{
+  li.list-inline-item:first-child:before{
     content: "";
+    margin-right: auto;
   }
   .nu-social{
     li{
