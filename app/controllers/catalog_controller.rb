@@ -11,6 +11,8 @@ class CatalogController < ApplicationController
   include Blacklight::DefaultComponentConfiguration
 
   configure_blacklight do |config|
+    config.autocomplete_enabled = false
+    config.index.search_bar_presenter_class = SearchBarPresenter
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
     #

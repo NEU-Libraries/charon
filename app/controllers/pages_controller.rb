@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  layout "application"
   def home
     raw = `cd #{Rails.root} && git log -n 20 --pretty="format:%h|%s"`
     @git_log = Hash.new
