@@ -13,7 +13,7 @@ class SearchBarPresenter
   end
 
   def render
-    if controller.is_a?(Blacklight::Catalog) && controller.action_name == "index"
+    if controller.instance_variable_get(:@searchable) || ((controller.is_a?(Blacklight::Catalog) && controller.action_name == "index"))
       view_context.render partial, presenter: self
     end
   end
