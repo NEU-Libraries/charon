@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/projectblacklight/blacklight-gallery.git
+  revision: f885a5a57db751b4cdf57ebdff47d86a2fcad426
+  specs:
+    blacklight-gallery (1.0.0.alpha)
+      blacklight (~> 7.0)
+      bootstrap (~> 4.0)
+      openseadragon (>= 0.2.0)
+      rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -257,6 +267,8 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
+    openseadragon (0.5.0)
+      rails (> 3.2.0)
     orm_adapter (0.5.0)
     pdf-reader (2.1.0)
       Ascii85 (~> 1.0.0)
@@ -439,6 +451,7 @@ PLATFORMS
 DEPENDENCIES
   blacklight (= 7.0.1)
   blacklight-access_controls
+  blacklight-gallery!
   bootsnap
   bootstrap (~> 4.0)
   carrierwave

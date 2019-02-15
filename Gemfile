@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails'
 gem 'valkyrie', '1.5.1'
 gem 'blacklight', '7.0.1'
+gem 'blacklight-gallery', :git => 'https://github.com/projectblacklight/blacklight-gallery.git' #Blacklight 7 support isn't in a gem yet
 gem 'pg'
 gem 'devise'
 gem 'haml-rails'
