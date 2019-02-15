@@ -17,6 +17,11 @@ footer {
   flex-grow: 0;
 }
 
+td.word-wrap {
+  word-wrap:break-word;
+  word-break:break-all;
+}
+
 .footer {
   background-color: #385775;
   color: $light;
