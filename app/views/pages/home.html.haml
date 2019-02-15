@@ -28,11 +28,11 @@
   .row
     .col-lg
       %h2.py-3 Recent Progress
-      %table.table.table-bordered
+      %table.table.table-bordered.table-responsive
         - @git_log.each do |commit|
           %tr
             %td.align-middle
               %a{:href => "https://github.com/NEU-Libraries/charon/commit/#{commit[0]}"}
                 = commit[0]
-            %td.word-wrap
+            %td
               = commit[1]
