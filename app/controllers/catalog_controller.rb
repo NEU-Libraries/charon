@@ -36,7 +36,9 @@ class CatalogController < ApplicationController
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tesim'
-    config.index.display_type_field = 'has_model_ssim'
+    # config.index.display_type_field = 'has_model_ssim'
+    config.index.display_type_field = "human_readable_type_ssim"
+    config.show.display_type_field = "human_readable_type_ssim"
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
