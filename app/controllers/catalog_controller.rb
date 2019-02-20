@@ -1,6 +1,4 @@
 # -*- encoding : utf-8 -*-
-require 'blacklight/catalog'
-
 class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::AccessControls::Catalog
@@ -8,10 +6,16 @@ class CatalogController < ApplicationController
   # Apply the blacklight-access_controls
   before_action :enforce_show_permissions, only: :show
 
-  include Blacklight::DefaultComponentConfiguration
+  # include Blacklight::DefaultComponentConfiguration
 
   configure_blacklight do |config|
-    config.view.gallery.partials = [:index_header, :index]
+    config.add_results_collection_tool(:sort_widget)
+    config.add_results_collection_tool(:per_page_widget)
+    config.add_results_collection_tool(:view_type_group)
+  end
+
+  configure_blacklight do |config|
+    config.view.gallery.partials = [:index_header, :thumbnail, :index]
     # config.view.masonry.partials = [:index]
     # config.view.slideshow.partials = [:index]
 
