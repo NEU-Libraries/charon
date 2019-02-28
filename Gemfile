@@ -17,6 +17,7 @@ gem 'valkyrie', '1.5.1'
 gem 'libera'
 gem 'minerva'
 gem 'rubocop', require: false
+gem 'simplecov', require: false, group: :test
 
 # Rails gems
 gem 'bootsnap'

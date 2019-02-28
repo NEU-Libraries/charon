@@ -30,3 +30,5 @@
 .nfs*
 
 /public/uploads
+
+/coverage/
