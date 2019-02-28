@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+require 'shields_badge'
+
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
+                                                                  SimpleCov::Formatter::HTMLFormatter,
+                                                                  SimpleCov::Formatter::ShieldsBadge
+                                                                ])
+
+SimpleCov.start do
+  add_filter 'spec'
+  add_filter 'vendor'
+  minimum_coverage 100
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

@@ -6,8 +6,4 @@ class Work < Valkyrie::Resource
 
   attribute :title, Valkyrie::Types::String
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
-
-  def current_state
-    Minerva::State.where(work_id: id.to_s).last
-  end
 end

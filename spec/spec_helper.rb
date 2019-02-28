@@ -15,19 +15,12 @@
 # it.
 #
 
-require 'simplecov'
-require 'shields_badge'
-
-SimpleCov.formatter = SimpleCov::Formatter::ShieldsBadge
-
-SimpleCov.start do
-  add_filter 'spec'
-  add_filter 'vendor'
-  minimum_coverage 100
-end
+require 'factory_bot_rails' # this shouldn't be necessary
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

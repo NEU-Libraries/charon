@@ -27,9 +27,6 @@ Rails.application.config.to_prepare do
       connection: Blacklight.default_index.connection,
       resource_indexer: Valkyrie::Persistence::Solr::CompositeIndexer.new(
         Valkyrie::Indexers::AccessControlsIndexer,
-        ProjectIndexer,
-        CollectionIndexer,
-        WorkIndexer,
         HumanReadableTypeIndexer
       )
     ),
