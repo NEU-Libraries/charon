@@ -1,4 +1,4 @@
-[![Coverage](https://NEU-Libraries.github.io/charon/badge.svg)](https://github.com/NEU-Libraries/charon)
+[![Coverage](https://raw.githubusercontent.com/NEU-Libraries/charon/master/badge.svg?sanitize=true)](https://github.com/NEU-Libraries/charon)
 
 # README
 
