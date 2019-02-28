@@ -63,15 +63,15 @@ jobs:
             docker-compose exec web \
               curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3000
       - run:
-          name: Publish Docker Image to Docker Hub
-          command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push nakatomi/charon_web:latest
-      - run:
           name: Run Specs
           command: |
             docker-compose exec web rake
       - run:
           name: Run Rubocop
           command: |
-            bundle exec rake rubocop
+            docker-compose exec web rubocop
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push nakatomi/charon_web:latest
