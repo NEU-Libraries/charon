@@ -1,5 +1,7 @@
-require "rails_helper"
-require "valkyrie/specs/shared_specs"
+# frozen_string_literal: true
+
+require 'rails_helper'
+require 'valkyrie/specs/shared_specs'
 
 describe CollectionChangeSet do
   let(:resource_klass) { described_class }
@@ -7,7 +9,7 @@ describe CollectionChangeSet do
 
   it_behaves_like 'a Valkyrie::ChangeSet'
 
-  it "allows setting title and a_member_of" do
-    expect(change_set.validate(title: 'Abc', a_member_of: ['123', '345'])).to be true
+  it 'allows setting title and a_member_of' do
+    expect(change_set.validate(title: 'Abc', a_member_of: %w[123 345])).to be true
   end
 end

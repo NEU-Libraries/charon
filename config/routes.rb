@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:index]
 
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :collections
 
-  root to: "pages#home"
+  root to: 'pages#home'
 
   get '/workflow/assign' => 'workflow#assign'
   get '/workflow/claim' => 'workflow#claim'

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'valkyrie'
 Rails.application.config.to_prepare do
   Valkyrie::MetadataAdapter.register(
@@ -12,7 +13,7 @@ Rails.application.config.to_prepare do
   )
 
   Valkyrie::StorageAdapter.register(
-    Valkyrie::Storage::Disk.new(base_path: Rails.root.join("tmp", "files")),
+    Valkyrie::Storage::Disk.new(base_path: Rails.root.join('tmp', 'files')),
     :disk
   )
 
@@ -23,14 +24,14 @@ Rails.application.config.to_prepare do
 
   Valkyrie::MetadataAdapter.register(
     Valkyrie::Persistence::Solr::MetadataAdapter.new(
-        connection: Blacklight.default_index.connection,
-        resource_indexer: Valkyrie::Persistence::Solr::CompositeIndexer.new(
-            Valkyrie::Indexers::AccessControlsIndexer,
-            ProjectIndexer,
-            CollectionIndexer,
-            WorkIndexer,
-            HumanReadableTypeIndexer
-        )
+      connection: Blacklight.default_index.connection,
+      resource_indexer: Valkyrie::Persistence::Solr::CompositeIndexer.new(
+        Valkyrie::Indexers::AccessControlsIndexer,
+        ProjectIndexer,
+        CollectionIndexer,
+        WorkIndexer,
+        HumanReadableTypeIndexer
+      )
     ),
     :index_solr
   )

@@ -1,0 +1,11 @@
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+  Include:
+    - 'app/**/*'
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'

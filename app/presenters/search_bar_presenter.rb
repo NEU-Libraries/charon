@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SearchBarPresenter
   attr_reader :configuration, :view_context, :controller
 
@@ -13,9 +14,10 @@ class SearchBarPresenter
   end
 
   def render
-    if controller.instance_variable_get(:@searchable) || ((controller.is_a?(Blacklight::Catalog) && controller.action_name == "index"))
-      view_context.render partial, presenter: self
+    unless controller.is_a?(Blacklight::Catalog) && controller.action_name == 'index'
+      return unless controller.instance_variable_get(:@searchable)
     end
+    view_context.render partial, presenter: self
   end
 
   ##

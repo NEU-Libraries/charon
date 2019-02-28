@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class WorkIndexer
   delegate :query_service, to: :metadata_adapter
   attr_reader :resource
@@ -11,6 +12,6 @@ class WorkIndexer
   end
 
   def to_solr
-    return {}
+    {}
   end
 end

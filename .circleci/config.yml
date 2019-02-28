@@ -71,3 +71,7 @@ jobs:
           name: Run Specs
           command: |
             docker-compose exec web rake
+      - run:
+          name: Run Rubocop
+          command: |
+            bundle exec rake rubocop

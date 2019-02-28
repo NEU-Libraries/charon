@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This migration comes from minerva (originally 20181218183815)
 class CreateMinervaStates < ActiveRecord::Migration[5.2]
   def change

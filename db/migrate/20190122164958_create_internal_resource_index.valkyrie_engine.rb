@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from valkyrie_engine (originally 20171204224121)
 class CreateInternalResourceIndex < ActiveRecord::Migration[5.1]
   def change

@@ -1,4 +1,5 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
+
 class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::AccessControls::Catalog
@@ -15,7 +16,7 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.view.gallery.partials = [:index_header, :thumbnail, :index]
+    config.view.gallery.partials = %i[index_header thumbnail index]
     # config.view.masonry.partials = [:index]
     # config.view.slideshow.partials = [:index]
 
@@ -41,8 +42,8 @@ class CatalogController < ApplicationController
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tesim'
     # config.index.display_type_field = 'has_model_ssim'
-    config.index.display_type_field = "human_readable_type_ssim"
-    config.show.display_type_field = "human_readable_type_ssim"
+    config.index.display_type_field = 'human_readable_type_ssim'
+    config.show.display_type_field = 'human_readable_type_ssim'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -63,7 +64,6 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
 
     config.add_search_field 'all_fields', label: 'All Fields'
-
 
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
@@ -111,7 +111,4 @@ class CatalogController < ApplicationController
     # mean") suggestion is offered.
     config.spell_max = 5
   end
-
-
-
 end

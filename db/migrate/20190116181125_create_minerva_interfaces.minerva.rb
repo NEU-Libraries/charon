@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This migration comes from minerva (originally 20181218183615)
 class CreateMinervaInterfaces < ActiveRecord::Migration[5.2]
   def change
