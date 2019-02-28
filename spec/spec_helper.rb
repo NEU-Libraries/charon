@@ -16,6 +16,9 @@
 #
 
 require 'simplecov'
+require 'shields_badge'
+
+SimpleCov.formatter = SimpleCov::Formatter::ShieldsBadge
 
 SimpleCov.start do
   add_filter 'spec'

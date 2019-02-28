@@ -408,6 +408,8 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    simplecov-shields-badge (0.1.0)
+      simplecov (~> 0.15)
     slop (4.6.2)
     solr_wrapper (2.1.0)
       faraday
@@ -494,6 +496,7 @@ DEPENDENCIES
   rubocop
   sass-rails
   simplecov
+  simplecov-shields-badge
   solr_wrapper (>= 0.3)
   turbolinks
   twitter-typeahead-rails (= 0.11.1.pre.corejavascript)

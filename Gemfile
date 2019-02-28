@@ -16,8 +16,6 @@ gem 'valkyrie', '1.5.1'
 # NEU gems
 gem 'libera'
 gem 'minerva'
-gem 'rubocop', require: false
-gem 'simplecov', require: false, group: :test
 
 # Rails gems
 gem 'bootsnap'
@@ -39,4 +37,10 @@ gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 group :development, :test do
   gem 'rspec-rails'
   gem 'solr_wrapper', '>= 0.3'
+end
+
+group :test do
+  gem 'rubocop', require: false
+  gem 'simplecov', require: false
+  gem 'simplecov-shields-badge', require: false
 end
