@@ -406,6 +406,9 @@ GEM
       sprockets-rails
       tilt
     sexp_processor (4.11.0)
+    simple_form (4.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -494,6 +497,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails
+  simple_form
   simplecov
   simplecov-shields-badge
   turbolinks

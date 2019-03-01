@@ -16,6 +16,7 @@ gem 'valkyrie', '1.5.1'
 # NEU gems
 gem 'libera'
 gem 'minerva'
+gem 'simple_form'
 
 # QA gems
 gem 'rubocop', require: false
