@@ -1,26 +1,16 @@
-[![Coverage](https://raw.githubusercontent.com/NEU-Libraries/charon/master/badge.svg?sanitize=true)](https://github.com/NEU-Libraries/charon)
+[![Coverage](https://raw.githubusercontent.com/NEU-Libraries/charon/master/badge.svg?sanitize=true)](https://github.com/NEU-Libraries/charon) [![CircleCI](https://circleci.com/gh/NEU-Libraries/charon.svg?style=svg)](https://circleci.com/gh/NEU-Libraries/charon)
 
-# README
+# Charon
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Charon is a digital framework designed to provide workflow management for a range of contributory and editorial digital humanities projects. Charon is part of CERES (the Community-Enhanced Repository for Engaged Scholarship), a larger ecology of tools developed by the Northeastern University Library to provide long-term sustainable support for advanced forms of digital scholarship, data curation, and publication.
 
-Things you may want to cover:
+This code has been designed to be developed and tested with [Docker](https://www.docker.com/) and docker compose.
 
-* Ruby version
+* Clone the repository
+* ```docker-compose up --build```
 
-* System dependencies
+This will start a rails server which can be accessed at <http://localhost:3000>
 
-* Configuration
+To run the test suite if you already have the containers running
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```docker exec -ti charon_web_1 bundle exec rspec spec```
