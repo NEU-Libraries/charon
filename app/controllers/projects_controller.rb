@@ -5,7 +5,15 @@ class ProjectsController < ApplicationController
     @change_set = ProjectChangeSet.new(Project.new)
   end
 
-  def create; end
+  def create
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    change_set = ProjectChangeSet.new(Project.new)
+    if change_set.validate(params[:project])
+      change_set.sync
+      @project = meta.persister.save(resource: change_set.resource)
+    end
+    redirect_to project_path(@project)
+  end
 
   def edit; end
 
