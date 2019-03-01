@@ -22,4 +22,6 @@
 //= require bootstrap
 //= require blacklight/blacklight
 
+//= require cocoon
+
 //= require_tree .
