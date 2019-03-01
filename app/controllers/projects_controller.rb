@@ -2,7 +2,7 @@
 
 class ProjectsController < ApplicationController
   def new
-    @project = Project.new
+    @change_set = ProjectChangeSet.new(Project.new)
   end
 
   def create; end

@@ -13,6 +13,10 @@ main {
   flex-grow: 1;
 }
 
+abbr[title], abbr[data-original-title] {
+  text-decoration: none;
+}
+
 footer {
   flex-grow: 0;
 }
