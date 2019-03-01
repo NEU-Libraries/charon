@@ -1,4 +1,4 @@
-[![Coverage](https://raw.githubusercontent.com/NEU-Libraries/charon/master/badge.svg?sanitize=true)](https://github.com/NEU-Libraries/charon)
+[![Coverage](https://raw.githubusercontent.com/NEU-Libraries/charon/master/badge.svg?sanitize=true)](https://github.com/NEU-Libraries/charon) [![CircleCI](https://circleci.com/gh/NEU-Libraries/charon.svg?style=svg)](https://circleci.com/gh/NEU-Libraries/charon)
 
 # Charon
 
