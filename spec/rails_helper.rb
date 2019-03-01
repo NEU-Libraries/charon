@@ -8,10 +8,11 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
                                                                   SimpleCov::Formatter::ShieldsBadge
                                                                 ])
 
-SimpleCov.start do
+SimpleCov.start 'rails' do
   add_filter 'spec'
   add_filter 'vendor'
-  minimum_coverage 100
+  add_filter 'app/channels'
+  # minimum_coverage 100
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
