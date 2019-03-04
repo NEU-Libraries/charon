@@ -16,6 +16,7 @@
 #
 
 require 'factory_bot_rails' # this shouldn't be necessary
+require 'blacklight'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

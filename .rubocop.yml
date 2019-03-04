@@ -9,3 +9,6 @@ AllCops:
     - 'db/**/*'
     - 'bin/**/*'
     - 'config/**/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'

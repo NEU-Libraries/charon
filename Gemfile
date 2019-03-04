@@ -14,10 +14,10 @@ gem 'rails'
 gem 'valkyrie', '1.5.1'
 
 # NEU gems
+gem 'cocoon'
 gem 'libera'
 gem 'minerva'
 gem 'simple_form'
-gem 'cocoon'
 
 # QA gems
 gem 'rubocop', require: false

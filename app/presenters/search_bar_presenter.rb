@@ -17,7 +17,9 @@ class SearchBarPresenter
     unless controller.is_a?(Blacklight::Catalog) && controller.action_name == 'index'
       return unless controller.instance_variable_get(:@searchable)
     end
+    # :nocov:
     view_context.render partial, presenter: self
+    # :nocov:
   end
 
   ##
