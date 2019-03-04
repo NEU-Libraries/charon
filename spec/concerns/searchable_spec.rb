@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 describe Searchable do
-
   before do
     class FakesController < ApplicationController
       include Searchable
@@ -13,11 +12,9 @@ describe Searchable do
   let(:object) { FakesController.new }
 
   describe '#searchable' do
-
     it 'is searchable' do
       object.searchable
       expect(object.instance_variable_get(:@searchable)).to be true
     end
-
   end
 end
