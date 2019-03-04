@@ -13,6 +13,11 @@ describe Searchable do
   let(:object) { FakesController.new }
 
   describe '#searchable' do
-    it { expect(object.searchable).to be true }
+
+    it 'is searchable' do
+      object.searchable
+      expect(object.instance_variable_get(:@searchable)).to be true
+    end
+
   end
 end
