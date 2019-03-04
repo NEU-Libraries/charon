@@ -21,6 +21,10 @@ footer {
   flex-grow: 0;
 }
 
+.table-responsive {
+  display: table;
+}
+
 .footer {
   background-color: #385775;
   color: $light;
