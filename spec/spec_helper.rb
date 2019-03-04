@@ -18,8 +18,11 @@
 require 'factory_bot_rails' # this shouldn't be necessary
 require 'blacklight'
 
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include SolrSupport
   config.include FactoryBot::Syntax::Methods
 
   # rspec-expectations config goes here. You can use an alternate
