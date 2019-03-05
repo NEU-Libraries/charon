@@ -17,6 +17,7 @@ gem 'capybara'
 gem 'cocoon'
 gem 'libera'
 gem 'minerva'
+gem 'rails-controller-testing'
 gem 'simple_form'
 
 # QA gems
