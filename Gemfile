@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gem 'blacklight', '7.0.1'
 gem 'blacklight-access_controls'
 gem 'blacklight-gallery', git: 'https://github.com/projectblacklight/blacklight-gallery.git' # Blacklight 7 support isn't in a gem yet
-gem 'carrierwave'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'haml-rails'
