@@ -13,6 +13,7 @@ gem 'rails'
 gem 'valkyrie', '1.5.1'
 
 # NEU gems
+gem 'capybara'
 gem 'cocoon'
 gem 'libera'
 gem 'minerva'
