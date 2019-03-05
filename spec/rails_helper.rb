@@ -21,7 +21,7 @@ ENV['RAILS_ENV'] = 'test'
 Rails.env = 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in #{Rails.env} mode!") if !Rails.env.test?
+abort("The Rails environment is running in #{Rails.env} mode!") unless Rails.env.test?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
