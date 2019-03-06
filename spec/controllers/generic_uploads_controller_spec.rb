@@ -17,9 +17,9 @@ describe GenericUploadsController do
     end
   end
 
-  describe "create" do
-    context "with valid input" do
-      it "creates a generic upload" do
+  describe 'create' do
+    context 'with valid input' do
+      it 'creates a generic upload' do
         file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
         expect { post :create, params: { generic_upload: { binary: file } } }.to change(ActiveStorage::Attachment, :count).by(1)
       end

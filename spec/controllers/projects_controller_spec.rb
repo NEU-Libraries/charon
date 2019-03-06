@@ -10,9 +10,9 @@ describe ProjectsController do
     end
   end
 
-  describe "create" do
-    context "with valid input" do
-      it "creates a project" do
+  describe 'create' do
+    context 'with valid input' do
+      it 'creates a project' do
         post :create, params: { project: { title: 'Cat', description: 'In the hat' } }
         expect(assigns(:project).title).to eq('Cat')
       end
