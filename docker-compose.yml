@@ -16,7 +16,7 @@ services:
   web:
     image: nakatomi/charon_web
     build: .
-    command: /bin/sh -c "rm -f /charon/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f /charon/tmp/pids/server.pid && bundle exec rake db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/charon
     ports:
