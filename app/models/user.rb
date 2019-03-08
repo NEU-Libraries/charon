@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   enumeration :capacity
+  has_many :roles
 
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
