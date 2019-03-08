@@ -12,9 +12,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def is_developer?
+  def developer?
+    self.capacity == :developer
   end
 
-  def is_admin?
+  def admin?
+    self.capacity == :administrator
   end
 end
