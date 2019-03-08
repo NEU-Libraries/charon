@@ -12,7 +12,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def developer?
+  after_initialize do |user|
+    if user.capacity.nil?
+      user.capacity = Capacity.user
+    end
+  end
+
+  def dev?
     self.capacity == :developer
   end
 
