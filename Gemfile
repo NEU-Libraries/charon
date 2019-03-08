@@ -15,6 +15,7 @@ gem 'valkyrie', '1.5.1'
 # NEU gems
 gem 'capybara'
 gem 'cocoon'
+gem 'enumerations'
 gem 'libera'
 gem 'minerva'
 gem 'rails-controller-testing'
