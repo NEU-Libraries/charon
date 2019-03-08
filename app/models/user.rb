@@ -13,16 +13,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   after_initialize do |user|
-    if user.capacity.nil?
-      user.capacity = Capacity.user
-    end
+    user.capacity = Capacity.user if user.capacity.nil?
   end
 
   def dev?
-    self.capacity == :developer
+    capacity == :developer
   end
 
   def admin?
-    self.capacity == :administrator
+    capacity == :administrator
   end
 end

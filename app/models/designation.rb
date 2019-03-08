@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Designation < Enumerations::Base
   value :manager,   name: 'Manager'
   value :editor,    name: 'Editor'
