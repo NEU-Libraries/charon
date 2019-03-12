@@ -4,3 +4,5 @@ Noid::Rails.configure do |config|
   config.minter_class = Noid::Rails::Minter::Db
   config.template = '.reeeeeek'
 end
+
+::Minter = Noid::Rails::Service.new

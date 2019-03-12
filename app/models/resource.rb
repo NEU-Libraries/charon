@@ -3,7 +3,7 @@
 class Resource < Valkyrie::Resource
   attribute :alternate_ids,
             Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true).default {
-              [::Noid::Rails::Service.new.mint]
+              [Minter.mint]
             }
 
   def to_param
