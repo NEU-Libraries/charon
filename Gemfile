@@ -44,7 +44,8 @@ gem 'turbolinks'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 
 # Blacklight
-group :development, :test do
+group :test do
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
 end

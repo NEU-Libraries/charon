@@ -20,6 +20,7 @@ require 'blacklight'
 require 'capybara/rspec'
 require 'noid/rails/minter'
 require 'noid/rails/rspec'
+require 'database_cleaner'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
@@ -29,8 +30,15 @@ RSpec.configure do |config|
   config.include SolrSupport
   config.include FactoryBot::Syntax::Methods
 
-  config.before(:suite) { disable_production_minter! }
-  config.after(:suite)  { enable_production_minter! }
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    disable_production_minter!
+  end
+
+  config.after(:suite) do
+    DatabaseCleaner.clean
+    enable_production_minter!
+  end
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
