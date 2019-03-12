@@ -1,3 +1,5 @@
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
 Documentation:
   Enabled: false
 Metrics/LineLength:
