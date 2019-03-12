@@ -18,6 +18,7 @@ gem 'cocoon'
 gem 'enumerations'
 gem 'libera'
 gem 'minerva'
+gem 'noid-rails'
 gem 'rails-controller-testing'
 gem 'simple_form'
 

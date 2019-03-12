@@ -18,13 +18,18 @@
 require 'factory_bot_rails' # this shouldn't be necessary
 require 'blacklight'
 require 'capybara/rspec'
+require 'noid/rails/rspec'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include Noid::Rails::RSpec
   config.include SolrSupport
   config.include FactoryBot::Syntax::Methods
+
+  before(:suite) { disable_production_minter! }
+  after(:suite)  { enable_production_minter! }
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

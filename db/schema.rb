@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_201643) do
+ActiveRecord::Schema.define(version: 2019_03_11_203918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,17 @@ ActiveRecord::Schema.define(version: 2019_03_08_201643) do
     t.datetime "updated_at", null: false
     t.string "auid", null: false
     t.index ["auid"], name: "index_minerva_works_on_auid", unique: true
+  end
+
+  create_table "minter_states", id: :serial, force: :cascade do |t|
+    t.string "namespace", default: "default", null: false
+    t.string "template", null: false
+    t.text "counters"
+    t.bigint "seq", default: 0
+    t.binary "rand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["namespace"], name: "index_minter_states_on_namespace", unique: true
   end
 
   create_table "orm_resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
