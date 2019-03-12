@@ -23,6 +23,9 @@ class SolrDocument
   attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
 
   def to_param
-    alternate_ids.first.split('id-')[1]
+    noid = alternate_ids&.first&.split('id-')&.last
+    return noid unless noid.blank?
+
+    super
   end
 end
