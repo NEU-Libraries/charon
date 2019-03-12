@@ -20,4 +20,9 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
 
   attribute :human_readable_type, Blacklight::Types::String, 'human_readable_type_ssim'
+  attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
+
+  def to_param
+    alternate_ids.first.split('id-')[1]
+  end
 end
