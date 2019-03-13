@@ -72,3 +72,30 @@ footer {
     }
   }
 }
+
+#documents.row.gallery {
+  display: block;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  .document {
+    display: flex;
+    flex: none;
+    .thumbnail {
+      &> a {
+        display: block;
+        height: 80px;
+      }
+      .caption {
+        height: 160px;
+        overflow: hidden;
+        dl.document-metadata {
+          margin-bottom: 0;
+        }
+      }
+      width: 100%;
+      padding-bottom: 10px;
+    }
+  }
+}

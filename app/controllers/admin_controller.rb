@@ -10,4 +10,7 @@ class AdminController < ApplicationController
   def update; end
 
   def show; end
+
+  def dashboard
+  end
 end

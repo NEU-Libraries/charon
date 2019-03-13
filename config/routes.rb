@@ -35,7 +35,11 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
+  # workflow
   get '/workflow/assign' => 'workflow#assign'
   get '/workflow/claim' => 'workflow#claim'
   get '/workflow/history/:id' => 'workflow#history'
+
+  # admin
+  get '/admin/dashboard' => 'admin#dashboard'
 end
