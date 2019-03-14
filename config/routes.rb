@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get '/workflow/claim' => 'workflow#claim'
   get '/workflow/history/:id' => 'workflow#history'
 
-  # admin
+  # dashboards
   get '/admin/dashboard' => 'admin#dashboard'
+  get '/users/dashboard' => 'users#dashboard'
+
 end
