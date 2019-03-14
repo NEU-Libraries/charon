@@ -11,6 +11,5 @@ class AdminController < ApplicationController
 
   def show; end
 
-  def dashboard
-  end
+  def dashboard; end
 end
