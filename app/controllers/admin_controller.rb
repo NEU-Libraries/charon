@@ -18,8 +18,11 @@ class AdminController < ApplicationController
   private
 
     def admin_check
-      unless current_or_guest_user.admin?
-        render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+      unless current_user
+        render :template => '/pages/401', :layout => "error", :formats => [:html], :status => 401 and return
+      end
+      unless current_user.admin?
+        render :template => '/pages/403', :layout => "error", :formats => [:html], :status => 403
       end
     end
 end

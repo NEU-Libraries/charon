@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def user_check
     unless current_user
-      render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+      render :template => '/pages/401', :layout => "error", :formats => [:html], :status => 401
     end
   end
 end
