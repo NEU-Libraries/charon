@@ -11,20 +11,20 @@
   / Example row of columns
   .row
     .col-md-4
-      %h2 Create a project
-      %p Projects allow for the organization of users, collections and works.
+      %h2 Admin Dashboard
+      %p Create projects and users.
       %p
-        %a.btn.btn-secondary{:href => "projects/new", :role => "button"} Create »
+        %a.btn.btn-secondary{:href => "admin/dashboard", :role => "button"} Explore »
+    .col-md-4
+      %h2 User Dashboard
+      %p Participate in project work.
+      %p
+        %a.btn.btn-secondary{:href => "users/dashboard", :role => "button"} Explore »
     .col-md-4
       %h2 New User?
-      %p Sign up to become a contributor to projects and collections.
+      %p Sign up to participate.
       %p
         %a.btn.btn-secondary{:href => "users/sign_up", :role => "button"} Register »
-    .col-md-4
-      %h2 Create a Work
-      %p Upload a file to begin the process of creating a scholarly Work.
-      %p
-        %a.btn.btn-secondary{:href => "generic_uploads/new", :role => "button"} Upload »
   .row
     .col-lg
       %h2.py-3 Recent Progress
