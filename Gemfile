@@ -15,6 +15,7 @@ gem 'valkyrie', '1.5.1'
 # NEU gems
 gem 'capybara'
 gem 'cocoon'
+gem 'devise-guests'
 gem 'enumerations'
 gem 'libera'
 gem 'minerva'
