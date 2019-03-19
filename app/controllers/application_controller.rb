@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   layout :determine_layout
 
   def render_401
-    render :template => '/pages/401', :layout => "error", :formats => [:html], :status => 401
+    render template: '/pages/401', layout: 'error', formats: [:html], status: 401
   end
 
   def render_403
-    render :template => '/pages/403', :layout => "error", :formats => [:html], :status => 403
+    render template: '/pages/403', layout: 'error', formats: [:html], status: 403
   end
 end

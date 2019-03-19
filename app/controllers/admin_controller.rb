@@ -17,12 +17,8 @@ class AdminController < ApplicationController
 
   private
 
-    def admin_check
-      unless current_user
-        render_401 and return
-      end
-      unless current_user.admin?
-        render_403 and return
-      end
-    end
+  def admin_check
+    render_401 && return unless current_user
+    render_403 && return unless current_user.admin?
+  end
 end

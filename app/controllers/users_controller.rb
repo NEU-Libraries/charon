@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-
   before_action :user_check, only: :dashboard
 
   def index
@@ -11,8 +10,6 @@ class UsersController < ApplicationController
   def dashboard; end
 
   def user_check
-    unless current_user
-      render_401 and return
-    end
+    render_401 && return unless current_user
   end
 end
