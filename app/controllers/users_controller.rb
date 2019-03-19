@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def user_check
     unless current_user
-      render_401
+      render_401 and return
     end
   end
 end

@@ -19,10 +19,10 @@ class AdminController < ApplicationController
 
     def admin_check
       unless current_user
-        render_401
+        render_401 and return
       end
       unless current_user.admin?
-        render_403
+        render_403 and return
       end
     end
 end
