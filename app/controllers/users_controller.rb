@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def user_check
     unless current_user
-      render :template => '/pages/401', :layout => "error", :formats => [:html], :status => 401
+      render_401
     end
   end
 end

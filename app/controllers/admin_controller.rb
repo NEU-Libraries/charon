@@ -19,10 +19,10 @@ class AdminController < ApplicationController
 
     def admin_check
       unless current_user
-        render :template => '/pages/401', :layout => "error", :formats => [:html], :status => 401 and return
+        render_401
       end
       unless current_user.admin?
-        render :template => '/pages/403', :layout => "error", :formats => [:html], :status => 403
+        render_403
       end
     end
 end

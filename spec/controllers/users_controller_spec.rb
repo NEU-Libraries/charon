@@ -12,4 +12,11 @@ describe UsersController do
       expect(response.body).to include(user.last_name)
     end
   end
+
+  describe 'dashboard' do
+    it '401s unless signed in' do
+      get :dashboard
+      expect(response.status).to eq(401)
+    end
+  end
 end
