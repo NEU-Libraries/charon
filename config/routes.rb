@@ -44,4 +44,8 @@ Rails.application.routes.draw do
   get '/admin/dashboard' => 'admin#dashboard'
   get '/users/dashboard' => 'users#dashboard'
 
+  # admin
+  get '/admin/new_user' => 'admin#new_user'
+  post '/admin/create_user' => 'admin#create_user'
+
 end

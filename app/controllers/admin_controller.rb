@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AdminController < ApplicationController
-  before_action :admin_check
+  # before_action :admin_check
 
   def new; end
 
@@ -14,6 +14,15 @@ class AdminController < ApplicationController
   def show; end
 
   def dashboard; end
+
+  def new_user
+    @user = User.new
+  end
+
+  def create_user
+    @user = User.new(password:Devise.friendly_token[0,20], :email => params[:user][:email], :first_name => params[:user][:first_name], :last_name => params[:user][:last_name])
+    @user.save!
+  end
 
   private
 
