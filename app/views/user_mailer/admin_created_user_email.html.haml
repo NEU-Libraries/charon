@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Welcome to charon.library.northeastern.edu, #{@user.first_name}
+    %p
+      An administrator has created a user account on your behalf,
+      your username is: #{@user.email}.
+      %br/
+      You'll need to set a password before you can access the site.
+      To do so, please click this link.
+      %br/
+      = edit_password_url(@user, reset_password_token: @token)
