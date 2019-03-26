@@ -1,3 +1,5 @@
+Metrics/AbcSize:
+  Max: 20
 Lint/AmbiguousBlockAssociation:
   Enabled: false
 Documentation:

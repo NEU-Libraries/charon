@@ -20,7 +20,11 @@ class AdminController < ApplicationController
   end
 
   def create_user
-    @user = User.new(password:Devise.friendly_token[0,20], :email => params[:user][:email], :first_name => params[:user][:first_name], :last_name => params[:user][:last_name])
+    @user = User.new(password: Devise.friendly_token[0, 20],
+                     email: params[:user][:email],
+                     first_name: params[:user][:first_name],
+                     last_name: params[:user][:last_name])
+
     @user.save!
     UserMailer.with(user: @user).admin_created_user_email.deliver_now
   end
