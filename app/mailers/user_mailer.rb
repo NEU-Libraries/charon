@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     _, @token = Devise.token_generator.generate(User, :reset_password_token)
 
-    @user.reset_password_token = enc
+    @user.reset_password_token = @token
     @user.reset_password_sent_at = Time.now.utc
 
     mail(to: @user.email, subject: 'A Charon (http://charon.library.northeastern.edu) user account was created for you')
