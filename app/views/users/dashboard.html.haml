@@ -1,6 +1,8 @@
 %h1.py-2
   User Dashboard
 
+= render 'users/dashboard/projects'
+
 - if current_user.admin?
   = render 'users/dashboard/admin'
   = render 'users/dashboard/editor'
