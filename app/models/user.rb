@@ -24,4 +24,7 @@ class User < ApplicationRecord
   def admin?
     capacity == :administrator
   end
+
+  def projects
+  end
 end
