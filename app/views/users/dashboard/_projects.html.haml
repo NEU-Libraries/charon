@@ -1,8 +1,8 @@
-.input-group.mb-3
-  .input-group-prepend
-    %label.input-group-text{:for => "inputGroupSelect01"} Projects
-  %select#inputGroupSelect01.custom-select
-    %option{:selected => "selected"} Choose...
+.input-group
+  %select#inputGroupSelect04.custom-select{"aria-label" => "Example select with button addon"}
+    %option{:selected => "selected"} Projects...
     %option{:value => "1"} One
     %option{:value => "2"} Two
     %option{:value => "3"} Three
+  .input-group-append
+    %button.btn.btn-outline-secondary{:type => "button"} Select
