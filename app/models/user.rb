@@ -25,11 +25,10 @@ class User < ApplicationRecord
     capacity == :administrator
   end
 
-  def projects
-  end
+  def projects; end
 
   def to_s
     # Blacklight presentation string
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}"
   end
 end
