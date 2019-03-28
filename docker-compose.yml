@@ -13,13 +13,15 @@ services:
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
   web:
     image: nakatomi/charon_web
     build: .
     volumes:
       - .:/charon
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - db
       - solr
