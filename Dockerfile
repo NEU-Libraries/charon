@@ -9,4 +9,3 @@ COPY Gemfile /charon/Gemfile
 COPY Gemfile.lock /charon/Gemfile.lock
 RUN bundle install
 COPY . /charon
-ENTRYPOINT ["/charon/docker-entrypoint.sh"]

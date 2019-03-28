@@ -25,6 +25,7 @@ services:
     depends_on:
       - db
       - solr
+    entrypoint: /charon/docker-entrypoint.sh
   solr:
     image: solr:7.2-alpine
     ports:
