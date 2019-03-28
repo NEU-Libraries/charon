@@ -56,6 +56,12 @@ jobs:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
+          name: Drop and Recreate
+          command: |
+            bundle exec rake db:drop
+            bundle exec rake db:create RAILS_ENV=test
+            bundle exec rake db:migrate RAILS_ENV=test
+      - run:
           name: Run Specs
           command: |
             docker-compose exec web rspec spec
