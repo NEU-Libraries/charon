@@ -27,4 +27,9 @@ class User < ApplicationRecord
 
   def projects
   end
+
+  def to_s
+    # Blacklight presentation string
+    "#{self.first_name} #{self.last_name}"
+  end
 end
