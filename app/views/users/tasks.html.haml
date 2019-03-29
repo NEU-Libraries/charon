@@ -2,7 +2,11 @@
   = "Actions for #{@project.title} - #{@role.designation.to_s.capitalize}"
 
 %table.table.table-bordered.table-responsive
-  = render 'users/tasks/manager'
-  = render 'users/tasks/editor'
-  = render 'users/tasks/creator'
-  = render 'users/tasks/depositor'
+  - if @role.manager?
+    = render 'users/tasks/manager'
+  - if @role.editor?
+    = render 'users/tasks/editor'
+  - if @role.creator?
+    = render 'users/tasks/creator'
+  - if @role.depositor?
+    = render 'users/tasks/depositor'
