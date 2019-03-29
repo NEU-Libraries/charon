@@ -1,14 +1,16 @@
-%h3.py-3.m-0 Creator
-.card-deck
-  .card
-    .card-body
-      %h4.card-title Select assigned task
-      %p.card-text Select a task assigned to my group or myself.
-    .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => "#", :role => "button"} Select
-  .card
-    .card-body
-      %h4.card-title Select available task
-      %p.card-text Select from tasks available to anyone with my abilites.
-    .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => "#", :role => "button"} Select
+%tr
+  %td.table-info
+  %td
+    Select assigned task
+  %td
+    Select a task assigned to my group or myself.
+  %td
+    %a.btn.btn-sm.btn-block.btn-outline-primary{:href => "#", :role => "button"} Select
+%tr
+  %td.table-info
+  %td
+    Select available task
+  %td
+    Select from tasks available to anyone with my abilites.
+  %td
+    %a.btn.btn-sm.btn-block.btn-outline-primary{:href => "#", :role => "button"} Select

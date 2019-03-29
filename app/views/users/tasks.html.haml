@@ -1,7 +1,8 @@
-%h1.py-2
-  = "Actions for #{@project.title}"
+%h2.pb-3
+  = "Actions for #{@project.title} - #{@role.designation.to_s.capitalize}"
 
-= render 'users/tasks/manager'
-= render 'users/tasks/editor'
-= render 'users/tasks/depositor'
-= render 'users/tasks/creator'
+%table.table.table-bordered.table-responsive
+  = render 'users/tasks/manager'
+  = render 'users/tasks/editor'
+  = render 'users/tasks/creator'
+  = render 'users/tasks/depositor'

@@ -1,14 +1,24 @@
-%h3.py-3.m-0 Depositor
-.card-deck
-  .card
-    .card-body
-      %h4.card-title Submit a new work
-      %p.card-text Select an available binary from the upload pool and provide metadata.
-    .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => "#", :role => "button"} Submit
-  .card
-    .card-body
-      %h4.card-title Review my history
-      %p.card-text View the actions that have been recorded in Charon.
-    .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => "#", :role => "button"} Review
+%tr
+  %td.table-warning
+  %td
+    Upload a file
+  %td
+    Upload a binary file to Charon that can then be made into a Work.
+  %td
+    %a.btn.btn-sm.btn-block.btn-outline-primary{:href => "#", :role => "button"} Submit
+%tr
+  %td.table-warning
+  %td
+    Submit a new work
+  %td
+    Select an available binary from the upload pool and provide metadata.
+  %td
+    %a.btn.btn-sm.btn-block.btn-outline-primary{:href => "#", :role => "button"} Submit
+%tr
+  %td.table-warning
+  %td
+    Review my history
+  %td
+    View the actions that have been recorded in Charon.
+  %td
+    %a.btn.btn-sm.btn-block.btn-outline-primary{:href => "#", :role => "button"} Review
