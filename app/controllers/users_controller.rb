@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def tasks
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+  end
+
   def dashboard; end
 
   def user_check

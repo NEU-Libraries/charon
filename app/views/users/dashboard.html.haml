@@ -1,10 +1,4 @@
 %h1.py-2
   User Dashboard
 
-= render 'users/dashboard/projects'
-
-- if current_user.admin?
-  = render 'users/dashboard/manager'
-  = render 'users/dashboard/editor'
-  = render 'users/dashboard/creator'
-  = render 'users/dashboard/depositor'
+= render 'users/dashboard/select_project'
