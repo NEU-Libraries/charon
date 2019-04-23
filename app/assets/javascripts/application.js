@@ -22,8 +22,6 @@
 //= require bootstrap
 //= require blacklight/blacklight
 
-//= require cocoon
-
 //= require monkey_patch_turbolinks
 
 //= require_tree .
