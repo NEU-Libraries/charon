@@ -31,10 +31,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with(
-      :truncation,
-      except: %w[ar_internal_metadata]
-    )
+    DatabaseCleaner.clean_with(:deletion)
     disable_production_minter!
   end
 
