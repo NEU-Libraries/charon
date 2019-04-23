@@ -27,7 +27,7 @@ describe User do
     end
 
     it 'returns false if user does not have that capacity' do
-      expect(dev_user.admin?).to be false
+      expect(user.admin?).to be false
     end
   end
 

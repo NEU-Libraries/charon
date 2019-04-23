@@ -34,7 +34,7 @@ describe UsersController do
 
     it '401s unless signed in' do
       sign_out user
-      get :tasks, params: {project_id: '1'}
+      get :tasks, params: { project_id: '1' }
       expect(response.status).to eq(401)
     end
   end
