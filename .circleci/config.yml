@@ -56,6 +56,10 @@ jobs:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
+          name: Migrate
+          command: |
+            docker-compose exec web rake db:migrate RAILS_ENV=test
+      - run:
           name: Run Specs
           command: |
             docker-compose exec web bundle exec rake
