@@ -22,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    capacity == :administrator
+    capacity == :developer || :administrator
   end
 
   def projects; end

@@ -20,23 +20,19 @@ require 'blacklight'
 require 'capybara/rspec'
 require 'noid/rails/minter'
 require 'noid/rails/rspec'
-require 'database_cleaner'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   include Noid::Rails::RSpec
-  config.include SolrSupport
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
     disable_production_minter!
   end
 
   config.after(:suite) do
-    DatabaseCleaner.clean
     enable_production_minter!
   end
 

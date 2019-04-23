@@ -10,11 +10,10 @@ gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'pg'
 gem 'rails'
-gem 'valkyrie', '1.5.1'
+gem 'valkyrie', '2.0.0.RC5'
 
 # NEU gems
 gem 'capybara'
-gem 'cocoon'
 gem 'devise-guests'
 gem 'enumerations'
 gem 'libera'

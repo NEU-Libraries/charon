@@ -54,23 +54,11 @@ jobs:
             DOCKERIZE_VERSION: v0.6.1
       - run:
           name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Drop
-          command: |
-            docker-compose exec web bundle exec rake db:drop
-      - run:
-          name: Recreate
-          command: |
-            docker-compose exec web bundle exec rake db:create RAILS_ENV=test
-      - run:
-          name: Migrate
-          command: |
-            docker-compose exec web bundle exec rake db:migrate RAILS_ENV=test
+          command: dockerize -wait tcp://localhost:5432/charon_test -timeout 1m
       - run:
           name: Run Specs
           command: |
-            docker-compose exec web rspec spec
+            docker-compose exec web bash -c "rake db:environment:set RAILS_ENV=test && rake"
       - run:
           name: Run Rubocop
           command: |

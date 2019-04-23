@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :user_check, only: :dashboard
+  before_action :user_check
 
   def index
     @users = User.all
