@@ -6,7 +6,11 @@ class Resource < Valkyrie::Resource
               [Minter.mint]
             }
 
-  def to_param
+  def noid
     alternate_ids.first.to_s
+  end
+
+  def to_param
+    noid
   end
 end

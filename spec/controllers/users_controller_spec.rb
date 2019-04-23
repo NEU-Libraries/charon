@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 describe UsersController do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user) { create(:user) }
+  let(:project) { create(:project) }
+  let(:user_registry) { UserRegistry.find(project.user_registry_id) }
+  let(:role) { build(:role, user: user, user_registry: user_registry) }
 
   describe 'index' do
     render_views
@@ -28,8 +31,14 @@ describe UsersController do
   end
 
   describe 'tasks' do
+    render_views
     it 'displays tasks available according to users role in a project' do
-      # TODO
+      sign_in user
+      user_registry.roles << role
+      user_registry.save!
+
+      get :tasks, params: { project_id: project.noid }
+      expect(response.body).to include("Actions for #{project.title} - #{role.designation.to_s.capitalize}")
     end
 
     it '401s unless signed in' do

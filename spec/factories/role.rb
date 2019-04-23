@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :role do
-    user { create(:user) }
-    user_registry { create(:user_registry) }
+    designation { Designation.user }
   end
 end
