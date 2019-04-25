@@ -16,7 +16,10 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.view.gallery.partials = %i[index_header thumbnail index]
+    config.index.partials = [:index_header, :thumbnail, :index]
+    config.view.gallery.partials = [:index_header, :thumbnail, :index]
+
+    # config.view.gallery.partials = %i[index_header thumbnail index]
     # config.view.masonry.partials = [:index]
     # config.view.slideshow.partials = [:index]
 
@@ -110,5 +113,8 @@ class CatalogController < ApplicationController
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
     config.spell_max = 5
+
+    # description_tesim
+    config.add_index_field 'description_tesim', label: 'Description'
   end
 end
