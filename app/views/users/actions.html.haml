@@ -6,10 +6,10 @@
 
 %table.table.table-bordered.table-responsive
   - if @role.manager?
-    = render 'users/tasks/manager'
+    = render 'users/actions/manager'
   - if @role.editor?
-    = render 'users/tasks/editor'
+    = render 'users/actions/editor'
   - if @role.creator?
-    = render 'users/tasks/creator'
+    = render 'users/actions/creator'
   - if @role.depositor?
-    = render 'users/tasks/depositor'
+    = render 'users/actions/depositor'
