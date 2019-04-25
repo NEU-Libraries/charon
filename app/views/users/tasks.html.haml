@@ -1,5 +1,8 @@
 %h2.pb-3
-  = "Actions for #{@project.title} - #{@role.designation.to_s.capitalize}"
+  - if current_user.admin?
+    = "Actions for #{@project.title} - System Administrator"
+  -else
+    = "Actions for #{@project.title} - #{@role.designation.to_s.capitalize}"
 
 %table.table.table-bordered.table-responsive
   - if @role.manager?
