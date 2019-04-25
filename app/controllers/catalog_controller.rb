@@ -16,8 +16,8 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.index.partials = [:index_header, :thumbnail, :index]
-    config.view.gallery.partials = [:index_header, :thumbnail, :index]
+    config.index.partials = %i[index_header thumbnail index]
+    config.view.gallery.partials = %i[index_header thumbnail index]
 
     # config.view.gallery.partials = %i[index_header thumbnail index]
     # config.view.masonry.partials = [:index]
