@@ -1,6 +1,6 @@
 %h2.pb-3
   - if current_user.admin?
-    = "Actions for #{@project.title} - System Administrator"
+    = "Actions for #{@project.title} - Administrator"
   -else
     = "Actions for #{@project.title} - #{@role.designation.to_s.capitalize}"
 
