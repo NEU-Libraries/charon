@@ -27,6 +27,8 @@ class AdminController < ApplicationController
 
     @user.save!
     UserMailer.with(user: @user).admin_created_user_email.deliver_now
+    flash[:notice] = "User successfully created. Email sent to #{params[:user][:email]} for notification."
+    redirect_to admin_dashboard_url
   end
 
   private

@@ -13,7 +13,9 @@ class UsersController < ApplicationController
     @role = Role.find_by(user_id: current_user.id, user_registry_id: @project.user_registry_id)
   end
 
-  def dashboard; end
+  def dashboard
+    # Find all user registries where current_user is a member
+  end
 
   def user_check
     render_401 && return unless current_user
