@@ -14,7 +14,10 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    # Find all user registries where current_user is a member
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    # Find all projects whose user registries have current_user as a member
+    project_ids = UserRegistry.joins(:roles).where(:roles => {:user_id => current_user.id}).pluck(:project_id)
+    @projects = meta.query_service.find_many_by_ids(ids: project_ids)
   end
 
   def user_check
