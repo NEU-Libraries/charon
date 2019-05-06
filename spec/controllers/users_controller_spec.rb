@@ -38,10 +38,8 @@ describe UsersController do
 
     it 'redirects to actions if there is only one project' do
       sign_in user
-      user_registry.project_id = project.id
       user_registry.roles << role
       user_registry.save!
-      user_registry.reload
       get :dashboard
       expect(response).to redirect_to(actions_path(project.noid))
     end

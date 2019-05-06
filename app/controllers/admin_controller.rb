@@ -20,14 +20,13 @@ class AdminController < ApplicationController
   end
 
   def create_user
-    @user = User.new(password: Devise.friendly_token[0, 20],
-                     email: params[:user][:email],
-                     first_name: params[:user][:first_name],
-                     last_name: params[:user][:last_name])
+    @user = User.create(password: Devise.friendly_token[0, 20],
+                        email: params[:user][:email],
+                        first_name: params[:user][:first_name],
+                        last_name: params[:user][:last_name])
 
-    @user.save!
     UserMailer.with(user: @user).admin_created_user_email.deliver_now
-    flash[:notice] = "User successfully created. Email sent to #{params[:user][:email]} for notification."
+    flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to admin_dashboard_url
   end
 

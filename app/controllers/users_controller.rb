@@ -16,13 +16,11 @@ class UsersController < ApplicationController
   def dashboard
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     # Find all projects whose user registries have current_user as a member
-    project_ids = UserRegistry.joins(:roles).where(:roles => {:user_id => current_user.id}).pluck(:project_id)
+    project_ids = UserRegistry.joins(:roles).where(roles: { user_id: current_user.id }).pluck(:project_id)
     @projects = meta.query_service.find_many_by_ids(ids: project_ids)
 
-    if @projects.count == 1
-      # skip project selection and send user to action list
-      redirect_to action: "actions", project_id: @projects.first.noid
-    end
+    # skip project selection and send user to action list
+    redirect_to action: 'actions', project_id: @projects.first.noid if @projects.count == 1
   end
 
   def user_check
