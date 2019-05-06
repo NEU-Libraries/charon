@@ -1,8 +1,11 @@
-.input-group
-  %select#inputGroupSelect04.custom-select{"aria-label" => "Example select with button addon"}
-    %option{:selected => "selected"} Projects...
-    %option{:value => "1"} One
-    %option{:value => "2"} Two
-    %option{:value => "3"} Three
-  .input-group-append
-    %button.btn.btn-outline-secondary{:type => "button"} Select
+- if @projects.blank?
+  %h1 No projects available
+- else
+  .input-group
+    %select#inputGroupSelect04.custom-select{"aria-label" => "Example select with button addon"}
+      %option{:selected => "selected"} Projects...
+      - @projects.each do |p|
+        %option{:value => "#{p.noid}"}
+          = p.title
+    .input-group-append
+      %button.btn.btn-outline-secondary{:type => "button"} Select

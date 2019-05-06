@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get '/users/dashboard' => 'users#dashboard'
 
   # task dashboard
-  get '/users/actions/:project_id' => 'users#actions'
+  get '/users/actions/:project_id', to: 'users#actions', as: 'actions'
 
   # admin
   get '/admin/new_user' => 'admin#new_user'
