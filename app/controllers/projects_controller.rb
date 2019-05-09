@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-
   def new
     @change_set = ProjectChangeSet.new(Project.new)
   end

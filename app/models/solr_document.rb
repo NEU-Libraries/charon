@@ -24,9 +24,7 @@ class SolrDocument
   attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
 
   def klass
-    if !klass_type.blank?
-      return klass_type.constantize
-    end
+    return klass_type.constantize unless klass_type.blank?
   end
 
   def to_param
