@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 module SystemCollectionGenerator
-  def generate_system_collections(project_id)
+  def generate_system_collections
     system_collections = []
     SystemCollectionType.all.each do |sct|
-      type = sct.to_s
-      system_collections << SystemCollection.new(a_member_of: project_id, system_collection_type: type, title: type)
+      system_collections << SystemCollection.new(a_member_of: self.id, system_collection_type: sct.to_s, title: sct.name)
     end
 
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)

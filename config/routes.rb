@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :generic_uploads
   resources :projects
   resources :collections
+  resources :system_collections
 
   root to: 'pages#home'
 

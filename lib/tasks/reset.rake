@@ -28,5 +28,7 @@ namespace :reset do
 
     ur.roles << r
     ur.save!
+
+    p.generate_system_collections
   end
 end

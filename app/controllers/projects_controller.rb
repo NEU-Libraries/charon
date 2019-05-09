@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  include SystemCollectionGenerator
 
   def new
     @change_set = ProjectChangeSet.new(Project.new)
@@ -18,7 +17,7 @@ class ProjectsController < ApplicationController
     # After successfull creation of project, create system collections
     # and associate with the resource
 
-    generate_system_collections(@project.id)
+    @project.generate_system_collections
 
     redirect_to project_path(@project)
   end

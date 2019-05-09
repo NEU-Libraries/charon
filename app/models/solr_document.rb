@@ -19,8 +19,15 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
+  attribute :klass_type, Blacklight::Types::String, 'internal_resource_tesim'
   attribute :human_readable_type, Blacklight::Types::String, 'human_readable_type_ssim'
   attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
+
+  def klass
+    if !klass_type.blank?
+      return klass_type.constantize
+    end
+  end
 
   def to_param
     noid = alternate_ids&.first&.split('id-')&.last
