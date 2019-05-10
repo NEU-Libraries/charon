@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
     project.attach_user(@user)
 
-    UserMailer.with(user: @user).admin_created_user_email.deliver_now
+    UserMailer.with(user: @user).system_created_user_email.deliver_now
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to users_dashboard_url
   end

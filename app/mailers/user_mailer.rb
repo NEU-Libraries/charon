@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserMailer < ApplicationMailer
-  def admin_created_user_email
+  def system_created_user_email
     @user = params[:user]
     @token, = Devise.token_generator.generate(User, :reset_password_token)
 
