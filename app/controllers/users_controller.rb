@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  include UserCreatable
+
   before_action :user_check
 
   def index
@@ -21,6 +23,22 @@ class UsersController < ApplicationController
 
     # skip project selection and send user to action list
     redirect_to action: 'actions', project_id: @projects.first.noid if @projects.count == 1
+  end
+
+  def new_user
+    @user = User.new
+  end
+
+  def create_user
+    @user = manufacture_user(params)
+
+    # Associate user with project
+    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+    project.attach_user(@user)
+
+    UserMailer.with(user: @user).admin_created_user_email.deliver_now
+    flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
+    redirect_to users_dashboard_url
   end
 
   def user_check

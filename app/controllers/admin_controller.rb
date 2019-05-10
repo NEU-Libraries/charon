@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AdminController < ApplicationController
+  include UserCreatable
+
   before_action :admin_check
 
   def new; end
@@ -20,10 +22,7 @@ class AdminController < ApplicationController
   end
 
   def create_user
-    @user = User.create(password: Devise.friendly_token[0, 20],
-                        email: params[:user][:email],
-                        first_name: params[:user][:first_name],
-                        last_name: params[:user][:last_name])
+    @user = manufacture_user(params)
 
     UserMailer.with(user: @user).admin_created_user_email.deliver_now
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
