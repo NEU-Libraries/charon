@@ -19,6 +19,8 @@ class AdminController < ApplicationController
 
   def new_user
     @user = User.new
+    @create_user_path = admin_create_user_path
+    render 'shared/new_user'
   end
 
   def create_user

@@ -27,9 +27,12 @@ class UsersController < ApplicationController
 
   def new_user
     @user = User.new
+    @create_user_path = users_create_user_path
+    render 'shared/new_user'
   end
 
   def create_user
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     @user = manufacture_user(params)
 
     # Associate user with project

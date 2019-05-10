@@ -26,7 +26,7 @@ describe AdminController do
   end
 
   describe 'create_user' do
-    it 'creates a user and emails them a notifications' do
+    it 'creates a user and emails them a notification' do
       sign_in FactoryBot.create(:admin)
       post :create_user, params: { user: { email: 'test@email.com', first_name: 'Doug', last_name: 'Dimmadome' } }
       mail = ActionMailer::Base.deliveries.last

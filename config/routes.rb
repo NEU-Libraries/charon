@@ -52,4 +52,8 @@ Rails.application.routes.draw do
   get '/admin/new_user' => 'admin#new_user'
   post '/admin/create_user' => 'admin#create_user'
 
+  # manager
+  get '/users/new_user' => 'users#new_user'
+  post '/users/create_user' => 'users#create_user'
+
 end
