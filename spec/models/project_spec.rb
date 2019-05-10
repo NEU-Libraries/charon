@@ -12,7 +12,7 @@ RSpec.describe Project do
   it_behaves_like 'a Valkyrie::Resource'
 
   it 'raises an error retrieving the user registry if the id is not set' do
-    expect{(resource_klass.new).user_registry}.to raise_error(ActiveRecord::RecordNotFound)
+    expect { resource_klass.new.user_registry }.to raise_error(ActiveRecord::RecordNotFound)
   end
 
   it 'provides the user registry' do
