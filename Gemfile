@@ -11,7 +11,7 @@ gem 'haml-rails'
 gem 'pg'
 gem 'puma'
 gem 'rails'
-gem 'valkyrie', '2.0.0.RC5'
+gem 'valkyrie', '2.0.0.RC6'
 
 # NEU gems
 gem 'capybara'
