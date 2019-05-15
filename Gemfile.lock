@@ -429,7 +429,7 @@ GEM
       thread_safe (~> 0.1)
     uber (0.1.0)
     unicode-display_width (1.4.1)
-    valkyrie (2.0.0.RC6)
+    valkyrie (2.0.0.RC7)
       activemodel
       activesupport
       disposable (~> 0.4.5)
@@ -488,7 +488,7 @@ DEPENDENCIES
   simplecov-shields-badge
   turbolinks
   twitter-typeahead-rails (= 0.11.1.pre.corejavascript)
-  valkyrie (= 2.0.0.RC6)
+  valkyrie (= 2.0.0.RC7)
 
 BUNDLED WITH
    1.17.2
