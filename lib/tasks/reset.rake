@@ -22,13 +22,15 @@ namespace :reset do
     ur = UserRegistry.create
     p = Project.new(title: 'Test Project', description: 'Test test test', user_registry_id: ur.id)
 
-    meta.persister.save(resource: p)
+    saved_p = meta.persister.save(resource: p)
+    ur.project_id = saved_p.id
+    ur.save!
 
     r = Role.create(user: u, user_registry: ur, designation: Designation.user)
 
     ur.roles << r
     ur.save!
 
-    p.generate_system_collections
+    saved_p.generate_system_collections
   end
 end

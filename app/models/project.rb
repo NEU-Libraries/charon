@@ -7,8 +7,14 @@ class Project < Resource
   attribute :description, Valkyrie::Types::String
   attribute :user_registry_id, Valkyrie::Types::Integer
 
-  def attach_user(user)
-    role = Role.new(user: user, user_registry: user_registry)
+  def attach_user(user, manager = false)
+    d = if manager
+          Designation.manager
+        else
+          Designation.user
+        end
+
+    role = Role.new(user: user, user_registry: user_registry, designation: d)
     user_registry.roles << role
     user_registry.save!
   end
