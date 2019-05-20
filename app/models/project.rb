@@ -22,4 +22,8 @@ class Project < Resource
   def user_registry
     UserRegistry.find(user_registry_id)
   end
+
+  def users
+    user_registry.roles.map(&:user)
+  end
 end

@@ -1,0 +1,18 @@
+%h1
+  = "Users for #{@project.title}"
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} First Name
+      %th{:scope => "col"} Last Name
+  %tbody
+    - @users.each_with_index do |user, i|
+      %tr
+        %td.align-middle
+          = i + 1
+        %td.align-middle
+          = user.first_name
+        %td.align-middle
+          = user.last_name
