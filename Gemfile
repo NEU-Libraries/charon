@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'blacklight', '7.0.1'
+gem 'blacklight', '7.1.0.alpha'
 gem 'blacklight-access_controls'
 gem 'blacklight-gallery', git: 'https://github.com/projectblacklight/blacklight-gallery.git' # Blacklight 7 support isn't in a gem yet
 gem 'devise'
@@ -42,10 +42,9 @@ end
 # Blacklight
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
-gem 'popper_js'
-gem 'rsolr', '>= 1.0', '< 3'
+gem 'rsolr'
 gem 'turbolinks'
-gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
+gem 'twitter-typeahead-rails'
 
 # Blacklight
 group :test do
