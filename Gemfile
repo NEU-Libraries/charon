@@ -30,14 +30,8 @@ gem 'simplecov-shields-badge', require: false
 
 # Rails gems
 gem 'bootsnap'
+gem 'listen'
 gem 'sass-rails'
-
-group :development do
-  gem 'listen'
-  gem 'spring'
-  gem 'spring-watcher-listen'
-  gem 'web-console'
-end
 
 # Blacklight
 gem 'bootstrap', '~> 4.0'
