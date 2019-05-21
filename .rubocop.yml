@@ -15,4 +15,5 @@ AllCops:
     - 'config/**/*'
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*.rb'
+    - 'spec/**/*'
+    - 'lib/tasks/*'
