@@ -6,16 +6,18 @@
     %tr
       %th{:scope => "col"} #
       %th{:scope => "col"} First Name
-      %th{:scope => "col"} Last Name
-      %th{:scope => "col"} Role
+      %th{:scope => "col"}
+        = sortable "users.last_name", "Last Name"
+      %th{:scope => "col"}
+        = sortable "designation", "Role"
   %tbody
-    - @users.each_with_index do |user, i|
+    - @roles.each_with_index do |role, i|
       %tr
         %td.align-middle
           = i + 1
         %td.align-middle
-          = user.first_name
+          = role.user.first_name
         %td.align-middle
-          = user.last_name
+          = role.user.last_name
         %td.align-middle
-          = user.designation(@project).name
+          = role.designation.name

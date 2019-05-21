@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   def new
     @change_set = ProjectChangeSet.new(Project.new)
   end
@@ -30,6 +32,14 @@ class ProjectsController < ApplicationController
   def users
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
-    @users = @project.users
+    @roles = @project.roles.order(sort_column + ' ' + sort_direction)
+  end
+
+  def sort_column
+    (User.column_names + Role.column_names).include?(params[:sort].split('.').last) ? params[:sort] : 'designation'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end
