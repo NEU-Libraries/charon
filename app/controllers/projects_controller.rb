@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
   end
 
   def sort_column
+    return 'designation' unless params[:sort]
     (User.column_names + Role.column_names).include?(params[:sort].split('.').last) ? params[:sort] : 'designation'
   end
 
