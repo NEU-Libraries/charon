@@ -27,6 +27,14 @@ class User < ApplicationRecord
 
   def projects; end
 
+  def role(project)
+    roles.where(user_registry_id: project.user_registry.id).take
+  end
+
+  def designation(project)
+    role(project).designation
+  end
+
   def to_s
     # Blacklight presentation string
     "#{first_name} #{last_name}"

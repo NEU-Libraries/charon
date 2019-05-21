@@ -7,6 +7,7 @@
       %th{:scope => "col"} #
       %th{:scope => "col"} First Name
       %th{:scope => "col"} Last Name
+      %th{:scope => "col"} Role
   %tbody
     - @users.each_with_index do |user, i|
       %tr
@@ -16,3 +17,5 @@
           = user.first_name
         %td.align-middle
           = user.last_name
+        %td.align-middle
+          = user.designation(@project).name
