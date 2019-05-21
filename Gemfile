@@ -30,7 +30,6 @@ gem 'simplecov-shields-badge', require: false
 
 # Rails gems
 gem 'bootsnap'
-gem 'listen'
 gem 'sass-rails'
 
 # Blacklight
@@ -46,3 +45,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
+
+gem 'listen', group: :development
