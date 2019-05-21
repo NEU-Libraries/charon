@@ -4,12 +4,13 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
-    link_to "#{title} #{sort_arrow(direction)}".html_safe, sort: column, direction: direction
+    link_to "#{title} #{sort_arrow(column, direction)}".html_safe, sort: column, direction: direction
   end
 
-  def sort_arrow(direction)
-    return '▲' if direction == 'asc'
+  def sort_arrow(column, direction)
+    return '▸' if column != sort_column
+    return '▴' if direction == 'asc'
 
-    '▼'
+    '▾'
   end
 end
