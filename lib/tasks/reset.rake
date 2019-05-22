@@ -31,9 +31,14 @@ namespace :reset do
     ur.roles << r
 
     # Add random users with faker
-    10.times do
+    9.times do
       u = User.create(password: Devise.friendly_token.first(10), email: Faker::Internet.email, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
       ur.roles << Role.create(user: u, user_registry: ur, designation: Designation.all.sample)
+    end
+
+    # Add loose random users
+    10.times do
+      u = User.create(password: Devise.friendly_token.first(10), email: Faker::Internet.email, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
     end
 
     ur.save!

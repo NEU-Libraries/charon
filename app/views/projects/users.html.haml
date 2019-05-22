@@ -1,5 +1,5 @@
-%h1
-  = "Users for #{@project.title}"
+%h2.py-3
+  = "User Registry for #{@project.title}"
 
 %table.table.table-bordered
   %thead
@@ -21,3 +21,17 @@
           = role.user.last_name
         %td.align-middle
           = role.designation.name
+
+.card-deck.py-3
+  .card
+    .card-body
+      %h4.card-title Add an existing user
+      %p.card-text Select an existing Charon user to attach to this project.
+    .card-footer
+      %a.btn.btn-lg.btn-block.btn-primary{:href => "/projects/new", :role => "button"} Add
+  .card
+    .card-body
+      %h4.card-title Create a user
+      %p.card-text Make a new user who will then be attached to this project.
+    .card-footer
+      %a.btn.btn-lg.btn-block.btn-primary{:href => admin_new_user_path, :role => "button"} Create
