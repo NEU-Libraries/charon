@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  include UserCreatable
   helper_method :sort_column, :sort_direction
 
   def new
@@ -35,9 +36,24 @@ class ProjectsController < ApplicationController
     @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
-  def new_user; end
+  def new_user
+    @user = User.new
+    @create_user_path = project_create_user_path
+    render 'shared/new_user'
+  end
 
-  def create_user; end
+  def create_user
+    @user = manufacture_user(params)
+
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+
+    project.attach_user(@user)
+
+    UserMailer.with(user: @user).system_created_user_email.deliver_now
+    flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
+    redirect_to actions_path(project.noid)
+  end
 
   def sort_column
     return 'designation' unless params[:sort]

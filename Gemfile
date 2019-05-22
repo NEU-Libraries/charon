@@ -46,7 +46,10 @@ group :test do
   gem 'rspec-rails'
 end
 
+group :development do
+  gem 'listen'
+end
+
 group :development, :test do
   gem 'faker', '1.9.1'
-  gem 'listen'
 end
