@@ -47,6 +47,6 @@ group :test do
 end
 
 group :development, :test do
-  gem 'faker'
+  gem 'faker', '1.9.1'
   gem 'listen'
 end

@@ -35,6 +35,10 @@ class ProjectsController < ApplicationController
     @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
+  def new_user; end
+
+  def create_user; end
+
   def sort_column
     return 'designation' unless params[:sort]
 
