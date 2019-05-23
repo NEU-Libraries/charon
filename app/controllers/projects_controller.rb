@@ -30,6 +30,8 @@ class ProjectsController < ApplicationController
 
   def show; end
 
+  def available_users; end
+
   def users
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])

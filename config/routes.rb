@@ -60,5 +60,6 @@ Rails.application.routes.draw do
   get '/projects/:project_id/users', to: 'projects#users', as: 'project_users'
   get '/projects/:project_id/new_user', to: 'projects#new_user', as: 'project_new_user'
   post '/projects/:project_id/create_user', to: 'projects#create_user', as: 'project_create_user'
+  get '/projects/:project_id /available_users', to: 'projects#available_users', as: 'project_available_users'
 
 end
