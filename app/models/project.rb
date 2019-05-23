@@ -7,6 +7,8 @@ class Project < Resource
   attribute :description, Valkyrie::Types::String
   attribute :user_registry_id, Valkyrie::Types::Integer
 
+  # TODO: Probably should change this signature so that 2nd param is a designation
+  # for clarity and flexability
   def attach_user(user, manager = false)
     # check to see if user is already attached
     # in which case do nothing
