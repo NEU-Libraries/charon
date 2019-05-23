@@ -15,10 +15,9 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     # Find all projects whose user registries have current_user as a member
     project_ids = UserRegistry.joins(:roles).where(roles: { user_id: current_user.id }).pluck(:project_id)
-    @projects = meta.query_service.find_many_by_ids(ids: project_ids)
+    @projects = metadata_adapter.query_service.find_many_by_ids(ids: project_ids)
 
     # skip project selection and send user to action list
     redirect_to action: 'actions', id: @projects.first.noid if @projects.count == 1
@@ -31,11 +30,10 @@ class UsersController < ApplicationController
   end
 
   def create_user
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     @user = manufacture_user(params)
 
     # Associate user with project
-    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    project = find_resource
     project.attach_user(@user)
 
     UserMailer.with(user: @user).system_created_user_email.deliver_now

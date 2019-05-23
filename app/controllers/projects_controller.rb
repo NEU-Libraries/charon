@@ -9,11 +9,10 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
     change_set = ProjectChangeSet.new(Project.new)
     if change_set.validate(params[:project])
       change_set.sync
-      @project = meta.persister.save(resource: change_set.resource)
+      @project = metadata_adapter.persister.save(resource: change_set.resource)
     end
 
     # After successfull creation of project, create system collections
@@ -32,16 +31,14 @@ class ProjectsController < ApplicationController
 
   def available_users
     # Need to filter down to users not already attached to project
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    @project = find_resource
     already_attached_users = @project.users
     @users = User.all.select{|u| !already_attached_users.include? u}
   end
 
   def add_users
     user_ids = params[:user_ids]
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    project = find_resource
     user_ids.each do |id|
       project.attach_user(@user)
     end
@@ -50,8 +47,7 @@ class ProjectsController < ApplicationController
   end
 
   def users
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    @project = find_resource
     @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
@@ -63,10 +59,7 @@ class ProjectsController < ApplicationController
 
   def create_user
     @user = manufacture_user(params)
-
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
-
+    project = find_resource
     project.attach_user(@user)
 
     UserMailer.with(user: @user).system_created_user_email.deliver_now

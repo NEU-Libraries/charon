@@ -7,10 +7,8 @@ module SystemCollectionGenerator
       system_collections << SystemCollection.new(a_member_of: id, system_collection_type: sct.to_s, title: sct.name)
     end
 
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-
     system_collections.each do |sc|
-      meta.persister.save(resource: sc)
+      Valkyrie.config.metadata_adapter.persister.save(resource: sc)
     end
   end
 end
