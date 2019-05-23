@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
 
     # After successfull creation of project, create system collections
     # and associate with the resource
-
     @project.generate_system_collections
 
     redirect_to project_path(@project)
@@ -33,14 +32,14 @@ class ProjectsController < ApplicationController
     # Need to filter down to users not already attached to project
     @project = find_resource
     already_attached_users = @project.users
-    @users = User.all.select{|u| !already_attached_users.include? u}
+    @users = User.all.reject { |u| already_attached_users.include? u }
   end
 
   def add_users
     user_ids = params[:user_ids]
     project = find_resource
     user_ids.each do |id|
-      project.attach_user(@user)
+      project.attach_user(User.find(id))
     end
     flash[:notice] = "Successfully added users to #{project.title}."
     redirect_to actions_path(project.noid)
