@@ -8,6 +8,7 @@ RSpec.describe Project do
   let(:resource_klass) { described_class }
   let(:user) { create(:user) }
   let(:project) { FactoryBot.create_for_repository(:project) }
+  let(:managed_project) { FactoryBot.create_for_repository(:project) }
   let(:user_registry) { UserRegistry.find(project.user_registry_id) }
   it_behaves_like 'a Valkyrie::Resource'
 
@@ -24,5 +25,19 @@ RSpec.describe Project do
     # expect that project has a user registry
     # which has the same role as the user
     expect(project.user_registry.roles.first == user.roles.first).to be true
+  end
+
+  it 'attaches a user and makes them a project manager' do
+    managed_project.attach_user(user, true)
+    expect(managed_project.user_registry.roles.first.designation).to eq Designation.manager
+  end
+
+  it 'returns roles' do
+    expect(project.roles).to eq user_registry.roles
+  end
+
+  it 'returns users' do
+    project.attach_user(user)
+    expect(project.users).to include(user)
   end
 end
