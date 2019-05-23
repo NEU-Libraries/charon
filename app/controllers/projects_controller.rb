@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
       project.attach_user(User.find(id))
     end
     flash[:notice] = "Successfully added users to #{project.title}."
-    redirect_to actions_path(project.noid)
+    redirect_to project_users_path(project.noid)
   end
 
   def users
@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
     project.attach_user(@user)
 
     UserMailer.with(user: @user).system_created_user_email.deliver_now
-    flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
+    flash[:notice] = "User successfully created and attached to #{project.title}. Email sent to #{@user.email} for notification."
     redirect_to actions_path(project.noid)
   end
 

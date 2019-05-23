@@ -28,7 +28,7 @@
       %h4.card-title Add an existing user
       %p.card-text Select an existing Charon user to attach to this project.
     .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => project_create_user_path(@project.noid), :role => "button"} Add
+      %a.btn.btn-lg.btn-block.btn-primary{:href => project_available_users_path(@project.noid), :role => "button"} Add
   .card
     .card-body
       %h4.card-title Create a user
