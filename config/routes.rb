@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   get '/users/dashboard' => 'users#dashboard'
 
   # task dashboard
-  get '/users/actions/:project_id', to: 'users#actions', as: 'actions'
+  get '/users/actions/:id', to: 'users#actions', as: 'actions'
 
   # admin
   get '/admin/new_user' => 'admin#new_user'
@@ -57,10 +57,10 @@ Rails.application.routes.draw do
   post '/users/create_user' => 'users#create_user'
 
   # user registry
-  get '/projects/:project_id/users', to: 'projects#users', as: 'project_users'
-  get '/projects/:project_id/new_user', to: 'projects#new_user', as: 'project_new_user'
-  post '/projects/:project_id/create_user', to: 'projects#create_user', as: 'project_create_user'
-  get '/projects/:project_id/available_users', to: 'projects#available_users', as: 'project_available_users'
-  get '/projects/:project_id/add_users', to: 'projects#add_users', as: 'project_add_users'
+  get '/projects/:id/users', to: 'projects#users', as: 'project_users'
+  get '/projects/:id/new_user', to: 'projects#new_user', as: 'project_new_user'
+  post '/projects/:id/create_user', to: 'projects#create_user', as: 'project_create_user'
+  get '/projects/:id/available_users', to: 'projects#available_users', as: 'project_available_users'
+  get '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
 
 end

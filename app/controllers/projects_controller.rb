@@ -33,14 +33,25 @@ class ProjectsController < ApplicationController
   def available_users
     # Need to filter down to users not already attached to project
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
     already_attached_users = @project.users
     @users = User.all.select{|u| !already_attached_users.include? u}
   end
 
+  def add_users
+    user_ids = params[:user_ids]
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    user_ids.each do |id|
+      project.attach_user(@user)
+    end
+    flash[:notice] = "Successfully added users to #{project.title}."
+    redirect_to actions_path(project.noid)
+  end
+
   def users
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
     @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
@@ -54,7 +65,7 @@ class ProjectsController < ApplicationController
     @user = manufacture_user(params)
 
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
 
     project.attach_user(@user)
 

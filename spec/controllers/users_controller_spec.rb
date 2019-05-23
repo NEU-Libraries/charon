@@ -53,13 +53,13 @@ describe UsersController do
         user_registry.roles << role
         user_registry.save!
       end
-      get :actions, params: { project_id: project.noid }
+      get :actions, params: { id: project.noid }
       expect(response.body).to include("Actions for #{project.title} - #{role.designation.to_s.capitalize}")
     end
 
     it '401s unless signed in' do
       sign_out user
-      get :actions, params: { project_id: '1' }
+      get :actions, params: { id: '1' }
       expect(response.status).to eq(401)
     end
   end
@@ -76,7 +76,7 @@ describe UsersController do
   describe 'create_user' do
     it 'creates a user and emails them a notification' do
       sign_in FactoryBot.create(:user)
-      post :create_user, params: { project_id: project.noid, user: { email: 'test@email.com', first_name: 'Doug', last_name: 'Dimmadome' } }
+      post :create_user, params: { id: project.noid, user: { email: 'test@email.com', first_name: 'Doug', last_name: 'Dimmadome' } }
       mail = ActionMailer::Base.deliveries.last
       expect(mail['to'].to_s).to eq('test@email.com')
     end
