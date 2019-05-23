@@ -8,6 +8,10 @@ class Project < Resource
   attribute :user_registry_id, Valkyrie::Types::Integer
 
   def attach_user(user, manager = false)
+    # check to see if user is already attached
+    # in which case do nothing
+    return if Role.where(user_registry_id: user_registry.id, user_id: user.id).exists?
+    
     d = if manager
           Designation.manager
         else

@@ -6,6 +6,7 @@ describe User do
   let(:user) { create(:user) }
   let(:dev_user) { create(:dev) }
   let(:admin_user) { create(:admin) }
+  let(:project) { FactoryBot.create_for_repository(:project) }
 
   describe '#dev?' do
     subject { dev_user.dev? }
@@ -31,9 +32,23 @@ describe User do
     end
   end
 
-  describe 'capacity' do
+  describe '#capacity' do
     it 'default user should have capacity of user and not developer or administrator' do
       expect(user.capacity).to eq :user
+    end
+  end
+
+  describe '#role(project)' do
+    it 'retrieves a users role from within a project' do
+      project.attach_user(user)
+      expect(user.role(project)).to eq user.roles.take
+    end
+  end
+
+  describe '#designation(project)' do
+    it 'retrieves a users designation from within a project' do
+      project.attach_user(user)
+      expect(user.designation(project)).to eq user.roles.take.designation
     end
   end
 end
