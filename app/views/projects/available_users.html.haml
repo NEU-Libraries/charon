@@ -1,18 +1,20 @@
-%h1
-  Users
+%h2.py-3
+  Available Users
 
-%table.table.table-bordered
+%table.table.table-bordered.table-responsive
   %thead
     %tr
-      %th{:scope => "col"} #
+      %th{:scope => "col"} Select
       %th{:scope => "col"} First Name
       %th{:scope => "col"} Last Name
   %tbody
     - @users.each_with_index do |user, i|
       %tr
         %td.align-middle
-          = i + 1
+          %input#defaultCheck1{:type => "checkbox", :value => ""}/
         %td.align-middle
           = user.first_name
         %td.align-middle
           = user.last_name
+
+%a.btn.btn-lg.btn-primary.float-right{:href => "#", :role => "button"} Add selected users
