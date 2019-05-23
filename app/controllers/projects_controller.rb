@@ -30,7 +30,13 @@ class ProjectsController < ApplicationController
 
   def show; end
 
-  def available_users; end
+  def available_users
+    # Need to filter down to users not already attached to project
+    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:project_id])
+    already_attached_users = project.users
+    @users = User.all.select{|u| !already_attached_users.include? u}
+  end
 
   def users
     meta = Valkyrie::MetadataAdapter.find(:composite_persister)
