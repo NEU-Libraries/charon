@@ -10,8 +10,7 @@ class UsersController < ApplicationController
   end
 
   def actions
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
-    @project = meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    @project = find_resource
     @role = Role.find_by(user_id: current_user.id, user_registry_id: @project.user_registry_id)
   end
 
