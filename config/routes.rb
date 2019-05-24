@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :collections
   resources :system_collections
+  resources :roles
 
   root to: 'pages#home'
 
