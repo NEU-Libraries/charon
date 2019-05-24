@@ -1,26 +1,29 @@
 %h2.py-3
   = "User Registry for #{@project.title}"
 
-%table.table.table-bordered
+%table.table.table-bordered.table-responsive
   %thead
     %tr
-      %th{:scope => "col"} #
       %th{:scope => "col"} First Name
       %th{:scope => "col"}
         = sortable "users.last_name", "Last Name"
       %th{:scope => "col"}
         = sortable "designation", "Role"
+      %th{:scope => "col"} Change Role
+      %th{:scope => "col"} Remove User
   %tbody
     - @roles.each_with_index do |role, i|
       %tr
-        %td.align-middle
-          = i + 1
         %td.align-middle
           = role.user.first_name
         %td.align-middle
           = role.user.last_name
         %td.align-middle
           = role.designation.name
+        %td.align-middle
+          %a.btn.btn-sm.btn-warning{:href => "#", :role => "button"} Modify
+        %td.align-middle
+          %a.btn.btn-sm.btn-danger{:href => "#", :role => "button"} Remove
 
 .card-deck.py-3
   .card
