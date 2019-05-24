@@ -44,4 +44,22 @@ describe ProjectsController do
       expect(response.body).to include("Last Name ▾")
     end
   end
+
+  describe 'available_users' do
+    it 'renders a list of users that can be added to the project' do
+
+    end
+  end
+
+  describe 'add_users' do
+    it 'attaches one or more users to a project' do
+
+    end
+  end
+
+  describe 'create_user' do
+    it 'creates a user and attaches them to a project' do
+
+    end
+  end
 end
