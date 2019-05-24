@@ -21,9 +21,9 @@
         %td.align-middle
           = role.designation.name
         %td.align-middle
-          %a.btn.btn-sm.btn-warning{:href => "#", :role => "button"} Modify
+          %a.btn.btn-sm.btn-warning{:href => edit_role_path(role), :role => "button"} Modify
         %td.align-middle
-          %a.btn.btn-sm.btn-danger{:href => "#{project_remove_user_path(@project, role.user.id)}", :role => "button"} Remove
+          %a.btn.btn-sm.btn-danger{:href => project_remove_user_path(@project, role.user.id), :role => "button"} Remove
 
 .card-deck.py-3
   .card
