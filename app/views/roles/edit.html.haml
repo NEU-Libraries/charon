@@ -1,3 +1,23 @@
 %h2.py-3
   = "Role for #{@user.first_name} #{@user.last_name} in #{@role.project.title}"
 -# Make a radio button list from designation_list
+
+= simple_form_for @role do |f|
+  %table.table.table-bordered.table-responsive
+    %thead
+      %tr
+        %th{:scope => "col"} Designation
+    %tbody
+      - @designation_list.each_with_index do |designation|
+        %tr
+          %td.align-middle
+            .form-check
+              %label.form-check-label
+                - if designation == @role.designation
+                  %input.form-check-input.active{:name => "designation", :value => designation.to_s, :type => "radio", :checked => ""}>/
+                  = designation.name
+                - else
+                  %input.form-check-input{:name => "designation", :value => designation.to_s, :type => "radio"}>/
+                  = designation.name
+
+  %input.btn.btn-lg.btn-primary.float-right{:href => "#", :role => "button", :type => "submit", :value => "Change Role"}

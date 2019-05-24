@@ -11,7 +11,13 @@ class RolesController < ApplicationController
     @designation_list = Designation.all
   end
 
-  def update; end
+  def update
+    role = Role.find(params[:id])
+    role.designation = Designation.find(params[:designation])
+    role.save!
+    flash[:notice] = "User role successfully changed to #{params[:designation]}."
+    redirect_to project_users_path(role.project)
+  end
 
   def show; end
 end
