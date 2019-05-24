@@ -5,8 +5,6 @@ require 'rails_helper'
 describe UsersController do
   let!(:user) { create(:user) }
   let(:project) { FactoryBot.create_for_repository(:project) }
-  let(:user_registry) { UserRegistry.find(project.user_registry_id) }
-  let(:role) { build(:role, user: user, user_registry: user_registry) }
 
   describe 'index' do
     render_views
@@ -38,8 +36,7 @@ describe UsersController do
 
     it 'redirects to actions if there is only one project' do
       sign_in user
-      user_registry.roles << role
-      user_registry.save!
+      project.attach_user(user)
       get :dashboard
       expect(response).to redirect_to(actions_path(project.noid))
     end
@@ -49,12 +46,9 @@ describe UsersController do
     render_views
     it 'displays actions available according to users role in a project' do
       sign_in user
-      if user_registry.roles.blank?
-        user_registry.roles << role
-        user_registry.save!
-      end
+      project.attach_user(user)
       get :actions, params: { id: project.noid }
-      expect(response.body).to include("Actions for #{project.title} - #{role.designation.to_s.capitalize}")
+      expect(response.body).to include("Actions for #{project.title} - #{project.roles.first.designation.to_s.capitalize}")
     end
 
     it '401s unless signed in' do

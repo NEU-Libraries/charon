@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe ProjectsController do
   let(:project) { FactoryBot.create_for_repository(:project) }
+  let!(:user) { create(:user) }
 
   describe 'new' do
     it 'renders the new record form' do
@@ -41,25 +42,32 @@ describe ProjectsController do
     render_views
     it 'returns designation unless there is a value for params[:sort]' do
       get :users, params: { id: project.noid, sort: 'users.last_name' }
-      expect(response.body).to include("Last Name ▾")
+      expect(response.body).to include('Last Name ▾')
     end
   end
 
   describe 'available_users' do
+    render_views
     it 'renders a list of users that can be added to the project' do
-
+      get :available_users, params: { id: project.noid }
+      expect(response.body).to include(user.last_name.to_s)
     end
   end
 
   describe 'add_users' do
     it 'attaches one or more users to a project' do
-
+      get :add_users, params: { id: project.noid, user_ids: [user.id] }
+      expect(project.users).to include user
     end
   end
 
   describe 'create_user' do
     it 'creates a user and attaches them to a project' do
-
+      sign_in FactoryBot.create(:admin)
+      post :create_user, params: { id: project.noid, user: { email: 'test@email.com', first_name: 'Doug', last_name: 'Dimmadome' } }
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail['to'].to_s).to eq('test@email.com')
+      expect(project.users).not_to be_empty
     end
   end
 end
