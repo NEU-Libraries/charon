@@ -24,4 +24,9 @@ class Role < ApplicationRecord
       (designation == :creator)   ||
       (designation == :depositor)
   end
+
+  def project
+    meta = Valkyrie.config.metadata_adapter
+    meta.query_service.find_by(id: user_registry.project_id)
+  end
 end

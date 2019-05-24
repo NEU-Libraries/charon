@@ -5,7 +5,11 @@ class RolesController < ApplicationController
 
   def create; end
 
-  def edit; end
+  def edit
+    @role = Role.find(params[:id])
+    @user = @role.user
+    @designation_list = Designation.all
+  end
 
   def update; end
 
