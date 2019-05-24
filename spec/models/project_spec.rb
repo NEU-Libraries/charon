@@ -27,6 +27,14 @@ RSpec.describe Project do
     expect(project.user_registry.roles.first == user.roles.first).to be true
   end
 
+  it 'removes a user' do
+    project.user_registry.roles.delete_all
+    project.attach_user(user)
+    expect(project.user_registry.roles.first == user.roles.first).to be true
+    project.remove_user(user)
+    expect(project.user_registry.roles).to be_empty
+  end
+
   it 'attaches a user and makes them a project manager' do
     managed_project.attach_user(user, true)
     expect(managed_project.user_registry.roles.first.designation).to eq Designation.manager

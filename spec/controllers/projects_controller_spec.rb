@@ -61,6 +61,15 @@ describe ProjectsController do
     end
   end
 
+  describe 'remove_user' do
+    it 'removes a user from a project' do
+      project.attach_user(user)
+      expect(project.users).to include user
+      get :remove_user, params: { id: project.noid, user_id: user.id }
+      expect(project.users).not_to include user
+    end
+  end
+
   describe 'create_user' do
     it 'creates a user and attaches them to a project' do
       sign_in FactoryBot.create(:admin)
