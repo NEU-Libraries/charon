@@ -42,7 +42,15 @@ class ProjectsController < ApplicationController
       project.attach_user(User.find(id))
     end
     flash[:notice] = "Successfully added users to #{project.title}."
-    redirect_to project_users_path(project.noid)
+    redirect_to project_users_path(project)
+  end
+
+  def remove_user
+    project = find_resource
+    user = User.find(params[:user_id])
+    project.remove_user(user)
+    flash[:notice] = "Successfully removed #{user.first_name} #{user.last_name} from #{project.title}."
+    redirect_to project_users_path(project)
   end
 
   def users
@@ -64,7 +72,7 @@ class ProjectsController < ApplicationController
     UserMailer.with(user: @user).system_created_user_email.deliver_now
     flash[:notice] = "User successfully created and attached to #{project.title}."\
                      "Email sent to #{@user.email} for notification."
-    redirect_to actions_path(project.noid)
+    redirect_to actions_path(project)
   end
 
   def sort_column

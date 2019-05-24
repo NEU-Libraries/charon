@@ -23,7 +23,7 @@
         %td.align-middle
           %a.btn.btn-sm.btn-warning{:href => "#", :role => "button"} Modify
         %td.align-middle
-          %a.btn.btn-sm.btn-danger{:href => "#", :role => "button"} Remove
+          %a.btn.btn-sm.btn-danger{:href => "#{project_remove_user_path(@project, role.user.id)}", :role => "button"} Remove
 
 .card-deck.py-3
   .card
@@ -31,10 +31,10 @@
       %h4.card-title Add an existing user
       %p.card-text Select an existing Charon user to attach to this project.
     .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => project_available_users_path(@project.noid), :role => "button"} Add
+      %a.btn.btn-lg.btn-block.btn-primary{:href => project_available_users_path(@project), :role => "button"} Add
   .card
     .card-body
       %h4.card-title Create a user
       %p.card-text Make a new user who will then be attached to this project.
     .card-footer
-      %a.btn.btn-lg.btn-block.btn-primary{:href => project_new_user_path(@project.noid), :role => "button"} Create
+      %a.btn.btn-lg.btn-block.btn-primary{:href => project_new_user_path(@project), :role => "button"} Create

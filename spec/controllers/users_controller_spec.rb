@@ -38,7 +38,7 @@ describe UsersController do
       sign_in user
       project.attach_user(user)
       get :dashboard
-      expect(response).to redirect_to(actions_path(project.noid))
+      expect(response).to redirect_to(actions_path(project))
     end
   end
 
