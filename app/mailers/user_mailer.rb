@@ -3,9 +3,9 @@
 class UserMailer < ApplicationMailer
   def system_created_user_email
     @user = params[:user]
-    @token, = Devise.token_generator.generate(User, :reset_password_token)
+    @token, enc = Devise.token_generator.generate(User, :reset_password_token)
 
-    @user.reset_password_token = @token
+    @user.reset_password_token = enc
     @user.reset_password_sent_at = Time.now.utc
     @user.save(validate: false)
 
