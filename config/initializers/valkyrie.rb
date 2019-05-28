@@ -36,10 +36,10 @@ Rails.application.config.to_prepare do
   Valkyrie::MetadataAdapter.register(
     Valkyrie::AdapterContainer.new(
       persister: Valkyrie::Persistence::CompositePersister.new(
-        Valkyrie.config.metadata_adapter.persister,
+        Valkyrie::MetadataAdapter.find(:postgres).persister,
         Valkyrie::MetadataAdapter.find(:index_solr).persister
       ),
-      query_service: Valkyrie.config.metadata_adapter.query_service
+      query_service: Valkyrie::MetadataAdapter.find(:postgres).query_service
     ),
     :composite_persister
   )

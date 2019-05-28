@@ -1,5 +1,5 @@
 development:
-  metadata_adapter: postgres
+  metadata_adapter: composite_persister
   storage_adapter: disk
 
 test:
@@ -7,5 +7,5 @@ test:
   storage_adapter: memory
 
 production:
-  metadata_adapter: postgres
+  metadata_adapter: composite_persister
   storage_adapter: disk

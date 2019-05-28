@@ -16,7 +16,7 @@ namespace :reset do
   task data: [:clean] do
     raise "Wrong env - #{Rails.env} - must be development" unless Rails.env.development?
 
-    meta = Valkyrie::MetadataAdapter.find(:composite_persister)
+    meta = Valkyrie.config.metadata_adapter
 
     u = User.create(password: 'password', email: 'test_admin@email.xyz', first_name: 'Test', last_name: 'Admin', capacity: Capacity.administrator)
     ur = UserRegistry.create
