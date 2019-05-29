@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe UsersController do
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
   let(:project) { FactoryBot.create_for_repository(:project) }
 
   describe 'index' do

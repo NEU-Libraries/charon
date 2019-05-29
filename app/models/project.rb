@@ -27,8 +27,10 @@ class Project < Resource
 
   def remove_user(user)
     role = Role.where(user_registry_id: user_registry_id, user_id: user.id).take
-    user_registry.roles.delete(role)
-    role.destroy!
+    if !role.blank?
+      user_registry.roles.delete(role)
+      role.destroy!
+    end
   end
 
   def user_registry

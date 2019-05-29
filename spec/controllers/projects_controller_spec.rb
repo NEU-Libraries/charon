@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe ProjectsController do
   let(:project) { FactoryBot.create_for_repository(:project) }
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
 
   describe 'new' do
     it 'renders the new record form' do
@@ -49,6 +49,7 @@ describe ProjectsController do
   describe 'available_users' do
     render_views
     it 'renders a list of users that can be added to the project' do
+      project.remove_user(user)
       get :available_users, params: { id: project.noid }
       expect(response.body).to include(user.last_name.to_s)
     end
