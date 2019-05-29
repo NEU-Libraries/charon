@@ -28,6 +28,10 @@ class User < ApplicationRecord
   def projects; end
 
   def role(project)
+    return nil if project.blank? || project.user_registry_id.blank?
+    # stubbed role for admin users
+    return Role.new(user: self, user_registry: project.user_registry, designation: Designation.manager) if admin?
+
     roles.where(user_registry_id: project.user_registry.id).take
   end
 

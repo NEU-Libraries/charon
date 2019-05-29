@@ -1,11 +1,14 @@
 - if @projects.blank?
-  %h1 No projects available
+  %h2.py-3
+    No projects available
 - else
-  .input-group
-    %select#inputGroupSelect04.custom-select{"aria-label" => "Example select with button addon"}
-      %option{:selected => "selected"} Projects...
-      - @projects.each do |p|
-        %option{:value => "#{p.noid}"}
-          = p.title
-    .input-group-append
-      %button.btn.btn-outline-secondary{:type => "button"} Select
+  %h2.py-3
+    Projects
+  %table.table.table-bordered
+    %tbody
+      - @projects.each_with_index do |project|
+        %tr
+          %td.align-middle
+            = project.title
+          %td.align-middle
+            %a.btn.btn-sm.btn-primary.float-right{:href => actions_path(project), :role => "button"} Select

@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :project do
-    title { 'Test Project' }
-    description { 'Test test test' }
+    title { Faker::Company.name }
+    description { Faker::Company.catch_phrase }
     user_registry_id { create(:user_registry).id }
 
     to_create do |instance|

@@ -11,14 +11,17 @@ class UsersController < ApplicationController
 
   def actions
     @project = find_resource
-    @role = Role.find_by(user_id: current_user.id, user_registry_id: @project.user_registry_id)
+    @role = current_user.role(@project)
   end
 
   def dashboard
-    # TODO: if system administrator, return all projects - solve no roles condition
-    # Find all projects whose user registries have current_user as a member
-    project_ids = UserRegistry.joins(:roles).where(roles: { user_id: current_user.id }).pluck(:project_id)
-    @projects = metadata_adapter.query_service.find_many_by_ids(ids: project_ids)
+    if current_user.admin?
+      @projects = metadata_adapter.query_service.find_all_of_model(model: Project)
+    else
+      # Find all projects whose user registries have current_user as a member
+      project_ids = UserRegistry.joins(:roles).where(roles: { user_id: current_user.id }).pluck(:project_id)
+      @projects = metadata_adapter.query_service.find_many_by_ids(ids: project_ids)
+    end
 
     # skip project selection and send user to action list
     redirect_to action: 'actions', id: @projects.first.noid if @projects.count == 1

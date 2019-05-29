@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe UsersController do
   let(:user) { create(:user) }
+  let(:admin_user) { create(:admin) }
   let(:project) { FactoryBot.create_for_repository(:project) }
 
   describe 'index' do
@@ -22,6 +23,7 @@ describe UsersController do
 
   describe 'dashboard' do
     render_views
+
     it '401s unless signed in' do
       sign_out user
       get :dashboard
@@ -39,6 +41,16 @@ describe UsersController do
       project.attach_user(user)
       get :dashboard
       expect(response).to redirect_to(actions_path(project))
+    end
+
+    it 'shows all projects if the user is an administrator' do
+      first_project = FactoryBot.create_for_repository(:project)
+      second_project = FactoryBot.create_for_repository(:project)
+      sign_in admin_user
+      get :dashboard
+      expect(response).to render_template('users/dashboard')
+      expect(response.body).to include(first_project.title)
+      expect(response.body).to include(second_project.title)
     end
   end
 

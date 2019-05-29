@@ -7,11 +7,12 @@ class Project < Resource
   attribute :description, Valkyrie::Types::String
   attribute :user_registry_id, Valkyrie::Types::Integer
 
-  def attach_user(user, d = Designation.user)
+  def attach_user(user, designation = Designation.user)
     # check to see if user is already attached
     # in which case do nothing
     return if Role.where(user_registry_id: user_registry.id, user_id: user.id).exists?
-    role = Role.new(user: user, user_registry: user_registry, designation: d)
+
+    role = Role.new(user: user, user_registry: user_registry, designation: designation)
     user_registry.roles << role
     user_registry.save!
   end
