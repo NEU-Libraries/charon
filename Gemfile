@@ -50,6 +50,6 @@ group :development do
   gem 'listen'
 end
 
-group :development, :test do
+group :development, :staging, :test do
   gem 'faker', '1.9.1'
 end
