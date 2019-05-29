@@ -36,7 +36,7 @@ RSpec.describe Project do
   end
 
   it 'attaches a user and makes them a project manager' do
-    managed_project.attach_user(user, true)
+    managed_project.attach_user(user, Designation.manager)
     expect(managed_project.user_registry.roles.first.designation).to eq Designation.manager
   end
 

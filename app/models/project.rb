@@ -7,19 +7,10 @@ class Project < Resource
   attribute :description, Valkyrie::Types::String
   attribute :user_registry_id, Valkyrie::Types::Integer
 
-  # TODO: Probably should change this signature so that 2nd param is a designation
-  # for clarity and flexability
-  def attach_user(user, manager = false)
+  def attach_user(user, d = Designation.user)
     # check to see if user is already attached
     # in which case do nothing
     return if Role.where(user_registry_id: user_registry.id, user_id: user.id).exists?
-
-    d = if manager
-          Designation.manager
-        else
-          Designation.user
-        end
-
     role = Role.new(user: user, user_registry: user_registry, designation: d)
     user_registry.roles << role
     user_registry.save!
