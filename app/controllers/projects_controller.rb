@@ -11,8 +11,12 @@ class ProjectsController < ApplicationController
   def create
     change_set = ProjectChangeSet.new(Project.new)
     if change_set.validate(params[:project])
+      user_registry = UserRegistry.create
+      change_set.user_registry_id = user_registry.id
       change_set.sync
       @project = metadata_adapter.persister.save(resource: change_set.resource)
+      user_registry.project_id = @project.id
+      user_registry.save!
     end
 
     # After successfull creation of project, create system collections
