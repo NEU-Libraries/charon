@@ -10,6 +10,10 @@ development:
   <<: *default
   database: charon_development
 
+staging:
+  <<: *default
+  database: charon_staging
+
 test:
   <<: *default
   database: charon_test
