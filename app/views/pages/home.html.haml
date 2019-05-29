@@ -29,14 +29,15 @@
       %p Sign up to participate.
       %p
         %a.btn.btn-secondary{:href => "users/sign_up", :role => "button"} Register »
-  .row
-    .col-lg
-      %h2.py-3 Recent Progress
-      %table.table.table-bordered.table-responsive
-        - @git_log.each do |commit|
-          %tr
-            %td.align-middle
-              %a{:href => "https://github.com/NEU-Libraries/charon/commit/#{commit[0]}"}
-                = commit[0]
-            %td
-              = commit[1]
+  - if !current_user.blank?
+    .row
+      .col-lg
+        %h2.py-3 Recent Progress
+        %table.table.table-bordered.table-responsive
+          - @git_log.each do |commit|
+            %tr
+              %td.align-middle
+                %a{:href => "https://github.com/NEU-Libraries/charon/commit/#{commit[0]}"}
+                  = commit[0]
+              %td
+                = commit[1]
