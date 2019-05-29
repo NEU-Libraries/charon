@@ -2,6 +2,10 @@ development:
   metadata_adapter: composite_persister
   storage_adapter: disk
 
+staging:
+  metadata_adapter: composite_persister
+  storage_adapter: disk
+
 test:
   metadata_adapter: memory
   storage_adapter: memory

@@ -10,6 +10,8 @@ FactoryBot.define do
     end
 
     after(:create) do |project, _evaluator|
+      project.generate_system_collections
+      
       user_registry = UserRegistry.create
       project.user_registry_id = user_registry.id
       user_registry.project_id = project.id
