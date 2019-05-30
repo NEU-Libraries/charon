@@ -18,6 +18,10 @@ module Charon
         attribute :edit_users, Valkyrie::Types::Set
         attribute :edit_groups, Valkyrie::Types::Set
       end
+
+      def public?
+        return true unless read_groups != ['public']
+      end
     end
   end
 end
