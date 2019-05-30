@@ -20,7 +20,9 @@ module Charon
       end
 
       def public?
-        return true unless read_groups != ['public']
+        return true if read_groups.include? 'public'
+
+        false
       end
     end
   end
