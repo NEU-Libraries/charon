@@ -11,7 +11,7 @@ gem 'haml-rails'
 gem 'pg'
 gem 'puma'
 gem 'rails'
-gem 'valkyrie', '2.0.0.RC7'
+gem 'valkyrie', '2.0.0.RC9'
 
 # NEU gems
 gem 'capybara'
@@ -25,6 +25,7 @@ gem 'simple_form'
 
 # QA gems
 gem 'rubocop', require: false
+gem 'rubocop-rails', require: false
 gem 'simplecov', require: false
 gem 'simplecov-shields-badge', require: false
 
@@ -42,7 +43,7 @@ gem 'twitter-typeahead-rails'
 # Blacklight
 group :test do
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '5.0.1' # pinning due to Strategy not registered error
   gem 'rspec-rails'
 end
 

@@ -5,7 +5,7 @@ class CatalogController < ApplicationController
   include Blacklight::AccessControls::Catalog
 
   # Apply the blacklight-access_controls
-  before_action :enforce_show_permissions, only: :show
+  # before_action :enforce_show_permissions, only: :show
 
   # include Blacklight::DefaultComponentConfiguration
 

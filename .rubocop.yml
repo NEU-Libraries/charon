@@ -1,6 +1,9 @@
+require: rubocop-rails
 Metrics/AbcSize:
   Max: 20
 Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Rails/FindEach:
   Enabled: false
 Documentation:
   Enabled: false
@@ -9,6 +12,7 @@ Metrics/LineLength:
   Include:
     - 'app/**/*'
 AllCops:
+  TargetRubyVersion: 2.5
   Exclude:
     - 'db/**/*'
     - 'bin/**/*'
@@ -17,3 +21,12 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'lib/tasks/*'
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_alternate_identifier

@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   enumeration :capacity
-  has_many :roles
+  has_many :roles, dependent: :destroy
 
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
@@ -32,7 +32,7 @@ class User < ApplicationRecord
     # stubbed role for admin users
     return Role.new(user: self, user_registry: project.user_registry, designation: Designation.manager) if admin?
 
-    roles.where(user_registry_id: project.user_registry.id).take
+    roles.find_by(user_registry_id: project.user_registry.id)
   end
 
   def designation(project)

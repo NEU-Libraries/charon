@@ -24,12 +24,12 @@ class SolrDocument
   attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
 
   def klass
-    return klass_type.constantize unless klass_type.blank?
+    return klass_type.constantize if klass_type.present?
   end
 
   def to_param
     noid = alternate_ids&.first&.split('id-')&.last
-    return noid unless noid.blank?
+    return noid if noid.present?
 
     super
   end
