@@ -26,7 +26,7 @@ describe ProjectsController do
     render_views
     it 'lists attached users for a given project' do
       get :users, params: { id: project.noid }
-      expect(response.body).to include("User Registry for #{project.title}")
+      expect(CGI.unescapeHTML(response.body)).to include("User Registry for #{project.title}")
       # TODO: need to flesh this out by actually populating and looking for users
     end
   end
@@ -42,7 +42,7 @@ describe ProjectsController do
     render_views
     it 'returns designation unless there is a value for params[:sort]' do
       get :users, params: { id: project.noid, sort: 'users.last_name' }
-      expect(response.body).to include('Last Name ▾')
+      expect(CGI.unescapeHTML(response.body)).to include('Last Name ▾')
     end
   end
 
@@ -51,7 +51,7 @@ describe ProjectsController do
     it 'renders a list of users that can be added to the project' do
       project.remove_user(user)
       get :available_users, params: { id: project.noid }
-      expect(response.body).to include(user.last_name.to_s)
+      expect(CGI.unescapeHTML(response.body)).to include(user.last_name.to_s)
     end
   end
 

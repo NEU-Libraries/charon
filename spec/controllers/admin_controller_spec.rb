@@ -21,7 +21,7 @@ describe AdminController do
     it 'renders new user form' do
       sign_in FactoryBot.create(:admin)
       get :new_user
-      expect(response.body).to include('Create a user')
+      expect(CGI.unescapeHTML(response.body)).to include('Create a user')
     end
   end
 

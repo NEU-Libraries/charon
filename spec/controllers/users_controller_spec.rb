@@ -12,7 +12,7 @@ describe UsersController do
     it 'displays the user' do
       sign_in user
       get :index
-      expect(response.body).to include(user.last_name)
+      expect(CGI.unescapeHTML(response.body)).to include(user.last_name)
     end
     it '401s unless signed in' do
       sign_out user
@@ -33,7 +33,7 @@ describe UsersController do
     it 'informs the user if there are no projects to select' do
       sign_in user
       get :dashboard
-      expect(response.body).to include('No projects available')
+      expect(CGI.unescapeHTML(response.body)).to include('No projects available')
     end
 
     it 'redirects to actions if there is only one project' do
@@ -49,8 +49,8 @@ describe UsersController do
       sign_in admin_user
       get :dashboard
       expect(response).to render_template('users/dashboard')
-      expect(response.body).to include(first_project.title)
-      expect(response.body).to include(second_project.title)
+      expect(CGI.unescapeHTML(response.body)).to include(first_project.title)
+      expect(CGI.unescapeHTML(response.body)).to include(second_project.title)
     end
   end
 
@@ -60,7 +60,7 @@ describe UsersController do
       sign_in user
       project.attach_user(user)
       get :actions, params: { id: project.noid }
-      expect(response.body).to include("Actions for #{project.title} - #{project.roles.first.designation.to_s.capitalize}")
+      expect(CGI.unescapeHTML(response.body)).to include("Actions for #{project.title} - #{project.roles.first.designation.to_s.capitalize}")
     end
 
     it '401s unless signed in' do
@@ -75,7 +75,7 @@ describe UsersController do
     it 'renders new user form' do
       sign_in FactoryBot.create(:user)
       get :new_user
-      expect(response.body).to include('Create a user')
+      expect(CGI.unescapeHTML(response.body)).to include('Create a user')
     end
   end
 
