@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'blacklight', '7.1.0.alpha'
-gem 'blacklight-access_controls'
+gem 'blacklight-access_controls', git: 'https://github.com/projectblacklight/blacklight-access_controls.git'
 gem 'blacklight-gallery', git: 'https://github.com/projectblacklight/blacklight-gallery.git' # Blacklight 7 support isn't in a gem yet
 gem 'devise'
 gem 'font-awesome-rails'

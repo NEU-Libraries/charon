@@ -5,7 +5,14 @@ class CatalogController < ApplicationController
   include Blacklight::AccessControls::Catalog
 
   # Apply the blacklight-access_controls
+  # Skipping for now - not using BL to show anything (/projects/:noid e.g.)
   # before_action :enforce_show_permissions, only: :show
+
+  # Devise does not control index (i.e. search) requests. Search results are limited to a user's access rights
+  # via Blacklight::AccessControls::SearchBuilder.
+  skip_authorize_resource only: :index
+
+  self.search_service_class = ::SearchService
 
   # include Blacklight::DefaultComponentConfiguration
 
@@ -116,5 +123,17 @@ class CatalogController < ApplicationController
 
     # description_tesim
     config.add_index_field 'description_tesim', label: 'Description'
+  end
+
+  private
+
+  # @note Overrides search service initialization to pass in current_ability.
+  # We should be able to remove this once Blacklight access controls supports version 7.
+  def search_service
+    search_service_class.new(
+      config: blacklight_config,
+      user_params: search_state.to_h,
+      current_ability: current_ability
+    )
   end
 end

@@ -15,6 +15,10 @@ Blacklight::AccessControls.configure do |config|
   # specify the user model
   # config.user_model = 'User'
 
-  config.download_group_field = 'edit_access_group_ssim'
-  config.download_user_field  = 'edit_access_person_ssim'
+  config.discover_group_field = 'read_access_group_ssim'
+  config.discover_user_field  = 'read_access_person_ssim'
+  config.read_group_field     = 'read_access_group_ssim'
+  config.read_user_field      = 'read_access_person_ssim'
+  config.download_group_field = 'read_access_group_ssim'
+  config.download_user_field  = 'read_access_person_ssim'
 end
