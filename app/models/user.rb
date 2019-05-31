@@ -20,16 +20,11 @@ class User < ApplicationRecord
   def projects; end
 
   def role(project)
-    return nil if project.blank? || project.user_registry_id.blank?
-
-    roles.find_by(user_registry_id: project.user_registry.id)
+    roles.find_by(user_registry_id: project&.user_registry&.id)
   end
 
   def designation(project)
-    r = role(project)
-    return nil if r.nil?
-
-    r.designation
+    role(project)&.designation
   end
 
   def to_s

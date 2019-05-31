@@ -12,8 +12,8 @@ RSpec.describe Project do
   let(:user_registry) { UserRegistry.find(project.user_registry_id) }
   it_behaves_like 'a Valkyrie::Resource'
 
-  it 'raises an error retrieving the user registry if the id is not set' do
-    expect { resource_klass.new.user_registry }.to raise_error(ActiveRecord::RecordNotFound)
+  it 'returns nil retrieving the user registry if the id is not set' do
+    expect(resource_klass.new.user_registry).to be nil
   end
 
   it 'provides the user registry' do
