@@ -36,7 +36,7 @@ module RoleChecker
     def role_check(project, designation)
       return false if role(project).nil?
       return true if admin?
-      return true if role(project).designation == designation
+      return true if designation(project) == designation
 
       false
     end
