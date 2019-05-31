@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def actions
     @project = find_resource
+
+    redirect_to users_dashboard_url if current_user.role(@project).nil?
   end
 
   def dashboard

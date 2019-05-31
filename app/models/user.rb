@@ -26,7 +26,10 @@ class User < ApplicationRecord
   end
 
   def designation(project)
-    role(project).designation
+    r = role(project)
+    return nil if r.nil?
+
+    r.designation
   end
 
   def to_s
