@@ -14,14 +14,20 @@ module RoleChecker
   end
 
   def editor?(project)
+    return true if manager?(project)
+
     role_check(project, Designation.editor)
   end
 
   def creator?(project)
+    return true if editor?(project)
+
     role_check(project, Designation.creator)
   end
 
   def depositor?(project)
+    return true if creator?(project)
+
     role_check(project, Designation.depositor)
   end
 
