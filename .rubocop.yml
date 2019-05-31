@@ -11,6 +11,8 @@ Metrics/LineLength:
   Max: 120
   Include:
     - 'app/**/*'
+Metrics/MethodLength:
+  ExcludedMethods: ['role_permissions']
 AllCops:
   TargetRubyVersion: 2.5
   Exclude:
@@ -30,3 +32,5 @@ Rails/UnknownEnv:
 Rails/DynamicFindBy:
   Whitelist:
     - find_by_alternate_identifier
+Layout/IndentationConsistency:
+  EnforcedStyle: rails

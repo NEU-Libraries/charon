@@ -127,13 +127,13 @@ class CatalogController < ApplicationController
 
   private
 
-  # @note Overrides search service initialization to pass in current_ability.
-  # We should be able to remove this once Blacklight access controls supports version 7.
-  def search_service
-    search_service_class.new(
-      config: blacklight_config,
-      user_params: search_state.to_h,
-      current_ability: current_ability
-    )
-  end
+    # @note Overrides search service initialization to pass in current_ability.
+    # We should be able to remove this once Blacklight access controls supports version 7.
+    def search_service
+      search_service_class.new(
+        config: blacklight_config,
+        user_params: search_state.to_h,
+        current_ability: current_ability
+      )
+    end
 end

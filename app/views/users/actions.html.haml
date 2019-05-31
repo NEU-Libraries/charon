@@ -2,14 +2,14 @@
   - if current_user.admin?
     = "Actions for #{@project.title} - Administrator"
   -else
-    = "Actions for #{@project.title} - #{@role.designation.to_s.capitalize}"
+    = "Actions for #{@project.title} - #{current_user.designation(@project).to_s.capitalize}"
 
 %table.table.table-bordered.table-responsive
-  - if @role.manager?
+  - if can? :oversee, @project
     = render 'users/actions/manager'
-  - if @role.editor?
+  - if can? :editorialize, @project
     = render 'users/actions/editor'
-  - if @role.creator?
+  - if can? :initiate, @project
     = render 'users/actions/creator'
-  - if @role.depositor?
+  - if can? :deposit, @project
     = render 'users/actions/depositor'

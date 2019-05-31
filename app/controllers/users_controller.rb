@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def actions
     @project = find_resource
-    @role = current_user.role(@project)
   end
 
   def dashboard
