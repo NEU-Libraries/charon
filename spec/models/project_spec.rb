@@ -16,6 +16,14 @@ RSpec.describe Project do
     expect(resource_klass.new.user_registry).to be nil
   end
 
+  it 'is public by default' do
+    expect(resource_klass.new.public?).to be true
+  end
+
+  it 'is not public if read groups don\'t include public value' do
+    expect(resource_klass.new(read_groups: []).public?).to be false
+  end
+
   it 'provides the user registry' do
     expect(project.user_registry == user_registry)
   end
