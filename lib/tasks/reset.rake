@@ -44,5 +44,12 @@ namespace :reset do
     ur.save!
 
     saved_p.generate_system_collections
+
+    User.create(password: 'password', email: 'p.yott@northeastern.edu', first_name: 'Patrick', last_name: 'Yott', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 'p.murray-john@northeastern.edu', first_name: 'Patrick', last_name: 'Murray-John', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 'j.flanders@northeastern.edu', first_name: 'Julia', last_name: 'Flanders', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 'a.rust@northeastern.edu', first_name: 'Amanda', last_name: 'Rust', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 'sj.sweeney@northeastern.edu', first_name: 'Sarah', last_name: 'Sweeney', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 'm.barney@northeastern.edu', first_name: 'Megan', last_name: 'Barney', capacity: Capacity.administrator)
   end
 end
