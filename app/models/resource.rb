@@ -17,12 +17,10 @@ class Resource < Valkyrie::Resource
   end
 
   def self.find(id)
-    begin
-      # expect noid
-      Valkyrie.config.metadata_adapter.query_service.find_by_alternate_identifier(alternate_identifier: id)
-    rescue Valkyrie::Persistence::ObjectNotFoundError
-      # try standard valkyrie
-      Valkyrie.config.metadata_adapter.query_service.find_by(id: id)
-    end
+    # expect noid
+    Valkyrie.config.metadata_adapter.query_service.find_by_alternate_identifier(alternate_identifier: id)
+  rescue Valkyrie::Persistence::ObjectNotFoundError
+    # try standard valkyrie
+    Valkyrie.config.metadata_adapter.query_service.find_by(id: id)
   end
 end

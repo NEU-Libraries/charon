@@ -4,8 +4,8 @@ class ProjectsController < ApplicationController
   include UserCreatable
   helper_method :sort_column, :sort_direction
 
-  before_action :admin_check, :only => [:new, :create, :edit, :update]
-  load_resource :except => [:new, :create, :edit, :update]
+  before_action :admin_check, only: %i[new create edit update]
+  load_resource except: %i[new create edit update]
 
   def new
     @change_set = ProjectChangeSet.new(Project.new)
