@@ -12,6 +12,14 @@ RSpec.describe Project do
   let(:user_registry) { UserRegistry.find(project.user_registry_id) }
   it_behaves_like 'a Valkyrie::Resource'
 
+  it 'has a find method that works with noid' do
+    expect(described_class.find(project.noid)).to eq project
+  end
+
+  it 'has a find method that works with a full id' do
+    expect(described_class.find(project.id)).to eq project
+  end
+
   it 'returns nil retrieving the user registry if the id is not set' do
     expect(resource_klass.new.user_registry).to be nil
   end

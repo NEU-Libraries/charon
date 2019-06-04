@@ -30,11 +30,4 @@ class AdminController < ApplicationController
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to admin_dashboard_url
   end
-
-  private
-
-    def admin_check
-      render_401 && return unless current_user
-      render_403 && return unless current_user.admin?
-    end
 end

@@ -22,4 +22,9 @@ class ApplicationController < ActionController::Base
   def metadata_adapter
     Valkyrie.config.metadata_adapter
   end
+
+  def admin_check
+    render_401 && return unless current_user
+    render_403 && return unless current_user.admin?
+  end
 end
