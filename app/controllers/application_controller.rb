@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
   include Blacklight::Controller
   include Croutons::Controller
-  layout :determine_layout
 
   def render_401
     render template: '/pages/401', layout: 'error', formats: [:html], status: :unauthorized

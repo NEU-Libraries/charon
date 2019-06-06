@@ -3,6 +3,7 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::AccessControls::Catalog
+  layout :determine_layout if respond_to? :layout
 
   # Apply the blacklight-access_controls
   # Skipping for now - not using BL to show anything (/projects/:noid e.g.)
