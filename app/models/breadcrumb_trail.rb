@@ -22,11 +22,10 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     if objects[:project].present?
       breadcrumb(objects[:project].title, actions_path(objects[:project]))
       breadcrumb('User Registry', project_users_path(objects[:project]))
-      breadcrumb('New User')
     else # admin create
       breadcrumb('Admin Dashboard', admin_dashboard_path)
-      breadcrumb('New User')
     end
+    breadcrumb('New User')
   end
 
   def projects_new

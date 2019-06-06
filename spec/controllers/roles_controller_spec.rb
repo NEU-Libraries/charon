@@ -6,6 +6,7 @@ describe RolesController do
   let(:role) { create(:role) }
 
   describe 'edit' do
+    render_views
     it 'renders the partial' do
       get :edit, params: { id: role.id }
       expect(response).to render_template('roles/edit')

@@ -8,6 +8,7 @@ describe ProjectsController do
   let(:admin_user) { create(:admin) }
 
   describe 'new' do
+    render_views
     it 'renders the new record form' do
       sign_in admin_user
       get :new
@@ -37,6 +38,7 @@ describe ProjectsController do
   end
 
   describe 'new_user' do
+    render_views
     it 'renders the new user form' do
       project.attach_user(user, Designation.manager)
       sign_in user
