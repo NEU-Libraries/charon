@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
   include Blacklight::Controller
+  include Croutons::Controller
   layout :determine_layout
 
   def render_401
