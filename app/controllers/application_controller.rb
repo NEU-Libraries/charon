@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include Croutons::Controller
 
+  # Best to ask for breadcrumbs everywhere
+  # and just avoid Croutons NotImplementedError
+  def breadcrumbs
+    super
+  rescue NoMethodError, NotImplementedError
+    # Just don't show them
+    logger.info 'No breadcrumbs found'
+  end
+
   def render_401
     render template: '/pages/401', layout: 'error', formats: [:html], status: :unauthorized
   end
