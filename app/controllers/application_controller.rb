@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     super
   rescue NoMethodError, NotImplementedError
     # Just don't show them
-    logger.info 'No breadcrumbs found'
+    logger.info 'No breadcrumbs found' and return
   end
 
   def render_401
