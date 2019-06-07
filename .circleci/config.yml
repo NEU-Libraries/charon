@@ -16,11 +16,6 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install -y apt-utils build-essential libpq-dev
       - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-      - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
@@ -63,11 +58,16 @@ jobs:
           name: Wait for web
           command: dockerize -wait http://localhost:3000 -timeout 1m
       - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            docker-compose exec web curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            docker-compose exec web chmod +x ./cc-test-reporter
+      - run:
           name: Run Specs
           command: |
-            ./cc-test-reporter before-build
+            docker-compose exec web ./cc-test-reporter before-build
             docker-compose exec web bundle exec rake
-            ./cc-test-reporter after-build --exit-code $?
+            docker-compose exec web ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
       - run:
           name: Run Rubocop
           command: |
