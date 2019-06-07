@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    environment:
+      CC_TEST_REPORTER_ID: 2afef0d746c34186735d7958d540e8f96aa9de8ddc4f9cc82f13dad228074a5a
     machine: true
     working_directory: ~/charon
     branches:
@@ -13,6 +15,14 @@ jobs:
           command: |
             sudo apt-get update -qq
             sudo apt-get install -y apt-utils build-essential libpq-dev
+            sudo composer self-update
+            composer install -n --prefer-dist
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+          # download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
       - run:
           name: Install Docker Compose
           command: |
@@ -58,7 +68,9 @@ jobs:
       - run:
           name: Run Specs
           command: |
+            ./cc-test-reporter before-build
             docker-compose exec web bundle exec rake
+            ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
       - run:
           name: Run Rubocop
           command: |
