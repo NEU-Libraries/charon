@@ -58,16 +58,11 @@ jobs:
           name: Wait for web
           command: dockerize -wait http://localhost:3000 -timeout 1m
       - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            docker-compose exec web curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            docker-compose exec web chmod +x ./cc-test-reporter
-      - run:
           name: Run Specs
           command: |
-            docker-compose exec web ./cc-test-reporter before-build
+            docker-compose exec web cc-test-reporter before-build
             docker-compose exec web bundle exec rake
-            docker-compose exec web ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
+            docker-compose exec web cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
       - run:
           name: Run Rubocop
           command: |
