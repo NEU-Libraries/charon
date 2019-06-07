@@ -15,8 +15,6 @@ jobs:
           command: |
             sudo apt-get update -qq
             sudo apt-get install -y apt-utils build-essential libpq-dev
-            sudo composer self-update
-            composer install -n --prefer-dist
       - run:
           name: Setup Code Climate test-reporter
           command: |
