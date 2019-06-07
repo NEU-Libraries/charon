@@ -1,4 +1,4 @@
-[![Coverage](https://raw.githubusercontent.com/NEU-Libraries/charon/master/badge.svg?sanitize=true)](https://github.com/NEU-Libraries/charon) [![CircleCI](https://circleci.com/gh/NEU-Libraries/charon.svg?style=svg)](https://circleci.com/gh/NEU-Libraries/charon)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/053e629d2bed2787d4bd/test_coverage)](https://codeclimate.com/github/NEU-Libraries/charon/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/053e629d2bed2787d4bd/maintainability)](https://codeclimate.com/github/NEU-Libraries/charon/maintainability) [![CircleCI](https://circleci.com/gh/NEU-Libraries/charon.svg?style=svg)](https://circleci.com/gh/NEU-Libraries/charon)
 
 # Charon
 
