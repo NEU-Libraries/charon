@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
-class ProjectsController < ApplicationController
+class ProjectsController < CatalogController
   include UserCreatable
   helper_method :sort_column, :sort_direction
 
+
   before_action :admin_check, only: %i[new create edit update]
   load_resource except: %i[new create edit update]
+
+  # Blacklight incantations
+  blacklight_config.track_search_session = false
+  layout 'application'
 
   def new
     @change_set = ProjectChangeSet.new(Project.new)
@@ -31,6 +36,7 @@ class ProjectsController < ApplicationController
 
   def show
     authorize! :read, @project
+    @response, @document_list = search_service.fetch(["29d27047-50a0-4a58-ba77-1e776385f86c", "05f6e402-1a11-43be-bf83-61c010704c5b"])
   end
 
   def available_users
