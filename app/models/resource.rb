@@ -23,4 +23,8 @@ class Resource < Valkyrie::Resource
     # try standard valkyrie
     Valkyrie.config.metadata_adapter.query_service.find_by(id: id)
   end
+
+  def parent
+    Valkyrie.config.metadata_adapter.query_service.find_references_by(resource: self, property: :a_member_of).first
+  end
 end

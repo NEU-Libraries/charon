@@ -32,4 +32,9 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb('Admin Dashboard', admin_dashboard_path)
     breadcrumb('New Project')
   end
+
+  def system_collections_show
+    breadcrumb(objects[:system_collection].parent.title, project_path(objects[:system_collection].parent))
+    breadcrumb(objects[:system_collection].title)
+  end
 end
