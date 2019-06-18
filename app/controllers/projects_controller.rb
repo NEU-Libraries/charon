@@ -4,7 +4,6 @@ class ProjectsController < CatalogController
   include UserCreatable
   helper_method :sort_column, :sort_direction
 
-
   before_action :admin_check, only: %i[new create edit update]
   load_resource except: %i[new create edit update]
 
