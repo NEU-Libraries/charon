@@ -35,7 +35,7 @@ class ProjectsController < CatalogController
 
   def show
     authorize! :read, @project
-    @response, @document_list = search_service.fetch(["29d27047-50a0-4a58-ba77-1e776385f86c", "05f6e402-1a11-43be-bf83-61c010704c5b"])
+    @response, @document_list = search_service.fetch(metadata_adapter.query_service.find_inverse_references_by(resource: @project, property: :a_member_of).map(&:id).map(&:to_s).to_a)
   end
 
   def available_users
