@@ -14,7 +14,8 @@ class ProjectsController < CatalogController
   layout 'application'
 
   configure_blacklight do |config|
-    config.search_builder_class = ::ProjectsSearchBuilder
+    # CatalogController has a fq for hiding SystemCollections
+    config.default_solr_params.delete(:fq)
   end
 
   def new
@@ -41,8 +42,7 @@ class ProjectsController < CatalogController
 
   def show
     authorize! :read, @project
-    @ss = search_service
-    @response, @document_list = @ss.fetch(metadata_adapter.query_service.find_inverse_references_by(resource: @project, property: :a_member_of).map(&:id).map(&:to_s).to_a)
+    @response, @document_list = search_service.fetch(metadata_adapter.query_service.find_inverse_references_by(resource: @project, property: :a_member_of).map(&:id).map(&:to_s).to_a)
   end
 
   def available_users

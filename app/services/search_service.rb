@@ -13,6 +13,6 @@ class SearchService < Blacklight::SearchService
   end
 
   def search_builder
-    search_builder_class.new(self, ability: current_ability)
+    Blacklight::AccessControls::SearchBuilder.new(self, ability: current_ability)
   end
 end

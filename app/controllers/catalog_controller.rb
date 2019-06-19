@@ -39,7 +39,7 @@ class CatalogController < ApplicationController
     # config.repository_class = Blacklight::Solr::Repository
     #
     ## Class for converting Blacklight's url parameters to into request parameters for the search index
-    # config.search_builder_class = ::SearchBuilder
+    # config.search_builder_class = ::CatalogSearchBuilder
     #
     ## Model that maps search index responses to the blacklight response model
     # config.response_model = Blacklight::Solr::Response
@@ -47,7 +47,8 @@ class CatalogController < ApplicationController
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = {
       qt: 'search',
-      rows: 10
+      rows: 10,
+      fq:['-internal_resource_tesim:SystemCollection']
     }
 
     # solr field configuration for search results/index views

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SearchBuilder < Blacklight::AccessControls::SearchBuilder
+class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
   ##
@@ -10,11 +10,4 @@ class SearchBuilder < Blacklight::AccessControls::SearchBuilder
   #   def add_custom_data_to_query(solr_parameters)
   #     solr_parameters[:custom] = blacklight_params[:user_value]
   #   end
-
-  self.default_processor_chain += [:exclude_unwanted_models]
-
-  def exclude_unwanted_models(solr_parameters)
-    solr_parameters[:fq] ||= []
-    solr_parameters[:fq] << "-internal_resource_tesim:\"SystemCollection\""
-  end
 end

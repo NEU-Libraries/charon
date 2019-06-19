@@ -49,7 +49,9 @@ group :test do
 end
 
 group :development do
+  gem 'byebug'
   gem 'listen'
+  gem 'pry'
 end
 
 group :development, :staging, :test do
