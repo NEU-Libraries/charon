@@ -2,14 +2,20 @@
 
 class ProjectsController < CatalogController
   include UserCreatable
-  helper_method :sort_column, :sort_direction
+  include Searchable
 
+  before_action :searchable, only: [:show]
   before_action :admin_check, only: %i[new create edit update]
   load_resource except: %i[new create edit update]
+  helper_method :sort_column, :sort_direction
 
   # Blacklight incantations
   blacklight_config.track_search_session = false
   layout 'application'
+
+  configure_blacklight do |config|
+    config.search_builder_class = ::ProjectsSearchBuilder
+  end
 
   def new
     @change_set = ProjectChangeSet.new(Project.new)
@@ -35,7 +41,8 @@ class ProjectsController < CatalogController
 
   def show
     authorize! :read, @project
-    @response, @document_list = search_service.fetch(metadata_adapter.query_service.find_inverse_references_by(resource: @project, property: :a_member_of).map(&:id).map(&:to_s).to_a)
+    @ss = search_service
+    @response, @document_list = @ss.fetch(metadata_adapter.query_service.find_inverse_references_by(resource: @project, property: :a_member_of).map(&:id).map(&:to_s).to_a)
   end
 
   def available_users
