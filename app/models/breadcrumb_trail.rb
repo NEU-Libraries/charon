@@ -33,6 +33,11 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb('New Project')
   end
 
+  def collections_show
+    breadcrumb(objects[:collection].parent.title, project_path(objects[:collection].parent))
+    breadcrumb(objects[:collection].title)
+  end
+
   def system_collections_show
     breadcrumb(objects[:system_collection].parent.title, project_path(objects[:system_collection].parent))
     breadcrumb(objects[:system_collection].title)
