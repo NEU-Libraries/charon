@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   mount Blacklight::Engine => '/'
   # root to: "catalog#index"
 
-  mount Minerva::Engine => '/minerva'
+  mount Minerva::Engine => '/'
 
   concern :searchable, Blacklight::Routes::Searchable.new
 
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :collections
   resources :system_collections
   resources :roles
-  resources :workflows
+  # resources :workflows
 
   root to: 'pages#home'
 
