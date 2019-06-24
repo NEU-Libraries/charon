@@ -34,13 +34,14 @@ Rails.application.routes.draw do
   resources :collections
   resources :system_collections
   resources :roles
+  resources :workflows
 
   root to: 'pages#home'
 
   # workflow
-  get '/workflow/assign' => 'workflow#assign'
-  get '/workflow/claim' => 'workflow#claim'
-  get '/workflow/history/:id' => 'workflow#history'
+  get '/workflows/assign' => 'workflows#assign'
+  get '/workflows/claim' => 'workflows#claim'
+  get '/workflows/history/:id' => 'workflows#history'
 
   # dashboards
   get '/admin/dashboard' => 'admin#dashboard'
