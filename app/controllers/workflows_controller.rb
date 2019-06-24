@@ -5,7 +5,9 @@ class WorkflowsController < ApplicationController
   load_resource except: %i[new create edit update]
   before_action :searchable, only: [:show]
 
-  def new; end
+  def new
+    @workflow = Minerva::Workflow.new
+  end
 
   def create; end
 

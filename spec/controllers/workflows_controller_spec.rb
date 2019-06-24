@@ -2,5 +2,5 @@
 
 require 'rails_helper'
 
-describe WorkflowController do
+describe WorkflowsController do
 end
