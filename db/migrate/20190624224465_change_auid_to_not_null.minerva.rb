@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This migration comes from minerva (originally 20190107173209)
 class ChangeAuidToNotNull < ActiveRecord::Migration[5.2]
   def change

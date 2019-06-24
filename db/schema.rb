@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_26_181340) do
+ActiveRecord::Schema.define(version: 2019_06_24_224465) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,14 +89,14 @@ ActiveRecord::Schema.define(version: 2019_04_26_181340) do
     t.integer "user_id"
     t.integer "role_id"
     t.integer "work_id"
-    t.integer "minerva_assignment_id"
-    t.integer "minerva_status_id"
+    t.integer "assignment_id"
+    t.integer "status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_minerva_states_on_assignment_id"
     t.index ["creator_id"], name: "index_minerva_states_on_creator_id"
-    t.index ["minerva_assignment_id"], name: "index_minerva_states_on_minerva_assignment_id"
-    t.index ["minerva_status_id"], name: "index_minerva_states_on_minerva_status_id"
     t.index ["role_id"], name: "index_minerva_states_on_role_id"
+    t.index ["status_id"], name: "index_minerva_states_on_status_id"
     t.index ["user_id"], name: "index_minerva_states_on_user_id"
     t.index ["work_id"], name: "index_minerva_states_on_work_id"
   end
@@ -203,6 +203,6 @@ ActiveRecord::Schema.define(version: 2019_04_26_181340) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "minerva_assignments", "minerva_interfaces", column: "interface_id"
-  add_foreign_key "minerva_states", "minerva_assignments"
-  add_foreign_key "minerva_states", "minerva_statuses"
+  add_foreign_key "minerva_states", "minerva_assignments", column: "assignment_id"
+  add_foreign_key "minerva_states", "minerva_statuses", column: "status_id"
 end

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This migration comes from minerva (originally 20181218183815)
 class CreateMinervaStates < ActiveRecord::Migration[5.2]
   def change
@@ -8,8 +6,8 @@ class CreateMinervaStates < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :role_id
       t.integer :work_id
-      t.integer :minerva_assignment_id
-      t.integer :minerva_status_id
+      t.integer :assignment_id
+      t.integer :status_id
 
       t.timestamps
     end
@@ -18,9 +16,9 @@ class CreateMinervaStates < ActiveRecord::Migration[5.2]
     add_index :minerva_states, :role_id
     add_index :minerva_states, :work_id
 
-    add_foreign_key :minerva_states, :minerva_assignments, column: :minerva_assignment_id
-    add_index :minerva_states, :minerva_assignment_id
-    add_foreign_key :minerva_states, :minerva_statuses, column: :minerva_status_id
-    add_index :minerva_states, :minerva_status_id
+    add_foreign_key :minerva_states, :minerva_assignments, column: :assignment_id
+    add_index :minerva_states, :assignment_id
+    add_foreign_key :minerva_states, :minerva_statuses, column: :status_id
+    add_index :minerva_states, :status_id
   end
 end
