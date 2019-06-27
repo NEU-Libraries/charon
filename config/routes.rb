@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
 
   mount Blacklight::Engine => '/'
-  # root to: "catalog#index"
-
-  mount Minerva::Engine => '/'
 
   concern :searchable, Blacklight::Routes::Searchable.new
 
@@ -38,9 +35,9 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   # workflows
-  # get '/workflows/assign' => 'workflows#assign'
-  # get '/workflows/claim' => 'workflows#claim'
-  # get '/workflows/history/:id' => 'workflows#history'
+  get '/workflows/assign' => 'minerva/workflows#assign'
+  get '/workflows/claim' => 'minerva/workflows#claim'
+  get '/workflows/history/:id' => 'minerva/workflows#history'
 
   # dashboards
   get '/admin/dashboard' => 'admin#dashboard'
@@ -66,4 +63,5 @@ Rails.application.routes.draw do
   post '/projects/:id/create_user', to: 'projects#create_user', as: 'project_create_user'
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
 
+  mount Minerva::Engine => '/'
 end

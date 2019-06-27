@@ -3,8 +3,13 @@
 module Minerva
   class WorkflowsController < ApplicationController
     include Minerva::Base::Workflows
-    def new
-      super
-    end
+
+    layout 'application'
+
+    def assign; end
+
+    def claim; end
+
+    def history; end
   end
 end
