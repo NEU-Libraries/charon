@@ -33,4 +33,4 @@ Rails/DynamicFindBy:
   Whitelist:
     - find_by_alternate_identifier
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
