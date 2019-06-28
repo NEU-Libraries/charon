@@ -27,16 +27,11 @@ services:
       - solr
     entrypoint: /charon/docker-entrypoint.sh
   solr:
-    image: solr:7.2-alpine
+    image: nakatomi/charon_solr
     ports:
     - 8983:8983
     volumes:
     - solr:/opt/solr/server/solr/mycores
-    - ./solr:/solr_config
-    entrypoint:
-    - bash
-    - "-c"
-    - "precreate-core blacklight-core /solr_config/config; precreate-core blacklight-core-test /solr_config/config; exec solr -f"
     healthcheck:
       test:
       - CMD
@@ -47,11 +42,3 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-
-
-# solr:
-#   image: solr
-#   ports:
-#     - "8983:8983"
-#   volumes:
-#     - solr:/opt/solr/server/solr/blacklight-core
