@@ -7,9 +7,10 @@ RUN sed -i 's/mailhub=mail/mailhub=172.17.0.1/' /etc/ssmtp/ssmtp.conf
 RUN echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf
 RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /usr/local/bin/cc-test-reporter
 RUN chmod +x /usr/local/bin/cc-test-reporter
-RUN mkdir /charon
-WORKDIR /charon
-COPY Gemfile /charon/Gemfile
-COPY Gemfile.lock /charon/Gemfile.lock
+RUN useradd -ms /bin/bash charon
+USER charon
+WORKDIR /home/charon/web
+COPY Gemfile /home/charon/web/Gemfile
+COPY Gemfile.lock /home/charon/web/Gemfile.lock
 RUN bundle install
-COPY . /charon
+COPY . /home/charon/web
