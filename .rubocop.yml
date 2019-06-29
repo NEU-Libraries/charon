@@ -34,3 +34,5 @@ Rails/DynamicFindBy:
     - find_by_alternate_identifier
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+Style/MissingRespondToMissing:
+  Enabled: false

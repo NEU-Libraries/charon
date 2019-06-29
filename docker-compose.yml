@@ -19,13 +19,13 @@ services:
     image: nakatomi/charon_web
     build: .
     volumes:
-      - .:/charon
+      - .:/home/charon/web
     ports:
       - 3000:3000
     depends_on:
       - db
       - solr
-    entrypoint: /charon/docker-entrypoint.sh
+    entrypoint: /home/charon/web/docker-entrypoint.sh
   solr:
     image: nakatomi/charon_solr
     ports:

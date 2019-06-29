@@ -10,18 +10,6 @@ module ApplicationHelper
     end
   end
 
-  # :nocov:
-  def respond_to_missing?(method_name, *args)
-    if (method_name.to_s.end_with?('_path') ||
-      method_name.to_s.end_with?('_url')) &&
-       main_app.respond_to?(method_name)
-      true
-    else
-      super
-    end
-  end
-  # :nocov:
-
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
