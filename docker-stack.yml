@@ -1,0 +1,44 @@
+# Use postgres/example user/password credentials
+version: '3.7'
+volumes:
+  solr:
+  db:
+  web:
+services:
+  db:
+    image: postgres
+    volumes:
+      - db:/var/lib/postgresql/data/pgdata
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+  web:
+    image: nakatomi/charon_web
+    deploy:
+      replicas: 2
+      update_config:
+        order: start-first
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - solr
+    entrypoint: /charon/docker-entrypoint.sh
+  solr:
+    image: nakatomi/charon_solr
+    ports:
+    - 8983:8983
+    volumes:
+    - solr:/opt/solr/server/solr/mycores
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - "-O"
+      - "/dev/null"
+      - http://localhost:8983/solr/
+      interval: 30s
+      timeout: 5s
+      retries: 3
