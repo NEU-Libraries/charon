@@ -3,6 +3,9 @@ jobs:
   build:
     machine: true
     working_directory: ~/charon
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - run:
@@ -67,23 +70,3 @@ jobs:
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push nakatomi/charon_web:latest
-  deploy:
-    machine:
-      enabled: true
-    steps:
-      - run:
-          name: Deploy Over SSH
-          command: |
-            ssh $SSH_USER@$SSH_HOST "cd /opt/charon && docker stack deploy --compose-file docker-stack.yml charon"
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
