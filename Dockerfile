@@ -9,6 +9,7 @@ RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest
 RUN chmod +x /usr/local/bin/cc-test-reporter
 RUN useradd -ms /bin/bash charon
 USER charon
+RUN mkdir -p /home/charon/web
 WORKDIR /home/charon/web
 COPY Gemfile /home/charon/web/Gemfile
 COPY Gemfile.lock /home/charon/web/Gemfile.lock
