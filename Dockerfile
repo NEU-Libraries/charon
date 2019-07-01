@@ -13,4 +13,4 @@ WORKDIR /home/charon/web
 COPY Gemfile /home/charon/web/Gemfile
 COPY Gemfile.lock /home/charon/web/Gemfile.lock
 RUN bundle install
-COPY . /home/charon/web
+COPY --chown=charon:charon . /home/charon/web
