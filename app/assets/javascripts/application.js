@@ -12,7 +12,6 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //
 // Required by Blacklight
 //= require jquery
@@ -21,7 +20,5 @@
 //= require twitter/typeahead
 //= require bootstrap
 //= require blacklight/blacklight
-
-//= require monkey_patch_turbolinks
 
 //= require_tree .

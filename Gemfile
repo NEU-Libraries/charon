@@ -38,7 +38,6 @@ gem 'sass-rails'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
 gem 'rsolr'
-gem 'turbolinks'
 gem 'twitter-typeahead-rails'
 
 # Blacklight
