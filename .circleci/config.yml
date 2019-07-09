@@ -12,7 +12,7 @@ jobs:
           name: Install dependencies
           command: |
             sudo apt-get update -qq
-            sudo apt-get install -y apt-utils build-essential libpq-dev
+            sudo apt-get install -y apt-utils build-essential libpq-dev httpie
       - run:
           name: Install Docker Compose
           command: |
@@ -70,3 +70,7 @@ jobs:
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push nakatomi/charon_web:latest
+      - run:
+          name: Deploy
+          command: |
+            http PUT charon.library.northeastern.edu/deploy token=$CHARON_TOKEN

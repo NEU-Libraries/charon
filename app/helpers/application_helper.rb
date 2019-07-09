@@ -22,4 +22,8 @@ module ApplicationHelper
 
     '▾'
   end
+
+  def application_version
+    VERSION
+  end
 end
