@@ -75,7 +75,7 @@ jobs:
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push nakatomi/charon_web:latest
-            docker tag nakatomi/charon_web:lastest nakatomi/charon_web:$CHARON_VERSION
+            docker tag nakatomi/charon_web:latest nakatomi/charon_web:$CHARON_VERSION
             docker push nakatomi/charon_web:$CHARON_VERSION
       - run:
           name: Deploy
