@@ -19,9 +19,6 @@ services:
     image: nakatomi/charon_web
     ports:
       - 3000:3000
-    depends_on:
-      - db
-      - solr
     entrypoint: /home/charon/web/docker-entrypoint.sh
   solr:
     image: nakatomi/charon_solr
