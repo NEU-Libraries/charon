@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-./scripts/wait-for-it.sh -t 60 db:5432 --strict -- echo "db is up"
-./scripts/wait-for-it.sh -t 60 solr:8983 --strict -- echo "solr is up"
+dockerize -wait tcp://db:5432 -timeout 1m
+dockerize -wait http://solr:8983 -timeout 1m
 rm -f /home/charon/web/tmp/pids/server.pid
 rake db:create
 rake db:migrate
