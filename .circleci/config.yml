@@ -21,7 +21,7 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - restore_cache:
           keys:
-            - v1-{{ .Branch }}
+            - v2-{{ .Branch }}
           paths:
             - ~/caches/charon.tar
       - run:
@@ -48,7 +48,7 @@ jobs:
             mkdir -p ~/caches
             docker save -o ~/caches/charon.tar nakatomi/charon_web
       - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
+          key: v2-{{ .Branch }}-{{ epoch }}
           paths:
             - ~/caches/charon.tar
       - run:
