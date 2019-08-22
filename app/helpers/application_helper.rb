@@ -4,9 +4,7 @@ module ApplicationHelper
   # kludge so we can keep Minerva as an isolated namespace but still use Blacklight layout
   def method_missing(method, *args, &block)
     if (method.to_s.end_with?('_path') || method.to_s.end_with?('_url')) && main_app.respond_to?(method)
-      # :nocov:
       main_app.send(method, *args)
-      # :nocov:
     else
       super
     end
