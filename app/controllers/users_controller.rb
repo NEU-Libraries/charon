@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def actions
     @project = find_resource
 
-    # TODO - flash an error if the below isn't true. A redirect to the same page without
+    # TODO: - flash an error if the below isn't true. A redirect to the same page without
     # causes confusion
     redirect_to users_dashboard_url if !current_user.admin? && current_user.role(@project).nil?
   end
