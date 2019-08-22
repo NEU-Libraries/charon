@@ -17,7 +17,7 @@
 
 require 'factory_bot_rails' # this shouldn't be necessary
 require 'blacklight'
-require 'capybara/rspec'
+# require 'capybara/rspec'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
