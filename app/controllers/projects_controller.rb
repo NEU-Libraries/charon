@@ -29,7 +29,7 @@ class ProjectsController < CatalogController
       change_set.sync
       @project = metadata_adapter.persister.save(resource: change_set.resource)
     end
-    
+
     # After successfull creation of project, create system collections
     # and associate with the resource
     user_registry.project_id = @project.id
