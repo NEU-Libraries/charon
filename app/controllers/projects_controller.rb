@@ -23,14 +23,17 @@ class ProjectsController < CatalogController
   end
 
   def create
-    change_set = ProjectChangeSet.new(Project.new(user_registry_id: UserRegistry.create.id))
+    user_registry = UserRegistry.create
+    change_set = ProjectChangeSet.new(Project.new(user_registry_id: user_registry.id))
     if change_set.validate(params[:project])
       change_set.sync
       @project = metadata_adapter.persister.save(resource: change_set.resource)
     end
-
+    
     # After successfull creation of project, create system collections
     # and associate with the resource
+    user_registry.project_id = @project.id
+    user_registry.save!
     @project.generate_system_collections
 
     redirect_to project_path(@project)
