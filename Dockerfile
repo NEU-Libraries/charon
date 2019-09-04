@@ -1,5 +1,5 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev msmtp msmtp-mta
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
         && apt-get install -y nodejs
 RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /usr/local/bin/cc-test-reporter
@@ -13,3 +13,4 @@ COPY Gemfile /home/charon/web/Gemfile
 COPY Gemfile.lock /home/charon/web/Gemfile.lock
 RUN bundle install
 COPY --chown=charon:charon . /home/charon/web
+RUN cp /home/charon/web/scripts/msmtprc /home/charon/.msmtprc
