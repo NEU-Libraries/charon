@@ -50,6 +50,7 @@ class ProjectsController < CatalogController
         resource: @project, property: :a_member_of
       ).map(&:id).map(&:to_s).to_a
     )
+    fresh_when(etag: @project, last_modified: @project.updated_at, public: true)
   end
 
   def available_users
