@@ -45,12 +45,13 @@ class ProjectsController < CatalogController
 
   def show
     authorize! :read, @project
+    return unless stale?(etag: @project, last_modified: @project.updated_at, public: true)
+
     @response, @document_list = search_service.fetch(
       metadata_adapter.query_service.find_inverse_references_by(
         resource: @project, property: :a_member_of
       ).map(&:id).map(&:to_s).to_a
     )
-    fresh_when(etag: @project, last_modified: @project.updated_at, public: true)
   end
 
   def available_users
