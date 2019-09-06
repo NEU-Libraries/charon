@@ -13,6 +13,7 @@ class PagesController < ApplicationController
       hsh_and_val = line.split('|', 2)
       @git_log[hsh_and_val[0]] = hsh_and_val[1]
     end
+    expires_in 1.day
     fresh_when(@git_log, public: true)
     # :nocov:
   end
