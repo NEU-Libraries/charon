@@ -96,7 +96,6 @@ class ProjectsController < CatalogController
     authorize! :oversee, @project
     @user = manufacture_user(params)
     @project.attach_user(@user)
-
     UserMailer.with(user: @user).system_created_user_email.deliver_now
     flash[:notice] = "User successfully created and attached to #{@project.title}."\
                      "Email sent to #{@user.email} for notification."

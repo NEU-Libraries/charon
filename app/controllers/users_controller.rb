@@ -38,7 +38,6 @@ class UsersController < ApplicationController
 
   def create_user
     @user = manufacture_user(params)
-
     # Associate user with project
     project = find_resource
     project.attach_user(@user)

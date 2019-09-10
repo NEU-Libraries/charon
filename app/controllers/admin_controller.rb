@@ -25,7 +25,6 @@ class AdminController < ApplicationController
 
   def create_user
     @user = manufacture_user(params)
-
     UserMailer.with(user: @user).system_created_user_email.deliver_now
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to admin_dashboard_url
