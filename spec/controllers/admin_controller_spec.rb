@@ -32,5 +32,12 @@ describe AdminController do
       mail = ActionMailer::Base.deliveries.last
       expect(mail['to'].to_s).to eq('test@email.com')
     end
+
+    it 'does not create a user when their email is already in use' do
+      User.create(password: 'password', email: 'email@alreadyinuse.com', first_name: 'Test', last_name: 'Test')
+      sign_in FactoryBot.create(:admin)
+      post :create_user, params: { user: { email: 'email@alreadyinuse.com', first_name: 'Doug', last_name: 'Dimmadome' } }
+      response.should redirect_to '/'
+    end
   end
 end
