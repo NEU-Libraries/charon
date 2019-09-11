@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  acts_as_messageable
   enumeration :capacity
   has_many :roles, dependent: :destroy
 
@@ -31,4 +32,7 @@ class User < ApplicationRecord
     # Blacklight presentation string
     "#{first_name} #{last_name}"
   end
+
+  # using alias for Mailboxer
+  alias name to_s
 end
