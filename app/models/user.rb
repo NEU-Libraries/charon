@@ -35,4 +35,8 @@ class User < ApplicationRecord
 
   # using alias for Mailboxer
   alias name to_s
+
+  def unread_notification_count
+    mailbox.notifications(unread: true).count
+  end
 end

@@ -20,7 +20,7 @@ class CatalogController < ApplicationController
   self.search_state_class = SearchState
 
   configure_blacklight do |config|
-    config.add_nav_action(:mailboxer, partial: 'mailboxer/nav/inbox')
+    config.add_nav_action(:mailboxer, partial: 'mailboxer/nav/notifications')
 
     config.add_results_collection_tool(:sort_widget)
     config.add_results_collection_tool(:per_page_widget)
