@@ -1,0 +1,6 @@
+-if current_user.present?
+  %a.nav-link{:href => "#"}
+    Inbox
+    -if current_user.unread_inbox_count > 0
+      %span.badge.badge-danger
+        = current_user.unread_inbox_count
