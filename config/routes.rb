@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   # mailboxer
   get '/users/notifications' => 'mailboxer#notifications_index'
   get '/users/inbox' => 'mailboxer#inbox_index'
+  get '/notifications/:id/mark_as_read', to: 'mailboxer#mark_notification_as_read', as: 'mark_notification_as_read'
 
   mount Minerva::Engine => '/'
 end

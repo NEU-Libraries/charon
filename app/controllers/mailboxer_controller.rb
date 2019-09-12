@@ -8,4 +8,10 @@ class MailboxerController < ApplicationController
     @notifications = current_user.mailbox.notifications
     @unread_ids = current_user.mailbox.notifications(unread: true).pluck(:id)
   end
+
+  def mark_notification_as_read
+     Mailboxer::Notification.find(params[:id]).mark_as_read(current_user)
+     flash[:notice] = "Message marked as read."
+     redirect_to users_notifications_path
+  end
 end

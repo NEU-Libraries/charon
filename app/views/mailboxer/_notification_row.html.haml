@@ -6,4 +6,4 @@
   %td.w-75.align-middle
     = notification.body
     - if unread
-      %a.btn.btn-sm.btn-primary.float-right{:href => "#", :role => "button"} Mark As Read
+      %a.btn.btn-sm.btn-primary.float-right{:href => mark_notification_as_read_path(notification.id), :role => "button"} Mark As Read
