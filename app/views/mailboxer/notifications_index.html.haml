@@ -1,0 +1,17 @@
+%h2.py-3
+  Notifications
+
+%table.table.table-bordered.table-responsive
+  %thead
+    %tr
+      %th{:scope => "col"} Sent
+      %th{:scope => "col"} Subject
+      %th{:scope => "col"} Message
+  %tbody
+    - @notifications.each do |notification|
+      -if @unread_ids.include?(notification.id)
+        %tr.table-info
+          = render 'notification_row', :notification => notification
+      -else
+        %tr
+          = render 'notification_row', :notification => notification

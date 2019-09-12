@@ -5,5 +5,7 @@ class MailboxerController < ApplicationController
   end
 
   def notifications_index
+    @notifications = current_user.mailbox.notifications
+    @unread_ids = current_user.mailbox.notifications(unread: true).pluck(:id)
   end
 end

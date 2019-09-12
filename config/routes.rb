@@ -63,5 +63,9 @@ Rails.application.routes.draw do
   post '/projects/:id/create_user', to: 'projects#create_user', as: 'project_create_user'
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
 
+  # mailboxer
+  get '/users/notifications' => 'mailboxer#notifications_index'
+  get '/users/inbox' => 'mailboxer#inbox_index'
+
   mount Minerva::Engine => '/'
 end
