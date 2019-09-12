@@ -50,9 +50,6 @@ class ProjectsController < CatalogController
         resource: @project, property: :a_member_of
       ).map(&:id).map(&:to_s).to_a
     )
-
-    expires_in 1.day
-    fresh_when(etag: @document_list, public: true)
   end
 
   def available_users
