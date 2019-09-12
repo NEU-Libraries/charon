@@ -9,9 +9,4 @@
       %th{:scope => "col"} Message
   %tbody
     - @notifications.each do |notification|
-      -if @unread_ids.include?(notification.id)
-        %tr.table-info
-          = render 'notification_row', :notification => notification
-      -else
-        %tr
-          = render 'notification_row', :notification => notification
+      = render 'notification_row', :notification => notification, :unread => @unread_ids.include?(notification.id)

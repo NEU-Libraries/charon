@@ -1,6 +1,9 @@
-%td.align-middle
-  = notification.created_at.strftime("%F %T")
-%td.align-middle
-  = notification.subject
-%td.w-75.align-middle
-  = notification.body
+%tr{:class => "#{'table-info' if unread}"}
+  %td.align-middle
+    = notification.created_at.strftime("%F %T")
+  %td.align-middle
+    = notification.subject
+  %td.w-75.align-middle
+    = notification.body
+    - if unread
+      %a.btn.btn-sm.btn-primary.float-right{:href => "#", :role => "button"} Mark As Read
