@@ -1,5 +1,5 @@
 -if current_user.present?
-  %a.nav-link{:href => users_notifications_path}
+  %a.nav-link{:href => notifications_path}
     Notifications
     -if current_user.unread_notification_count > 0
       %span.badge.badge-danger

@@ -10,3 +10,5 @@
   %tbody
     - @notifications.each do |notification|
       = render 'notification_row', :notification => notification, :unread => @unread_ids.include?(notification.id)
+
+%a.btn.btn-primary.btn-lg.float-right{:href => mark_all_notifications_as_read_url, :role => "button"} Mark All As Read

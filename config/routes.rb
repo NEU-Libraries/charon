@@ -64,9 +64,10 @@ Rails.application.routes.draw do
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
 
   # mailboxer
-  get '/users/notifications' => 'mailboxer#notifications_index'
-  get '/users/inbox' => 'mailboxer#inbox_index'
-  get '/notifications/:id/mark_as_read', to: 'mailboxer#mark_notification_as_read', as: 'mark_notification_as_read'
+  get '/notifications' => 'notifications#index'
+  get '/inbox' => 'conversations#index'
+  get '/notifications/:id/mark_as_read', to: 'notifications#mark_as_read', as: 'mark_notification_as_read'
+  get '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read', as: 'mark_all_notifications_as_read'
 
   mount Minerva::Engine => '/'
 end
