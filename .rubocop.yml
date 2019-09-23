@@ -21,6 +21,8 @@ AllCops:
     - 'config/**/*'
 Metrics/BlockLength:
   Exclude:
+    # BL config too long
+    - 'app/controllers/catalog_controller.rb'
     - 'spec/**/*'
     - 'lib/tasks/*'
 Rails/UnknownEnv:

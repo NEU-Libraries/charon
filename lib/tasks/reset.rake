@@ -53,23 +53,5 @@ namespace :reset do
     User.create(password: 'password', email: 'sj.sweeney@northeastern.edu', first_name: 'Sarah', last_name: 'Sweeney', capacity: Capacity.administrator)
     User.create(password: 'password', email: 'm.barney@northeastern.edu', first_name: 'Megan', last_name: 'Barney', capacity: Capacity.administrator)
     User.create(password: 'password', email: 'webber.sh@husky.neu.edu', first_name: 'Shannon', last_name: 'Webber', capacity: Capacity.administrator)
-
-    # Create assignments for task list
-    Minerva::Assignment.create(title: "Transcribe")
-    Minerva::Assignment.create(title: "Encode")
-    Minerva::Assignment.create(title: "Catalog")
-    Minerva::Assignment.create(title: "Review")
-    Minerva::Assignment.create(title: "Publish")
-
-    # Create statuses
-    Minerva::Status.create(title: "In Progress")
-    Minerva::Status.create(title: "Inactive")
-    Minerva::Status.create(title: "Complete")
-    Minerva::Status.create(title: "Under Review")
-    Minerva::Status.create(title: "Available")
-    Minerva::Status.create(title: "Edited")
-    Minerva::Status.create(title: "Finished")
-    Minerva::Status.create(title: "Approved")
-    Minerva::Status.create(title: "Denied")
   end
 end

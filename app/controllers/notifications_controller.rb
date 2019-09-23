@@ -7,16 +7,16 @@ class NotificationsController < ApplicationController
   end
 
   def mark_as_read
-     Mailboxer::Notification.find(params[:id]).mark_as_read(current_user)
-     flash[:notice] = "Notification marked as read."
-     redirect_to notifications_path
+    Mailboxer::Notification.find(params[:id]).mark_as_read(current_user)
+    flash[:notice] = 'Notification marked as read.'
+    redirect_to notifications_path
   end
 
   def mark_all_as_read
-     current_user.mailbox.notifications.each do |notification|
-       notification.mark_as_read(current_user)
-     end
-     flash[:notice] = "All notifications marked as read."
-     redirect_to notifications_path
+    current_user.mailbox.notifications.each do |notification|
+      notification.mark_as_read(current_user)
+    end
+    flash[:notice] = 'All notifications marked as read.'
+    redirect_to notifications_path
   end
 end
