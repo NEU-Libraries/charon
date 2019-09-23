@@ -2,12 +2,27 @@
   = f.input :title
   %ul.list-group.sortable
     - @tasks.each do |t|
-      %li.list-group-item
+      %li.list-group-item.d-flex.justify-content-between.align-items-center
         = t.name
+        %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove"}
+
   %br
+
+  .input-group
+    %select#inputGroupSelect04.custom-select
+      %option{:selected => "selected"} Choose...
+      - @tasks.each do |t|
+        %option{:value => "#{t.to_s}"}
+          = t.name
+    .input-group-append
+      %button.btn.btn-outline-secondary{:type => "button"} Add Task
+
+  %br
+
   = f.input :ordered, as: :radio_buttons
   = f.input :task_list, :as => :hidden
   = f.button :submit, class: 'btn btn-primary'
+
 
 :javascript
   sortable('.sortable');
