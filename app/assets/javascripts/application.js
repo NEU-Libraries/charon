@@ -21,4 +21,6 @@
 //= require bootstrap
 //= require blacklight/blacklight
 
+//= require html5sortable
+
 //= require_tree .

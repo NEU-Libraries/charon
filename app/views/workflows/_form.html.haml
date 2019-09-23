@@ -1,0 +1,13 @@
+= simple_form_for(@workflow) do |f|
+  = f.input :title
+  %ul.list-group.sortable
+    - @tasks.each do |t|
+      %li.list-group-item
+        = t.name
+  %br
+  = f.input :ordered, as: :radio_buttons
+  = f.input :task_list, :as => :hidden
+  = f.button :submit, class: 'btn btn-primary'
+
+:javascript
+  sortable('.sortable');
