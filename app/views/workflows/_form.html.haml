@@ -28,4 +28,16 @@
 
 
 :javascript
+  function sortable_reload() {
+    raw_sortable = sortable('.sortable', 'serialize');
+
+    sortable_values = '';
+
+    $.each(raw_sortable[0].items, function( index, value ) {
+      sortable_values = sortable_values.concat($.trim($.parseHTML(value.html)[0].innerText) + ',');
+    });
+
+    sortable_array = '['.concat(sortable_values.replace(/.$/,"]"));
+  };
+
   sortable('.sortable');
