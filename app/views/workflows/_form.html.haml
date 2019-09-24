@@ -2,23 +2,23 @@
   = f.input :title
 
   %label
-    Task List
+    Task List - Click and Drag to reorder
   %ul.list-group.sortable
     - @tasks.each do |t|
       %li.list-group-item.d-flex.justify-content-between.align-items-center
-        = t.name
+        .task-text
+          = t.name
         %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove();"}
 
   %br
 
   .input-group
-    %select#inputGroupSelect04.custom-select
-      %option{:selected => "selected"} Choose...
+    %select#add-task.custom-select
       - @tasks.each do |t|
-        %option{:value => "#{t.to_s}"}
+        %option{:value => "#{t.name}"}
           = t.name
     .input-group-append
-      %button.btn.btn-success{:type => "button"} Add Task
+      %button.btn.btn-success{:type => "button", :onclick => "new_task = $('.sortable').children().last('li').clone(); new_task.children('.task-text').text($('#add-task').val()); new_task.appendTo('.sortable');"} Add Task
 
   %br
 
