@@ -6,12 +6,12 @@
   %ul.list-group.sortable
     %li.hidden-task.list-group-item.d-flex.justify-content-between.align-items-center
       .task-text
-      %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove();"}
+      %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove(); sortable_reload();"}
     - @tasks.each do |t|
       %li.list-group-item.d-flex.justify-content-between.align-items-center
         .task-text
           = t.name
-        %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove();"}
+        %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove(); sortable_reload();"}
 
   %br
 
@@ -21,7 +21,7 @@
         %option{:value => "#{t.name}"}
           = t.name
     .input-group-append
-      %button.btn.btn-success{:type => "button", :onclick => "new_task = $('.sortable').children().last('li').clone(); new_task.children('.task-text').text($('#add-task').val()); new_task.removeClass('hidden-task'); new_task.appendTo('.sortable');"} Add Task
+      %button.btn.btn-success{:type => "button", :onclick => "new_task = $('.sortable').children().last('li').clone(); new_task.children('.task-text').text($('#add-task').val()); new_task.removeClass('hidden-task'); new_task.appendTo('.sortable'); sortable_reload();"} Add Task
 
   %br
 
@@ -40,7 +40,7 @@
       sortable_values = sortable_values.concat($.trim($.parseHTML(value.html)[0].innerText) + ',');
     });
 
-    sortable_array = '['.concat(sortable_values.replace(/.$/,"]"));
+    sortable_array = '['.concat(sortable_values.replace(',', '').replace(/.$/,"]"));
   };
 
   sortable('.sortable');
