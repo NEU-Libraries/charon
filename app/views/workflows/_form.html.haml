@@ -41,6 +41,12 @@
     });
 
     sortable_array = '['.concat(sortable_values.replace(',', '').replace(/.$/,"]"));
+    $('#workflow_task_list').val(sortable_array);
   };
 
+  sortable('.sortable')[0].addEventListener('sortupdate', function(e) {
+    sortable_reload();
+  });
+
   sortable('.sortable');
+  sortable_reload();
