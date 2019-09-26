@@ -2,8 +2,8 @@
 
 class WorkflowsController < ApplicationController
   def new
-    @project_id = Minerva::Project.find_or_create_by(:auid => params[:project_id]).id
-    @creator_id = Minerva::User.find_or_create_by(:auid => current_user.id).id
+    @project_id = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
+    @creator_id = Minerva::User.find_or_create_by(auid: current_user.id).id
     @workflow = Minerva::Workflow.new
     @tasks = Task.all
   end
@@ -18,5 +18,8 @@ class WorkflowsController < ApplicationController
 
   def update; end
 
-  def show; end
+  def show
+    @workflow = Minerva::Workflow.find(params[:id])
+    @project = Project.find(Minerva::Project.find(@workflow.project_id).auid)
+  end
 end
