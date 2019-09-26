@@ -27,6 +27,8 @@
 
   = f.input :ordered, as: :radio_buttons
   = f.input :task_list, :as => :hidden
+  = f.input :creator_id, :as => :hidden, input_html: {value: @creator_id}
+  = f.input :project_id, :as => :hidden, input_html: {value: @project_id}
   = f.button :submit, class: 'btn btn-primary'
 
 
