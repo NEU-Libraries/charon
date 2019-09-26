@@ -39,10 +39,10 @@
     sortable_values = '';
 
     $.each(raw_sortable[0].items, function( index, value ) {
-      sortable_values = sortable_values.concat($.trim($.parseHTML(value.html)[0].innerText) + ',');
+      sortable_values = sortable_values.concat('"' + $.trim($.parseHTML(value.html)[0].innerText) + '",');
     });
 
-    sortable_array = '['.concat(sortable_values.replace(',', '').replace(/.$/,"]"));
+    sortable_array = '['.concat(sortable_values.replace('"",', '').replace(/.$/,"]"));
     $('#workflow_task_list').val(sortable_array);
   };
 

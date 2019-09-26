@@ -20,6 +20,7 @@ class WorkflowsController < ApplicationController
 
   def show
     @workflow = Minerva::Workflow.find(params[:id])
+    @tasks = JSON.parse(@workflow.task_list)
     @project = Project.find(Minerva::Project.find(@workflow.project_id).auid)
   end
 end

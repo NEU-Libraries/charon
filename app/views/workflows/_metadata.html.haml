@@ -1,0 +1,10 @@
+%h6.pb-2
+  Task List
+%ul.list-group
+  - @tasks.each do |task|
+    %li.list-group-item
+      = task
+
+%h6.pt-3
+  Ordered
+= @workflow.ordered.to_s.capitalize
