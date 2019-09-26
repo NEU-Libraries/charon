@@ -7,19 +7,19 @@
     %li.hidden-task.list-group-item.d-flex.justify-content-between.align-items-center
       .task-text
       %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove(); sortable_reload();"}
-    - @tasks.each do |t|
+    -  JSON.parse(@workflow.task_list).each do |task|
       %li.list-group-item.d-flex.justify-content-between.align-items-center
         .task-text
-          = t.name
+          = task
         %input.btn.btn-sm.btn-danger{:href => "#", :role => "button", :type => "button", :value => "Remove", :onclick => "$(this).parent().remove(); sortable_reload();"}
 
   %br
 
   .input-group
     %select#add-task.custom-select
-      - @tasks.each do |t|
-        %option{:value => "#{t.name}"}
-          = t.name
+      - Task.all.map{ |t| t.name}.each do |task|
+        %option{:value => "#{task}"}
+          = task
     .input-group-append
       %button.btn.btn-success{:type => "button", :onclick => "new_task = $('.sortable').children().last('li').clone(); new_task.children('.task-text').text($('#add-task').val()); new_task.removeClass('hidden-task'); new_task.appendTo('.sortable'); sortable_reload();"} Add Task
 
@@ -27,8 +27,8 @@
 
   = f.input :ordered, as: :radio_buttons
   = f.input :task_list, :as => :hidden
-  = f.input :creator_id, :as => :hidden, input_html: {value: @creator_id}
-  = f.input :project_id, :as => :hidden, input_html: {value: @project_id}
+  = f.input :creator_id, :as => :hidden, input_html: {value: @workflow.creator_id}
+  = f.input :project_id, :as => :hidden, input_html: {value: @workflow.project_id}
   = f.button :submit, class: 'btn btn-primary'
 
 

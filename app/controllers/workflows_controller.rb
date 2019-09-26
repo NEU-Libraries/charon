@@ -2,10 +2,9 @@
 
 class WorkflowsController < ApplicationController
   def new
-    @project_id = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
-    @creator_id = Minerva::User.find_or_create_by(auid: current_user.id).id
-    @workflow = Minerva::Workflow.new
-    @tasks = Task.all
+    pid = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
+    cid = Minerva::User.find_or_create_by(auid: current_user.id).id
+    @workflow = Minerva::Workflow.new(task_list: Task.all.map{ |t| t.name}, project_id: pid, creator_id: cid)
   end
 
   def create
@@ -14,9 +13,17 @@ class WorkflowsController < ApplicationController
     redirect_to workflow_path(@workflow)
   end
 
-  def edit; end
+  def edit
+    @workflow = Minerva::Workflow.find(params[:id])
+  end
 
-  def update; end
+  def update
+    @workflow = Minerva::Workflow.find(params[:id])
+    permitted = params.require(:workflow).permit(:title, :ordered, :task_list, :project_id, :creator_id)
+    @workflow.update_attributes! permitted
+    flash[:notice] = "Successfully edited workflow."
+    redirect_to workflow_path(@workflow)
+  end
 
   def show
     @workflow = Minerva::Workflow.find(params[:id])
