@@ -47,4 +47,9 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb(objects[:project].title, actions_path(objects[:project]))
     breadcrumb('New Workflow')
   end
+
+  def workflows_edit
+    breadcrumb(objects[:project].title, actions_path(objects[:project]))
+    breadcrumb(objects[:workflow].title)
+  end
 end

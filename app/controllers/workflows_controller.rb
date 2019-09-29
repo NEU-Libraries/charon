@@ -16,6 +16,7 @@ class WorkflowsController < ApplicationController
 
   def edit
     @workflow = Minerva::Workflow.find(params[:id])
+    @project = Project.find(Minerva::Project.find(@workflow.project_id).auid)
   end
 
   def update
