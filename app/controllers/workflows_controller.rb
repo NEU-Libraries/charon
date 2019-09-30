@@ -21,7 +21,7 @@ class WorkflowsController < ApplicationController
 
   def update
     @workflow = Workflow.find(params[:id])
-    permitted = params.require(:workflow).permit(:title, :ordered, :task_list, :project_id, :creator_id)
+    permitted = params.except(:project_id, :creator_id).require(:workflow).permit(:title, :ordered, :task_list, :project_id, :creator_id)
     @workflow.update_attributes! permitted
     flash[:notice] = "Successfully edited workflow."
     redirect_to workflow_path(@workflow)
