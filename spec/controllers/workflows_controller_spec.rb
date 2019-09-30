@@ -21,7 +21,7 @@ describe WorkflowsController do
       sign_in admin_user
       pid = Minerva::Project.find_or_create_by(auid: project.noid).id
       cid = Minerva::User.find_or_create_by(auid: admin_user.id).id
-      post :create, params: { workflow: { project_id: pid, creator_id: cid, title: 'Test', ordered: true, task_list: "[\"Encode\",\"Catalog\",\"Review\",\"Transcribe\",\"Publish\"]" } }
+      post :create, params: { workflow: { project_id: pid, creator_id: cid, title: 'Test', ordered: true, task_list: '["Encode","Catalog","Review","Transcribe","Publish"]' } }
       response.should redirect_to workflow_path(Workflow.last)
     end
   end
@@ -46,7 +46,7 @@ describe WorkflowsController do
   describe 'update' do
     it 'udpates a workflow' do
       sign_in admin_user
-      post :update, params: { id: workflow.id, workflow: { title: 'update action test', ordered: true, task_list: "[\"Encode\",\"Catalog\",\"Review\",\"Transcribe\",\"Publish\"]" } }
+      post :update, params: { id: workflow.id, workflow: { title: 'update action test', ordered: true, task_list: '["Encode","Catalog","Review","Transcribe","Publish"]' } }
       response.should redirect_to workflow_path(workflow.id)
       expect(workflow.reload.title).to eq('update action test')
     end

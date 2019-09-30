@@ -104,6 +104,7 @@ describe ProjectsController do
   end
 
   describe 'workflows' do
+    render_views
     it 'lists all workflows associated with this project' do
       sign_in admin_user # TODO: not a requirement but it should be
       get :workflows, params: { id: project.noid }
