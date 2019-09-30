@@ -100,7 +100,7 @@ class ProjectsController < CatalogController
   end
 
   def workflows
-    @workflows = Workflow.where(project_id: Minerva::Project.where(auid: params[:id]).take.id)
+    @workflows = Workflow.where(project_id: Minerva::Project.where(auid: params[:id]).take&.id)
   end
 
   private

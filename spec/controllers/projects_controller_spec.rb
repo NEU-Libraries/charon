@@ -102,4 +102,12 @@ describe ProjectsController do
       expect(response).to render_template('projects/show')
     end
   end
+
+  describe 'workflows' do
+    it 'lists all workflows associated with this project' do
+      sign_in admin_user # TODO: not a requirement but it should be
+      get :workflows, params: { id: project.noid }
+      expect(response).to render_template('projects/workflows')
+    end
+  end
 end
