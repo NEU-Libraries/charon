@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class WorkflowsController < ApplicationController
+  def index
+  end
+  
   def new
     @project = Project.find(params[:project_id])
     pid = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
