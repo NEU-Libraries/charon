@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :collections
   resources :system_collections
   resources :roles
-  resources :workflows
+  resources :workflows, path: 'workflows/:project_id'
 
   root to: 'pages#home'
 

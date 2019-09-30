@@ -3,7 +3,7 @@
 class WorkflowsController < ApplicationController
   def index
   end
-  
+
   def new
     @project = Project.find(params[:project_id])
     pid = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
@@ -19,7 +19,7 @@ class WorkflowsController < ApplicationController
 
   def edit
     @workflow = Minerva::Workflow.find(params[:id])
-    @project = Project.find(Minerva::Project.find(@workflow.project_id).auid)
+    @project = Project.find(params[:project_id])
   end
 
   def update
@@ -33,6 +33,6 @@ class WorkflowsController < ApplicationController
   def show
     @workflow = Minerva::Workflow.find(params[:id])
     @tasks = JSON.parse(@workflow.task_list)
-    @project = Project.find(Minerva::Project.find(@workflow.project_id).auid)
+    @project = Project.find(params[:project_id])
   end
 end
