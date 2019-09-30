@@ -31,14 +31,14 @@ Rails.application.routes.draw do
   resources :collections
   resources :system_collections
   resources :roles
-  resources :workflows, path: 'workflows/:project_id'
+  resources :workflows
 
   root to: 'pages#home'
 
   # workflows
-  get '/workflows/assign' => 'minerva/workflows#assign'
-  get '/workflows/claim' => 'minerva/workflows#claim'
-  get '/workflows/history/:id' => 'minerva/workflows#history'
+  get '/workflows/assign' => 'workflows#assign'
+  get '/workflows/claim' => 'workflows#claim'
+  get '/workflows/history/:id' => 'workflows#history'
 
   # dashboards
   get '/admin/dashboard' => 'admin#dashboard'
@@ -55,20 +55,19 @@ Rails.application.routes.draw do
   get '/users/new_user' => 'users#new_user'
   post '/users/create_user' => 'users#create_user'
 
-  # user registry
+  # project user registry
   get '/projects/:id/users', to: 'projects#users', as: 'project_users'
   get '/projects/:id/new_user', to: 'projects#new_user', as: 'project_new_user'
   get '/projects/:id/available_users', to: 'projects#available_users', as: 'project_available_users'
   get '/projects/:id/remove_user/:user_id', to: 'projects#remove_user', as: 'project_remove_user'
-  # ---
   post '/projects/:id/create_user', to: 'projects#create_user', as: 'project_create_user'
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
+  # project workflows
+  get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'
 
   # mailboxer
   get '/notifications' => 'notifications#index'
   get '/inbox' => 'conversations#index'
   get '/notifications/:id/mark_as_read', to: 'notifications#mark_as_read', as: 'mark_notification_as_read'
   get '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read', as: 'mark_all_notifications_as_read'
-
-  mount Minerva::Engine => '/'
 end

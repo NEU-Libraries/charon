@@ -6,6 +6,11 @@ class Project < Resource
   attribute :description, Valkyrie::Types::String
   attribute :user_registry_id, Valkyrie::Types::Integer
 
+  # Minerva crossover
+  def marked_for_destruction?
+    false
+  end
+
   def attach_user(user, designation = Designation.user)
     # check to see if user is already attached
     # in which case do nothing

@@ -1,0 +1,11 @@
+%h2.py-3
+  Workflows for
+  = @project.title
+%table.table.table-bordered
+  %tbody
+    - @workflows.each_with_index do |workflow|
+      %tr
+        %td.align-middle
+          = workflow.title
+        %td.align-middle
+          %a.btn.btn-sm.btn-primary.float-right{:href => edit_workflow_path(workflow), :role => "button"} Edit

@@ -99,6 +99,10 @@ class ProjectsController < CatalogController
     redirect_to actions_path(@project)
   end
 
+  def workflows
+    @workflows = Workflow.where(project_id: Minerva::Project.where(auid: params[:id]).take.id)
+  end
+
   private
 
     def sort_column
