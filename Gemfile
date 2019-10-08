@@ -23,6 +23,7 @@ gem 'mailboxer'
 gem 'minerva'
 gem 'noid-rails'
 gem 'rails-controller-testing'
+gem 'rails-healthcheck'
 gem 'simple_form'
 
 # QA gems

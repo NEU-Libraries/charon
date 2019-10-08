@@ -322,6 +322,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-healthcheck (1.0.3)
+      rails (>= 5.2.3)
     rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
     railties (5.2.3)
@@ -498,6 +500,7 @@ DEPENDENCIES
   puma
   rails
   rails-controller-testing
+  rails-healthcheck
   rsolr
   rspec-rails
   rubocop
@@ -510,4 +513,4 @@ DEPENDENCIES
   valkyrie
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

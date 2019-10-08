@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  Healthcheck.routes(self)
+
   devise_for :users
   resources :users, only: [:index]
 
