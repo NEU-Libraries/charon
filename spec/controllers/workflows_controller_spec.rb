@@ -24,6 +24,14 @@ describe WorkflowsController do
       post :create, params: { workflow: { project_id: pid, creator_id: cid, title: 'Test', ordered: true, task_list: '["Encode","Catalog","Review","Transcribe","Publish"]' } }
       response.should redirect_to workflow_path(Workflow.last)
     end
+
+    it 'rejects a workflow without a title' do
+      sign_in admin_user
+      pid = Minerva::Project.find_or_create_by(auid: project.noid).id
+      cid = Minerva::User.find_or_create_by(auid: admin_user.id).id
+      post :create, params: { workflow: { project_id: pid, creator_id: cid, title: '', ordered: true, task_list: '["Encode","Catalog","Review","Transcribe","Publish"]' } }
+      response.should redirect_to root_path
+    end
   end
 
   describe 'show' do
