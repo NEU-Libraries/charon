@@ -2,7 +2,7 @@
   = f.input :title
 
   %label
-    Task List - Click and Drag to reorder
+    Task List - Click and Drag to reorder *
   %ul.list-group.sortable
     %li.hidden-task.list-group-item.d-flex.justify-content-between.align-items-center
       .task-text
@@ -25,7 +25,7 @@
 
   %br
 
-  = f.input :ordered, as: :radio_buttons
+  = f.input :ordered
   = f.input :task_list, :as => :hidden
   = f.input :creator_id, :as => :hidden, input_html: {value: @workflow.creator_id}
   = f.input :project_id, :as => :hidden, input_html: {value: @workflow.project_id}
@@ -38,12 +38,20 @@
 
     sortable_values = '';
 
-    $.each(raw_sortable[0].items, function( index, value ) {
-      sortable_values = sortable_values.concat('"' + $.trim($.parseHTML(value.html)[0].innerText) + '",');
-    });
+    if (raw_sortable[0].items.length > 1) {
+      $.each(raw_sortable[0].items, function( index, value ) {
+        sortable_values = sortable_values.concat('"' + $.trim($.parseHTML(value.html)[0].innerText) + '",');
+      });
+    }
 
-    sortable_array = '['.concat(sortable_values.replace('"",', '').replace(/.$/,"]"));
-    $('#workflow_task_list').val(sortable_array);
+    if (sortable_values.length > 0) {
+      sortable_array = '['.concat(sortable_values.replace('"",', '').replace(/.$/,"]"));
+      $('#workflow_task_list').val(sortable_array);
+    }
+    else {
+      // null set
+      $('#workflow_task_list').val("");
+    }
   };
 
   sortable('.sortable')[0].addEventListener('sortupdate', function(e) {

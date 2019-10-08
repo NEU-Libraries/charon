@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WorkflowsController < ApplicationController
+  rescue_from ActiveRecord::RecordInvalid, with: :invalid_workflow
+
   def new
     @project = Project.find(params[:project_id])
     pid = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
@@ -21,11 +23,7 @@ class WorkflowsController < ApplicationController
 
   def update
     @workflow = Workflow.find(params[:id])
-    permitted = params
-                .except(:project_id, :creator_id)
-                .require(:workflow)
-                .permit(:title, :ordered, :task_list, :project_id, :creator_id)
-
+    permitted = update_param_filter(params)
     @workflow.update! permitted
     flash[:notice] = 'Successfully edited workflow.'
     redirect_to workflow_path(@workflow)
@@ -36,4 +34,18 @@ class WorkflowsController < ApplicationController
     @project = @workflow.project
     @tasks = JSON.parse(@workflow.task_list)
   end
+
+  private
+
+    def invalid_workflow(exception)
+      flash[:error] = "Invalid workflow - #{exception}"
+      redirect_to(root_path) && return
+    end
+
+    def update_param_filter(params)
+      params
+        .except(:project_id, :creator_id)
+        .require(:workflow)
+        .permit(:title, :ordered, :task_list, :project_id, :creator_id)
+    end
 end
