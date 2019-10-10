@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'blacklight', '7.1.0.alpha'
+gem 'blacklight'
 gem 'blacklight-access_controls', git: 'https://github.com/projectblacklight/blacklight-access_controls.git'
 gem 'blacklight-gallery', git: 'https://github.com/projectblacklight/blacklight-gallery.git' # Blacklight 7 support isn't in a gem yet
 gem 'croutons'
@@ -40,6 +40,7 @@ gem 'sass-rails'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
 gem 'rsolr'
+gem 'sassc', '2.2.0' #pin for text muted sass bug. Plan on migrating off of render_views to full headless view testing
 gem 'twitter-typeahead-rails'
 
 # Blacklight
