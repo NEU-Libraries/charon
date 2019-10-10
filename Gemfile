@@ -40,7 +40,7 @@ gem 'sass-rails'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
 gem 'rsolr'
-gem 'sassc', '2.2.0' #pin for text muted sass bug. Plan on migrating off of render_views to full headless view testing
+gem 'sprockets', '< 4.0'
 gem 'twitter-typeahead-rails'
 
 # Blacklight
