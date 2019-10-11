@@ -103,6 +103,10 @@ class ProjectsController < CatalogController
     @workflows = Workflow.where(project_id: Minerva::Project.where(auid: params[:id]).take&.id)
   end
 
+  def uploads
+    @uploads = GenericUpload.where(project_id: @project.noid)
+  end
+
   private
 
     def sort_column

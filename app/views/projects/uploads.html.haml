@@ -1,0 +1,12 @@
+%h2.py-2
+  Uploaded Files for
+  = @project.title
+%table.table.table-bordered
+  - @uploads.each_with_index do |upload, i|
+    %tr
+      %td.align-middle
+        = i
+      %td.w-75.align-middle
+        = upload.binary.blob.filename.to_s
+      %td
+        %button.btn.btn-success.btn-add.float-right{:href => "", :type => "button", "data-toggle"=>"tooltip", :title => "Assign Workflow"} Assign Workflow

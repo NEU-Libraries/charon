@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
   # project workflows
   get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'
+  # project uploads
+  get '/projects/:id/uploads', to: 'projects#uploads', as: 'project_uploads' 
 
   # mailboxer
   get '/notifications' => 'notifications#index'
