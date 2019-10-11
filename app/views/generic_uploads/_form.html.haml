@@ -1,4 +1,5 @@
 = form_for @generic_upload do |f|
+  = f.hidden_field :project_id, :value => params[:project_id]
   .form-group
     .custom-file
       = f.file_field :binary, multiple: false, class: "custom-file-input"

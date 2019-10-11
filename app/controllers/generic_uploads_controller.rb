@@ -6,7 +6,7 @@ class GenericUploadsController < ApplicationController
   end
 
   def create
-    gu = GenericUpload.new(params[:generic_upload].permit(:binary))
+    gu = GenericUpload.new(params[:generic_upload].permit(:binary, :project_id))
     gu.save!
 
     redirect_to action: 'index'
