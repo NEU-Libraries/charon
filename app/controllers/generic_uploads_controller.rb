@@ -17,4 +17,10 @@ class GenericUploadsController < ApplicationController
   end
 
   def show; end
+
+  def approve
+  end
+
+  def deny
+  end
 end

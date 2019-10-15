@@ -67,11 +67,15 @@ Rails.application.routes.draw do
   # project workflows
   get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'
   # project uploads
-  get '/projects/:id/uploads', to: 'projects#uploads', as: 'project_uploads' 
+  get '/projects/:id/uploads', to: 'projects#uploads', as: 'project_uploads'
 
   # mailboxer
   get '/notifications' => 'notifications#index'
   get '/inbox' => 'conversations#index'
   get '/notifications/:id/mark_as_read', to: 'notifications#mark_as_read', as: 'mark_notification_as_read'
   get '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read', as: 'mark_all_notifications_as_read'
+
+  # uploads
+  get '/uploads/:id/approve' => 'generic_uploads#approve'
+  get '/uploads/:id/deny' => 'generic_uploads#deny'
 end
