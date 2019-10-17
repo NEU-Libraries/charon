@@ -76,6 +76,6 @@ Rails.application.routes.draw do
   get '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read', as: 'mark_all_notifications_as_read'
 
   # uploads
-  get '/uploads/:id/approve' => 'generic_uploads#approve'
-  get '/uploads/:id/deny' => 'generic_uploads#deny'
+  get '/uploads/:id/approve', to: 'generic_uploads#approve', as: 'upload_approve'
+  get '/uploads/:id/deny', to: 'generic_uploads#deny', as: 'upload_deny'
 end

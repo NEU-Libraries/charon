@@ -9,5 +9,5 @@
       %td.w-75.align-middle
         = upload.binary.blob.filename.to_s
       %td.text-right
-        %button.btn.btn-sm.btn-success.btn-add{:href => "", :type => "button", "data-toggle"=>"tooltip", :title => "Approve"} Approve
-        %button.btn.btn-sm.btn-danger.btn-add{:href => "", :type => "button", "data-toggle"=>"tooltip", :title => "Deny"} Deny
+        %a.btn.btn-sm.btn-success{:href => upload_approve_path(upload)} Approve
+        %a.btn.btn-sm.btn-danger{:href => upload_deny_path(upload)} Deny
