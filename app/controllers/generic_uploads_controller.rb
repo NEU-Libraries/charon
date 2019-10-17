@@ -19,6 +19,9 @@ class GenericUploadsController < ApplicationController
   def show; end
 
   def approve
+    # get project and list workflows for attachment
+    @generic_upload = GenericUpload.find(params[:id])
+    @workflows = Workflow.where(project_id: Minerva::Project.where(auid: @generic_upload.project_id).take&.id)
   end
 
   def deny

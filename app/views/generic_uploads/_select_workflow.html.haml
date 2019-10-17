@@ -1,0 +1,14 @@
+- if @workflows.blank?
+  %h3.py-3
+    No workflows available
+- else
+  %h3.py-3
+    Workflows
+  %table.table.table-bordered
+    %tbody
+      - @workflows.each_with_index do |workflow|
+        %tr
+          %td.align-middle
+            = workflow.title
+          %td.align-middle
+            %a.btn.btn-sm.btn-primary.float-right{:href => "", :role => "button"} Attach
