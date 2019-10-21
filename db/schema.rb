@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_11_165714) do
+ActiveRecord::Schema.define(version: 2019_10_21_003717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,15 +109,6 @@ ActiveRecord::Schema.define(version: 2019_10_11_165714) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
 
-  create_table "minerva_assignments", force: :cascade do |t|
-    t.string "title"
-    t.boolean "automated"
-    t.integer "interface_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["interface_id"], name: "index_minerva_assignments_on_interface_id"
-  end
-
   create_table "minerva_interfaces", force: :cascade do |t|
     t.string "title"
     t.string "code_point"
@@ -144,22 +135,15 @@ ActiveRecord::Schema.define(version: 2019_10_11_165714) do
     t.integer "user_id"
     t.integer "role_id"
     t.integer "work_id"
-    t.integer "assignment_id"
-    t.integer "status_id"
+    t.integer "interface_id"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assignment_id"], name: "index_minerva_states_on_assignment_id"
     t.index ["creator_id"], name: "index_minerva_states_on_creator_id"
+    t.index ["interface_id"], name: "index_minerva_states_on_interface_id"
     t.index ["role_id"], name: "index_minerva_states_on_role_id"
-    t.index ["status_id"], name: "index_minerva_states_on_status_id"
     t.index ["user_id"], name: "index_minerva_states_on_user_id"
     t.index ["work_id"], name: "index_minerva_states_on_work_id"
-  end
-
-  create_table "minerva_statuses", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "minerva_users", force: :cascade do |t|
@@ -260,7 +244,5 @@ ActiveRecord::Schema.define(version: 2019_10_11_165714) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
-  add_foreign_key "minerva_assignments", "minerva_interfaces", column: "interface_id"
-  add_foreign_key "minerva_states", "minerva_assignments", column: "assignment_id"
-  add_foreign_key "minerva_states", "minerva_statuses", column: "status_id"
+  add_foreign_key "minerva_states", "minerva_interfaces", column: "interface_id"
 end

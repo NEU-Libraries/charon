@@ -6,8 +6,8 @@ class CreateMinervaStates < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :role_id
       t.integer :work_id
-      t.integer :assignment_id
-      t.integer :status_id
+      t.integer :interface_id
+      t.string  :status
 
       t.timestamps
     end
@@ -15,10 +15,8 @@ class CreateMinervaStates < ActiveRecord::Migration[5.2]
     add_index :minerva_states, :user_id
     add_index :minerva_states, :role_id
     add_index :minerva_states, :work_id
+    add_index :minerva_states, :interface_id
 
-    add_foreign_key :minerva_states, :minerva_assignments, column: :assignment_id
-    add_index :minerva_states, :assignment_id
-    add_foreign_key :minerva_states, :minerva_statuses, column: :status_id
-    add_index :minerva_states, :status_id
+    add_foreign_key :minerva_states, :minerva_interfaces, column: :interface_id
   end
 end
