@@ -40,4 +40,8 @@ class Project < Resource
   def users
     roles&.map(&:user)
   end
+
+  def incoming_collection
+    children.find{ |c| c.system_collection_type == "incoming" }
+  end
 end

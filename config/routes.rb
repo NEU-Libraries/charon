@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :system_collections
   resources :roles
   resources :workflows
+  resources :works
 
   root to: 'pages#home'
 
@@ -78,4 +79,5 @@ Rails.application.routes.draw do
   # uploads
   get '/uploads/:id/approve', to: 'generic_uploads#approve', as: 'upload_approve'
   get '/uploads/:id/deny', to: 'generic_uploads#deny', as: 'upload_deny'
+  get '/uploads/:id/attach', to: 'generic_uploads#attach', as: 'upload_attach'
 end

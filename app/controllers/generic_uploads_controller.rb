@@ -26,4 +26,14 @@ class GenericUploadsController < ApplicationController
 
   def deny
   end
+
+  def attach
+    generic_upload = GenericUpload.find(params[:id])
+    project = Project.find(generic_upload.project_id)
+    # Create a work and make it belong to incoming
+    new_work = Work.new(title: generic_upload.filename, a_member_of: project.incoming_collection.id)
+    Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
+    redirect_to work_path(new_work) and return
+    # Make a minerva state with status of available
+  end
 end
