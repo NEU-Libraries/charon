@@ -36,4 +36,7 @@ class GenericUploadsController < ApplicationController
     redirect_to work_path(new_work) and return
     # Make a minerva state with status of available
   end
+
+  def reject
+  end
 end
