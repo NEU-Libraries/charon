@@ -35,8 +35,14 @@ class GenericUploadsController < ApplicationController
     Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
     redirect_to work_path(new_work) and return
     # Make a minerva state with status of available
+    # Notify user of acceptance
   end
 
   def reject
+    # find user
+    # remove binary
+    GenericUpload.find(params[:id]).destroy
+    # notify user of denial reason
+    # params[:denial]
   end
 end
