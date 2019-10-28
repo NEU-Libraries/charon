@@ -1,2 +1,8 @@
 %h2.py-2
   Deny File
+
+%form
+  .form-group
+    %label{:for => "denial"} Reason for denial
+    %textarea#denial.form-control{:rows => "10"}
+  %input.btn.btn-danger.float-right{:href => "#", :role => "button", :type => "submit", :value => "Deny"}
