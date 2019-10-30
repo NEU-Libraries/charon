@@ -42,6 +42,6 @@ class Project < Resource
   end
 
   def incoming_collection
-    children.find{ |c| c.system_collection_type == "incoming" }
+    children.find { |c| c.system_collection_type == 'incoming' }
   end
 end

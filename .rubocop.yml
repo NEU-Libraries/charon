@@ -5,7 +5,7 @@ Lint/AmbiguousBlockAssociation:
   Enabled: false
 Rails/FindEach:
   Enabled: false
-Documentation:
+Style/Documentation:
   Enabled: false
 Metrics/LineLength:
   Max: 120

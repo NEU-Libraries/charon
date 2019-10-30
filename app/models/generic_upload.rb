@@ -7,4 +7,8 @@ class GenericUpload < ApplicationRecord
   def filename
     binary.blob.filename.to_s
   end
+
+  def project
+    Project.find(project_id)
+  end
 end
