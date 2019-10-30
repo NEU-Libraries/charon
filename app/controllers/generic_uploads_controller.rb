@@ -7,6 +7,7 @@ class GenericUploadsController < ApplicationController
 
   def create
     gu = GenericUpload.new(params[:generic_upload].permit(:binary, :project_id))
+    gu.user = current_user
     gu.save!
 
     redirect_to action: 'index'
@@ -33,9 +34,10 @@ class GenericUploadsController < ApplicationController
     # Create a work and make it belong to incoming
     new_work = Work.new(title: generic_upload.filename, a_member_of: project.incoming_collection.id, workflow_id: params[:workflow_id])
     Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
-    redirect_to work_path(new_work) and return
     # Make a minerva state with status of available
     # Notify user of acceptance
+    generic_upload.user.notify("Upload Approved", "Your upload #{generic_upload.filename} was approved.")
+    redirect_to work_path(new_work) and return
   end
 
   def reject
