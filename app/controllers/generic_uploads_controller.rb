@@ -36,15 +36,17 @@ class GenericUploadsController < ApplicationController
     Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
     # Make a minerva state with status of available
     # Notify user of acceptance
-    generic_upload.user.notify("Upload Approved", "Your upload #{generic_upload.filename} was approved.")
+    generic_upload.user.notify("Upload Approved", "Your upload #{generic_upload.filename} was approved")
     redirect_to work_path(new_work) and return
   end
 
   def reject
-    # find user
-    # remove binary
-    GenericUpload.find(params[:id]).destroy
+    generic_upload = GenericUpload.find(params[:id])
     # notify user of denial reason
-    # params[:denial]
+    generic_upload.user.notify("Upload Denied", "Your upload #{generic_upload.filename} was denied - #{params[:denial]}")
+    # remove binary
+    generic_upload.destroy
+    flash[:notice] = "User notified of denial and upload removed"
+    redirect_to(root_path) && return
   end
 end
