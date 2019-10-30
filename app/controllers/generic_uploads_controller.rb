@@ -14,10 +14,6 @@ class GenericUploadsController < ApplicationController
     redirect_to actions_path(params[:generic_upload][:project_id])
   end
 
-  def index
-    @uploads = GenericUpload.all
-  end
-
   def show; end
 
   def approve

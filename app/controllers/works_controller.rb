@@ -9,5 +9,7 @@ class WorksController < ApplicationController
 
   def update; end
 
-  def show; end
+  def show
+    @work = Work.find(params[:id])
+  end
 end

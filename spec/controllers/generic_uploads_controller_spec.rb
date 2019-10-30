@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe GenericUploadsController do
+  let(:project) { FactoryBot.create_for_repository(:project) }
+
   describe 'new' do
     it 'renders the new record form' do
       get :new
@@ -10,18 +12,12 @@ describe GenericUploadsController do
     end
   end
 
-  describe 'index' do
-    it 'renders the index' do
-      get :index
-      expect(response).to render_template('generic_uploads/index')
-    end
-  end
-
   describe 'create' do
     context 'with valid input' do
       it 'creates a generic upload' do
+        sign_in FactoryBot.create(:user)
         file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
-        expect { post :create, params: { generic_upload: { binary: file } } }.to change(ActiveStorage::Attachment, :count).by(1)
+        expect { post :create, params: { generic_upload: { binary: file, project_id: project.id } } }.to change(ActiveStorage::Attachment, :count).by(1)
       end
     end
   end
