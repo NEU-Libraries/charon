@@ -10,7 +10,8 @@ class GenericUploadsController < ApplicationController
     gu.user = current_user
     gu.save!
 
-    redirect_to action: 'index'
+    flash[:notice] = "File #{gu.filename} uploaded"
+    redirect_to actions_path(params[:generic_upload][:project_id])
   end
 
   def index
@@ -37,6 +38,7 @@ class GenericUploadsController < ApplicationController
     # Make a minerva state with status of available
     # Notify user of acceptance
     generic_upload.user.notify("Upload Approved", "Your upload #{generic_upload.filename} was approved")
+    generic_upload.destroy!
     redirect_to work_path(new_work) and return
   end
 

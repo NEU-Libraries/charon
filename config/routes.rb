@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :generic_uploads, :path => 'uploads'
+  resources :generic_uploads, :path => 'uploads', except: [:index]
   resources :projects
   resources :collections
   resources :system_collections

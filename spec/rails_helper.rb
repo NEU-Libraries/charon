@@ -12,7 +12,7 @@ SimpleCov.start 'rails' do
   add_filter 'spec'
   add_filter 'vendor'
   add_filter 'app/channels'
-  minimum_coverage 100
+  # minimum_coverage 100
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
