@@ -5,6 +5,7 @@ require 'rails_helper'
 describe GenericUploadsController do
   let(:project) { FactoryBot.create_for_repository(:project) }
   let(:generic_upload) { create(:generic_upload) }
+  let(:workflow) { create(:workflow) }
 
   describe 'new' do
     it 'renders the new record form' do
@@ -32,6 +33,12 @@ describe GenericUploadsController do
   end
 
   describe 'attach' do
+    it 'associates a workflow with a new work made from an upload' do
+      get :attach, params: { id: generic_upload.id, workflow_id: workflow.id }
+      created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
+      response.should redirect_to work_path(created_work)
+      expect(created_work.workflow_id).to eq(workflow.id.to_s)
+    end
   end
 
   describe 'reject' do
