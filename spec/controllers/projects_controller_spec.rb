@@ -111,4 +111,14 @@ describe ProjectsController do
       expect(response).to render_template('projects/workflows')
     end
   end
+
+  describe 'uploads' do
+    it 'lists the binary uploads that are associated with this project' do
+      sign_in admin_user
+      get :uploads, params: { id: project.noid }
+      expect(response).to render_template('projects/uploads')
+      # TODO: upload a file and check that it is in list
+      # TODO: when none uploaded, check that partial indicates none
+    end
+  end
 end
