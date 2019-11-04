@@ -31,6 +31,7 @@ class GenericUploadsController < ApplicationController
                         workflow_id: params[:workflow_id])
     Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
     # Make a minerva state with status of available
+    # Minerva::State.create(creator_id: current_user.id, work_id: new_work.id, status: Status.available.name)
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',
                                 "Your upload #{@generic_upload.filename} was approved")
