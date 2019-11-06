@@ -34,6 +34,7 @@ describe GenericUploadsController do
 
   describe 'attach' do
     it 'associates a workflow with a new work made from an upload' do
+      sign_in FactoryBot.create(:admin)
       get :attach, params: { id: generic_upload.id, workflow_id: workflow.id }
       created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
       response.should redirect_to work_path(created_work)

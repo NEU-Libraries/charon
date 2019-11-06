@@ -29,9 +29,13 @@ class GenericUploadsController < ApplicationController
     new_work = Work.new(title: @generic_upload.filename,
                         a_member_of: @generic_upload.project.incoming_collection.id,
                         workflow_id: params[:workflow_id])
-    Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
+    saved_work = Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
     # Make a minerva state with status of available
-    # Minerva::State.create(creator_id: current_user.id, work_id: new_work.id, status: Status.available.name)
+    wid = Minerva::Work.find_or_create_by(auid: saved_work.id.to_s).id
+    cid = Minerva::User.find_or_create_by(auid: current_user.id).id
+    state = Minerva::State.new(creator_id: cid, work_id: wid, status: Status.available.name)
+    raise StandardError, state.errors.full_messages unless state.save
+
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',
                                 "Your upload #{@generic_upload.filename} was approved")

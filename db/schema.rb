@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_204359) do
+ActiveRecord::Schema.define(version: 2019_11_06_080548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,17 +124,9 @@ ActiveRecord::Schema.define(version: 2019_10_29_204359) do
     t.index ["auid"], name: "index_minerva_projects_on_auid", unique: true
   end
 
-  create_table "minerva_roles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "auid", null: false
-    t.index ["auid"], name: "index_minerva_roles_on_auid", unique: true
-  end
-
   create_table "minerva_states", force: :cascade do |t|
     t.integer "creator_id"
     t.integer "user_id"
-    t.integer "role_id"
     t.integer "work_id"
     t.integer "interface_id"
     t.string "status"
@@ -142,7 +134,6 @@ ActiveRecord::Schema.define(version: 2019_10_29_204359) do
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_minerva_states_on_creator_id"
     t.index ["interface_id"], name: "index_minerva_states_on_interface_id"
-    t.index ["role_id"], name: "index_minerva_states_on_role_id"
     t.index ["user_id"], name: "index_minerva_states_on_user_id"
     t.index ["work_id"], name: "index_minerva_states_on_work_id"
   end
