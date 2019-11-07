@@ -26,6 +26,11 @@ namespace :reset do
     ur.project_id = saved_p.id
     ur.save!
 
+    # Create Workflow
+    pid = Minerva::Project.find_or_create_by(auid: saved_p.noid).id
+    cid = Minerva::User.find_or_create_by(auid: u.id).id
+    Workflow.create(title: 'Default Workflow', task_list: Task.all.map(&:name), project_id: pid, creator_id: cid)
+
     r = Role.create(user: u, user_registry: ur, designation: Designation.user)
 
     ur.roles << r
