@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :roles
   resources :workflows
   resources :works
+  resources :interfaces
 
   root to: 'pages#home'
 
