@@ -82,4 +82,7 @@ Rails.application.routes.draw do
   get '/uploads/:id/attach/:workflow_id', to: 'generic_uploads#attach', as: 'upload_attach'
   get '/uploads/:id/deny', to: 'generic_uploads#deny', as: 'upload_deny'
   post '/uploads/:id/reject', to: 'generic_uploads#reject', as: 'upload_reject'
+
+  # tasks
+  get '/tasks/catalog/:id' => 'tasks#catalog'
 end

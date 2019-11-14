@@ -21,6 +21,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     Ascii85 (1.0.3)
+    ace-rails-ap (4.2)
     actioncable (5.2.3)
       actionpack (= 5.2.3)
       nio4r (~> 2.0)
@@ -471,6 +472,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ace-rails-ap
   blacklight
   blacklight-access_controls!
   blacklight-gallery!

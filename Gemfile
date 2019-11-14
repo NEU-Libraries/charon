@@ -15,6 +15,7 @@ gem 'rails'
 gem 'valkyrie'
 
 # NEU gems
+gem 'ace-rails-ap'
 gem 'capybara'
 gem 'devise-guests'
 gem 'enumerations'

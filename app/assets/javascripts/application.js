@@ -22,5 +22,6 @@
 //= require blacklight/blacklight
 
 //= require html5sortable
+//= require ace-rails-ap
 
 //= require_tree .

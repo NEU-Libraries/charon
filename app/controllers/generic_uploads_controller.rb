@@ -33,8 +33,13 @@ class GenericUploadsController < ApplicationController
     # Make a minerva state with status of available
     wid = Minerva::Work.find_or_create_by(auid: saved_work.noid).id
     cid = Minerva::User.find_or_create_by(auid: current_user.id).id
-    state = Minerva::State.new(creator_id: cid, work_id: wid, status: Status.available.name)
-    raise StandardError, state.errors.full_messages unless state.save
+    uid = Minerva::User.find_or_create_by(auid: @generic_upload.user.id).id
+
+    upload_state = Minerva::State.new(creator_id: uid, work_id: wid, interface_id: upload_interface.id, status: Status.complete.name)
+    raise StandardError, state.errors.full_messages unless upload_state.save
+
+    upload_approval_state = Minerva::State.new(creator_id: cid, work_id: wid, status: Status.available.name)
+    raise StandardError, state.errors.full_messages unless upload_approval_state.save
 
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',

@@ -1,0 +1,6 @@
+en:
+  charon:
+    interface:
+      upload:
+        past_tense: "uploaded"
+        present_tense: "uploading"
