@@ -25,6 +25,7 @@ class GenericUploadsController < ApplicationController
   def deny; end
 
   def attach
+    Minerva::Interface.create(title: "upload", code_point: "generic_uploads#new")
     # Create a work and make it belong to incoming
     new_work = Work.new(title: @generic_upload.filename,
                         a_member_of: @generic_upload.project.incoming_collection.id,
