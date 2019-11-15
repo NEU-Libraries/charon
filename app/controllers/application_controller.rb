@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
     Valkyrie.config.metadata_adapter
   end
 
+  def storage_adapter
+    Valkyrie.config.storage_adapter
+  end
+
   def admin_check
     render_401 && return unless current_user
     render_403 && return unless current_user.admin?
