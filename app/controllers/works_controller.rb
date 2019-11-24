@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WorksController < ApplicationController
+  include ModsDisplay::ControllerExtension
+
   def new; end
 
   def create; end
@@ -11,6 +13,7 @@ class WorksController < ApplicationController
 
   def show
     @work = Work.find(params[:id])
+    # render_mods_display(@model).to_html
   end
 
   def history
