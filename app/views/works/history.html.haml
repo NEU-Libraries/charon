@@ -16,7 +16,7 @@
         %td.align-middle
           = User.find(Minerva::User.find(action.creator_id).auid).name
           - if !action.interface_id.blank?
-            blah de blahed
+            = Interface.find(action.interface_id).past_tense
           - else
             made
           = Work.find(Minerva::Work.find(action.work_id).auid).title
