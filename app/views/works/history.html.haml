@@ -1,5 +1,5 @@
 %h2
-  Actions for
+  History for
   = @work.title
 
 %table.table.table-bordered
@@ -7,10 +7,20 @@
     %tr
       %th{:scope => "col"} #
       %th{:scope => "col"} Action
+      %th{:scope => "col"} Date
   %tbody
     - @work.history.each_with_index do |action, i|
       %tr
         %td.align-middle
           = i + 1
         %td.align-middle
-          = action.inspect
+          = User.find(Minerva::User.find(action.creator_id).auid).name
+          - if !action.interface_id.blank?
+            blah de blahed
+          - else
+            made
+          = Work.find(Minerva::Work.find(action.work_id).auid).title
+          - if action.interface_id.blank?
+            = action.status.downcase
+        %td.align-middle
+          = action.updated_at
