@@ -9,4 +9,8 @@ class Work < Resource
   attribute :mods_xml, Valkyrie::Types::String
 
   mods_xml_source(&:mods_xml)
+
+  def history
+    Minerva::State.where(work_id: Minerva::Work.find_by(auid: noid).id)
+  end
 end

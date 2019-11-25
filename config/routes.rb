@@ -85,4 +85,7 @@ Rails.application.routes.draw do
 
   # tasks
   get '/tasks/catalog/:id' => 'tasks#catalog'
+
+  # audit history
+  get '/works/:id/history' => 'works#history'
 end

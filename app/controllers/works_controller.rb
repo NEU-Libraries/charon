@@ -17,5 +17,6 @@ class WorksController < ApplicationController
   end
 
   def history
+    @work = Work.find(params[:id])
   end
 end

@@ -1,0 +1,16 @@
+%h2
+  Actions for
+  = @work.title
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} Action
+  %tbody
+    - @work.history.each_with_index do |action, i|
+      %tr
+        %td.align-middle
+          = i + 1
+        %td.align-middle
+          = action.inspect
