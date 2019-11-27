@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  def xml_editor
+  end
+
   def catalog
     work = Work.find(params[:id])
     # raw xml param

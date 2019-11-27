@@ -1,0 +1,12 @@
+#editor{ style: 'position:relative;min-height:320px;' }
+
+:javascript
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/eclipse");
+  editor.getSession().setMode("ace/mode/xml");
+  editor.setOptions({
+    maxLines: Infinity,
+    minLines: 20,
+    useSoftTabs: true,
+    showInvisibles: true,
+  });

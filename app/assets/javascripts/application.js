@@ -22,6 +22,9 @@
 //= require blacklight/blacklight
 
 //= require html5sortable
+
 //= require ace-rails-ap
+//= require ace/theme-eclipse
+//= require ace/mode-xml
 
 //= require_tree .

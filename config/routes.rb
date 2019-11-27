@@ -84,7 +84,7 @@ Rails.application.routes.draw do
   post '/uploads/:id/reject', to: 'generic_uploads#reject', as: 'upload_reject'
 
   # tasks
-  get '/tasks/catalog/:id' => 'tasks#catalog'
+  get '/tasks/catalog/:id' => 'tasks#xml_editor'
 
   # audit history
   get '/works/:id/history' => 'works#history'
