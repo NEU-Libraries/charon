@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  include ModsDisplay::ControllerExtension
+
   def xml_editor
+    @work = Work.find(params[:id])
+    @mods_html = render_mods_display(@work).to_html
   end
 
   def catalog
