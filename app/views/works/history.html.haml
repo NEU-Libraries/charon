@@ -1,4 +1,4 @@
-%h2
+%h2.py-3
   History for
   = @work.title
 
@@ -16,11 +16,17 @@
         %td.align-middle
           = User.find(Minerva::User.find(action.creator_id).auid).name
           - if !action.interface_id.blank?
-            = Interface.find(action.interface_id).past_tense
+            - if action.status == "Complete"
+              has
+              = Interface.find(action.interface_id).past_tense
+            - elsif action.status == "In Progress"
+              is
+              = Interface.find(action.interface_id).present_tense
           - else
-            made
+            changed
           = Work.find(Minerva::Work.find(action.work_id).auid).title
           - if action.interface_id.blank?
+            to
             = action.status.downcase
         %td.align-middle
           = action.updated_at
