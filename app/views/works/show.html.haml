@@ -1,4 +1,9 @@
 %h2
   = @work.title
-#mods
-  = @mods_html.html_safe
+
+.container
+  .row
+    .col
+      Thumbnail
+    .col
+      = @mods_html.html_safe
