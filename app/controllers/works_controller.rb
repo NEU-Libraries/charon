@@ -13,7 +13,7 @@ class WorksController < ApplicationController
 
   def show
     @work = Work.find(params[:id])
-    # render_mods_display(@model).to_html
+    @mods_html = render_mods_display(@work).to_html
   end
 
   def history
