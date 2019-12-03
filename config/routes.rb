@@ -39,11 +39,6 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  # workflows
-  get '/workflows/assign' => 'workflows#assign'
-  get '/workflows/claim' => 'workflows#claim'
-  get '/workflows/history/:id' => 'workflows#history'
-
   # dashboards
   get '/admin/dashboard' => 'admin#dashboard'
   get '/users/dashboard' => 'users#dashboard'
@@ -84,7 +79,8 @@ Rails.application.routes.draw do
   post '/uploads/:id/reject', to: 'generic_uploads#reject', as: 'upload_reject'
 
   # tasks
-  get '/tasks/catalog/:id' => 'tasks#xml_editor'
+  get '/tasks/catalog/:id', to: 'tasks#xml_editor', as: 'xml_editor'
+  get '/tasks/:id/claim', to: 'tasks#claim', as: 'claim_task'
 
   # audit history
   get '/works/:id/history' => 'works#history'

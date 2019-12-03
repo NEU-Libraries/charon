@@ -17,4 +17,14 @@ class TasksController < ApplicationController
       work = metadata_adapter.persister.save(resource: change_set.resource)
     end
   end
+
+  def claim
+    # get list of tasks from workflow
+    # search work history for in progress and completed tasks
+  end
+
+  def assign
+    # make task in progress
+    # update minerva state
+  end
 end
