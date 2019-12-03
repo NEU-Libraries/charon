@@ -1,0 +1,19 @@
+%h2.py-3
+  Claim task for
+  = @project.title
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"} Task
+      %th{:scope => "col"} Status
+      %th{:scope => "col"} Claim
+  %tbody
+    - JSON.parse(@project.default_workflow.task_list).each do |task|
+      %tr
+        %td.align-middle
+          = task
+        %td.align-middle
+          Available
+        %td.text-right
+          %a.btn.btn-sm.btn-success{:href => "#"} Claim

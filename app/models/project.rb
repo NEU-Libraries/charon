@@ -44,4 +44,13 @@ class Project < Resource
   def incoming_collection
     children.find { |c| c.system_collection_type == 'incoming' }
   end
+
+  def workflows
+    Workflow.where(project_id: Minerva::Project.where(auid: noid).take&.id)
+  end
+
+  def default_workflow
+    # Need to add default attribute, use first for now
+    workflows.first
+  end
 end
