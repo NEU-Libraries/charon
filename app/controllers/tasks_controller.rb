@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   end
 
   def claim
-    @project = Project.find(params[:id])
+    @work = Work.find(params[:id])
     # get list of tasks from workflow
     # search work history for in progress and completed tasks
   end

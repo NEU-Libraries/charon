@@ -13,4 +13,8 @@ class Work < Resource
   def history
     Minerva::State.where(work_id: Minerva::Work.find_by(auid: noid).id)
   end
+
+  def workflow
+    Workflow.find(workflow_id)
+  end
 end
