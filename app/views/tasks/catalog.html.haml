@@ -1,3 +1,7 @@
+%h2.py-3
+  Catalog
+  = @work.title
+
 .container
   .row
     .col
@@ -6,6 +10,11 @@
     .col
       #mods
         = @mods_html.html_safe
+
+.py-3.text-right
+  %a.btn.btn-primary{:href => "#", :role => "button"} Preview
+  %a.btn.btn-success{:href => "#", :role => "button"} Save
+
 
 :javascript
   var editor = ace.edit("editor");
