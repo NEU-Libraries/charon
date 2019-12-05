@@ -18,6 +18,18 @@ class TasksController < ApplicationController
     end
   end
 
+  def transcribe
+  end
+
+  def encode
+  end
+
+  def review
+  end
+
+  def publish
+  end
+
   def claim
     @work = Work.find(params[:id])
     # get list of tasks from workflow
