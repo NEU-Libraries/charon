@@ -79,8 +79,14 @@ Rails.application.routes.draw do
   post '/uploads/:id/reject', to: 'generic_uploads#reject', as: 'upload_reject'
 
   # tasks
-  get '/tasks/catalog/:id', to: 'tasks#xml_editor', as: 'xml_editor'
   get '/tasks/:id/claim', to: 'tasks#claim', as: 'claim_task'
+  get '/tasks/:id/update', to: 'tasks#update_work', as: 'update_work'
+
+  get '/tasks/:id/encode', to: 'tasks#encode', as: 'encode'
+  get '/tasks/:id/catalog', to: 'tasks#catalog', as: 'catalog'
+  get '/tasks/:id/publish', to: 'tasks#publish', as: 'publish'
+  get '/tasks/:id/review', to: 'tasks#review', as: 'review'
+  get '/tasks/:id/transcribe', to: 'tasks#transcribe', as: 'transcribe'
 
   # audit history
   get '/works/:id/history' => 'works#history'

@@ -16,4 +16,4 @@
         %td.align-middle
           Available
         %td.text-right
-          %a.btn.btn-sm.btn-success{:href => "#"} Claim
+          %a.btn.btn-sm.btn-success{:href => polymorphic_url([task.downcase.to_sym])} Claim
