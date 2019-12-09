@@ -80,7 +80,7 @@ Rails.application.routes.draw do
 
   # tasks
   get '/tasks/:id/claim', to: 'tasks#claim', as: 'claim_task'
-  get '/tasks/:id/update', to: 'tasks#update_work', as: 'update_work'
+  put '/tasks/:id/update', to: 'tasks#update_work', as: 'update_work'
 
   get '/tasks/:id/encode', to: 'tasks#encode', as: 'encode'
   get '/tasks/:id/catalog', to: 'tasks#catalog', as: 'catalog'
