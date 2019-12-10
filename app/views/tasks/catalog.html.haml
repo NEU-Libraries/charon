@@ -19,7 +19,6 @@
     -# %a.btn.btn-success{:href => update_work_path(@work), :role => "button"} Save
     %input.btn.btn-success{:href => "#", :role => "button", :type => "submit", :value => "Save"}
 
-
 :javascript
   var editor = ace.edit("editor");
   editor.setTheme("ace/theme/eclipse");
@@ -29,4 +28,11 @@
     minLines: 20,
     useSoftTabs: true,
     showInvisibles: true,
+  });
+
+  $(function() {
+    $('#raw_xml_form').submit(function() {
+      $("#raw_xml_").val(editor.getValue());
+      return true;
+    });
   });
