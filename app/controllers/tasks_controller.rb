@@ -17,7 +17,10 @@ class TasksController < ApplicationController
     #   work = metadata_adapter.persister.save(resource: change_set.resource)
     # end
 
-    flash[:notice] = params.inspect
+    work = Work.find(params[:id])
+    work.mods_xml = params[:raw_xml]
+    saved_work = metadata_adapter.persister.save(resource: work)
+    flash[:notice] = "MODS updated for #{saved_work.title}"
     redirect_to root_url
   end
 
