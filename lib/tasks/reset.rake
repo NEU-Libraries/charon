@@ -61,5 +61,7 @@ namespace :reset do
     User.create(password: 'password', email: 'sj.sweeney@northeastern.edu', first_name: 'Sarah', last_name: 'Sweeney', capacity: Capacity.administrator)
     User.create(password: 'password', email: 'm.barney@northeastern.edu', first_name: 'Megan', last_name: 'Barney', capacity: Capacity.administrator)
     User.create(password: 'password', email: 'webber.sh@husky.neu.edu', first_name: 'Shannon', last_name: 'Webber', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 'as.clark@northeastern.edu', first_name: 'Ashley', last_name: 'Clark', capacity: Capacity.administrator)
+    User.create(password: 'password', email: 's.bauman@northeastern.edu', first_name: 'Syd', last_name: 'Bauman', capacity: Capacity.administrator)
   end
 end
