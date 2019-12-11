@@ -9,13 +9,16 @@ class TasksController < ApplicationController
   end
 
   def update_work
-    work = Work.find(params[:id])
-    # raw xml param
-    change_set = WorkChangeSet.new(work)
-    if change_set.validate(params[:work])
-      change_set.sync
-      work = metadata_adapter.persister.save(resource: change_set.resource)
-    end
+    # work = Work.find(params[:id])
+    # # raw xml param
+    # change_set = WorkChangeSet.new(work)
+    # if change_set.validate(params[:work])
+    #   change_set.sync
+    #   work = metadata_adapter.persister.save(resource: change_set.resource)
+    # end
+
+    flash[:notice] = params.inspect
+    redirect_to root_url
   end
 
   def transcribe

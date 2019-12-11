@@ -2,7 +2,7 @@
   Catalog
   = @work.title
 
-= form_tag update_work_path(@work), :method => :put, :id => "raw_xml_form", :remote => true do
+= form_tag update_work_path(@work), :method => :put, :id => "raw_xml_form" do
   = hidden_field_tag( "raw_xml[]", "")
 
   .container
