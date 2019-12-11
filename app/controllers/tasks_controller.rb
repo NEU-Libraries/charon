@@ -19,6 +19,16 @@ class TasksController < ApplicationController
 
     work = Work.find(params[:id])
     work.mods_xml = params[:raw_xml]
+
+    begin
+      mods_title = Nokogiri::XML(work.mods_xml).at_xpath("//mods:titleInfo/mods:title").text
+      if !mods_title.blank?
+        work.title = mods_title
+      end
+    rescue Exception
+      # TODO cleanup
+    end
+
     saved_work = metadata_adapter.persister.save(resource: work)
     flash[:notice] = "MODS updated for #{saved_work.title}"
     redirect_to root_url
