@@ -5,7 +5,7 @@ class Interface < Minerva::Interface
     I18n.t "charon.interface.#{title}.past_tense"
   end
 
-  def present_tense(interface)
+  def present_tense
     I18n.t "charon.interface.#{title}.present_tense"
   end
 end

@@ -4,3 +4,6 @@ en:
       upload:
         past_tense: "uploaded"
         present_tense: "uploading"
+      catalog:
+        past_tense: "catalogued"
+        present_tense: "cataloging"
