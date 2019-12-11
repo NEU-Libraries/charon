@@ -33,6 +33,7 @@ namespace :reset do
 
     # Create interfaces
     Minerva::Interface.create(title: "upload", code_point: "generic_uploads#new")
+    Minerva::Interface.create(title: "catalog", code_point: "catalog#catalog")
 
     r = Role.create(user: u, user_registry: ur, designation: Designation.user)
 

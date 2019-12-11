@@ -6,6 +6,9 @@ class TasksController < ApplicationController
   def catalog
     @work = Work.find(params[:id])
     @mods_html = render_mods_display(@work).to_html
+
+    catalog_state = Minerva::State.new(creator_id: cid, work_id: wid, interface_id: catalog_interface.id, status: Status.in_progress.name)
+    raise StandardError, state.errors.full_messages unless catalog_state.save
   end
 
   def update_work
@@ -30,6 +33,12 @@ class TasksController < ApplicationController
     end
 
     saved_work = metadata_adapter.persister.save(resource: work)
+
+    wid = Minerva::Work.find_or_create_by(auid: saved_work.noid).id
+    cid = Minerva::User.find_or_create_by(auid: current_user.id).id
+    catalog_state = Minerva::State.new(creator_id: cid, work_id: wid, interface_id: catalog_interface.id, status: Status.complete.name)
+    raise StandardError, state.errors.full_messages unless catalog_state.save
+
     flash[:notice] = "MODS updated for #{saved_work.title}"
     redirect_to root_url
   end
