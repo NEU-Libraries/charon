@@ -68,4 +68,11 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb(objects[:work].parent.title, collection_path(objects[:work].parent))
     breadcrumb(objects[:work].title)
   end
+
+  def works_history
+    breadcrumb(objects[:work].parent.parent.title, project_path(objects[:work].parent.parent))
+    breadcrumb(objects[:work].parent.title, collection_path(objects[:work].parent))
+    breadcrumb(objects[:work].title, work_path(objects[:work]))
+    breadcrumb('History')
+  end
 end
