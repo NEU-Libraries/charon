@@ -1,4 +1,6 @@
-%a.btn.btn-primary.float-right{:href => claim_task_path(params[:id]), :role => "button"} Update Work
+.float-right
+  %a.btn.btn-success{:href => history_path(params[:id]), :role => "button"} History
+  %a.btn.btn-primary{:href => claim_task_path(params[:id]), :role => "button"} Update Work
 %h2
   = @work.title
 

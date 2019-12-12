@@ -89,5 +89,5 @@ Rails.application.routes.draw do
   get '/tasks/:id/transcribe', to: 'tasks#transcribe', as: 'transcribe'
 
   # audit history
-  get '/works/:id/history' => 'works#history'
+  get '/works/:id/history', to: 'works#history', as: 'history'
 end
