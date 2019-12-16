@@ -37,7 +37,7 @@ describe AdminController do
       User.create(password: 'password', email: 'email@alreadyinuse.com', first_name: 'Test', last_name: 'Test')
       sign_in FactoryBot.create(:admin)
       post :create_user, params: { user: { email: 'email@alreadyinuse.com', first_name: 'Doug', last_name: 'Dimmadome' } }
-      response.should redirect_to '/'
+      expect(response).to redirect_to(root_path)
     end
   end
 end

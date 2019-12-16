@@ -37,7 +37,7 @@ describe GenericUploadsController do
       sign_in FactoryBot.create(:admin)
       get :attach, params: { id: generic_upload.id, workflow_id: workflow.id }
       created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
-      response.should redirect_to work_path(created_work)
+      expect(response).to redirect_to(created_work)
       expect(created_work.workflow_id).to eq(workflow.id.to_s)
     end
   end
