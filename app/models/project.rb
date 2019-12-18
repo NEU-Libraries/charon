@@ -48,9 +48,4 @@ class Project < Resource
   def workflows
     Workflow.where(project_id: Minerva::Project.where(auid: noid).take&.id)
   end
-
-  def default_workflow
-    # Need to add default attribute, use first for now
-    workflows.first
-  end
 end

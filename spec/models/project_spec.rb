@@ -64,4 +64,8 @@ RSpec.describe Project do
     project.attach_user(user)
     expect(project.users).to include(user)
   end
+
+  it 'returns workflows' do
+    expect(project.workflows).to eq Workflow.where(project_id: Minerva::Project.where(auid: project.noid).take&.id)
+  end
 end
