@@ -11,7 +11,7 @@ class Work < Resource
   mods_xml_source(&:mods_xml)
 
   def history
-    Minerva::State.where(work_id: Minerva::Work.find_by(auid: noid).id)
+    Minerva::State.where(work_id: Minerva::Work.find_or_create_by(auid: noid).id)
   end
 
   def workflow

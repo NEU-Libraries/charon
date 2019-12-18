@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :work do
     title { Faker::Company.name }
     a_member_of { FactoryBot.create_for_repository(:project).incoming_collection.id }
+    workflow_id { create(:workflow).id }
 
     to_create do |instance|
       Valkyrie.config.metadata_adapter.persister.save(resource: instance)
