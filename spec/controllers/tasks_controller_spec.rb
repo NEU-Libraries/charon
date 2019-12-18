@@ -28,4 +28,40 @@ describe TasksController do
       # TODO further testing
     end
   end
+
+  describe 'transcribe' do
+    render_views
+    it 'renders' do
+      get :transcribe, params: { id: work.noid }
+      expect(response).to render_template('tasks/transcribe')
+      # TODO further testing
+    end
+  end
+
+  describe 'encode' do
+    render_views
+    it 'renders' do
+      get :encode, params: { id: work.noid }
+      expect(response).to render_template('tasks/encode')
+      # TODO further testing
+    end
+  end
+
+  describe 'review' do
+    render_views
+    it 'renders' do
+      get :review, params: { id: work.noid }
+      expect(response).to render_template('tasks/review')
+      # TODO further testing
+    end
+  end
+
+  describe 'publish' do
+    render_views
+    it 'renders' do
+      get :publish, params: { id: work.noid }
+      expect(response).to render_template('tasks/publish')
+      # TODO further testing
+    end
+  end
 end
