@@ -46,6 +46,6 @@ class Project < Resource
   end
 
   def workflows
-    Workflow.where(project_id: Minerva::Project.where(auid: noid).take&.id)
+    Workflow.where(project_id: Minerva::Project.find_by(auid: noid)&.id)
   end
 end

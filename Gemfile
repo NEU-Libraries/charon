@@ -15,8 +15,8 @@ gem 'rails'
 gem 'valkyrie'
 
 # NEU gems
-gem 'activerecord-session_store'
 gem 'ace-rails-ap'
+gem 'activerecord-session_store'
 gem 'capybara'
 gem 'devise-guests'
 gem 'enumerations'

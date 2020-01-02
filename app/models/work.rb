@@ -6,7 +6,7 @@ class Work < Resource
   attribute :title, Valkyrie::Types::String
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
   attribute :workflow_id, Valkyrie::Types::Integer
-  attribute :mods_xml, Valkyrie::Types::String.default {'<_/>'}
+  attribute :mods_xml, Valkyrie::Types::String.default { '<_/>' }
 
   mods_xml_source(&:mods_xml)
 

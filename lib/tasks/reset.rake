@@ -32,8 +32,8 @@ namespace :reset do
     Workflow.create(title: 'Default Workflow', task_list: Task.all.map(&:name), project_id: pid, creator_id: cid)
 
     # Create interfaces
-    Minerva::Interface.create(title: "upload", code_point: "generic_uploads#new")
-    Minerva::Interface.create(title: "catalog", code_point: "catalog#catalog")
+    Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
+    Minerva::Interface.create(title: 'catalog', code_point: 'catalog#catalog')
 
     r = Role.create(user: u, user_registry: ur, designation: Designation.user)
 
