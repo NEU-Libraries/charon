@@ -5,9 +5,11 @@ class WorkflowsController < ApplicationController
 
   def new
     @project = Project.find(params[:project_id])
-    pid = Minerva::Project.find_or_create_by(auid: params[:project_id]).id
-    cid = Minerva::User.find_or_create_by(auid: current_user.id).id
-    @workflow = Workflow.new(task_list: Task.all.map(&:name), project_id: pid, creator_id: cid)
+    @workflow = Workflow.new(
+      task_list: Task.all.map(&:name),
+      project_id: minerva_project_id(params[:project_id]),
+      creator_id: minerva_user_id(current_user.id)
+    )
   end
 
   def create

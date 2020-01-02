@@ -2,9 +2,11 @@
 
 class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
-  include InterfacesHelper
+
   include Blacklight::Controller
   include Croutons::Controller
+  include InterfacesHelper
+  include MinervaHelper
 
   # Best to ask for breadcrumbs everywhere
   # and just avoid Croutons NotImplementedError

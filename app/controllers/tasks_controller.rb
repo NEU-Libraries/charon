@@ -7,9 +7,13 @@ class TasksController < ApplicationController
     @work = Work.find(params[:id])
     @mods_html = render_mods_display(@work).to_html
 
-    wid = Minerva::Work.find_or_create_by(auid: @work.noid).id
-    cid = Minerva::User.find_or_create_by(auid: current_user.id).id
-    catalog_state = Minerva::State.new(creator_id: cid, work_id: wid, interface_id: catalog_interface.id, status: Status.in_progress.name)
+    catalog_state = Minerva::State.new(
+      creator_id: minerva_user_id(current_user.id),
+      work_id: minerva_work_id(@work.noid),
+      interface_id: catalog_interface.id,
+      status: Status.in_progress.name
+    )
+
     raise StandardError, state.errors.full_messages unless catalog_state.save
   end
 
@@ -24,28 +28,6 @@ class TasksController < ApplicationController
 
     flash[:notice] = "MODS updated for #{saved_work.title}"
     redirect_to root_url
-
-    # work = Work.find(params[:id])
-    # work.mods_xml = params[:raw_xml]
-    #
-    # begin
-    #   mods_title = Nokogiri::XML(work.mods_xml).at_xpath("//mods:titleInfo/mods:title").text
-    #   if !mods_title.blank?
-    #     work.title = mods_title
-    #   end
-    # rescue Exception
-    #   # TODO cleanup
-    # end
-    #
-    # saved_work = metadata_adapter.persister.save(resource: work)
-    #
-    # wid = Minerva::Work.find_or_create_by(auid: saved_work.noid).id
-    # cid = Minerva::User.find_or_create_by(auid: current_user.id).id
-    # catalog_state = Minerva::State.new(creator_id: cid, work_id: wid, interface_id: catalog_interface.id, status: Status.complete.name)
-    # raise StandardError, state.errors.full_messages unless catalog_state.save
-    #
-    # flash[:notice] = "MODS updated for #{saved_work.title}"
-    # redirect_to root_url
   end
 
   def transcribe

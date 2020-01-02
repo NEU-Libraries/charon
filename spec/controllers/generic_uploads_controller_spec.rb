@@ -18,7 +18,7 @@ describe GenericUploadsController do
     context 'with valid input' do
       it 'creates a generic upload' do
         sign_in FactoryBot.create(:user)
-        file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
+        file = fixture_file_upload(Rails.root.join('public/apple-touch-icon.png'), 'image/png')
         expect { post :create, params: { generic_upload: { binary: file, project_id: project.id } } }.to change(ActiveStorage::Attachment, :count).by(1)
       end
     end

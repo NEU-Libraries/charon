@@ -19,7 +19,11 @@ class GenericUploadsController < ApplicationController
   def show; end
 
   def approve
-    @workflows = Workflow.where(project_id: Minerva::Project.where(auid: @generic_upload.project_id).take&.id)
+    @workflows = Workflow.where(
+      project_id: Minerva::Project.where(
+        auid: @generic_upload.project_id
+      ).take&.id
+    )
   end
 
   def deny; end
@@ -32,14 +36,22 @@ class GenericUploadsController < ApplicationController
                         workflow_id: params[:workflow_id])
     saved_work = Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
     # Make a minerva state with status of available
-    wid = Minerva::Work.find_or_create_by(auid: saved_work.noid).id
-    cid = Minerva::User.find_or_create_by(auid: current_user.id).id
-    uid = Minerva::User.find_or_create_by(auid: @generic_upload.user.id).id
 
-    upload_state = Minerva::State.new(creator_id: uid, work_id: wid, interface_id: upload_interface.id, status: Status.complete.name)
+    upload_state = Minerva::State.new(
+      creator_id: minerva_user_id(@generic_upload.user.id),
+      work_id: minerva_work_id(saved_work.noid),
+      interface_id: upload_interface.id,
+      status: Status.complete.name
+    )
+
     raise StandardError, state.errors.full_messages unless upload_state.save
 
-    upload_approval_state = Minerva::State.new(creator_id: cid, work_id: wid, status: Status.available.name)
+    upload_approval_state = Minerva::State.new(
+      creator_id: minerva_user_id(current_user.id),
+      work_id: minerva_work_id(saved_work.noid),
+      status: Status.available.name
+    )
+
     raise StandardError, state.errors.full_messages unless upload_approval_state.save
 
     # Notify user of acceptance
