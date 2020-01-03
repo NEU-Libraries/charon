@@ -30,9 +30,21 @@ describe TasksController do
   end
 
   describe 'update_work' do
-    it 'alters a work object' do
-      put :update_work, params: { :id => work.id, :work => { :title => 'new title', :mods_xml => '<_/>' } }
+    it 'alters a work\'s title' do
+      put :update_work, params: { id: work.id, work: { title: 'new title' } }
       expect(Work.find(work.noid).title).to eq('new title')
+    end
+
+    it 'alters a work\'s MODS' do
+      new_mods = '<?xml version="1.0" encoding="UTF-8"?>
+        <mods:mods xmlns:drs="https://repository.neu.edu/spec/v1" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:niec="http://repository.neu.edu/schema/niec" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dwc="http://rs.tdwg.org/dwc/terms/" xmlns:dwr="http://rs.tdwg.org/dwc/xsd/simpledarwincore/" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+          <mods:titleInfo usage="primary">
+            <mods:title>MODS title</mods:title>
+          <mods:nonSort/></mods:titleInfo>
+        </mods:mods>'
+      put :update_work, params: { id: work.id, work: { mods_xml: new_mods } }
+      expect(Work.find(work.noid).mods_xml).to eq(new_mods)
+      expect(Work.find(work.noid).title).to eq('MODS title')
     end
   end
 
