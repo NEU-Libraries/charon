@@ -29,6 +29,13 @@ describe TasksController do
     end
   end
 
+  describe 'update_work' do
+    it 'alters a work object' do
+      put :update_work, params: { :id => work.id, :work => { :title => 'new title', :mods_xml => '<_/>' } }
+      expect(Work.find(work.noid).title).to eq('new title')
+    end
+  end
+
   describe 'transcribe' do
     render_views
     it 'renders' do
