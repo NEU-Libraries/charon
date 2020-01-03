@@ -31,8 +31,6 @@ class GenericUploadsController < ApplicationController
   def deny; end
 
   def attach
-    Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
-
     @saved_work = create_work(@generic_upload.filename,
                               @generic_upload.project.incoming_collection.id,
                               params[:workflow_id])
@@ -41,7 +39,7 @@ class GenericUploadsController < ApplicationController
     @generic_upload.user.notify('Upload Approved',
                                 "Your upload #{@generic_upload.filename} was approved")
     @generic_upload.destroy!
-    redirect_to(work_path(new_work))
+    redirect_to(work_path(@saved_work))
   end
 
   def reject
