@@ -3,6 +3,8 @@
 class GenericUploadsController < ApplicationController
   load_resource except: %i[new create edit update]
 
+  after_action :make_upload_state, :make_approval_state, only: [:attach]
+
   def new
     @generic_upload = GenericUpload.new
   end
@@ -30,29 +32,10 @@ class GenericUploadsController < ApplicationController
 
   def attach
     Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
-    # Create a work and make it belong to incoming
-    new_work = Work.new(title: @generic_upload.filename,
-                        a_member_of: @generic_upload.project.incoming_collection.id,
-                        workflow_id: params[:workflow_id])
-    saved_work = Valkyrie.config.metadata_adapter.persister.save(resource: new_work)
-    # Make a minerva state with status of available
 
-    upload_state = Minerva::State.new(
-      creator_id: minerva_user_id(@generic_upload.user.id),
-      work_id: minerva_work_id(saved_work.noid),
-      interface_id: upload_interface.id,
-      status: Status.complete.name
-    )
-
-    raise StandardError, state.errors.full_messages unless upload_state.save
-
-    upload_approval_state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(saved_work.noid),
-      status: Status.available.name
-    )
-
-    raise StandardError, state.errors.full_messages unless upload_approval_state.save
+    @saved_work = create_work(@generic_upload.filename,
+                              @generic_upload.project.incoming_collection.id,
+                              params[:workflow_id])
 
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',
@@ -70,4 +53,33 @@ class GenericUploadsController < ApplicationController
     flash[:notice] = 'User notified of denial and upload removed'
     redirect_to(root_path)
   end
+
+  private
+
+    def create_work(title, parent_id, workflow_id)
+      # Create a work and make it belong to incoming
+      new_work = Work.new(title: title,
+                          a_member_of: parent_id,
+                          workflow_id: workflow_id)
+      metadata_adapter.persister.save(resource: new_work)
+    end
+
+    def make_upload_state
+      upload_state = Minerva::State.new(
+        creator_id: minerva_user_id(@generic_upload.user.id),
+        work_id: minerva_work_id(@saved_work.noid),
+        interface_id: upload_interface.id,
+        status: Status.complete.name
+      )
+      raise StandardError, state.errors.full_messages unless upload_state.save
+    end
+
+    def make_approval_state
+      upload_approval_state = Minerva::State.new(
+        creator_id: minerva_user_id(current_user.id),
+        work_id: minerva_work_id(@saved_work.noid),
+        status: Status.available.name
+      )
+      raise StandardError, state.errors.full_messages unless upload_approval_state.save
+    end
 end
