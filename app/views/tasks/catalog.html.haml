@@ -3,7 +3,7 @@
   = @work.title
 
 = form_tag update_work_path(@work), :method => :put, :id => "raw_xml_form" do
-  = hidden_field_tag( "raw_xml", "")
+  = hidden_field_tag("work[mods_xml]", "")
 
   .container
     .row
@@ -15,8 +15,6 @@
           = @mods_html.html_safe
 
   .py-3.text-right
-    -# %a.btn.btn-primary{:href => "#", :role => "button"} Preview
-    -# %a.btn.btn-success{:href => update_work_path(@work), :role => "button"} Save
     %input.btn.btn-success{:href => "#", :role => "button", :type => "submit", :value => "Save"}
 
 :javascript
@@ -32,7 +30,7 @@
 
   $(function() {
     $('#raw_xml_form').submit(function() {
-      $("#raw_xml").val(editor.getValue());
+      $("#work_mods_xml").val(editor.getValue());
       return true;
     });
   });

@@ -19,15 +19,14 @@ class TasksController < ApplicationController
   end
 
   def update_work
-    # raw xml param
     change_set = WorkChangeSet.new(@work)
     if change_set.validate(params[:work])
       change_set.sync
       saved_work = metadata_adapter.persister.save(resource: change_set.resource)
     end
 
-    flash[:notice] = "MODS updated for #{saved_work.title}"
-    redirect_to root_url
+    flash[:notice] = 'MODS updated'
+    redirect_to work_path(saved_work)
   end
 
   def transcribe; end
