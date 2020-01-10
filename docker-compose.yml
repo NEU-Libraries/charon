@@ -21,8 +21,6 @@ services:
     ports:
       - 3000:3000
     entrypoint: /home/charon/web/docker-entrypoint.sh
-    volumes:
-      - images:/home/charon/images
   solr:
     image: nakatomi/charon_solr
     ports:
