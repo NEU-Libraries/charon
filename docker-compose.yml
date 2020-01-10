@@ -4,6 +4,7 @@ volumes:
   solr:
   db:
   web:
+  images:
 services:
   db:
     image: postgres
@@ -20,12 +21,14 @@ services:
     ports:
       - 3000:3000
     entrypoint: /home/charon/web/docker-entrypoint.sh
+    volumes:
+      - images:/home/charon/images
   solr:
     image: nakatomi/charon_solr
     ports:
     - 8983:8983
     volumes:
-    - solr:/opt/solr/server/solr/mycores
+    - solr:/opt/solr/server/solr/mycores/blacklight-core/data
     healthcheck:
       test:
       - CMD
@@ -36,3 +39,9 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+  iiif:
+    image: uclalibrary/cantaloupe:4.1.4
+    ports:
+      - 8182:8182
+    volumes:
+      - images:/imageroot

@@ -9,6 +9,7 @@ RUN rm -f /usr/local/lib/ruby/gems/2.5.0/specifications/default/fileutils-1.0.2.
 RUN useradd -ms /bin/bash charon
 USER charon
 RUN mkdir -p /home/charon/web
+RUN mkdir -p /home/charon/images
 WORKDIR /home/charon/web
 COPY Gemfile /home/charon/web/Gemfile
 COPY Gemfile.lock /home/charon/web/Gemfile.lock
