@@ -11,8 +11,6 @@ USER charon
 RUN mkdir -p /home/charon/web
 RUN mkdir -p /home/charon/images
 WORKDIR /home/charon/web
-COPY --chown=charon:charon Gemfile /home/charon/web/Gemfile
-COPY --chown=charon:charon Gemfile.lock /home/charon/web/Gemfile.lock
-RUN bundle install
 COPY --chown=charon:charon . /home/charon/web
+RUN bundle install
 RUN cp /home/charon/web/scripts/msmtprc /home/charon/.msmtprc
