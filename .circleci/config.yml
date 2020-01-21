@@ -21,7 +21,7 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - restore_cache:
           keys:
-            - v2-{{ .Branch }}
+            - v3-{{ .Branch }}
           paths:
             - ~/caches/charon.tar
       - run:
