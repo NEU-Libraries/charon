@@ -4,5 +4,5 @@ services:
   web:
     build: .
     volumes:
-      - .:/home/charon/web
+      - ./:/home/charon/web
       - images:/home/charon/images
