@@ -3,6 +3,7 @@
 class GenericUploadsController < ApplicationController
   load_resource except: %i[new create edit update]
 
+  before_action :file_presence_check, only: [:create]
   after_action :make_upload_state, :make_approval_state, only: [:attach]
 
   def new
@@ -15,7 +16,7 @@ class GenericUploadsController < ApplicationController
     gu.save!
 
     flash[:notice] = "File #{gu.filename} uploaded"
-    redirect_to actions_path(params[:generic_upload][:project_id])
+    redirect_to(actions_path(params[:generic_upload][:project_id])) && return
   end
 
   def show; end
@@ -53,6 +54,11 @@ class GenericUploadsController < ApplicationController
   end
 
   private
+
+    def file_presence_check
+      flash[:error] = 'File not selected for upload'
+      redirect_to(root_path) && return if params[:generic_upload][:binary].blank?
+    end
 
     def create_work(title, parent_id, workflow_id)
       # Create a work and make it belong to incoming
