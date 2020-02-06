@@ -20,6 +20,11 @@ RSpec.describe Project do
     expect(described_class.find(project.id)).to eq project
   end
 
+  it 'has a helper method that finds works that belong to it' do
+    new_work = Valkyrie.config.metadata_adapter.persister.save(resource: Work.new(title: 'test work', project_id: project.id))
+    expect(project.works.first).to eq new_work
+  end
+
   it 'returns nil retrieving the user registry if the id is not set' do
     expect(resource_klass.new.user_registry).to be nil
   end
