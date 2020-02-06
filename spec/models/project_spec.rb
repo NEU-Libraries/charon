@@ -8,6 +8,7 @@ RSpec.describe Project do
   let(:resource_klass) { described_class }
   let(:user) { create(:user) }
   let(:project) { FactoryBot.create_for_repository(:project) }
+  let(:work) { FactoryBot.create_for_repository(:work) }
   let(:managed_project) { FactoryBot.create_for_repository(:project) }
   let(:user_registry) { UserRegistry.find(project.user_registry_id) }
   it_behaves_like 'a Valkyrie::Resource'
@@ -18,11 +19,6 @@ RSpec.describe Project do
 
   it 'has a find method that works with a full id' do
     expect(described_class.find(project.id)).to eq project
-  end
-
-  it 'has a helper method that finds works that belong to it' do
-    new_work = Valkyrie.config.metadata_adapter.persister.save(resource: Work.new(title: 'test work', project_id: project.id))
-    expect(project.works.first).to eq new_work
   end
 
   it 'returns nil retrieving the user registry if the id is not set' do
