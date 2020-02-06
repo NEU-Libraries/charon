@@ -6,6 +6,7 @@ class Work < Resource
   attribute :title, Valkyrie::Types::String
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
   attribute :workflow_id, Valkyrie::Types::Integer
+  attribute :project_id, Valkyrie::Types::ID
   attribute :mods_xml, Valkyrie::Types::String.default { '<_/>' }
 
   mods_xml_source(&:mods_xml)
@@ -16,5 +17,9 @@ class Work < Resource
 
   def workflow
     Workflow.find(workflow_id)
+  end
+
+  def project
+    Project.find(project_id)
   end
 end

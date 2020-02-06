@@ -48,4 +48,8 @@ class Project < Resource
   def workflows
     Workflow.where(project_id: Minerva::Project.find_by(auid: noid)&.id)
   end
+
+  def works
+    Valkyrie.config.metadata_adapter.query_service.find_inverse_references_by(resource: self, property: :project_id)
+  end
 end

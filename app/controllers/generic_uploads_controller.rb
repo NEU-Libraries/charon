@@ -33,6 +33,7 @@ class GenericUploadsController < ApplicationController
 
   def attach
     @saved_work = create_work(@generic_upload.filename,
+                              @generic_upload.project.id,
                               @generic_upload.project.incoming_collection.id,
                               params[:workflow_id])
 
@@ -60,9 +61,10 @@ class GenericUploadsController < ApplicationController
       redirect_to(root_path) && return if params[:generic_upload][:binary].blank?
     end
 
-    def create_work(title, parent_id, workflow_id)
+    def create_work(title, project_id, parent_id, workflow_id)
       # Create a work and make it belong to incoming
       new_work = Work.new(title: title,
+                          project_id: project_id,
                           a_member_of: parent_id,
                           workflow_id: workflow_id)
       metadata_adapter.persister.save(resource: new_work)
