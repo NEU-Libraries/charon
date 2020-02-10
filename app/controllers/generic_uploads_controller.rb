@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mimemagic/overlay'
+
 class GenericUploadsController < ApplicationController
   load_resource except: %i[new create edit update]
 
@@ -15,7 +17,9 @@ class GenericUploadsController < ApplicationController
     gu.user = current_user
     gu.save!
 
-    flash[:notice] = "File #{gu.filename} uploaded"
+    mime = MimeMagic.by_magic(File.open(params[:generic_upload][:binary].path))
+
+    flash[:notice] = "File #{gu.filename} uploaded - mime type of #{mime}"
     redirect_to(actions_path(params[:generic_upload][:project_id])) && return
   end
 
@@ -57,8 +61,12 @@ class GenericUploadsController < ApplicationController
   private
 
     def file_presence_check
+      file_presence_error if params[:generic_upload][:binary].blank?
+    end
+
+    def file_presence_error
       flash[:error] = 'File not selected for upload'
-      redirect_to(root_path) && return if params[:generic_upload][:binary].blank?
+      redirect_to(root_path) && return
     end
 
     def create_work(title, project_id, parent_id, workflow_id)
