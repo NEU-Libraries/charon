@@ -519,6 +519,7 @@ DEPENDENCIES
   libera
   listen
   mailboxer
+  mimemagic
   minerva
   mods_display
   noid-rails
