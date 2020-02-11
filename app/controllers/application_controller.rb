@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include Croutons::Controller
   include InterfacesHelper
   include MinervaHelper
+  include MimeHelper
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 

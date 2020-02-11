@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mimemagic/overlay'
-
 class GenericUploadsController < ApplicationController
   load_resource except: %i[new create edit update]
 
@@ -17,9 +15,9 @@ class GenericUploadsController < ApplicationController
     gu.user = current_user
     gu.save!
 
-    mime = MimeMagic.by_magic(File.open(params[:generic_upload][:binary].path))
+    mime = determine_mime(File.open(params[:generic_upload][:binary].path))
 
-    flash[:notice] = "File #{gu.filename} uploaded - mime type of #{mime}"
+    flash[:notice] = "File #{gu.filename} uploaded - image? #{is_image?(mime)}"
     redirect_to(actions_path(params[:generic_upload][:project_id])) && return
   end
 
