@@ -34,6 +34,8 @@ class CatalogController < ApplicationController
     # config.view.masonry.partials = [:index]
     # config.view.slideshow.partials = [:index]
 
+    config.index.thumbnail_method = :render_thumbnail
+
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
     config.autocomplete_enabled = false
@@ -51,7 +53,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: 'search',
       rows: 10,
-      fq: ['-internal_resource_tesim:SystemCollection']
+      fq: ['-internal_resource_tesim:SystemCollection', '-internal_resource_tesim:FileSet']
     }
 
     # solr field configuration for search results/index views

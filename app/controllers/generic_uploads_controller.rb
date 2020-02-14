@@ -42,6 +42,17 @@ class GenericUploadsController < ApplicationController
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',
                                 "Your upload #{@generic_upload.filename} was approved")
+
+    file_set = FileSet.new type: 'generic'
+    blob = Blob.new
+    # upload = ActionDispatch::Http::UploadedFile.new tempfile: File.new('/path/to/files/file1.tiff'), filename: 'file1.tiff', type: 'image/tiff'
+    file = Valkyrie.config.storage_adapter.upload(file: @generic_upload.file, resource: file_set, original_filename: @generic_upload.filename)
+    blob.file_identifier = file.id
+    saved_blob = metadata_adapter.persister.save(resource: blob)
+    file_set.member_ids += [saved_blob.id]
+    file_set.a_member_of = @saved_work.id
+    metadata_adapter.persister.save(resource: file_set)
+
     @generic_upload.destroy!
     redirect_to(work_path(@saved_work))
   end

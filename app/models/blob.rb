@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Blob < Valkyrie::Resource
+class Blob < Resource
   attribute :mime_type, Valkyrie::Types::Set
   attribute :original_filename, Valkyrie::Types::Set
   attribute :file_identifier, Valkyrie::Types::ID

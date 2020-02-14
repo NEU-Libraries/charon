@@ -17,4 +17,8 @@ module ApplicationHelper
   def application_version
     VERSION
   end
+
+  def render_thumbnail(document, options)
+    image_tag("https://repository.library.northeastern.edu/downloads/neu:m0453923d?datastream_id=thumbnail_4")
+  end
 end

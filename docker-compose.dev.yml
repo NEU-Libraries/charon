@@ -5,4 +5,5 @@ services:
     build: .
     volumes:
       - ./:/home/charon/web
+      - storage:/home/charon/storage
       - images:/home/charon/images
