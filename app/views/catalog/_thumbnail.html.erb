@@ -1,5 +1,0 @@
-<% if presenter(document).respond_to?('thumbnail') && presenter(document).thumbnail.exists? && tn = presenter(document).thumbnail.thumbnail_tag({}, counter: document_counter_with_offset(document_counter)) %>
-<div class="document-thumbnail">
-  <%= tn %>
-</div>
-<% end %>
