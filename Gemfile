@@ -26,9 +26,14 @@ gem 'mimemagic'
 gem 'minerva'
 gem 'mods_display'
 gem 'noid-rails'
+gem 'picture_tag'
 gem 'rails-controller-testing'
 gem 'rails-healthcheck'
 gem 'simple_form'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-picturefill'
+end
 
 # QA gems
 gem 'rubocop', require: false
