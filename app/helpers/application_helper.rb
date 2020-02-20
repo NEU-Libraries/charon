@@ -18,7 +18,7 @@ module ApplicationHelper
     VERSION
   end
 
-  def render_thumbnail(document, options)
-    image_tag("https://repository.library.northeastern.edu/downloads/neu:m0451f929?datastream_id=thumbnail_4", size: "50x50")
+  def render_thumbnail(_document, _options)
+    image_tag('https://repository.library.northeastern.edu/downloads/neu:m0451f929?datastream_id=thumbnail_4', size: '50x50')
   end
 end
