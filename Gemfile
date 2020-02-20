@@ -18,6 +18,7 @@ gem 'valkyrie'
 gem 'ace-rails-ap'
 gem 'activerecord-session_store'
 gem 'capybara'
+gem 'coffee-script'
 gem 'devise-guests'
 gem 'enumerations'
 gem 'libera'
@@ -30,10 +31,6 @@ gem 'picture_tag'
 gem 'rails-controller-testing'
 gem 'rails-healthcheck'
 gem 'simple_form'
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-picturefill'
-end
 
 # QA gems
 gem 'rubocop', require: false

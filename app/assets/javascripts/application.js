@@ -27,6 +27,7 @@
 //= require ace/theme-eclipse
 //= require ace/mode-xml
 
+//= require picturefill
 //= require picture_tag
 
 //= require_tree .
