@@ -312,8 +312,6 @@ GEM
       ruby-rc4
       ttfunk
     pg (1.2.2)
-    picture_tag (2.0.0)
-      rails (>= 3.0)
     popper_js (1.16.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -525,7 +523,6 @@ DEPENDENCIES
   mods_display
   noid-rails
   pg
-  picture_tag
   pry
   puma
   rails

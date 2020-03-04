@@ -9,7 +9,11 @@ class GenericUpload < ApplicationRecord
   end
 
   def file
-    File.open(ActiveStorage::Blob.service.path_for(binary.key))
+    File.open(file_path)
+  end
+
+  def file_path
+    ActiveStorage::Blob.service.path_for(binary.key)
   end
 
   def project

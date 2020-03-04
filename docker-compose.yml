@@ -38,7 +38,7 @@ services:
       timeout: 5s
       retries: 3
   iiif:
-    image: uclalibrary/cantaloupe:4.1.4
+    image: nakatomi/charon_cantaloupe:4.0
     ports:
       - 8182:8182
     volumes:

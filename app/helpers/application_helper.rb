@@ -18,7 +18,9 @@ module ApplicationHelper
     VERSION
   end
 
-  def render_thumbnail(_document, _options)
-    image_tag('https://repository.library.northeastern.edu/downloads/neu:m0451f929?datastream_id=thumbnail_4', size: '50x50')
+  def render_thumbnail(document, _options)
+    # image_tag('https://repository.library.northeastern.edu/downloads/neu:m0451f929?datastream_id=thumbnail_4', size: '50x50')
+    @thumbnail_path = "http://localhost:8182/iiif/2/#{document.id}.jp2/full/full/0/default.jpg"
+    render 'shared/thumbnail'
   end
 end

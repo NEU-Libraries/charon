@@ -15,9 +15,7 @@ class GenericUploadsController < ApplicationController
     gu.user = current_user
     gu.save!
 
-    mime = determine_mime(File.open(params[:generic_upload][:binary].path))
-
-    flash[:notice] = "File #{gu.filename} uploaded - image? #{is_image?(mime)}"
+    flash[:notice] = "File #{gu.filename} uploaded"
     redirect_to(actions_path(params[:generic_upload][:project_id])) && return
   end
 
@@ -44,13 +42,35 @@ class GenericUploadsController < ApplicationController
                                 "Your upload #{@generic_upload.filename} was approved")
 
     file_set = FileSet.new type: 'generic'
+
+    # Make thumbnail?
+    mime = determine_mime(@generic_upload.file)
+
+    if image?(mime)
+      # create thumbnail derivative for IIIF
+      i = Image.read( @generic_upload.file.path ).first
+      i.format = 'JP2'
+      thumbnail_path = "/home/charon/images/#{@saved_work.id}.jp2"
+      i.write( thumbnail_path ) # will need to do some unique filename to enable crosswalking back via pid
+
+      thumbnail_blob = Blob.new
+      # thumbnail_file = Valkyrie.config.storage_adapter.upload(file: File.open(thumbnail_path), resource: file_set, original_filename: @generic_upload.filename)
+      thumbnail_blob.file_identifier = "disk://#{thumbnail_path}"
+      thumbnail_blob.use = [Valkyrie::Vocab::PCDMUse.ThumbnailImage]
+
+      saved_thumbnail_blob = metadata_adapter.persister.save(resource: thumbnail_blob)
+      file_set.member_ids += [saved_thumbnail_blob.id]
+      file_set.a_member_of = @saved_work.id
+      file_set = metadata_adapter.persister.save(resource: file_set)
+    end
+
     blob = Blob.new
     # upload = ActionDispatch::Http::UploadedFile.new tempfile: File.new('/path/to/files/file1.tiff'), filename: 'file1.tiff', type: 'image/tiff'
     file = Valkyrie.config.storage_adapter.upload(file: @generic_upload.file, resource: file_set, original_filename: @generic_upload.filename)
     blob.file_identifier = file.id
+    blob.use = [Valkyrie::Vocab::PCDMUse.OriginalFile]
     saved_blob = metadata_adapter.persister.save(resource: blob)
     file_set.member_ids += [saved_blob.id]
-    file_set.a_member_of = @saved_work.id
     metadata_adapter.persister.save(resource: file_set)
 
     @generic_upload.destroy!
