@@ -6,6 +6,8 @@ module MimeHelper
   def determine_mime(file_path)
     mime = MimeMagic.by_magic(File.open(file_path))
     mime = MimeMagic.by_path(file_path) if mime.blank?
+    return MimeMagic.new('application/octet-stream') if mime.blank?
+
     mime
   end
 

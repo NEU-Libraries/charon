@@ -48,10 +48,10 @@ class GenericUploadsController < ApplicationController
 
     if image?(mime)
       # create thumbnail derivative for IIIF
-      i = Image.read( @generic_upload.file.path ).first
+      i = Image.read(@generic_upload.file.path).first
       i.format = 'JP2'
       thumbnail_path = "/home/charon/images/#{@saved_work.id}.jp2"
-      i.write( thumbnail_path ) # will need to do some unique filename to enable crosswalking back via pid
+      i.write(thumbnail_path) # will need to do some unique filename to enable crosswalking back via pid
 
       thumbnail_blob = Blob.new
       # thumbnail_file = Valkyrie.config.storage_adapter.upload(file: File.open(thumbnail_path), resource: file_set, original_filename: @generic_upload.filename)
