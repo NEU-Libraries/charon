@@ -1,8 +1,8 @@
--# %picture
--#   %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "/images/large.jpg"}
--#   %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "/images/large_retina.jpg 2x"}
--#   %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "/images/medium.jpg"}
--#   %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "/images/medium_retina.jpg 2x"}
--#   %source{sizes: "100vw", srcset: "/images/small.jpg"}
--#   %source{sizes: "100vw", srcset: "/images/small_retina.jpg 2x"}
--#   %img{alt: "Your smart alt attribute", srcset: "/images/fallback.jpg"}/
+%picture
+  %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: @thumbnail_path}
+  %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: @thumbnail_path}
+  %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: @thumbnail_path}
+  %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: @thumbnail_path}
+  %source{sizes: "100vw", srcset: @thumbnail_path}
+  %source{sizes: "100vw", srcset: @thumbnail_path}
+  %img{alt: "Your smart alt attribute", srcset: @thumbnail_path}/
