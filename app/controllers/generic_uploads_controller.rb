@@ -46,7 +46,7 @@ class GenericUploadsController < ApplicationController
     # Make thumbnail?
     mime = determine_mime(@generic_upload.file)
 
-    if image?(mime)
+    if mime.image?
       # create thumbnail derivative for IIIF
       i = Image.read(@generic_upload.file.path).first
       i.format = 'JP2'
