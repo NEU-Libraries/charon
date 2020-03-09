@@ -34,7 +34,7 @@ gem 'simple_form'
 # QA gems
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
-gem 'simplecov', require: false
+gem 'simplecov', '<0.18', require: false
 gem 'simplecov-shields-badge', require: false
 
 # Rails gems
