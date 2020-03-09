@@ -21,6 +21,13 @@ describe GenericUploadsController do
         file = fixture_file_upload(Rails.root.join('public/apple-touch-icon.png'), 'image/png')
         expect { post :create, params: { generic_upload: { binary: file, project_id: project.id } } }.to change(ActiveStorage::Attachment, :count).by(1)
       end
+
+      it 'gives an error if no binary is provided' do
+        sign_in FactoryBot.create(:user)
+        post :create, params: { generic_upload: { project_id: project.id } }
+        expect(response).to redirect_to(root_path)
+        expect(subject.request.flash[:error]).to eq('File not selected for upload')
+      end
     end
   end
 

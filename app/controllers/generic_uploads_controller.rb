@@ -62,6 +62,9 @@ class GenericUploadsController < ApplicationController
       file_set.member_ids += [saved_thumbnail_blob.id]
       file_set.a_member_of = @saved_work.id
       file_set = metadata_adapter.persister.save(resource: file_set)
+
+      @saved_work.thumbnail = true
+      @saved_work = metadata_adapter.persister.save(resource: @saved_work)
     end
 
     blob = Blob.new

@@ -22,6 +22,7 @@ class SolrDocument
   attribute :klass_type, Blacklight::Types::String, 'internal_resource_tesim'
   attribute :human_readable_type, Blacklight::Types::String, 'human_readable_type_ssim'
   attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
+  attribute :thumbnail, Blacklight::Types::Array, 'thumbnail_tesim'
 
   def klass
     return klass_type.constantize if klass_type.present?
@@ -32,5 +33,10 @@ class SolrDocument
     return noid if noid.present?
 
     super
+  end
+
+  def thumbnail?
+    false unless thumbnail&.first&.split('boolean-')&.last == 'true'
+    true
   end
 end

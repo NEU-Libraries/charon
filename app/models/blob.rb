@@ -5,8 +5,4 @@ class Blob < Resource
   attribute :original_filename, Valkyrie::Types::Set
   attribute :file_identifier, Valkyrie::Types::ID
   attribute :use, Valkyrie::Types::Set
-
-  def thumbnail?
-    use.include?(Valkyrie::Vocab::PCDMUse.ThumbnailImage)
-  end
 end
