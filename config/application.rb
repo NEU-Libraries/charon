@@ -17,5 +17,6 @@ module Charon
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.iiif = config_for(:iiif)["url"]
   end
 end
