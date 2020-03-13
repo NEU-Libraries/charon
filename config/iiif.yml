@@ -1,8 +1,8 @@
 development:
-  url: 'http://localhost:8182'
+  url: 'http://localhost:8182/iiif'
 staging:
   url: 'http://charon.library.northeastern.edu/iiif'
 test: &test
-  url: 'http://localhost:8182'
+  url: 'http://localhost:8182/iiif'
 production:
   url: 'http://charon.library.northeastern.edu/iiif'

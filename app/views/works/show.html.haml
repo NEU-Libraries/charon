@@ -1,13 +1,13 @@
 .float-right
-  %a.btn.btn-success{:href => history_path(params[:id]), :role => "button"} History
-  %a.btn.btn-primary{:href => claim_task_path(params[:id]), :role => "button"} Update Work
+  %a.btn.btn-success{:href => history_path(@work.noid), :role => "button"} History
+  %a.btn.btn-primary{:href => claim_task_path(@work.noid), :role => "button"} Update Work
 %h2
   = @work.title
 
 .container.work-metadata
   .row
     .col
-      Thumbnail
+      =image_tag "#{iiif_url}/2/#{@work.id}.jp2/full/!500,500/0/default.jpg"
     .col
       #mods
         = @mods_html.html_safe
