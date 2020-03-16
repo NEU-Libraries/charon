@@ -1,8 +1,9 @@
-%picture
-  %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: @large_thumbnail_path}
-  %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{@large_thumbnail_path} 2x"}
-  %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: @medium_thumbnail_path}
-  %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{@medium_thumbnail_path} 2x"}
-  %source{sizes: "100vw", srcset: @small_thumbnail_path}
-  %source{sizes: "100vw", srcset: "#{@small_thumbnail_path} 2x"}
-  %img{alt: "Your smart alt attribute", srcset: @thumbnail_path}/
+- if document.thumbnail?
+  %picture
+    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: @large_thumbnail_path}
+    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{@large_thumbnail_path} 2x"}
+    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: @medium_thumbnail_path}
+    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{@medium_thumbnail_path} 2x"}
+    %source{sizes: "100vw", srcset: @small_thumbnail_path}
+    %source{sizes: "100vw", srcset: "#{@small_thumbnail_path} 2x"}
+    %img{alt: "Your smart alt attribute", srcset: @thumbnail_path}/

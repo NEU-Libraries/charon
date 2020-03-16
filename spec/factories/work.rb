@@ -10,6 +10,7 @@ FactoryBot.define do
     a_member_of { project.incoming_collection.id }
     project_id { project.id }
     workflow_id { create(:workflow).id }
+    thumbnail { true }
 
     to_create do |instance|
       Valkyrie.config.metadata_adapter.persister.save(resource: instance)

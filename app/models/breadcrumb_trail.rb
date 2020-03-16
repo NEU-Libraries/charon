@@ -38,11 +38,6 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb(objects[:collection].title)
   end
 
-  def system_collections_show
-    breadcrumb(objects[:system_collection].parent.title, project_path(objects[:system_collection].parent))
-    breadcrumb(objects[:system_collection].title)
-  end
-
   def workflows_new
     breadcrumb(objects[:project].title, actions_path(objects[:project]))
     breadcrumb('New Workflow')
