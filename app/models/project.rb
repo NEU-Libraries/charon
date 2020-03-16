@@ -45,6 +45,10 @@ class Project < Resource
     children.find { |c| c.system_collection_type == 'incoming' }
   end
 
+  def works_collection
+    children.find { |c| c.system_collection_type == 'works' }
+  end
+
   def workflows
     Workflow.where(project_id: Minerva::Project.find_by(auid: noid)&.id)
   end

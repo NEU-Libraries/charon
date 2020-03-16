@@ -20,6 +20,7 @@ class TasksController < ApplicationController
 
   def update_work
     change_set = WorkChangeSet.new(@work)
+    change_set.a_member_of = @work.project.works_collection.id
     if change_set.validate(params[:work])
       change_set.sync
       saved_work = metadata_adapter.persister.save(resource: change_set.resource)
