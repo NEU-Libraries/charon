@@ -31,7 +31,6 @@ Rails.application.routes.draw do
   resources :generic_uploads, :path => 'uploads', except: [:index]
   resources :projects
   resources :collections
-  resources :system_collections
   resources :roles
   resources :workflows
   resources :works

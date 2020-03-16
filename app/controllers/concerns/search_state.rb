@@ -5,7 +5,9 @@ class SearchState < Blacklight::SearchState
 
   def url_for_document(doc, options = {})
     if doc.respond_to?(:klass) && doc.klass.present?
-      return send(ActiveModel::Naming.singular_route_key(doc.klass) + '_path', doc)
+      # Need to handle collection/system_collection difference
+      model_str = ActiveModel::Naming.singular_route_key(doc.klass)
+      return send(model_str + '_path', doc)
     end
 
     super

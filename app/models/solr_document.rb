@@ -23,8 +23,11 @@ class SolrDocument
   attribute :human_readable_type, Blacklight::Types::String, 'human_readable_type_ssim'
   attribute :alternate_ids, Blacklight::Types::Array, 'alternate_ids_tesim'
   attribute :thumbnail, Blacklight::Types::Array, 'thumbnail_tesim'
+  attribute :system_collection_type, Blacklight::Types::String, 'system_collection_type_tesim'
 
   def klass
+    #kludge for preferred type - collection controller links
+    return 'Collection'.constantize if system_collection_type.present?
     return klass_type.constantize if klass_type.present?
   end
 
@@ -37,6 +40,7 @@ class SolrDocument
 
   def thumbnail?
     return false unless thumbnail&.first&.split('boolean-')&.last == 'true'
+
     true
   end
 end

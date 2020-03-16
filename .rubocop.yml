@@ -41,3 +41,9 @@ Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 Style/MissingRespondToMissing:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
