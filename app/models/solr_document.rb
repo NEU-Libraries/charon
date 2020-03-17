@@ -26,7 +26,7 @@ class SolrDocument
   attribute :system_collection_type, Blacklight::Types::String, 'system_collection_type_tesim'
 
   def klass
-    #kludge for preferred type - collection controller links
+    # kludge for preferred type - collection controller links
     return 'Collection'.constantize if system_collection_type.present?
     return klass_type.constantize if klass_type.present?
   end

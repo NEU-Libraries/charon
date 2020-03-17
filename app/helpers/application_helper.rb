@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def render_thumbnail(document, _options)
-    render partial: 'shared/thumbnail', :locals => {:document => document, :iiif => iiif_url}
+    render partial: 'shared/thumbnail', locals: { document: document, iiif: iiif_url }
   end
 
   def iiif_url
