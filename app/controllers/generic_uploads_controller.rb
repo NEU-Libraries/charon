@@ -43,28 +43,7 @@ class GenericUploadsController < ApplicationController
 
     file_set = FileSet.new type: 'generic'
 
-    # Make thumbnail?
-    mime = determine_mime(@generic_upload.file)
-
-    if mime.image?
-      # create thumbnail derivative for IIIF
-      i = Image.read(@generic_upload.file.path).first
-      i.format = 'JP2'
-      thumbnail_path = "/home/charon/images/#{@saved_work.id}.jp2"
-      i.write(thumbnail_path) # will need to do some unique filename to enable crosswalking back via pid
-
-      thumbnail_blob = Blob.new
-      thumbnail_blob.file_identifier = "disk://#{thumbnail_path}"
-      thumbnail_blob.use = [Valkyrie::Vocab::PCDMUse.ThumbnailImage]
-
-      saved_thumbnail_blob = metadata_adapter.persister.save(resource: thumbnail_blob)
-      file_set.member_ids += [saved_thumbnail_blob.id]
-      file_set.a_member_of = @saved_work.id
-      file_set = metadata_adapter.persister.save(resource: file_set)
-
-      @saved_work.thumbnail = true
-      @saved_work = metadata_adapter.persister.save(resource: @saved_work)
-    end
+    create_thumbnail(image_path, work_id) if upload_an_image?(@generic_upload.file)
 
     file = Valkyrie.config.storage_adapter.upload(
       file: @generic_upload.file,
@@ -130,5 +109,40 @@ class GenericUploadsController < ApplicationController
         status: Status.available.name
       )
       raise StandardError, state.errors.full_messages unless upload_approval_state.save
+    end
+
+    def upload_an_image?(file)
+      determine_mime(file).image?
+    end
+
+    def create_thumbnail(image_path, work_id)
+      make_jp2(image_path, work_id)
+    end
+
+    def make_jp2(image_path, work_id)
+      # create thumbnail derivative for IIIF
+      i = Image.read(image_path).first
+      i.format = 'JP2'
+      thumbnail_path = "/home/charon/images/#{work_id}.jp2"
+      i.write(thumbnail_path) # will need to do some unique filename to enable crosswalking back via pid
+      make_thumbnail_blob(thumbnail_path, work_id)
+    end
+
+    def make_thumbnail_blob(thumbnail_path, work_id)
+      thumbnail_blob = Blob.new
+      thumbnail_blob.file_identifier = "disk://#{thumbnail_path}"
+      thumbnail_blob.use = [Valkyrie::Vocab::PCDMUse.ThumbnailImage]
+      saved_thumbnail_blob = metadata_adapter.persister.save(resource: thumbnail_blob)
+      add_thumbnail_blob_to_work(saved_thumbnail_blob.id, work_id)
+    end
+
+    def add_thumbnail_blob_to_work(blob_id, work_id)
+      file_set.member_ids += [blob_id]
+      file_set.a_member_of = work_id
+      metadata_adapter.persister.save(resource: file_set)
+
+      work = Work.find(work_id)
+      work.thumbnail = true
+      metadata_adapter.persister.save(resource: work)
     end
 end
