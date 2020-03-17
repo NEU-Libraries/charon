@@ -54,7 +54,6 @@ class GenericUploadsController < ApplicationController
       i.write(thumbnail_path) # will need to do some unique filename to enable crosswalking back via pid
 
       thumbnail_blob = Blob.new
-      # thumbnail_file = Valkyrie.config.storage_adapter.upload(file: File.open(thumbnail_path), resource: file_set, original_filename: @generic_upload.filename)
       thumbnail_blob.file_identifier = "disk://#{thumbnail_path}"
       thumbnail_blob.use = [Valkyrie::Vocab::PCDMUse.ThumbnailImage]
 
@@ -67,9 +66,13 @@ class GenericUploadsController < ApplicationController
       @saved_work = metadata_adapter.persister.save(resource: @saved_work)
     end
 
+    file = Valkyrie.config.storage_adapter.upload(
+      file: @generic_upload.file,
+      resource: file_set,
+      original_filename: @generic_upload.filename
+    )
+
     blob = Blob.new
-    # upload = ActionDispatch::Http::UploadedFile.new tempfile: File.new('/path/to/files/file1.tiff'), filename: 'file1.tiff', type: 'image/tiff'
-    file = Valkyrie.config.storage_adapter.upload(file: @generic_upload.file, resource: file_set, original_filename: @generic_upload.filename)
     blob.file_identifier = file.id
     blob.use = [Valkyrie::Vocab::PCDMUse.OriginalFile]
     saved_blob = metadata_adapter.persister.save(resource: blob)

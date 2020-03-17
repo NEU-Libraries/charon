@@ -53,7 +53,9 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: 'search',
       rows: 10,
-      fq: ['-internal_resource_tesim:SystemCollection', '-internal_resource_tesim:FileSet', '-internal_resource_tesim:Blob']
+      fq: ['-internal_resource_tesim:SystemCollection',
+           '-internal_resource_tesim:FileSet',
+           '-internal_resource_tesim:Blob']
     }
 
     # solr field configuration for search results/index views
