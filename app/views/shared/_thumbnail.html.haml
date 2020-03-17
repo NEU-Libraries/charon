@@ -1,9 +1,9 @@
 - if document.thumbnail?
   %picture
-    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: @large_thumbnail_path}
-    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{@large_thumbnail_path} 2x"}
-    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: @medium_thumbnail_path}
-    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{@medium_thumbnail_path} 2x"}
-    %source{sizes: "100vw", srcset: @small_thumbnail_path}
-    %source{sizes: "100vw", srcset: "#{@small_thumbnail_path} 2x"}
-    %img{alt: "Your smart alt attribute", srcset: @thumbnail_path}/
+    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: iiif_thumbnail_url(document.id, 400)}
+    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{iiif_thumbnail_url(document.id, 800)} 2x"}
+    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: iiif_thumbnail_url(document.id, 200)}
+    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{iiif_thumbnail_url(document.id, 400)} 2x"}
+    %source{sizes: "100vw", srcset: iiif_thumbnail_url(document.id, 100)}
+    %source{sizes: "100vw", srcset: "#{iiif_thumbnail_url(document.id, 200)} 2x"}
+    %img{alt: "Your smart alt attribute", srcset: iiif_thumbnail_url(document.id, 100)}/

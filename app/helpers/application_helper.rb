@@ -30,7 +30,8 @@ module ApplicationHelper
     render partial: 'shared/thumbnail', :locals => {:document => document}
   end
 
-  def iiif_url
-    Rails.application.config.iiif['url']
+  def iiif_thumbnail_url(id, size)
+    base_url = Rails.application.config.iiif['url']
+    return "#{base_url}/2/#{id}.jp2/full/!#{size},#{size}/0/default.jpg"
   end
 end
