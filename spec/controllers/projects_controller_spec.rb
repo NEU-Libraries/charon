@@ -7,6 +7,16 @@ describe ProjectsController do
   let(:user) { create(:user) }
   let(:admin_user) { create(:admin) }
 
+  describe 'works' do
+    render_views
+    it 'renders a list of works associated with the project' do
+      sign_in admin_user
+      get :works, params: { id: project.noid }
+      expect(response).to render_template('projects/works')
+      # TODO: have some dummy works and expect them be seen via title
+    end
+  end
+
   describe 'new' do
     render_views
     it 'renders the new record form' do
