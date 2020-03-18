@@ -107,6 +107,9 @@ class ProjectsController < CatalogController
     @uploads = GenericUpload.where(project_id: @project.noid)
   end
 
+  def works
+  end
+
   private
 
     def sort_column

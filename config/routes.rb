@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'
   # project uploads
   get '/projects/:id/uploads', to: 'projects#uploads', as: 'project_uploads'
+  # all project works (no collection nesting)
+  get '/projects/:id/works', to: 'projects#works', as: 'project_works'
 
   # mailboxer
   get '/notifications' => 'notifications#index'

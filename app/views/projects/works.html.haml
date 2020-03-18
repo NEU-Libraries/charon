@@ -1,0 +1,16 @@
+%h2.py-3
+  Works for
+  = @project.title
+
+= form_tag project_add_users_path do
+  %table.table.table-bordered.table-responsive
+    %thead
+      %tr
+        %th{:scope => "col"} Title
+        %th{:scope => "col"} Actions
+    %tbody
+      - @project.works.each_with_index do |work, i|
+        %tr
+          %td.align-middle
+            = work.title
+          %td.align-middle
