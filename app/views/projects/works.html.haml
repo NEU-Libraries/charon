@@ -12,5 +12,5 @@
       - @project.works.each_with_index do |work, i|
         %tr
           %td.align-middle
-            = work.title
+            = link_to "#{work.title}", work
           %td.align-middle
