@@ -28,7 +28,7 @@ class Work < Resource
     history.first.status
   end
 
-  def responsable_user
+  def responsible_user
     if !history.first.user_id.blank?
       return User.find(history.first.user_id)
     end
