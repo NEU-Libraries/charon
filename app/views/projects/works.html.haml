@@ -20,4 +20,5 @@
           %td.align-middle
             = work.state
           %td.align-middle
+            %a.btn.btn-primary{:href => claim_task_path(work.noid), :role => "button"} Update Work
             %a.btn.btn-success{:href => history_path(work.noid), :role => "button"} History
