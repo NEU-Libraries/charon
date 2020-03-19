@@ -16,6 +16,8 @@
           %td.align-middle
             = link_to "#{work.title}", work
           %td.align-middle
+            = work.responsable_user ? link_to(work.responsable_user) : "Anyone"
           %td.align-middle
+            = work.state
           %td.align-middle
             %a.btn.btn-success{:href => history_path(work.noid), :role => "button"} History

@@ -23,4 +23,14 @@ class Work < Resource
   def project
     Project.find(project_id)
   end
+
+  def state
+    history.first.status
+  end
+
+  def responsable_user
+    if !history.first.user_id.blank?
+      return User.find(history.first.user_id)
+    end
+  end
 end
