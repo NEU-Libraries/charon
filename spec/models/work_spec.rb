@@ -17,4 +17,14 @@ RSpec.describe Work do
   it 'has a thumbnail boolean that works with solr' do
     expect(document.thumbnail?).to be true
   end
+
+  it 'state is nil if not set' do
+    expect(work.state).to be nil
+    # TODO: need to test it returns if set
+  end
+
+  it 'responsible user returns nil if not set' do
+    expect(work.responsible_user).to be nil
+    # TODO: need to test it returns if set
+  end
 end

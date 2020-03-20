@@ -25,12 +25,10 @@ class Work < Resource
   end
 
   def state
-    history.first.status
+    history&.first&.status
   end
 
   def responsible_user
-    if !history.first.user_id.blank?
-      return User.find(history.first.user_id)
-    end
+    return User.find(history.first.user_id) if history&.first&.user_id.present?
   end
 end
