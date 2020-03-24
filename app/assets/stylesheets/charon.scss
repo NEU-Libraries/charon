@@ -164,3 +164,7 @@ footer {
 .document-counter {
   display: none;
 }
+
+.list-group-item:first-of-type {
+  border-top-width: auto;
+}
