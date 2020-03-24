@@ -3,3 +3,19 @@
   = @work.title
 
 -# @workflow.task_list
+
+%table.table.table-bordered.table-responsive
+  %thead
+    %tr
+      %th{:scope => "col"} Type
+      %th{:scope => "col"} User
+      %th{:scope => "col"} Action
+  %tbody
+    - JSON.parse(@work.workflow.task_list).each do |task|
+      %tr
+        %td.align-middle
+          = task
+        %td.align-middle
+          Insert Person Here
+        %td.align-middle
+          Assign me
