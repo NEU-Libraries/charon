@@ -19,4 +19,8 @@ class WorksController < ApplicationController
   def history
     @work = Work.find(params[:id])
   end
+
+  def assign_task
+    @work = Work.find(params[:id])
+  end
 end

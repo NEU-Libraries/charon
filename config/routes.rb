@@ -89,6 +89,7 @@ Rails.application.routes.draw do
   get '/tasks/:id/review', to: 'tasks#review', as: 'review'
   get '/tasks/:id/transcribe', to: 'tasks#transcribe', as: 'transcribe'
 
-  # audit history
+  # works
   get '/works/:id/history', to: 'works#history', as: 'history'
+  get '/works/:id/assign_task', to: 'works#assign_task', as: 'assign_task'
 end

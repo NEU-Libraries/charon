@@ -43,11 +43,6 @@ class TasksController < ApplicationController
     # search work history for in progress and completed tasks
   end
 
-  def assign
-    # make task in progress
-    # update minerva state
-  end
-
   private
 
     def find_work
