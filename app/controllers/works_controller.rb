@@ -22,7 +22,7 @@ class WorksController < ApplicationController
 
   def tasks
     @work = Work.find(params[:id])
-    @users = @work.project.users.collect {|u| [ "#{u.last_name}, #{u.first_name}", u.id ]}
+    @users = @work.project.users.sort_by(&:last_name).collect { |u| ["#{u.last_name}, #{u.first_name}", u.id] }
   end
 
   def assign_task
