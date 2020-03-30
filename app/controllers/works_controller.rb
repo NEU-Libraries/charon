@@ -22,6 +22,10 @@ class WorksController < ApplicationController
 
   def assign_task
     @work = Work.find(params[:id])
-    @users = @work.project.users
+    @users = @work.project.users.collect {|u| [ "#{u.last_name}, #{u.first_name}", u.id ]}
+  end
+
+  def task_assignment
+    # Pair work, user and task
   end
 end
