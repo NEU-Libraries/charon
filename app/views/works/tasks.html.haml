@@ -2,8 +2,6 @@
   Assign a task for
   = @work.title
 
--# @workflow.task_list
-
 %table.table.table-bordered.table-responsive
   %thead
     %tr
@@ -16,6 +14,6 @@
         %td.align-middle
           = task
         %td.align-middle
-          = select("user", "user_id", @users, { include_blank: true })
+          = select("task", "user_id", @users, { include_blank: true })
         %td.align-middle
-          Assign me
+          %a.btn.btn-sm.btn-info{:href => assign_task_path(@work), :role => "button"} Assign

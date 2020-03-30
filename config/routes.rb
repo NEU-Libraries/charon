@@ -91,5 +91,6 @@ Rails.application.routes.draw do
 
   # works
   get '/works/:id/history', to: 'works#history', as: 'history'
+  get '/works/:id/tasks', to: 'works#tasks', as: 'tasks'
   get '/works/:id/assign_task', to: 'works#assign_task', as: 'assign_task'
 end
