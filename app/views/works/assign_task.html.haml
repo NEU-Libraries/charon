@@ -16,6 +16,6 @@
         %td.align-middle
           = task
         %td.align-middle
-          Insert Person Here
+          = select("user", "user_id", @users.collect {|u| [ "#{u.last_name}, #{u.first_name}", u.id ] }, { include_blank: true })
         %td.align-middle
           Assign me

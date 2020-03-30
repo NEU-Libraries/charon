@@ -22,5 +22,6 @@ class WorksController < ApplicationController
 
   def assign_task
     @work = Work.find(params[:id])
+    @users = @work.project.users
   end
 end
