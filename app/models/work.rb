@@ -13,7 +13,7 @@ class Work < Resource
   mods_xml_source(&:mods_xml)
 
   def history
-    Minerva::State.where(work_id: Minerva::Work.find_or_create_by(auid: noid).id)
+    Minerva::State.where(work_id: Minerva::Work.find_or_create_by(auid: noid).id).order(:created_at).reverse_order
   end
 
   def workflow
@@ -29,6 +29,7 @@ class Work < Resource
   end
 
   def responsible_user
-    return User.find(history.first.user_id) if history&.first&.user_id.present?
+    return User.find(Minerva::User.find(history.first.user_id).auid) if history&.first&.user_id.present?
+    # nil
   end
 end

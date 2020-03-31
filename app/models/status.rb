@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Status < Enumerations::Base
+  value :assigned,      name: 'Assigned'
   value :in_progress,   name: 'In Progress'
   value :inactive,      name: 'Inactive'
   value :complete,      name: 'Complete'

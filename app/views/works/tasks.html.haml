@@ -14,6 +14,7 @@
       = form_tag(assign_task_path, method: "post") do
         %tr
           %td.align-middle
+            = hidden_field_tag :task, task
             = task
           %td.align-middle
             = select_tag('user[id]', options_for_select(@users), :include_blank => true)

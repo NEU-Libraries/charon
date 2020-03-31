@@ -29,11 +29,20 @@ class WorksController < ApplicationController
   def assign_task
     # Pair work, user and task
 
-    flash[:notice] = params.inspect
-    redirect_to(root_path)
+    work = Work.find(params[:id])
+    user = User.find(params[:user][:id])
+    # task = Task.find(params[:task][:name].downcase)
 
-    # work = Work.find(params[:id])
-    # user = User.find(params[:task][:user_id])
-    # task = params[:task][:name]
+    state = Minerva::State.new(
+      creator_id: minerva_user_id(current_user.id),
+      user_id: minerva_user_id(user.id),
+      work_id: minerva_work_id(work.noid),
+      status: Status.assigned.name
+    )
+
+    state.save
+
+    flash[:notice] = state.inspect
+    redirect_to(root_path)
   end
 end

@@ -5,16 +5,14 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{:scope => "col"} #
       %th{:scope => "col"} Action
       %th{:scope => "col"} Date
   %tbody
     - @work.history.each_with_index do |action, i|
       %tr
         %td.align-middle
-          = i + 1
-        %td.align-middle
-          = User.find(Minerva::User.find(action.creator_id).auid).name
+          - creator = User.find(Minerva::User.find(action.creator_id).auid)
+          = link_to "#{creator.name}", creator
           - if !action.interface_id.blank?
             - if action.status == "Complete"
               has
@@ -28,5 +26,11 @@
           - if action.interface_id.blank?
             to
             = action.status.downcase
+            - if action.user_id.present?
+              - user = User.find(Minerva::User.find(action.user_id).auid)
+              for
+              = link_to "#{user.name}", user
+            - else
+              for anyone
         %td.align-middle
           = action.created_at

@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   Healthcheck.routes(self)
 
   devise_for :users
-  resources :users, only: [:index]
 
   mount Blacklight::Engine => '/'
 
@@ -93,4 +92,6 @@ Rails.application.routes.draw do
   get '/works/:id/history', to: 'works#history', as: 'history'
   get '/works/:id/tasks', to: 'works#tasks', as: 'tasks'
   post '/works/:id/assign_task', to: 'works#assign_task', as: 'assign_task'
+
+  resources :users, only: [:index, :show]
 end
