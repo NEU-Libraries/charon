@@ -27,5 +27,12 @@ class WorksController < ApplicationController
 
   def assign_task
     # Pair work, user and task
+
+    flash[:notice] = params.inspect
+    redirect_to(root_path)
+
+    # work = Work.find(params[:id])
+    # user = User.find(params[:task][:user_id])
+    # task = params[:task][:name]
   end
 end
