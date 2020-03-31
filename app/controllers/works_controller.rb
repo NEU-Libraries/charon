@@ -23,6 +23,7 @@ class WorksController < ApplicationController
   def tasks
     @work = Work.find(params[:id])
     @users = @work.project.users.sort_by(&:last_name).collect { |u| ["#{u.last_name}, #{u.first_name}", u.id] }
+    # .unshift(['Select User', ''])
   end
 
   def assign_task

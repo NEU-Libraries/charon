@@ -2,19 +2,20 @@
   Assign a task for
   = @work.title
 
-= form_tag assign_task_path(@work) do
-  %table.table.table-bordered.table-responsive
-    %thead
-      %tr
-        %th{:scope => "col"} Type
-        %th{:scope => "col"} User
-        %th{:scope => "col"} Action
-    %tbody
-      - JSON.parse(@work.workflow.task_list).each do |task|
+
+%table.table.table-bordered.table-responsive
+  %thead
+    %tr
+      %th{:scope => "col"} Type
+      %th{:scope => "col"} User
+      %th{:scope => "col"} Action
+  %tbody
+    - JSON.parse(@work.workflow.task_list).each do |task|
+      = form_tag(assign_task_path, method: "post") do
         %tr
           %td.align-middle
             = task
           %td.align-middle
-            = select("task", "user_id", @users, { include_blank: true })
+            = select_tag('user[id]', options_for_select(@users), :include_blank => true)
           %td.align-middle
-            %input.btn.btn-primary{:href => "#", :role => "button", :type => "submit", :value => "Assign"}
+            = submit_tag "Assign", class: 'btn btn-primary'
