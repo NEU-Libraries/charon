@@ -32,6 +32,7 @@ class WorksController < ApplicationController
     work = Work.find(params[:id])
     user = User.find(params[:user][:id])
     # task = Task.find(params[:task][:name].downcase)
+    # interface_id ? need to correlate these
 
     state = Minerva::State.new(
       creator_id: minerva_user_id(current_user.id),

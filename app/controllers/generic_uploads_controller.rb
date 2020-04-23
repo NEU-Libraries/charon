@@ -91,7 +91,7 @@ class GenericUploadsController < ApplicationController
         work_id: minerva_work_id(@saved_work.noid),
         status: Status.available.name
       )
-      upload_approval_state.created_at = Time.now + 1
+      upload_approval_state.created_at = Time.zone.now + 1
       raise StandardError, state.errors.full_messages unless upload_approval_state.save
     end
 
