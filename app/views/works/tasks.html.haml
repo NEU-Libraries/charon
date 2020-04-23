@@ -10,17 +10,13 @@
         - JSON.parse(@work.workflow.task_list).each do |task|
           .form-check.py-1
             %label.form-check-label
-              %input.form-check-input{:name => "optradio", :type => "radio"}>/
+              %input.form-check-input{:name => "task", :type => "radio", :value => "#{task.downcase}"}>/
               = task
       .col-sm
         %h5.pb-2 User
         .form-group
           %label Select from list
-          %select.form-control
-            %option
-            - @users.each do |u|
-              %option{value: u[1]}
-                = u[0]
+          = select_tag('user[id]', options_for_select(@users), {:include_blank => true, class: "form-control"})
       .col-sm
 
   = submit_tag "Assign", class: 'btn btn-primary float-right'
