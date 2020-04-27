@@ -15,11 +15,12 @@
           = link_to "#{creator.name}", creator
           - if !action.interface_id.blank?
             - if action.status == "Assigned"
-              has assigned
+              has assigned the
               = Interface.find(action.interface_id).present_tense
               - user = User.find(Minerva::User.find(action.user_id).auid)
-              to
+              task to
               = link_to "#{user.name}", user
+              for
             - if action.status == "Complete"
               has
               = Interface.find(action.interface_id).past_tense

@@ -27,24 +27,25 @@ class WorksController < ApplicationController
   end
 
   def assign_task
-    # Pair work, user and task
-
     work = Work.find(params[:id])
     user = User.find(params[:user][:id])
     task = Task.find(params[:task])
-    # interface_id ? need to correlate these
 
-    state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      user_id: minerva_user_id(user.id),
-      work_id: minerva_work_id(work.noid),
-      interface_id: Minerva::Interface.find_by(title: task).id,
-      status: Status.assigned.name
-    )
+    save_state(current_user.id, user.id, work.noid, task)
 
-    state.save
-
-    flash[:notice] = state.inspect
+    flash[:notice] = 'Task assigned'
     redirect_to(root_path)
   end
+
+  private
+
+    def save_state(current_user_id, user_id, work_noid, task_title)
+      Minerva::State.create(
+        creator_id: minerva_user_id(current_user_id),
+        user_id: minerva_user_id(user_id),
+        work_id: minerva_work_id(work_noid),
+        interface_id: Minerva::Interface.find_by(title: task_title).id,
+        status: Status.assigned.name
+      )
+    end
 end
