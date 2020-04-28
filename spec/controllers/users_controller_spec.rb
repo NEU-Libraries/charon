@@ -7,6 +7,16 @@ describe UsersController do
   let(:admin_user) { create(:admin) }
   let(:project) { FactoryBot.create_for_repository(:project) }
 
+  describe 'show' do
+    render_views
+    it 'shows the user\'s profile' do
+      # TODO: actually flesh out partial and testing
+      sign_in user
+      get :show, params: { id: user.id }
+      expect(CGI.unescapeHTML(response.body)).to include(user.last_name)
+    end
+  end
+
   describe 'index' do
     render_views
     it 'displays the user' do
