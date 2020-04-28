@@ -1,3 +1,16 @@
 %h2.py-2
   Profile for
   = @user.name
+
+%table.table.table-bordered.table-responsive
+  %tbody
+    - @assignments.each do |action|
+      %tr
+        %td.align-middle
+          - creator = User.find(Minerva::User.find(action.creator_id).auid)
+          = link_to "#{creator.name}", creator
+          - if action.status == "Assigned"
+            has assigned the
+            = Interface.find(action.interface_id).present_tense
+            task to you for
+            = Work.find(Minerva::Work.find(action.work_id).auid).title
