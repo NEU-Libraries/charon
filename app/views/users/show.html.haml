@@ -12,5 +12,9 @@
           - if action.status == "Assigned"
             has assigned the
             = Interface.find(action.interface_id).present_tense
-            task to you for
-            = Work.find(Minerva::Work.find(action.work_id).auid).title
+            task to
+            - user = User.find(Minerva::User.find(action.user_id).auid)
+            = link_to "#{user.name}", user
+            for
+            - work = Work.find(Minerva::Work.find(action.work_id).auid)
+            = link_to "#{work.title}", work
