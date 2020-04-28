@@ -33,8 +33,8 @@ class WorksController < ApplicationController
 
     save_state(current_user.id, user.id, work.noid, task)
 
-    flash[:notice] = 'Task assigned'
-    redirect_to(root_path)
+    flash[:notice] = "Task assigned to #{user.first_name} #{user.last_name}"
+    redirect_to(project_works_path(work.project))
   end
 
   private

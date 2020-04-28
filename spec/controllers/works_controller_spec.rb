@@ -13,7 +13,7 @@ describe WorksController do
       Minerva::Interface.create(title: 'transcribe', code_point: 'tasks#transcribe')
       post :assign_task, params: { id: work.id, task: 'transcribe', user: { id: admin_user.id } }
       expect(Minerva::State.count).to be 1
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(project_works_path(work.project))
     end
   end
 
