@@ -23,28 +23,22 @@ class WorksController < ApplicationController
   def tasks
     @work = Work.find(params[:id])
     @users = @work.project.users.sort_by(&:last_name).collect { |u| ["#{u.last_name}, #{u.first_name}", u.id] }
-    # .unshift(['Select User', ''])
   end
 
   def assign_task
-    work = Work.find(params[:id])
-    user = User.find(params[:user][:id])
-    task = Task.find(params[:task])
-
-    save_state(current_user.id, user.id, work.noid, task)
-
-    flash[:notice] = "Task assigned to #{user.first_name} #{user.last_name}"
-    redirect_to(project_works_path(work.project))
+    save_state
+    flash[:notice] = 'Task assigned to user'
+    redirect_to(project_works_path(Work.find(params[:id]).project))
   end
 
   private
 
-    def save_state(current_user_id, user_id, work_noid, task_title)
+    def save_state
       Minerva::State.create(
-        creator_id: minerva_user_id(current_user_id),
-        user_id: minerva_user_id(user_id),
-        work_id: minerva_work_id(work_noid),
-        interface_id: Minerva::Interface.find_by(title: task_title).id,
+        creator_id: minerva_user_id(current_user.id),
+        user_id: minerva_user_id(params[:user][:id]),
+        work_id: minerva_work_id(params[:id]),
+        interface_id: Minerva::Interface.find_by(title: params[:task]).id,
         status: Status.assigned.name
       )
     end
