@@ -2,6 +2,8 @@
   Profile for
   = @user.name
 
+%h4.py-2
+  Task Assignments
 %table.table.table-bordered.table-responsive
   %tbody
     - @assignments.each do |action|
@@ -9,6 +11,8 @@
         %td.align-middle
           = render partial: "shared/actions/display", locals: {action: action}
 
+%h4.py-2
+  Users Actions
 %table.table.table-bordered.table-responsive
   %tbody
     - @user_actions.each do |action|
