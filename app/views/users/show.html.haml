@@ -18,3 +18,22 @@
             for
             - work = Work.find(Minerva::Work.find(action.work_id).auid)
             = link_to "#{work.title}", work
+
+%table.table.table-bordered.table-responsive
+  %tbody
+    - @user_actions.each do |action|
+      %tr
+        %td.align-middle
+          = action.inspect
+        %td.align-middle
+          - creator = User.find(Minerva::User.find(action.creator_id).auid)
+          = link_to "#{creator.name}", creator
+          - if action.status == "Assigned"
+            has assigned the
+            = Interface.find(action.interface_id).present_tense
+            task to
+            - user = User.find(Minerva::User.find(action.user_id).auid)
+            = link_to "#{user.name}", user
+            for
+            - work = Work.find(Minerva::Work.find(action.work_id).auid)
+            = link_to "#{work.title}", work
