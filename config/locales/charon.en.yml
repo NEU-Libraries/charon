@@ -7,3 +7,6 @@ en:
       catalog:
         past_tense: "catalogued"
         present_tense: "cataloging"
+      publish:
+        past_tense: "published"
+        present_tense: "publishing"

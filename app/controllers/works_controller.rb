@@ -17,8 +17,7 @@ class WorksController < ApplicationController
     @mods_html = render_mods_display(@work).to_html
   end
 
-  def history
-  end
+  def history; end
 
   def tasks
     @users = @work.project.users.sort_by(&:last_name).collect { |u| ["#{u.last_name}, #{u.first_name}", u.id] }
@@ -33,11 +32,12 @@ class WorksController < ApplicationController
   private
 
     def save_state
+      @task = Interface.find_by(title: params[:task])
       Minerva::State.create(
         creator_id: minerva_user_id(current_user.id),
         user_id: minerva_user_id(params[:user][:id]),
         work_id: minerva_work_id(params[:id]),
-        interface_id: Minerva::Interface.find_by(title: params[:task]).id,
+        interface_id: @task.id,
         status: Status.assigned.name
       )
       notify_user
@@ -45,6 +45,6 @@ class WorksController < ApplicationController
 
     def notify_user
       User.find(params[:user][:id]).notify('Task Assigned',
-                          "You've been assigned a task for #{@work.title}")
+                                           "#{current_user.to_s} has tasked you with #{@task.present_tense} for #{@work.title}")
     end
 end
