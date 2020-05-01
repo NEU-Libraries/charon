@@ -9,7 +9,7 @@
     = render partial: "shared/actions/in_progress", locals: {action: action}
 - else
   changed
-= Work.find(Minerva::Work.find(action.work_id).auid).title
+= render partial: "shared/actions/linked_work", locals: {action: action}
 - if action.interface_id.blank?
   to
   = action.status.downcase

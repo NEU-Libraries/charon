@@ -4,7 +4,7 @@
   %td.align-middle
     = notification.subject
   %td.w-75.align-middle
-    = notification.body
+    = notification.body.html_safe
     - if unread
       %a.btn.btn-sm.btn-success.float-right{:href => mark_notification_as_read_path(notification.id), :role => "button"}
         %span.fa.fa-check

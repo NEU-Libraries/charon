@@ -25,7 +25,7 @@ class WorksController < ApplicationController
 
   def assign_task
     save_state
-    flash[:notice] = 'Task assigned to user'
+    flash[:notice] = "The #{@task.present_tense} task has been assigned to #{@assigned_user}"
     redirect_to(project_works_path(@work.project))
   end
 
@@ -44,7 +44,10 @@ class WorksController < ApplicationController
     end
 
     def notify_user
-      User.find(params[:user][:id]).notify('Task Assigned',
-                                           "#{current_user.to_s} has tasked you with #{@task.present_tense} for #{@work.title}")
+      @assigned_user = User.find(params[:user][:id])
+      @assigned_user.notify('Task Assigned',
+                            "#{helpers.link_to @current_user.to_s, @current_user}
+                            has tasked you with #{@task.present_tense} for
+                            #{helpers.link_to @work.title.to_s, @work}")
     end
 end
