@@ -3,6 +3,8 @@
 class WorksController < ApplicationController
   include ModsDisplay::ControllerExtension
 
+  load_resource except: %i[new create edit update]
+
   def new; end
 
   def create; end
@@ -12,23 +14,20 @@ class WorksController < ApplicationController
   def update; end
 
   def show
-    @work = Work.find(params[:id])
     @mods_html = render_mods_display(@work).to_html
   end
 
   def history
-    @work = Work.find(params[:id])
   end
 
   def tasks
-    @work = Work.find(params[:id])
     @users = @work.project.users.sort_by(&:last_name).collect { |u| ["#{u.last_name}, #{u.first_name}", u.id] }
   end
 
   def assign_task
     save_state
     flash[:notice] = 'Task assigned to user'
-    redirect_to(project_works_path(Work.find(params[:id]).project))
+    redirect_to(project_works_path(@work.project))
   end
 
   private
@@ -41,5 +40,11 @@ class WorksController < ApplicationController
         interface_id: Minerva::Interface.find_by(title: params[:task]).id,
         status: Status.assigned.name
       )
+      notify_user
+    end
+
+    def notify_user
+      User.find(params[:user][:id]).notify('Task Assigned',
+                          "You've been assigned a task for #{@work.title}")
     end
 end
