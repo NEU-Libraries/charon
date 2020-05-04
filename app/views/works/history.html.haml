@@ -11,6 +11,6 @@
     - @work.history.each_with_index do |action, i|
       %tr
         %td.align-middle
-          = render partial: "shared/actions/display", locals: {action: action}
+          = render partial: "shared/tasks/display", locals: {action: action}
         %td.align-middle
           = action.created_at

@@ -25,8 +25,4 @@ module ApplicationHelper
   def iiif_url
     Rails.application.config.iiif['url']
   end
-
-  def container_classes
-    'container-lg'
-  end
 end
