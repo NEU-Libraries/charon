@@ -12,7 +12,7 @@ FactoryBot.define do
     user_id       { minerva_user_id(create(:user).id) }
     work_id       { minerva_work_id(work.noid) }
     # TODO: make multiple interface factories and get rid of this one off
-    interface_id  { create(:interface, code_point: "tasks#encode").id }
+    interface_id  { create(:interface, code_point: 'tasks#encode').id }
     status        { Status.available.name }
   end
 end
