@@ -1,6 +1,15 @@
 en:
   charon:
     interface:
+      transcribe:
+        past_tense: "transcribed"
+        present_tense: "transcribing"
+      encode:
+        past_tense: "encoded"
+        present_tense: "encoding"
+      review:
+        past_tense: "reviewed"
+        present_tense: "reviewing"
       upload:
         past_tense: "uploaded"
         present_tense: "uploading"

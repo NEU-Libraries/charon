@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @assignments = Minerva::State.where(user_id: Minerva::User.where(auid: params[:id]).take&.id)
-    @user_actions = Minerva::State.where(creator_id: Minerva::User.where(auid: params[:id]).take&.id)
+    @assignments = State.where(user_id: Minerva::User.where(auid: params[:id]).take&.id)
+    @user_actions = State.where(creator_id: Minerva::User.where(auid: params[:id]).take&.id)
   end
 
   def index

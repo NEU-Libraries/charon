@@ -13,7 +13,7 @@ class Work < Resource
   mods_xml_source(&:mods_xml)
 
   def history
-    Minerva::State.where(work_id: Minerva::Work.find_or_create_by(auid: noid).id).order(:created_at).reverse_order
+    State.where(work_id: Minerva::Work.find_or_create_by(auid: noid).id).order(:created_at).reverse_order
   end
 
   def workflow
