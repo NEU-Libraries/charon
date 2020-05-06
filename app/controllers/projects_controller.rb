@@ -82,8 +82,7 @@ class ProjectsController < CatalogController
     @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
-  def users
-  end
+  def users; end
 
   def new_user
     authorize! :oversee, @project
