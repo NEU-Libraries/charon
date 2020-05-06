@@ -10,6 +10,7 @@ describe ProjectsController do
   describe 'users' do
     render_views
     it 'renders a list of users associated with the project' do
+      project.attach_user(user, Designation.manager)
       sign_in admin_user
       get :users, params: { id: project.noid }
       expect(response).to render_template('projects/users')
