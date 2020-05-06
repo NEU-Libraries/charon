@@ -1,0 +1,40 @@
+%h2.py-3
+  = "User Registry for #{@project.title}"
+
+%table.table.table-bordered.table-responsive
+  %thead
+    %tr
+      %th{:scope => "col"} First Name
+      %th{:scope => "col"}
+        = sortable "users.last_name", "Last Name"
+      %th{:scope => "col"}
+        = sortable "designation", "Role"
+      %th{:scope => "col"} Change Role
+      %th{:scope => "col"} Remove User
+  %tbody
+    - @roles.each_with_index do |role, i|
+      %tr
+        %td.align-middle
+          = role.user.first_name
+        %td.align-middle
+          = role.user.last_name
+        %td.align-middle
+          = role.designation.name
+        %td.align-middle
+          %a.btn.btn-sm.btn-warning{:href => edit_role_path(role), :role => "button"} Modify
+        %td.align-middle
+          %a.btn.btn-sm.btn-danger{:href => project_remove_user_path(@project, role.user.id), :role => "button"} Remove
+
+.card-deck.py-3
+  .card
+    .card-body
+      %h4.card-title Add an existing user
+      %p.card-text Select an existing Charon user to attach to this project.
+    .card-footer
+      %a.btn.btn-lg.btn-block.btn-primary{:href => project_available_users_path(@project), :role => "button"} Add
+  .card
+    .card-body
+      %h4.card-title Create a user
+      %p.card-text Make a new user who will then be attached to this project.
+    .card-footer
+      %a.btn.btn-lg.btn-block.btn-primary{:href => project_new_user_path(@project), :role => "button"} Create

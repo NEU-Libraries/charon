@@ -66,7 +66,7 @@ class ProjectsController < CatalogController
       @project.attach_user(User.find(id))
     end
     flash[:notice] = "Successfully added users to #{@project.title}."
-    redirect_to project_users_path(@project)
+    redirect_to project_user_registry_path(@project)
   end
 
   def remove_user
@@ -74,12 +74,15 @@ class ProjectsController < CatalogController
     user = User.find(params[:user_id])
     @project.remove_user(user)
     flash[:notice] = "Successfully removed #{user.first_name} #{user.last_name} from #{@project.title}."
-    redirect_to project_users_path(@project)
+    redirect_to project_user_registry_path(@project)
+  end
+
+  def user_registry
+    authorize! :oversee, @project
+    @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
   def users
-    authorize! :oversee, @project
-    @roles = @project.roles.order(sort_column + ' ' + sort_direction)
   end
 
   def new_user

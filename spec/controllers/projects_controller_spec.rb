@@ -36,12 +36,12 @@ describe ProjectsController do
     end
   end
 
-  describe 'users' do
+  describe 'user_registry' do
     render_views
-    it 'lists attached users for a given project' do
+    it 'lists the user registry for a given project' do
       project.attach_user(user, Designation.manager)
       sign_in user
-      get :users, params: { id: project.noid }
+      get :user_registry, params: { id: project.noid }
       expect(CGI.unescapeHTML(response.body)).to include("User Registry for #{project.title}")
       # TODO: need to flesh this out by actually populating and looking for users
     end
@@ -62,7 +62,7 @@ describe ProjectsController do
     it 'returns designation unless there is a value for params[:sort]' do
       project.attach_user(user, Designation.manager)
       sign_in user
-      get :users, params: { id: project.noid, sort: 'users.last_name' }
+      get :user_registry, params: { id: project.noid, sort: 'users.last_name' }
       expect(CGI.unescapeHTML(response.body)).to include('Last Name ▾')
     end
   end

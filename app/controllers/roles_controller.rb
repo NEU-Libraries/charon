@@ -16,7 +16,7 @@ class RolesController < ApplicationController
     role.designation = Designation.find(params[:designation])
     role.save!
     flash[:notice] = "User role successfully changed to #{params[:designation]}."
-    redirect_to project_users_path(role.project)
+    redirect_to project_user_registry_path(role.project)
   end
 
   def show; end

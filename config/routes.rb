@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   post '/users/create_user' => 'users#create_user'
 
   # project user registry
+  get '/projects/:id/user_registry', to: 'projects#user_registry', as: 'project_user_registry'
   get '/projects/:id/users', to: 'projects#users', as: 'project_users'
   get '/projects/:id/new_user', to: 'projects#new_user', as: 'project_new_user'
   get '/projects/:id/available_users', to: 'projects#available_users', as: 'project_available_users'
