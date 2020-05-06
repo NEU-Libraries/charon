@@ -38,7 +38,7 @@ class Project < Resource
   end
 
   def users
-    roles&.map(&:user)
+    User.where(id: roles.pluck(:user_id))
   end
 
   def incoming_collection

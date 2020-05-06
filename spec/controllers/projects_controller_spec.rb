@@ -7,6 +7,16 @@ describe ProjectsController do
   let(:user) { create(:user) }
   let(:admin_user) { create(:admin) }
 
+  describe 'users' do
+    render_views
+    it 'renders a list of works associated with the project' do
+      sign_in admin_user
+      get :users, params: { id: project.noid }
+      expect(response).to render_template('projects/users')
+      # TODO: actually look up their last action and check them
+    end
+  end
+
   describe 'works' do
     render_views
     it 'renders a list of works associated with the project' do

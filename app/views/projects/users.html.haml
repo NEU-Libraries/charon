@@ -1,0 +1,16 @@
+%h2.py-3
+  = "Users for #{@project.title}"
+
+%table.table.table-bordered.table-responsive
+  %thead
+    %tr
+      %th{:scope => "col"} First Name
+      %th{:scope => "col"}
+        = sortable "users.last_name", "Last Name"
+  %tbody
+    - @users.each_with_index do |user, i|
+      %tr
+        %td.align-middle
+          = user.first_name
+        %td.align-middle
+          = user.last_name
