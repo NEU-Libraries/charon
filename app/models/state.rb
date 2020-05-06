@@ -5,8 +5,10 @@ class State < Minerva::State
 
   # TODO: move claim_path out of the model and into a helper
   def claim_path
-    path_array = Interface.find(interface_id).code_point.split('#')
-    url_for(controller: path_array[0], action: path_array[1], id: work.noid)
+    if interface_id.present?
+      path_array = Interface.find(interface_id).code_point.split('#')
+      return url_for(controller: path_array[0], action: path_array[1], id: work.noid)
+    end
   end
 
   private

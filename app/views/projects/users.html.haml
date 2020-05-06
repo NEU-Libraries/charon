@@ -11,6 +11,6 @@
     - @users.each_with_index do |user, i|
       %tr
         %td.align-middle
-          = user.name
+          = link_to "#{user.name}", user
         %td.align-middle
           = render partial: "shared/tasks/display", locals: {action: user.last_action(@project)}
