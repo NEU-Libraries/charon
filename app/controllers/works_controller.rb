@@ -46,7 +46,7 @@ class WorksController < ApplicationController
     def notify_user
       @assigned_user = User.find(params[:user][:id])
       @assigned_user.notify('Task Assigned',
-                            "#{helpers.link_to @current_user.to_s, @current_user}
+                            "#{helpers.link_to @current_user.name, @current_user}
                             has tasked you with #{@task.present_tense} for
                             #{helpers.link_to @work.title.to_s, @work}")
     end

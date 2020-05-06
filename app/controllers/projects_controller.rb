@@ -83,6 +83,7 @@ class ProjectsController < CatalogController
   end
 
   def users
+    params[:sort] = 'last_name' # Only value
     @users = @project.users.order(sort_column + ' ' + sort_direction)
   end
 

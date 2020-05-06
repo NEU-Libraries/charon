@@ -1,21 +1,22 @@
-- creator = User.find(Minerva::User.find(action.creator_id).auid)
-= link_to "#{creator.name}", creator
-- if !action.interface_id.blank?
-  - if action.status == "Assigned"
-    = render partial: "shared/tasks/assigned", locals: {action: action}
-  - if action.status == "Complete"
-    = render partial: "shared/tasks/complete", locals: {action: action}
-  - elsif action.status == "In Progress"
-    = render partial: "shared/tasks/in_progress", locals: {action: action}
-- else
-  changed
-= render partial: "shared/tasks/linked_work", locals: {action: action}
-- if action.interface_id.blank?
-  to
-  = action.status.downcase
-  - if action.user_id.present?
-    - user = User.find(Minerva::User.find(action.user_id).auid)
-    for
-    = link_to "#{user.name}", user
+- if action.present?
+  - creator = User.find(Minerva::User.find(action.creator_id).auid)
+  = link_to "#{creator.name}", creator
+  - if !action.interface_id.blank?
+    - if action.status == "Assigned"
+      = render partial: "shared/tasks/assigned", locals: {action: action}
+    - if action.status == "Complete"
+      = render partial: "shared/tasks/complete", locals: {action: action}
+    - elsif action.status == "In Progress"
+      = render partial: "shared/tasks/in_progress", locals: {action: action}
   - else
-    for anyone
+    changed
+  = render partial: "shared/tasks/linked_work", locals: {action: action}
+  - if action.interface_id.blank?
+    to
+    = action.status.downcase
+    - if action.user_id.present?
+      - user = User.find(Minerva::User.find(action.user_id).auid)
+      for
+      = link_to "#{user.name}", user
+    - else
+      for anyone

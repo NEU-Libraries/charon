@@ -20,6 +20,11 @@ class User < ApplicationRecord
 
   def projects; end
 
+  def last_action(project)
+    minerva_work_ids = Minerva::Work.where(auid: project.works.map(&:noid).to_a).pluck(:id)
+    State.where(creator_id: Minerva::User.find_by(auid: id)&.id, work_id: minerva_work_ids).last
+  end
+
   def role(project)
     roles.find_by(user_registry_id: project&.user_registry&.id)
   end

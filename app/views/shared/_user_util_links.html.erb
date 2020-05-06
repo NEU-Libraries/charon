@@ -8,7 +8,7 @@
     <li class="nav-item">
       <%= link_to t('blacklight.header_links.logout'), destroy_user_session_path, class: 'nav-link' %>
     </li>
-    <% unless current_user.to_s.blank? -%>
+    <% unless current_user.name.blank? -%>
     <li class="nav-item">
       <%= link_to current_user, user_path(current_user), class: 'nav-link' %>
     </li>

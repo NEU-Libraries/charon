@@ -4,13 +4,13 @@
 %table.table.table-bordered.table-responsive
   %thead
     %tr
-      %th{:scope => "col"} First Name
       %th{:scope => "col"}
-        = sortable "users.last_name", "Last Name"
+        = sortable "last_name", "Name"
+      %th{:scope => "col"} Last Action
   %tbody
     - @users.each_with_index do |user, i|
       %tr
         %td.align-middle
-          = user.first_name
+          = user.name
         %td.align-middle
-          = user.last_name
+          = render partial: "shared/tasks/display", locals: {action: user.last_action(@project)}
