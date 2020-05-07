@@ -1,7 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe StateHelper, :type => :helper do
-  describe "#claim_path" do
+require 'rails_helper'
+
+RSpec.describe StateHelper, type: :helper do
+  describe '#claim_path' do
     let(:state) { create(:state) }
 
     it "returns the url for a state based on it's code point" do
