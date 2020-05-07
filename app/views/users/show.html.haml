@@ -9,7 +9,8 @@
     %tr
       %th{:scope => "col"} Task
       %th{:scope => "col"} Status
-      %th{:scope => "col"} Actions
+      - if @user == current_user
+        %th{:scope => "col"} Actions
   %tbody
     - @assignments.each do |action|
       %tr
@@ -17,8 +18,9 @@
           = render partial: "shared/tasks/display", locals: {action: action}
         %td.align-middle
           = action.status
-        %td.align-middle
-          = render partial: "shared/tasks/actions", locals: {action: action}
+        - if @user == current_user
+          %td.align-middle
+            = render partial: "shared/tasks/actions", locals: {action: action}
 
 %h4.py-2
   Users Actions
