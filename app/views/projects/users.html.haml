@@ -4,12 +4,15 @@
 %table.table.table-bordered.table-responsive
   %thead
     %tr
+      %th{:scope => "col"} ID
       %th{:scope => "col"}
         = sortable "last_name", "Name"
       %th{:scope => "col"} Last Action
   %tbody
     - @users.each_with_index do |user, i|
       %tr
+        %td.align-middle
+          = user.id
         %td.align-middle
           = link_to "#{user.name}", user
         %td.align-middle

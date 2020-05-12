@@ -22,7 +22,15 @@ class User < ApplicationRecord
 
   def last_action(project)
     minerva_work_ids = Minerva::Work.where(auid: project.works.map(&:noid).to_a).pluck(:id)
-    State.where(creator_id: Minerva::User.find_by(auid: id)&.id, work_id: minerva_work_ids).last
+    user_id = Minerva::User.find_by(auid: id)&.id
+    return if user_id.blank?
+
+    last_action = State.where(creator_id: user_id, work_id: minerva_work_ids).last
+    if last_action.blank?
+      # Look for their last assignment
+      last_action = State.where(user_id: user_id, work_id: minerva_work_ids).last
+    end
+    last_action
   end
 
   def role(project)
