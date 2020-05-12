@@ -8,6 +8,7 @@ describe GenericUploadsController do
   let(:workflow) { create(:workflow) }
 
   describe 'new' do
+    render_views
     it 'renders the new record form' do
       get :new, params: { project_id: project.noid }
       expect(response).to render_template('generic_uploads/new')
@@ -32,6 +33,7 @@ describe GenericUploadsController do
   end
 
   describe 'approve' do
+    render_views
     it 'shows workflows for the project' do
       get :approve, params: { id: generic_upload.id }
       expect(response).to render_template('generic_uploads/approve')

@@ -10,6 +10,7 @@ describe ProjectsController do
   describe 'users' do
     render_views
     it 'renders a list of users associated with the project' do
+      Minerva::User.find_or_create_by(auid: user.id)
       project.attach_user(user, Designation.manager)
       sign_in admin_user
       get :users, params: { id: project.noid }
@@ -134,6 +135,7 @@ describe ProjectsController do
   end
 
   describe 'uploads' do
+    render_views
     it 'lists the binary uploads that are associated with this project' do
       sign_in admin_user
       get :uploads, params: { id: project.noid }
