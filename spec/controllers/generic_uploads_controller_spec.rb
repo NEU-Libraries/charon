@@ -9,7 +9,7 @@ describe GenericUploadsController do
 
   describe 'new' do
     it 'renders the new record form' do
-      get :new
+      get :new, params: { project_id: project.noid }
       expect(response).to render_template('generic_uploads/new')
     end
   end

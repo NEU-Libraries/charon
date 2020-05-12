@@ -38,6 +38,22 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb('New Project')
   end
 
+  def projects_uploads
+    breadcrumb(objects[:project].title, actions_path(objects[:project]))
+    breadcrumb('Uploaded Files')
+  end
+
+  def generic_uploads_approve
+    breadcrumb(objects[:project].title, actions_path(objects[:project]))
+    breadcrumb('Uploaded Files', project_uploads_path(objects[:project]))
+    breadcrumb('Approve File')
+  end
+
+  def generic_uploads_new
+    breadcrumb(objects[:project].title, actions_path(objects[:project]))
+    breadcrumb('Upload File')
+  end
+
   def collections_show
     breadcrumb(objects[:collection].parent.title, project_path(objects[:collection].parent))
     breadcrumb(objects[:collection].title)

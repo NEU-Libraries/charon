@@ -7,6 +7,7 @@ class GenericUploadsController < ApplicationController
   after_action :make_upload_state, :make_approval_state, only: [:attach]
 
   def new
+    @project = Project.find(params[:project_id])
     @generic_upload = GenericUpload.new
   end
 
@@ -22,6 +23,7 @@ class GenericUploadsController < ApplicationController
   def show; end
 
   def approve
+    @project = Project.find(@generic_upload.project_id)
     @workflows = Workflow.where(
       project_id: Minerva::Project.where(
         auid: @generic_upload.project_id
