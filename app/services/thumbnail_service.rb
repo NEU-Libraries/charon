@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ThumbnailService
+  include MimeHelper
+
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
     @work = Work.find(params[:work_id])
@@ -23,8 +25,8 @@ class ThumbnailService
 
     def make_jp2
       # create thumbnail derivative for IIIF
-      i = Image.read(path).first
-      return if path.blank?
+      return if find_path.blank?
+      i = Image.read(find_path).first
 
       i.format = 'JP2'
       thumbnail_path = "/home/charon/images/#{@work.id}.jp2"
@@ -64,9 +66,9 @@ class ThumbnailService
 
     def find_path
       path = ''
-      if determine_mime(@generic_upload.file).subtype == 'pdf'
+      if determine_mime(@upload.file).subtype == 'pdf'
         path = process_pdf
-      elsif determine_mime(@generic_upload.file).image?
+      elsif determine_mime(@upload.file).image?
         path = @upload.file.path
       end
       path
