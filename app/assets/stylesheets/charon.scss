@@ -171,6 +171,7 @@ footer {
 
 .navbar {
   .container-lg {
+    // Hardcoded - need to figure out mixins with variables to use lg sm etc.
     @media (max-width: 1024px) {
       padding: 0 !important;
     }
