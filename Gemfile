@@ -27,8 +27,10 @@ gem 'mimemagic'
 gem 'minerva'
 gem 'mods_display'
 gem 'noid-rails'
+gem 'pdf-reader'
 gem 'rails-controller-testing'
 gem 'rails-healthcheck'
+gem 'rmagick'
 gem 'simple_form'
 
 # QA gems

@@ -526,12 +526,14 @@ DEPENDENCIES
   minerva
   mods_display
   noid-rails
+  pdf-reader
   pg
   pry
   puma
   rails
   rails-controller-testing
   rails-healthcheck
+  rmagick
   rsolr
   rspec-rails
   rubocop
