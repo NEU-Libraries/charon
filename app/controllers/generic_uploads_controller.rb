@@ -101,11 +101,11 @@ class GenericUploadsController < ApplicationController
       @file_set = FileSet.new type: 'generic'
       @file_set = metadata_adapter.persister.save(resource: @file_set)
 
-      if determine_mime(@generic_upload.file).image?
-        ThumbnailService.new({ upload_id: @generic_upload.id,
-                               work_id: @saved_work.id,
-                               file_set_id: @file_set.id }).create_thumbnail
-      end
+      # Simply run everything through. Will do Image/PDF check in the service
+      # TODO: Make this a backgrounded job
+      ThumbnailService.new({ upload_id: @generic_upload.id,
+                             work_id: @saved_work.id,
+                             file_set_id: @file_set.id }).create_thumbnail
 
       BlobService.new({ upload_id: @generic_upload.id,
                         file_set_id: @file_set.id }).create_blob

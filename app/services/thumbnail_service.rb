@@ -8,7 +8,11 @@ class ThumbnailService
   end
 
   def create_thumbnail
+    # if determine_mime(@generic_upload.file).subtype == "pdf"
     thumbnail_path = make_jp2
+
+    return if thumbnail_path.blank?
+
     blob_id = make_thumbnail_blob(thumbnail_path)
     add_thumbnail_blob_to_work(blob_id)
     @work.thumbnail = true
@@ -19,7 +23,9 @@ class ThumbnailService
 
     def make_jp2
       # create thumbnail derivative for IIIF
-      i = Image.read(@upload.file.path).first
+      i = Image.read(path).first
+      return if path.blank?
+
       i.format = 'JP2'
       thumbnail_path = "/home/charon/images/#{@work.id}.jp2"
       i.write(thumbnail_path) # will need to do some unique filename to enable crosswalking back via pid
@@ -38,5 +44,31 @@ class ThumbnailService
       @file_set.member_ids += [blob_id]
       @file_set.a_member_of = @work.id
       Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
+    end
+
+    def process_pdf
+      pdf = Magick::ImageList.new(@upload.file.path + '[0]') do
+        self.density = 300
+        self.quality = 100
+      end
+      page_img = pdf.first
+
+      page_img.border!(0, 0, 'white')
+      page_img.alpha(Magick::DeactivateAlphaChannel)
+
+      file_path = "/home/charon/images/#{@work.id}-pdf-page-0.png"
+
+      page_img.write(file_path) { self.depth = 8 }
+      file_path
+    end
+
+    def find_path
+      path = ''
+      if determine_mime(@generic_upload.file).subtype == 'pdf'
+        path = process_pdf
+      elsif determine_mime(@generic_upload.file).image?
+        path = @upload.file.path
+      end
+      path
     end
 end
