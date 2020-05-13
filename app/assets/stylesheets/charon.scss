@@ -168,3 +168,11 @@ footer {
 .list-group-item:first-of-type {
   border-top-width: auto;
 }
+
+.navbar {
+  .container-lg {
+    @media (max-width: 1024px) {
+      padding: 0 !important;
+    }
+  }
+}
