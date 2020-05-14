@@ -5,6 +5,7 @@ require 'rails_helper'
 describe GenericUploadsController do
   let(:project) { FactoryBot.create_for_repository(:project) }
   let(:generic_upload) { create(:generic_upload) }
+  let(:generic_upload_pdf) { create(:generic_upload, :pdf) }
   let(:workflow) { create(:workflow) }
 
   describe 'new' do
@@ -42,11 +43,21 @@ describe GenericUploadsController do
   end
 
   describe 'attach' do
-    it 'associates a workflow with a new work made from an upload' do
+    it 'associates a workflow with a new work made from an image upload' do
       # TODO: move interface creation to shared spec starting point
       Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
       sign_in FactoryBot.create(:admin)
       get :attach, params: { id: generic_upload.id, workflow_id: workflow.id }
+      created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
+      expect(response).to redirect_to(created_work)
+      expect(created_work.workflow_id).to eq(workflow.id.to_s)
+    end
+
+    it 'associates a workflow with a new work made from a PDF upload' do
+      # TODO: move interface creation to shared spec starting point
+      Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
+      sign_in FactoryBot.create(:admin)
+      get :attach, params: { id: generic_upload_pdf.id, workflow_id: workflow.id }
       created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
       expect(response).to redirect_to(created_work)
       expect(created_work.workflow_id).to eq(workflow.id.to_s)

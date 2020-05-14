@@ -26,6 +26,7 @@ class ThumbnailService
     def make_jp2
       # create thumbnail derivative for IIIF
       return if find_path.blank?
+
       i = Image.read(find_path).first
 
       i.format = 'JP2'
