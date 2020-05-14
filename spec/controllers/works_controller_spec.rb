@@ -10,7 +10,7 @@ describe WorksController do
     it 'creates a new minerva task associated with interface and user' do
       # TODO: update this when the redirect properly integrates with dashboard
       sign_in admin_user
-      Minerva::Interface.create(title: 'transcribe', code_point: 'tasks#transcribe')
+      create_interfaces
       post :assign_task, params: { id: work.id, task: 'transcribe', user: { id: admin_user.id } }
       expect(Minerva::State.count).to be 1
       expect(response).to redirect_to(project_works_path(work.project))

@@ -18,9 +18,7 @@ describe TasksController do
   describe 'catalog' do
     render_views
     it 'renders an XML editor for this works MODS' do
-      # TODO: make these in a helper method for all rspec tests
-      Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
-      Minerva::Interface.create(title: 'catalog', code_point: 'catalog#catalog')
+      create_interfaces
 
       sign_in FactoryBot.create(:user)
       get :catalog, params: { id: work.noid }

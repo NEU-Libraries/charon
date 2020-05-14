@@ -44,8 +44,7 @@ describe GenericUploadsController do
 
   describe 'attach' do
     it 'associates a workflow with a new work made from an image upload' do
-      # TODO: move interface creation to shared spec starting point
-      Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
+      create_interfaces
       sign_in FactoryBot.create(:admin)
       get :attach, params: { id: generic_upload.id, workflow_id: workflow.id }
       created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
@@ -54,8 +53,7 @@ describe GenericUploadsController do
     end
 
     it 'associates a workflow with a new work made from a PDF upload' do
-      # TODO: move interface creation to shared spec starting point
-      Minerva::Interface.create(title: 'upload', code_point: 'generic_uploads#new')
+      create_interfaces
       sign_in FactoryBot.create(:admin)
       get :attach, params: { id: generic_upload_pdf.id, workflow_id: workflow.id }
       created_work = Valkyrie.config.metadata_adapter.query_service.find_all_of_model(model: Work).last
