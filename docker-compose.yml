@@ -8,6 +8,7 @@ volumes:
   redis:
 services:
   sidekiq:
+    image: nakatomi/charon_web:latest
     command: bundle exec sidekiq
     environment:
       - REDIS_URL_SIDEKIQ=redis://redis:6379/0

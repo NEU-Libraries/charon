@@ -1,8 +1,6 @@
 # Use postgres/example user/password credentials
 version: '3.7'
 services:
-  sidekiq:
-    image: nakatomi/charon_web:latest
   db:
     volumes:
       - /home/circleci/db:/var/lib/postgresql/data/pgdata
