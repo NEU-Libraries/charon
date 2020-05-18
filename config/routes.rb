@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   mount Blacklight::Engine => '/'
+  mount Sidekiq::Web => '/sidekiq'
 
   concern :searchable, Blacklight::Routes::Searchable.new
 

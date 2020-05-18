@@ -5,7 +5,22 @@ volumes:
   db:
   images:
   storage:
+  redis:
 services:
+  sidekiq:
+    depends_on:
+      - 'db'
+      - 'redis'
+    command: bundle exec sidekiq
+    environment:
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/0
+  redis:
+    image: 'redis:6-alpine'
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis:/data'
   db:
     image: postgres
     volumes:

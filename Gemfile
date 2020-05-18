@@ -31,6 +31,7 @@ gem 'pdf-reader'
 gem 'rails-controller-testing'
 gem 'rails-healthcheck'
 gem 'rmagick'
+gem 'sidekiq'
 gem 'simple_form'
 
 # QA gems
