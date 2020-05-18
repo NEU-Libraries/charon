@@ -2,7 +2,9 @@
 
 Rails.application.configure do
   config.assets.compile = false
-  
+
+  config.active_job.queue_adapter = :sidekiq
+
   Rails.application.routes.default_url_options[:host] = 'charon.library.northeastern.edu'
   # Settings specified here will take precedence over those in config/application.rb.
 
