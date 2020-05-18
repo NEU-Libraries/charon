@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   sidekiq:
-    build: /home/circleci/charon
+    image: nakatomi/charon_web:latest
   db:
     volumes:
       - /home/circleci/db:/var/lib/postgresql/data/pgdata
