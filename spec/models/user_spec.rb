@@ -8,15 +8,15 @@ describe User do
   let(:admin_user) { create(:admin) }
   let(:project) { FactoryBot.create_for_repository(:project) }
 
-  describe '#dev?' do
-    subject { dev_user.dev? }
+  describe '#developer?' do
+    subject { dev_user.developer? }
 
     context 'returns true if user has that capacity' do
       it { is_expected.to be true }
     end
 
     it 'returns false if user does not have that capacity' do
-      expect(admin_user.dev?).to be false
+      expect(admin_user.developer?).to be false
     end
   end
 

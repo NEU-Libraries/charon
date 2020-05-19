@@ -5,8 +5,16 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  sidekiq_web_constraint = lambda do |request|
+    current_user = request.env['warden'].user
+    current_user.present? && (current_user.admin? || current_user.developer?)
+  end
+
   mount Blacklight::Engine => '/'
-  mount Sidekiq::Web => '/sidekiq'
+
+  constraints sidekiq_web_constraint do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   concern :searchable, Blacklight::Routes::Searchable.new
 

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module RoleChecker
-  def dev?
+  def developer?
     capacity == :developer
   end
 
   def admin?
-    dev? || capacity == :administrator
+    developer? || capacity == :administrator
   end
 
   def manager?(project)
