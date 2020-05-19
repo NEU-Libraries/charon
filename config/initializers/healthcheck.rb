@@ -8,6 +8,8 @@ Healthcheck.configure do |config|
   config.method = :get
 
   # -- Checks --
+  # Check if redis and sidekiq is available
+  config.add_check :sidekiq, -> { !!Sidekiq.redis(&:info) rescue false }
   # Check if the db is available
   config.add_check :database, -> { ActiveRecord::Base.connection.execute('select 1') }
   # Check if the db is available and without pending migrations
