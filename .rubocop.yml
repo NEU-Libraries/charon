@@ -17,6 +17,7 @@ Layout/LineLength:
 Metrics/MethodLength:
   ExcludedMethods: ['role_permissions']
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.5
   Exclude:
     - 'db/**/*'
