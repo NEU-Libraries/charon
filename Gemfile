@@ -64,5 +64,5 @@ group :development do
 end
 
 group :development, :staging, :test do
-  gem 'faker', '1.9.1'
+  gem 'faker'
 end
