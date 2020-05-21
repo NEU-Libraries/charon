@@ -42,9 +42,7 @@ class GenericUploadsController < ApplicationController
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',
                                 "Your upload #{helpers.link_to @generic_upload.filename, @saved_work} was approved")
-    # create_thumbnail
     CreateThumbnailJob.perform_later(@generic_upload.id, @saved_work.noid)
-    # @generic_upload.destroy!
     redirect_to(work_path(@saved_work))
   end
 
@@ -96,19 +94,5 @@ class GenericUploadsController < ApplicationController
       )
       upload_approval_state.created_at = Time.zone.now + 1
       raise StandardError, state.errors.full_messages unless upload_approval_state.save
-    end
-
-    def create_thumbnail
-      @file_set = FileSet.new type: 'generic'
-      @file_set = metadata_adapter.persister.save(resource: @file_set)
-
-      # Simply run everything through. Will do Image/PDF check in the service
-      # TODO: Make this a backgrounded job
-      ThumbnailService.new({ upload_id: @generic_upload.id,
-                             work_id: @saved_work.id,
-                             file_set_id: @file_set.id }).create_thumbnail
-
-      BlobService.new({ upload_id: @generic_upload.id,
-                        file_set_id: @file_set.id }).create_blob
     end
 end
