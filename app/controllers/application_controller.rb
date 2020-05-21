@@ -31,8 +31,7 @@ class ApplicationController < ActionController::Base
 
   def find_resource
     # expects id to be in params, and to be a noid
-    meta = Valkyrie.config.metadata_adapter
-    meta.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+    metadata_adapter.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
   end
 
   def metadata_adapter

@@ -3,6 +3,10 @@ version: '3.7'
 services:
   sidekiq:
     build: .
+    volumes:
+      - ./:/home/charon/web
+      - storage:/home/charon/storage
+      - images:/home/charon/images
   web:
     build: .
     volumes:

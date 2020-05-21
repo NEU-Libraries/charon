@@ -42,8 +42,9 @@ class GenericUploadsController < ApplicationController
     # Notify user of acceptance
     @generic_upload.user.notify('Upload Approved',
                                 "Your upload #{helpers.link_to @generic_upload.filename, @saved_work} was approved")
-    create_thumbnail
-    @generic_upload.destroy!
+    # create_thumbnail
+    CreateThumbnailJob.perform_later(@generic_upload.id, @saved_work.noid)
+    # @generic_upload.destroy!
     redirect_to(work_path(@saved_work))
   end
 
