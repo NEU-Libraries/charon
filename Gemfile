@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'blacklight'
+gem 'blacklight', '7.7.0'
 gem 'blacklight-access_controls', git: 'https://github.com/projectblacklight/blacklight-access_controls.git'
 gem 'blacklight-gallery'
 gem 'croutons'

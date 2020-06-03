@@ -71,13 +71,12 @@ GEM
     autoprefixer-rails (9.7.6)
       execjs
     bcrypt (3.1.13)
-    blacklight (7.8.1)
+    blacklight (7.7.0)
       deprecation
       globalid
       jbuilder (~> 2.7)
       kaminari (>= 0.15)
       rails (>= 5.1, < 7)
-      view_component
     blacklight-gallery (2.0.2)
       blacklight (~> 7.7)
       bootstrap (~> 4.0)
@@ -500,8 +499,6 @@ GEM
       rdf-vocab
       reform
       reform-rails
-    view_component (2.7.0)
-      activesupport (>= 5.0.0, < 7.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     websocket-driver (0.7.2)
@@ -517,7 +514,7 @@ PLATFORMS
 DEPENDENCIES
   ace-rails-ap
   activerecord-session_store
-  blacklight
+  blacklight (= 7.7.0)
   blacklight-access_controls!
   blacklight-gallery
   bootsnap
