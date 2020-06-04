@@ -39,10 +39,9 @@ class GenericUploadsController < ApplicationController
                               @generic_upload.project.incoming_collection.id,
                               params[:workflow_id])
 
-    # Notify user of acceptance
-    @generic_upload.user.notify('Upload Approved',
-                                "Your upload #{helpers.link_to @generic_upload.filename, @saved_work} was approved")
-    CreateThumbnailJob.perform_later(@generic_upload.id, @saved_work.noid)
+    notify_of_attachment
+    CreateBlobJob.perform_later(@generic_upload.id, create_file_set.id.to_s)
+
     redirect_to(work_path(@saved_work))
   end
 
@@ -57,6 +56,14 @@ class GenericUploadsController < ApplicationController
   end
 
   private
+
+    def notify_of_attachment
+      # Notify user of acceptance
+      @generic_upload.user.notify('Upload Approved',
+                                  "Your upload
+                                  #{helpers.link_to @generic_upload.filename, @saved_work}
+                                  was approved")
+    end
 
     def file_presence_check
       file_presence_error if params[:generic_upload][:binary].blank?
@@ -74,6 +81,11 @@ class GenericUploadsController < ApplicationController
                           a_member_of: parent_id,
                           workflow_id: workflow_id)
       metadata_adapter.persister.save(resource: new_work)
+    end
+
+    def create_file_set
+      file_set = FileSet.new type: 'generic'
+      Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
     end
 
     def make_upload_state

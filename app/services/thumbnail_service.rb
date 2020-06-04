@@ -9,8 +9,7 @@ class ThumbnailService
     @file_set = FileSet.find(params[:file_set_id])
   end
 
-  def create_thumbnail
-    # if determine_mime(@generic_upload.file).subtype == "pdf"
+  def run
     thumbnail_path = make_jp2
 
     return if thumbnail_path.blank?
@@ -19,6 +18,7 @@ class ThumbnailService
     add_thumbnail_blob_to_work(blob_id)
     @work.thumbnail = true
     Valkyrie.config.metadata_adapter.persister.save(resource: @work)
+    GenericUpload.find(upload_id).destroy!
   end
 
   private
