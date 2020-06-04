@@ -40,7 +40,7 @@ class GenericUploadsController < ApplicationController
                               params[:workflow_id])
 
     notify_of_attachment
-    CreateBlobJob.perform_later(@generic_upload.id, create_file_set.id.to_s)
+    CreateBlobJob.perform_later(@saved_work.noid, @generic_upload.id, create_file_set.noid)
 
     redirect_to(work_path(@saved_work))
   end

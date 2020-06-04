@@ -3,6 +3,7 @@
 class BlobService
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
+    @work = Work.find(params[:work_id])
     @file_set = FileSet.find(params[:file_set_id])
   end
 
@@ -13,7 +14,7 @@ class BlobService
     saved_blob = Valkyrie.config.metadata_adapter.persister.save(resource: blob)
     @file_set.member_ids += [saved_blob.id]
     Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
-    CreateThumbnailJob.perform_later(@generic_upload.id, @saved_work.noid, fs.id)
+    CreateThumbnailJob.perform_later(@upload.id, @work.noid, @file_set.noid)
   end
 
   private

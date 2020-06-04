@@ -18,7 +18,7 @@ class ThumbnailService
     add_thumbnail_blob_to_work(blob_id)
     @work.thumbnail = true
     Valkyrie.config.metadata_adapter.persister.save(resource: @work)
-    GenericUpload.find(upload_id).destroy!
+    GenericUpload.find(@upload.id).destroy!
   end
 
   private

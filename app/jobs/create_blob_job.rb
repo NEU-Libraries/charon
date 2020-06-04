@@ -3,8 +3,9 @@
 class CreateBlobJob < ApplicationJob
   queue_as :default
 
-  def perform(upload_id, file_set_id)
-    BlobService.new({ upload_id: upload_id,
+  def perform(work_id, upload_id, file_set_id)
+    BlobService.new({ work_id: work_id,
+                      upload_id: upload_id,
                       file_set_id: file_set_id }).run
   end
 end
