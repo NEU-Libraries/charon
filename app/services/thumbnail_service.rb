@@ -7,9 +7,14 @@ class ThumbnailService
     @upload = GenericUpload.find(params[:upload_id])
     @work = Work.find(params[:work_id])
     @file_set = FileSet.find(params[:file_set_id])
+  rescue Valkyrie::Persistence::ObjectNotFoundError, ActiveRecord::RecordNotFound => e
+    Rails.logger.error(e)
   end
 
   def run
+    return if @upload.nil? || @work.nil? || @file_set.nil?
+    return if @work.thumbnail == true # idempotent step
+
     thumbnail_path = make_jp2
 
     return if thumbnail_path.blank?

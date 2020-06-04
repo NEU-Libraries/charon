@@ -1,32 +1,40 @@
 # frozen_string_literal: true
 
 describe CreateBlobJob do
-  subject(:job) { described_class.perform_later('x', 'y') }
   let(:work) { FactoryBot.create_for_repository(:work) }
   let(:image) { create(:generic_upload) }
   let(:pdf) { create(:generic_upload, :pdf) }
+  let(:blank_file_set) { FactoryBot.create_for_repository(:file_set, :blank) }
   let(:file_set) { FactoryBot.create_for_repository(:file_set) }
 
   ActiveJob::Base.queue_adapter = :test
-
-  it 'queues the job' do
-    expect { job }.to have_enqueued_job(described_class)
-      .with('x', 'y')
-      .on_queue('default')
-  end
 
   it 'runs the job successfully with an image' do
     # TODO: check that derivatives are actually created
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
     expect do
-      CreateBlobJob.perform_later(work.noid, image.id, file_set.noid)
+      CreateBlobJob.perform_later(work.noid, image.id, blank_file_set.noid)
     end.to have_performed_job(CreateBlobJob)
   end
 
   it 'runs the job successfully with a PDF' do
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
     expect do
-      CreateBlobJob.perform_later(work.noid, pdf.id, file_set.noid)
+      CreateBlobJob.perform_later(work.noid, pdf.id, blank_file_set.noid)
+    end.to have_performed_job(CreateBlobJob)
+  end
+
+  it 'exits gracefully if params refer to missing objects' do
+    ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
+    expect do
+      CreateBlobJob.perform_later('', '', '')
+    end.to have_performed_job(CreateBlobJob)
+  end
+
+  it 'exits gracefully if file set already has original file' do
+    ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
+    expect do
+      CreateBlobJob.perform_later(work.noid, image.id, file_set.noid)
     end.to have_performed_job(CreateBlobJob)
   end
 
