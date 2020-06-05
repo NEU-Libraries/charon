@@ -13,7 +13,9 @@ Rails.application.config.to_prepare do
   )
 
   Valkyrie::StorageAdapter.register(
-    Valkyrie::Storage::Disk.new(base_path: Rails.root.join('tmp', 'files')),
+    Valkyrie::Storage::Disk.new(base_path: Rails.root.join('tmp', 'files'),
+    file_mover: FileUtils.method(:cp)
+    ),
     :disk
   )
 
