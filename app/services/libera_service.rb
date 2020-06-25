@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class LibereaService
+class LiberaService
   def initialize(params)
     @work = Work.find(params[:work_id])
     @blob = Blob.find(params[:blob_id])
 
-    parser = Libera::Parser.new
-    parser.mk_working_dir
+    @parser = Libera::Parser.new
+    @parser.mk_working_dir
     @file_list = []
     reader = PDF::Reader.new(@blob.file_path)
     @page_count = reader.page_count - 1
@@ -20,7 +20,7 @@ class LibereaService
       pdf.destroy! && page_img.destroy!
     end
 
-    parser.generate_tei(@page_list)
+    @parser.generate_tei(@page_list)
   end
 
   private
@@ -42,7 +42,7 @@ class LibereaService
       @file_list << file_path
       page_img.write(file_path) { self.depth = 8 }
 
-      txt = parser.parse_image(file_path, page_number)
+      txt = @parser.parse_image(file_path, page_number)
       @page_list[file_name] = txt
     end
 end
