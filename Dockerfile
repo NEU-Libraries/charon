@@ -1,5 +1,5 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev msmtp msmtp-mta ghostscript
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev msmtp msmtp-mta ghostscript tesseract-ocr libgs-dev imagemagick
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
         && apt-get install -y nodejs
 RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /usr/local/bin/cc-test-reporter

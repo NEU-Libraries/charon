@@ -15,9 +15,7 @@ class LiberaService
 
   def run
     (0..@page_count).each do |i|
-      parse_page(i)
-    ensure
-      pdf.destroy! && page_img.destroy!
+      read_page(i)
     end
 
     @parser.generate_tei(@page_list)
@@ -33,6 +31,8 @@ class LiberaService
       page_img.alpha(Magick::DeactivateAlphaChannel)
 
       parse_page(page_number, page_img)
+    ensure
+      pdf.destroy! && page_img.destroy!
     end
 
     def parse_page(page_number, page_img)

@@ -7,5 +7,10 @@ FactoryBot.define do
     to_create do |instance|
       Valkyrie.config.metadata_adapter.persister.save(resource: instance)
     end
+
+    trait :pdf do
+      file_identifier { 'disk://' + Rails.root.join('spec/fixtures/files/example.pdf').to_s }
+      original_filename { 'example.pdf' }
+    end
   end
 end
