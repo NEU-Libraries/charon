@@ -11,4 +11,5 @@ class Classification < Enumerations::Base
   value :text,              name: 'Text'
   value :archive,           name: 'Archive'
   value :musical_notation,  name: 'Musical Notation'
+  value :work,              name: 'Work'
 end

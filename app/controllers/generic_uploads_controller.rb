@@ -84,7 +84,7 @@ class GenericUploadsController < ApplicationController
     end
 
     def create_file_set
-      file_set = FileSet.new type: 'generic'
+      file_set = FileSet.new type: Classification.work.name # need to allow for other types
       Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
     end
 
