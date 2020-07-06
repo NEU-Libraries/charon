@@ -25,11 +25,11 @@ module MimeHelper
 
     def by_extension(extension)
       case extension
-      when (%w[docx doc].include? extension)
+      when 'docx', 'doc'
         Classification.text
-      when (%w[xls xlsx xlw].include? extension)
+      when 'xls', 'xlsx', 'xlw'
         Classification.spreadsheet
-      when (%w[ppt pptx pps ppsx].include? extension)
+      when 'ppt', 'pptx', 'pps', 'ppsx'
         Classification.presentation
       end
     end
