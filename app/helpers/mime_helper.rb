@@ -10,4 +10,8 @@ module MimeHelper
 
     mime
   end
+
+  def determine_classification(mime)
+    # enumerate mime types to classification for file set type
+  end
 end
