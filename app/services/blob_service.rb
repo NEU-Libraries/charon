@@ -31,7 +31,7 @@ class BlobService
       Valkyrie.config.storage_adapter.upload(
         file: @upload.file,
         resource: @file_set,
-        original_filename: @upload.filename
+        original_filename: @upload.file_name
       )
     end
 end

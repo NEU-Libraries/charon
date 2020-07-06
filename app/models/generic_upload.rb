@@ -4,7 +4,7 @@ class GenericUpload < ApplicationRecord
   has_one_attached :binary
   belongs_to :user
 
-  def filename
+  def file_name
     binary.blob.filename.to_s
   end
 

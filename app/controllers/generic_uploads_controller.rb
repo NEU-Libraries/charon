@@ -16,7 +16,7 @@ class GenericUploadsController < ApplicationController
     gu.user = current_user
     gu.save!
 
-    flash[:notice] = "File #{gu.filename} uploaded"
+    flash[:notice] = "File #{gu.file_name} uploaded"
     redirect_to(actions_path(params[:generic_upload][:project_id])) && return
   end
 
@@ -34,13 +34,13 @@ class GenericUploadsController < ApplicationController
   def deny; end
 
   def attach
-    @saved_work = create_work(@generic_upload.filename,
+    @saved_work = create_work(@generic_upload.file_name,
                               @generic_upload.project.id,
                               @generic_upload.project.incoming_collection.id,
                               params[:workflow_id])
 
     notify_of_attachment
-    CreateBlobJob.perform_later(@saved_work.noid, @generic_upload.id, create_file_set.noid)
+    CreateBlobJob.perform_later(@saved_work.noid, @generic_upload.id, create_file_set(@generic_upload.file_path).noid)
 
     redirect_to(work_path(@saved_work))
   end
@@ -48,7 +48,7 @@ class GenericUploadsController < ApplicationController
   def reject
     # notify user of denial reason
     @generic_upload.user.notify('Upload Denied',
-                                "Your upload #{@generic_upload.filename} was denied - #{params[:denial]}")
+                                "Your upload #{@generic_upload.file_name} was denied - #{params[:denial]}")
     # remove binary
     @generic_upload.destroy
     flash[:notice] = 'User notified of denial and upload removed'
@@ -61,7 +61,7 @@ class GenericUploadsController < ApplicationController
       # Notify user of acceptance
       @generic_upload.user.notify('Upload Approved',
                                   "Your upload
-                                  #{helpers.link_to @generic_upload.filename, @saved_work}
+                                  #{helpers.link_to @generic_upload.file_name, @saved_work}
                                   was approved")
     end
 
@@ -83,8 +83,8 @@ class GenericUploadsController < ApplicationController
       metadata_adapter.persister.save(resource: new_work)
     end
 
-    def create_file_set
-      file_set = FileSet.new type: Classification.work.name # need to allow for other types
+    def create_file_set(file_path)
+      file_set = FileSet.new type: determine_classification(file_path)
       Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
     end
 
