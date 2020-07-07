@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BlobService
+  include MimeHelper
+
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
     @work = Work.find(params[:work_id])
@@ -24,7 +26,9 @@ class BlobService
       blob = Blob.new
       blob.file_identifier = create_file.id
       blob.use = [Valkyrie::Vocab::PCDMUse.OriginalFile]
-      Valkyrie.config.metadata_adapter.persister.save(resource: blob)
+      saved_blob = Valkyrie.config.metadata_adapter.persister.save(resource: blob)
+      LiberaJob.perform_later(@work.noid, saved_blob.noid) if determine_mime(saved_blob.file_path).subtype == 'pdf'
+      saved_blob
     end
 
     def create_file

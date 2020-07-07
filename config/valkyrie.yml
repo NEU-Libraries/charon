@@ -8,7 +8,7 @@ staging:
 
 test:
   metadata_adapter: memory
-  storage_adapter: memory
+  storage_adapter: test_disk
 
 production:
   metadata_adapter: composite_persister

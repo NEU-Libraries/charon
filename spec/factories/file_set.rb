@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :blank do
       member_ids { [] }
     end
+
+    trait :pdf do
+      member_ids { FactoryBot.create_for_repository(:blob, :pdf).id }
+    end
   end
 end

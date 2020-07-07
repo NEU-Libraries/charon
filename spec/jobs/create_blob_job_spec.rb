@@ -19,6 +19,7 @@ describe CreateBlobJob do
 
   it 'runs the job successfully with a PDF' do
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
+    expect(pdf.file_name).to eq('example.pdf')
     expect do
       CreateBlobJob.perform_later(work.noid, pdf.id, blank_file_set.noid)
     end.to have_performed_job(CreateBlobJob)

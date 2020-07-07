@@ -17,6 +17,14 @@ Rails.application.config.to_prepare do
       base_path: Rails.root.join('tmp', 'files'),
       file_mover: FileUtils.method(:cp)
     ),
+    :test_disk
+  )
+
+  Valkyrie::StorageAdapter.register(
+    Valkyrie::Storage::Disk.new(
+      base_path: '/home/charon/storage/valkyrie',
+      file_mover: FileUtils.method(:cp)
+    ),
     :disk
   )
 
