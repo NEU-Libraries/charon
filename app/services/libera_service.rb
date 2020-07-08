@@ -37,7 +37,11 @@ class LiberaService
 
     def parse_page(page_number, page_img)
       file_name = "pdf-page-#{page_number}.#{Libera.configuration.format_type}"
-      file_path = "#{Libera.configuration.working_dir}/#{file_name}"
+
+      dir_path = "#{Libera.configuration.working_dir}/libera-#{Time.now.to_f.to_s.gsub!('.', '')}"
+      FileUtils.mkdir_p dir_path
+
+      file_path = "#{dir_path}/#{file_name}"
 
       @file_list << file_path
       page_img.write(file_path) { self.depth = 8 }
