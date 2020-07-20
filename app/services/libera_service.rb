@@ -66,17 +66,24 @@ class LiberaService
     end
 
     def parse_page(page_number, page_img)
-      file_name = "pdf-page-#{page_number}.#{Libera.configuration.format_type}"
+      image_file_name = "pdf-page-#{page_number}.#{Libera.configuration.format_type}"
+      image_file_path = "#{Libera.configuration.working_dir}/#{image_file_name}"
 
-      file_path = "#{Libera.configuration.working_dir}/#{file_name}"
+      @file_list << image_file_path
+      page_img.write(image_file_path) { self.depth = 8 }
 
-      @file_list << file_path
-      page_img.write(file_path) { self.depth = 8 }
-
-      page_file = create_file(File.open(file_path), file_name)
+      page_file = create_file(File.open(image_file_path), image_file_name)
       populate_file_set(page_file)
 
-      txt = @parser.parse_image(file_path, page_number)
-      @page_list[file_name] = txt
+      txt = @parser.parse_image(image_file_path, page_number)
+      @page_list[image_file_name] = txt
+      parse_image(page_number)
+    end
+
+    def parse_image(page_number)
+      text_file_name = "pdf-page-#{page_number}.txt"
+      text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
+      text_file = create_file(File.open(text_file_path), text_file_name)
+      populate_file_set(text_file)
     end
 end
