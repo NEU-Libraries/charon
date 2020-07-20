@@ -3,7 +3,7 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = current_user.mailbox.notifications
-    @unread_ids = current_user.mailbox.notifications(unread: true).pluck(:id)
+    @unread_ids = current_user.mailbox.notifications(unread: true).ids
   end
 
   def mark_as_read

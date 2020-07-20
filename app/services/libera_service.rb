@@ -5,16 +5,18 @@ class LiberaService
     @work = Work.find(params[:work_id])
     @blob = Blob.find(params[:blob_id])
 
+    Libera.configuration.working_dir = Rails.root.join('tmp').to_s + "/libera-#{Time.now.to_f.to_s.gsub!('.', '')}"
     @parser = Libera::Parser.new
     @parser.mk_working_dir
     @file_list = []
-    reader = PDF::Reader.new(@blob.file_path)
-    @page_count = reader.page_count - 1
     @page_list = {}
   end
 
   def run
     create_file_set
+
+    reader = PDF::Reader.new(@blob.file_path)
+    @page_count = reader.page_count - 1
 
     (0..@page_count).each do |i|
       read_page(i)
@@ -66,10 +68,7 @@ class LiberaService
     def parse_page(page_number, page_img)
       file_name = "pdf-page-#{page_number}.#{Libera.configuration.format_type}"
 
-      dir_path = "#{Libera.configuration.working_dir}/libera-#{Time.now.to_f.to_s.gsub!('.', '')}"
-      FileUtils.mkdir_p dir_path
-
-      file_path = "#{dir_path}/#{file_name}"
+      file_path = "#{Libera.configuration.working_dir}/#{file_name}"
 
       @file_list << file_path
       page_img.write(file_path) { self.depth = 8 }

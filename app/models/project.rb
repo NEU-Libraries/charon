@@ -14,7 +14,7 @@ class Project < Resource
   def attach_user(user, designation = Designation.user)
     # check to see if user is already attached
     # in which case do nothing
-    return if Role.where(user_registry_id: user_registry.id, user_id: user.id).exists?
+    return if Role.exists?(user_registry_id: user_registry.id, user_id: user.id)
 
     role = Role.new(user: user, user_registry: user_registry, designation: designation)
     user_registry.roles << role
@@ -22,7 +22,7 @@ class Project < Resource
   end
 
   def remove_user(user)
-    return unless user.roles.where(user_registry_id: user_registry_id).exists?
+    return unless user.roles.exists?(user_registry_id: user_registry_id)
 
     role = Role.find_by(user_registry_id: user_registry_id, user_id: user.id)
     user_registry.roles.delete(role)
@@ -38,7 +38,7 @@ class Project < Resource
   end
 
   def users
-    User.where(id: roles.pluck(:user_id))
+    User.where(id: roles.select(:user_id))
   end
 
   def incoming_collection
