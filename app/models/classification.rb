@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Classification < Enumerations::Base
+  value :derivative,        name: 'Derivative'
   value :map,               name: 'Map'
   value :dataset,           name: 'Dataset'
   value :image,             name: 'Image'
