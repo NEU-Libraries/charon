@@ -23,6 +23,7 @@ class LiberaService
     end
 
     @parser.generate_tei(@page_list)
+    add_tei
   end
 
   private
@@ -85,5 +86,11 @@ class LiberaService
       text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
       text_file = create_file(File.open(text_file_path), text_file_name)
       populate_file_set(text_file)
+    end
+
+    def add_tei
+      tei_path = "#{Libera.configuration.working_dir}/tei.xml"
+      tei_file = create_file(File.open(tei_path), 'tei.xml')
+      populate_file_set(tei_file)
     end
 end
