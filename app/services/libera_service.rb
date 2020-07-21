@@ -29,9 +29,9 @@ class LiberaService
   private
 
     def create_file_set
-      @file_set = FileSet.new type: Classification.derivative.name
-      @file_set.a_member_of = @work.id
-      Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
+      fs = FileSet.new type: Classification.derivative.name
+      fs.a_member_of = @work.id
+      @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: fs)
     end
 
     def create_derivative_blob(file)
@@ -63,7 +63,7 @@ class LiberaService
 
     def populate_file_set(page_file)
       @file_set.member_ids += [create_derivative_blob(page_file).id]
-      Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
+      @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
     end
 
     def parse_page(page_number, page_img)
