@@ -103,5 +103,8 @@ Rails.application.routes.draw do
   get '/works/:id/tasks', to: 'works#tasks', as: 'tasks'
   post '/works/:id/assign_task', to: 'works#assign_task', as: 'assign_task'
 
+  # downloads
+  get '/downloads/:id', to: 'downloads#download', as: 'download'
+
   resources :users, only: [:index, :show]
 end

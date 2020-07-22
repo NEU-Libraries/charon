@@ -29,8 +29,11 @@ class Resource < Valkyrie::Resource
   end
 
   def children
-    Valkyrie.config.metadata_adapter.query_service.find_inverse_references_by(
+    result = []
+    result.concat Valkyrie.config.metadata_adapter.query_service.find_inverse_references_by(
       resource: self, property: :a_member_of
-    )
+    ).to_a
+    result.concat Valkyrie.config.metadata_adapter.query_service.find_members(resource: self).to_a
+    result.uniq
   end
 end
