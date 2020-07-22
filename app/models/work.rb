@@ -31,4 +31,12 @@ class Work < Resource
   def responsible_user
     return User.find(Minerva::User.find(history.first.user_id).auid) if history&.first&.user_id.present?
   end
+
+  def files
+    children.map(&:files).flatten
+  end
+
+  def file_paths
+    files.map(&:file_path)
+  end
 end
