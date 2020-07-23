@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class DownloadsController < ApplicationController
+class ImagesController < ApplicationController
   def manifest; end
 end
