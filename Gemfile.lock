@@ -230,6 +230,10 @@ GEM
     i18n (1.8.4)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    iiif-presentation (1.0.0)
+      activesupport (>= 3.2.18)
+      faraday (>= 0.9)
+      json
     image_processing (1.11.0)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -544,6 +548,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   haml-rails
+  iiif-presentation
   jquery-rails
   libera
   listen
