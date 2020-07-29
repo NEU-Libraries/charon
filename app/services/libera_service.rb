@@ -57,8 +57,6 @@ class LiberaService
       page_img.alpha(Magick::DeactivateAlphaChannel)
 
       parse_page(page_number, page_img)
-    ensure
-      pdf.destroy! && page_img.destroy!
     end
 
     def populate_file_set(page_file)
