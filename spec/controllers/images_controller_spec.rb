@@ -8,7 +8,7 @@ describe ImagesController do
   describe 'manifest' do
     it 'generates a IIIF manifest' do
       get :manifest, params: { id: file_set.noid }
-      expect(CGI.unescapeHTML(response.body)).to eq('')
+      expect(JSON.parse(response.body)['sequences'][0]['canvases'][0]['label']).to eq('Image 1')
     end
   end
 end
