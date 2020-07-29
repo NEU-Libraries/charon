@@ -12,5 +12,10 @@ FactoryBot.define do
       file_identifier { 'disk://' + Rails.root.join('spec/fixtures/files/example.pdf').to_s }
       original_filename { 'example.pdf' }
     end
+
+    trait :png do
+      file_identifier { 'disk://' + Rails.root.join('spec/fixtures/files/image.png').to_s }
+      original_filename { 'image.png' }
+    end
   end
 end

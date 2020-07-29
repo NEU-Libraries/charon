@@ -106,5 +106,8 @@ Rails.application.routes.draw do
   # downloads
   get '/downloads/:id', to: 'downloads#download', as: 'download'
 
+  # iiif manifest for file set
+  get '/manifest/:id', to: 'images#manifest', as: 'manifest'
+
   resources :users, only: [:index, :show]
 end
