@@ -1,6 +1,6 @@
 FROM ruby:2.5
-RUN sed 's/none\" pattern=\"PDF/read|write\" pattern=\"PDF/g' /etc/ImageMagick-6/policy.xml
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev msmtp msmtp-mta ghostscript tesseract-ocr libgs-dev imagemagick
+RUN sed -i.bak 's/none\" pattern=\"PDF/read|write\" pattern=\"PDF/g' /etc/ImageMagick-6/policy.xml
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
         && apt-get install -y nodejs
 RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /usr/local/bin/cc-test-reporter
