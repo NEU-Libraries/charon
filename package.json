@@ -1,5 +1,11 @@
 {
   "name": "charon",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "universalviewer": "^4.0.0-pre.40"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:NEU-Libraries/charon.git",
+  "license": "MIT"
 }

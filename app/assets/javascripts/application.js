@@ -29,4 +29,7 @@
 
 //= require picturefill
 
+//= require universalviewer/dist/uv-assets/js/bundle
+//= require universalviewer/dist/uv-dist-umd/UV
+
 //= require_tree .
