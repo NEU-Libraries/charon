@@ -34,6 +34,7 @@ gem 'rails-healthcheck'
 gem 'rmagick'
 gem 'sidekiq'
 gem 'simple_form'
+gem 'webpacker'
 
 # QA gems
 gem 'rubocop', require: false
