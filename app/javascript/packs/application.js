@@ -19,3 +19,22 @@ import 'bootstrap/dist/js/bootstrap';
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+
+// Local
+require('blacklight-frontend/app/javascript/blacklight/core')
+require('blacklight-frontend/app/javascript/blacklight/autocomplete')
+require('blacklight-frontend/app/javascript/blacklight/checkbox_submit')
+require('blacklight-frontend/app/javascript/blacklight/modal')
+require('blacklight-frontend/app/javascript/blacklight/bookmark_toggle')
+require('blacklight-frontend/app/javascript/blacklight/collapsable')
+require('blacklight-frontend/app/javascript/blacklight/facet_load')
+require('blacklight-frontend/app/javascript/blacklight/search_context')
+// doing the above rather than require('blacklight-frontend/app/assets/javascripts/blacklight/blacklight')
+// each script may have an import it's doing
+
+// Removed from _home_text.html.erb
+Blacklight.onLoad(function() {
+    $('#about .card-header').one('click', function() {
+        $($(this).data('target')).load($(this).find('a').attr('href'));
+    });
+});
