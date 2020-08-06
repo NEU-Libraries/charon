@@ -5,7 +5,9 @@
     "@rails/activestorage": "^6.0.3-2",
     "@rails/ujs": "^6.0.3-2",
     "@rails/webpacker": "5.1.1",
+    "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "universalviewer": "^3.1.1",
     "webpack": "^4.0.0"
   },
