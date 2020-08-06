@@ -5,6 +5,7 @@
     "@rails/activestorage": "^6.0.3-2",
     "@rails/ujs": "^6.0.3-2",
     "@rails/webpacker": "5.1.1",
+    "ace-code-editor": "^1.2.3",
     "blacklight-frontend": "^7.7.0",
     "bootstrap": "^4.5.2",
     "html5sortable": "^0.9.17",
