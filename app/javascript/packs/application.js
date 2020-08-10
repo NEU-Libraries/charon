@@ -16,9 +16,12 @@
 // const imagePath = (name) => images(name, true)
 
 import 'bootstrap/dist/js/bootstrap';
+import 'ace-builds';
+import 'ace-builds/webpack-resolver';
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+require("jquery")
 
 // Local
 require('blacklight-frontend/app/javascript/blacklight/core')
@@ -26,7 +29,7 @@ require('blacklight-frontend/app/javascript/blacklight/autocomplete')
 require('blacklight-frontend/app/javascript/blacklight/checkbox_submit')
 require('blacklight-frontend/app/javascript/blacklight/modal')
 require('blacklight-frontend/app/javascript/blacklight/bookmark_toggle')
-require('blacklight-frontend/app/javascript/blacklight/collapsable')
+require('blacklight-frontend/app/javascript/blacklight/button_focus')
 require('blacklight-frontend/app/javascript/blacklight/facet_load')
 require('blacklight-frontend/app/javascript/blacklight/search_context')
 // doing the above rather than require('blacklight-frontend/app/assets/javascripts/blacklight/blacklight')
