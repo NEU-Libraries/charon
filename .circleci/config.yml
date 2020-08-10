@@ -48,7 +48,7 @@ jobs:
             mkdir -p ~/caches
             docker save -o ~/caches/charon.tar nakatomi/charon_web
       - save_cache:
-          key: v2-{{ .Branch }}-{{ epoch }}
+          key: v1-{{ .Branch }}-{{ epoch }}
           paths:
             - ~/caches/charon.tar
       - run:
