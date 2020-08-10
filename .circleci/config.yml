@@ -64,9 +64,9 @@ jobs:
       - run:
           name: Create database and migrate
           command: |
-            docker-compose run web bundle exec rake db:create
-            docker-compose run web bundle exec rake db:migrate
-            docker-compose run web NODE_ENV=test bundle exec rails webpacker:compile
+            docker-compose exec web bundle exec rake db:create
+            docker-compose exec web bundle exec rake db:migrate
+            docker-compose exec web NODE_ENV=test bundle exec rails webpacker:compile
       - run:
           name: Wait for web
           command: dockerize -wait http://localhost:3000 -timeout 1m
