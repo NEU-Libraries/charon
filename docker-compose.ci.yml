@@ -6,6 +6,5 @@ services:
       - /home/circleci/db:/var/lib/postgresql/data/pgdata
   web:
     environment:
-      - RAILS_ENV=test
       - CC_TEST_REPORTER_ID=2afef0d746c34186735d7958d540e8f96aa9de8ddc4f9cc82f13dad228074a5a
     build: /home/circleci/charon
