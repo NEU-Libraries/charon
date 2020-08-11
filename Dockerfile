@@ -18,4 +18,5 @@ COPY --chown=charon:charon . /home/charon/web
 RUN bundle install
 RUN yarn install
 RUN bundle exec rails webpacker:compile
+RUN NODE_ENV=test bundle exec rails webpacker:compile
 RUN cp /home/charon/web/scripts/msmtprc /home/charon/.msmtprc
