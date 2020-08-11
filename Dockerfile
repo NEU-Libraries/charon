@@ -15,8 +15,8 @@ RUN mkdir -p /home/charon/web
 RUN mkdir -p /home/charon/images
 WORKDIR /home/charon/web
 COPY --chown=charon:charon . /home/charon/web
-RUN bundle install
+RUN bundle install --path vendor/bundle
 RUN yarn install
-RUN bundle exec rails webpacker:compile
-RUN NODE_ENV=test bundle exec rails webpacker:compile
+RUN bundle exec rake assets:precompile
+RUN bundle exec rake assets:precompile RAILS_ENV=test
 RUN cp /home/charon/web/scripts/msmtprc /home/charon/.msmtprc

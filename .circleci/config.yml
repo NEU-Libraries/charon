@@ -73,7 +73,7 @@ jobs:
           name: Run Specs
           command: |
             docker-compose exec web cc-test-reporter before-build
-            docker-compose exec web bundle exec rake
+            docker-compose exec web bundle exec rspec --profile
             docker-compose exec web cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
       - run:
           name: Run Rubocop

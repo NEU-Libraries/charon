@@ -6,6 +6,8 @@
 
 # Ignore bundler config.
 /.bundle
+# Ignore bundler artifacts
+/vendor/bundle/*
 
 # Ignore all logfiles and tempfiles.
 /log/*
