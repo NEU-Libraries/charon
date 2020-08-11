@@ -19,38 +19,38 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      # - restore_cache:
-      #     keys:
-      #       - v1-{{ .Branch }}
-      #     paths:
-      #       - ~/caches/charon.tar
-      # - run:
-      #     name: Load Docker image layer cache
-      #     command: |
-      #       set +o pipefail
-      #       docker load -i ~/caches/charon.tar | true
-      # - run:
-      #     name: Set CHARON_VERSION and Define Environment Variable at Runtime
-      #     command: |
-      #       echo 'export CHARON_VERSION=$(cat .version)' >> $BASH_ENV
-      #       source $BASH_ENV
-      # - run:
-      #     name: Check CHARON_VERSION doesn't already exist in docker tags
-      #     command: |
-      #       scripts/tag_check.sh $CHARON_VERSION
-      # - run:
-      #     name: Build application Docker image
-      #     command: |
-      #       docker build --cache-from=nakatomi/charon_web:latest -t nakatomi/charon_web .
-      # - run:
-      #     name: Save Docker image layer cache
-      #     command: |
-      #       mkdir -p ~/caches
-      #       docker save -o ~/caches/charon.tar nakatomi/charon_web
-      # - save_cache:
-      #     key: v1-{{ .Branch }}-{{ epoch }}
-      #     paths:
-      #       - ~/caches/charon.tar
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - ~/caches/charon.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i ~/caches/charon.tar | true
+      - run:
+          name: Set CHARON_VERSION and Define Environment Variable at Runtime
+          command: |
+            echo 'export CHARON_VERSION=$(cat .version)' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Check CHARON_VERSION doesn't already exist in docker tags
+          command: |
+            scripts/tag_check.sh $CHARON_VERSION
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=nakatomi/charon_web:latest -t nakatomi/charon_web .
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p ~/caches
+            docker save -o ~/caches/charon.tar nakatomi/charon_web
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - ~/caches/charon.tar
       - run:
           name: Start container
           command: |
@@ -79,14 +79,14 @@ jobs:
           name: Run Rubocop
           command: |
             docker-compose exec web rubocop
-      # - run:
-      #     name: Publish Docker Image to Docker Hub
-      #     command: |
-      #       echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-      #       docker push nakatomi/charon_web:latest
-      #       docker tag nakatomi/charon_web:latest nakatomi/charon_web:$CHARON_VERSION
-      #       docker push nakatomi/charon_web:$CHARON_VERSION
-      # - run:
-      #     name: Deploy
-      #     command: |
-      #       http PUT charon.library.northeastern.edu/deploy token=$CHARON_TOKEN version=$CHARON_VERSION
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push nakatomi/charon_web:latest
+            docker tag nakatomi/charon_web:latest nakatomi/charon_web:$CHARON_VERSION
+            docker push nakatomi/charon_web:$CHARON_VERSION
+      - run:
+          name: Deploy
+          command: |
+            http PUT charon.library.northeastern.edu/deploy token=$CHARON_TOKEN version=$CHARON_VERSION
