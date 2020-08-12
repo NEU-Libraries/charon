@@ -13,10 +13,12 @@ RUN useradd -ms /bin/bash charon
 USER charon
 RUN mkdir -p /home/charon/web
 RUN mkdir -p /home/charon/images
+COPY Gemfile* /tmp/
+WORKDIR /tmp
+RUN bundle install
 WORKDIR /home/charon/web
 COPY --chown=charon:charon . /home/charon/web
-RUN bundle install --path vendor/bundle
+RUN bundle install
 RUN yarn install
 RUN bundle exec rake assets:precompile
-RUN bundle exec rake assets:precompile RAILS_ENV=test
 RUN cp /home/charon/web/scripts/msmtprc /home/charon/.msmtprc
