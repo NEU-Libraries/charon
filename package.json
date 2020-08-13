@@ -12,7 +12,6 @@
     "jquery": "^3.5.1",
     "picturefill": "^3.0.3",
     "popper.js": "^1.16.1",
-    "universalviewer": "^3.1.1",
     "webpack": "^4.0.0"
   },
   "version": "1.0.0",
