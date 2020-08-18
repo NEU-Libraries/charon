@@ -1,2 +1,4 @@
-%a.btn.btn-secondary.btn-sm{:type => "button", :href => download_path(locals[:id])}
-  = locals[:id]
+- locals[:file_set].files.each do |blob|
+  %a.btn.btn-secondary.btn-sm{:type => "button", :href => download_path(blob.noid)}
+    = blob.extension
+    = blob.noid

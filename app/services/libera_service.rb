@@ -34,8 +34,9 @@ class LiberaService
       @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: fs)
     end
 
-    def create_derivative_blob(file)
+    def create_derivative_blob(file, file_name)
       blob_derivative = Blob.new
+      blob_derivative.original_filename = file_name
       blob_derivative.file_identifier = file.id # what does this mean in this context?
       blob_derivative.use = [Valkyrie::Vocab::PCDMUse.ServiceFile]
       Valkyrie.config.metadata_adapter.persister.save(resource: blob_derivative)
@@ -59,8 +60,8 @@ class LiberaService
       parse_page(page_number, page_img)
     end
 
-    def populate_file_set(page_file)
-      @file_set.member_ids += [create_derivative_blob(page_file).id]
+    def populate_file_set(page_file, page_file_name)
+      @file_set.member_ids += [create_derivative_blob(page_file, page_file_name).id]
       @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
     end
 
@@ -72,7 +73,7 @@ class LiberaService
       page_img.write(image_file_path) { self.depth = 8 }
 
       page_file = create_file(File.open(image_file_path), image_file_name)
-      populate_file_set(page_file)
+      populate_file_set(page_file, image_file_name)
 
       txt = @parser.parse_image(image_file_path, page_number)
       @page_list[image_file_name] = txt
@@ -83,12 +84,12 @@ class LiberaService
       text_file_name = "pdf-page-#{page_number}.txt"
       text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
       text_file = create_file(File.open(text_file_path), text_file_name)
-      populate_file_set(text_file)
+      populate_file_set(text_file, text_file_name)
     end
 
     def add_tei
       tei_path = "#{Libera.configuration.working_dir}/tei.xml"
       tei_file = create_file(File.open(tei_path), 'tei.xml')
-      populate_file_set(tei_file)
+      populate_file_set(tei_file, 'tei.xml')
     end
 end

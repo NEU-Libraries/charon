@@ -27,4 +27,14 @@ RSpec.describe Work do
     expect(work.responsible_user).to be nil
     # TODO: need to test it returns if set
   end
+
+  it 'responds to files' do
+    expect(work.files).to eq []
+    # TODO: need to test against work with items
+  end
+
+  it 'responds to file paths' do
+    expect(work.file_paths).to eq []
+    # TODO: need to test against work with items
+  end
 end

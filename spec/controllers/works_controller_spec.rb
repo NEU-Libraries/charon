@@ -5,6 +5,7 @@ require 'rails_helper'
 describe WorksController do
   let(:work) { FactoryBot.create_for_repository(:work) }
   let(:admin_user) { create(:admin) }
+  let(:blob) { FactoryBot.create_for_repository(:blob, :pdf) }
 
   describe 'assign_task' do
     it 'creates a new minerva task associated with interface and user' do
@@ -31,6 +32,7 @@ describe WorksController do
   describe 'show' do
     render_views
     it 'renders a works title' do
+      LiberaJob.perform_now(work.noid, blob.noid)
       get :show, params: { id: work.noid }
       expect(response).to render_template('works/show')
       expect(CGI.unescapeHTML(response.body)).to include(work.title)

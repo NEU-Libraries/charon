@@ -25,6 +25,7 @@ class BlobService
     def create_blob
       blob = Blob.new
       blob.file_identifier = create_file.id
+      blob.original_filename = @upload.file_name
       blob.use = [Valkyrie::Vocab::PCDMUse.OriginalFile]
       saved_blob = Valkyrie.config.metadata_adapter.persister.save(resource: blob)
       LiberaJob.perform_later(@work.noid, saved_blob.noid) if determine_mime(saved_blob.file_path).subtype == 'pdf'

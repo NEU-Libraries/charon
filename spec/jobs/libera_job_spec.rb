@@ -2,7 +2,6 @@
 
 describe LiberaJob do
   let(:work) { FactoryBot.create_for_repository(:work, :fake_thumbnail) }
-  let(:file_set) { FactoryBot.create_for_repository(:file_set) }
   let(:blob) { FactoryBot.create_for_repository(:blob, :pdf) }
 
   ActiveJob::Base.queue_adapter = :test

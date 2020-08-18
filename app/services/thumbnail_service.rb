@@ -42,6 +42,7 @@ class ThumbnailService
 
     def make_thumbnail_blob(thumbnail_path)
       thumbnail_blob = Blob.new
+      thumbnail_blob.original_filename = "#{@work.id}.jp2"
       thumbnail_blob.file_identifier = "disk://#{thumbnail_path}"
       thumbnail_blob.use = [Valkyrie::Vocab::PCDMUse.ThumbnailImage]
       saved_thumbnail_blob = Valkyrie.config.metadata_adapter.persister.save(resource: thumbnail_blob)
