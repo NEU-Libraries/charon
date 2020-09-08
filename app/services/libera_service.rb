@@ -79,6 +79,8 @@ class LiberaService
     end
 
     def make_tei
+      make_file_set # TEI needs it's own file_set
+
       @parser.generate_tei(@page_list)
 
       tei_path = "#{Libera.configuration.working_dir}/tei.xml"

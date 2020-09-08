@@ -13,8 +13,8 @@ describe LiberaService do
       expect(work.children[0].class).to eq(Stack)
 
       stack = work.children[0]
-      expect(stack.children.count).to eq(1) # 1 page
-      expect(stack.children[0].files.count).to eq(4) # 1 page == 1 image, 1 text, 1 tei file, 1 jp2 file
+      expect(stack.children.count).to eq(2) # 1 page, 1 tei
+      expect(stack.children[0].files.count).to eq(3) # 1 page == 1 image, 1 text, 1 jp2 file
       # TODO: check that the member ids correspond with the blobs
     end
   end
