@@ -1,4 +1,5 @@
-- locals[:file_set].files.each do |blob|
-  %a.btn.btn-secondary.btn-sm{:type => "button", :href => download_path(blob.noid)}
-    = blob.extension
-    = blob.noid
+- if locals[:file_set].present?
+  - locals[:file_set].files.each do |blob|
+    %a.btn.btn-secondary.btn-sm{:type => "button", :href => download_path(blob.noid)}
+      = blob.extension
+      = blob.noid

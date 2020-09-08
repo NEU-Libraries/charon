@@ -10,10 +10,11 @@ describe LiberaService do
   describe '#run' do
     it 'runs the libera gem against the blob and adds items to the work' do
       expect { libera_service.run }.to change { work.children.count }.from(0).to(1)
-      expect(work.children[0].class).to eq(FileSet)
+      expect(work.children[0].class).to eq(Stack)
 
-      fs = work.children[0]
-      expect(fs.member_ids.count).to eq(3) # 1 page == 1 image, 1 text, 1 tei file
+      stack = work.children[0]
+      expect(stack.children.count).to eq(1) # 1 page
+      expect(stack.children[0].files.count).to eq(4) # 1 page == 1 image, 1 text, 1 tei file, 1 jp2 file
       # TODO: check that the member ids correspond with the blobs
     end
   end

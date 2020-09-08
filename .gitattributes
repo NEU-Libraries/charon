@@ -1,4 +1,5 @@
 * text eol=lf
+public/uv/** -text
 *.png binary
 *.jpg binary
 *.pdf binary

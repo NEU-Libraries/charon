@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe WorksController do
+  let(:image) { create(:generic_upload) }
+  let(:blank_file_set) { FactoryBot.create_for_repository(:file_set, :blank) }
   let(:work) { FactoryBot.create_for_repository(:work) }
   let(:admin_user) { create(:admin) }
   let(:blob) { FactoryBot.create_for_repository(:blob, :pdf) }
@@ -32,6 +34,7 @@ describe WorksController do
   describe 'show' do
     render_views
     it 'renders a works title' do
+      CreateThumbnailJob.perform_now(image.id, work.noid, blank_file_set.noid)
       LiberaJob.perform_now(work.noid, blob.noid)
       get :show, params: { id: work.noid }
       expect(response).to render_template('works/show')

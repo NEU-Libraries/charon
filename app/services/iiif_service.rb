@@ -73,7 +73,7 @@ class IiifService
 
     def generate_resource(img)
       resource = IIIF::Presentation::Resource.new('@id' =>
-        "http://localhost:8182/iiif/2/#{img.filename.split('/').last}/full/!500,500/0/default.jpg")
+        "http://localhost:8182/iiif/2/#{img.filename.split('/').last.split('.').first}/full/full/0/default.jpg")
       resource['@type'] = 'dctypes:Image'
       resource['format'] = 'image/jpeg'
       resource['width'] = img.columns

@@ -12,6 +12,14 @@ class Work < Resource
 
   mods_xml_source(&:mods_xml)
 
+  def stacks
+    children.select { |c| c.class == Stack }
+  end
+
+  def file_sets
+    children.select { |c| c.class == FileSet }
+  end
+
   def history
     State.where(work_id: Minerva::Work.find_or_create_by(auid: noid).id).order(:created_at).reverse_order
   end
