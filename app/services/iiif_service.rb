@@ -25,15 +25,19 @@ class IiifService
 
   private
 
+    def img
+      Magick::Image.ping(@blob.file_path).first
+    end
+
     def populate_sequence(sequence)
       # canvas loop
       canvases = []
-      @file_set.files.each_with_index do |blob, i|
+      @file_set.files.each_with_index do |b, i|
+        @blob = b
         # need to check if blob is image-y
-        next unless determine_mime(blob.file_path).image?
+        next unless determine_mime(@blob.file_path).image?
 
-        img = Magick::Image.ping(blob.file_path).first
-        canvas = generate_canvas(img, i)
+        canvas = generate_canvas(i)
         canvases.append(canvas)
       end
       sequence['canvases'] = canvases
@@ -48,7 +52,7 @@ class IiifService
       sequence
     end
 
-    def generate_canvas(img, index)
+    def generate_canvas(index)
       canvas = IIIF::Presentation::Canvas.new
       canvas_id = 'http://' + SecureRandom.uuid
       canvas['@id'] = canvas_id
@@ -56,24 +60,24 @@ class IiifService
       canvas['height'] = img.rows
       canvas['label'] = "Image #{index + 1}"
 
-      image = generate_image(img, canvas_id)
+      image = generate_image(canvas_id)
 
       canvas['images'] = [image]
       canvas
     end
 
-    def generate_image(img, canvas_id)
+    def generate_image(canvas_id)
       image = IIIF::Presentation::Resource.new('@id' => 'http://' + SecureRandom.uuid)
       image['@type'] = 'oa:Annotation'
       image['motivation'] = 'sc:painting'
       image['on'] = canvas_id
-      image['resource'] = generate_resource(img)
+      image['resource'] = generate_resource
       image
     end
 
-    def generate_resource(img)
+    def generate_resource
       resource = IIIF::Presentation::Resource.new('@id' =>
-        "http://localhost:8182/iiif/2/#{img.filename.split('/').last.split('.').first}/full/full/0/default.jpg")
+        "http://localhost:8182/iiif/2/#{@blob.noid}/full/full/0/default.jpg")
       resource['@type'] = 'dctypes:Image'
       resource['format'] = 'image/jpeg'
       resource['width'] = img.columns
