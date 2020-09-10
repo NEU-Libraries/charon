@@ -1,9 +1,9 @@
 - if document.thumbnail?
   %picture
-    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{400},#{400}/0/default.jpg"}
-    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{800},#{800}/0/default.jpg 2x"}
-    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{200},#{200}/0/default.jpg"}
-    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{400},#{400}/0/default.jpg 2x"}
-    %source{sizes: "100vw", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{100},#{100}/0/default.jpg"}
-    %source{sizes: "100vw", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{100},#{100}/0/default.jpg 2x"}
-    %img{alt: "Your smart alt attribute", srcset: "#{iiif}/2/#{document.id}.jp2/full/!#{100},#{100}/0/default.jpg 2x"}/
+    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{400},#{400}/0/default.jpg"}
+    %source{media: "(min-width: 2000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{800},#{800}/0/default.jpg 2x"}
+    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{200},#{200}/0/default.jpg"}
+    %source{media: "(min-width: 1000px)", sizes: "100vw", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{400},#{400}/0/default.jpg 2x"}
+    %source{sizes: "100vw", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{100},#{100}/0/default.jpg"}
+    %source{sizes: "100vw", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{100},#{100}/0/default.jpg 2x"}
+    %img{alt: "Your smart alt attribute", srcset: "#{iiif}/2/#{document.thumbnail_id}/full/!#{100},#{100}/0/default.jpg 2x"}/

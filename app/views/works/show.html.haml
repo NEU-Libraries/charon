@@ -7,7 +7,7 @@
 .container-lg.work-metadata
   .row
     .col.border
-      =image_tag "#{iiif_url}/2/#{@work.id}.jp2/full/!500,500/0/default.jpg"
+      =image_tag "#{iiif_url}/2/#{@work.thumbnail}/full/!500,500/0/default.jpg"
     .col
       #mods
         = @mods_html.html_safe

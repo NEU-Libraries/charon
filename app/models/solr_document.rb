@@ -43,4 +43,8 @@ class SolrDocument
 
     true
   end
+
+  def thumbnail_id
+    thumbnail&.first&.split('id-')&.last
+  end
 end
