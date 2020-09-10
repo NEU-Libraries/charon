@@ -62,7 +62,7 @@ class LiberaService
       jp2 = Image.read(image_file_path).first
       jp2.format = 'JP2'
       jp2_file_name = "pdf-page-#{@page_number}.jp2"
-      jp2_path = "/home/charon/images/#{jp2_file_name}" # not any more - need tmp dir
+      jp2_path = Rails.root.join('tmp').to_s + "/#{jp2_file_name}"
       jp2.write(jp2_path)
 
       populate_file_set(jp2_path)

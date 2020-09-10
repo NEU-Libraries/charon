@@ -35,15 +35,15 @@ class ThumbnailService
       i = Image.read(find_path).first
 
       i.format = 'JP2'
-      thumbnail_path = "/home/charon/images/#{@work.id}.jp2"
-      i.write(thumbnail_path) # will need to do some unique filename to enable crosswalking back via pid
+      thumbnail_path = Rails.root.join('tmp').to_s + "/#{SecureRandom.uuid}.jp2"
+      i.write(thumbnail_path)
       thumbnail_path
     end
 
     def make_thumbnail_blob(thumbnail_path)
       thumbnail_blob = Blob.new
-      thumbnail_blob.original_filename = "#{@work.id}.jp2"
-      thumbnail_blob.file_identifier = "disk://#{thumbnail_path}"
+      thumbnail_blob.original_filename = thumbnail_path.split('/').last
+      thumbnail_blob.file_identifier = create_valkyrie_file(thumbnail_path).id
       thumbnail_blob.use = [Valkyrie::Vocab::PCDMUse.ThumbnailImage]
       saved_thumbnail_blob = Valkyrie.config.metadata_adapter.persister.save(resource: thumbnail_blob)
       saved_thumbnail_blob.id
@@ -65,7 +65,7 @@ class ThumbnailService
       page_img.border!(0, 0, 'white')
       page_img.alpha(Magick::DeactivateAlphaChannel)
 
-      file_path = "/home/charon/images/#{@work.id}-pdf-page-0.png"
+      file_path = Rails.root.join('tmp').to_s + "/#{SecureRandom.uuid}.png"
 
       page_img.write(file_path) { self.depth = 8 }
       file_path
@@ -73,7 +73,7 @@ class ThumbnailService
 
     def create_valkyrie_file(file_path)
       Valkyrie.config.storage_adapter.upload(
-        file: File.open(file_path), # tei, png, txt
+        file: File.open(file_path),
         resource: @file_set,
         original_filename: file_path.split('/').last
       )
