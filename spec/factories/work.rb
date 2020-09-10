@@ -16,7 +16,7 @@ FactoryBot.define do
     end
 
     trait :fake_thumbnail do
-      thumbnail { true }
+      thumbnail { SecureRandom.uuid }
     end
   end
 end

@@ -39,7 +39,7 @@ class SolrDocument
   end
 
   def thumbnail?
-    return false unless thumbnail&.first&.split('boolean-')&.last == 'true'
+    return false if thumbnail.blank?
 
     true
   end

@@ -13,7 +13,7 @@ class ThumbnailService
 
   def run
     return if @upload.nil? || @work.nil? || @file_set.nil?
-    return if @work.thumbnail == true # idempotent step
+    return if @work.thumbnail.present? # idempotent step
 
     thumbnail_path = make_jp2
 
@@ -21,7 +21,7 @@ class ThumbnailService
 
     blob_id = make_thumbnail_blob(thumbnail_path)
     add_thumbnail_blob_to_work(blob_id)
-    @work.thumbnail = true
+    @work.thumbnail = blob_id
     Valkyrie.config.metadata_adapter.persister.save(resource: @work)
     GenericUpload.find(@upload.id).destroy!
   end

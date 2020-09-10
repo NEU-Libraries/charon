@@ -8,7 +8,7 @@ class Work < Resource
   attribute :workflow_id, Valkyrie::Types::Integer
   attribute :project_id, Valkyrie::Types::ID
   attribute :mods_xml, Valkyrie::Types::String.default { '<_/>' }
-  attribute :thumbnail, Valkyrie::Types::Bool
+  attribute :thumbnail, Valkyrie::Types::ID
 
   mods_xml_source(&:mods_xml)
 
