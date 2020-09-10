@@ -71,6 +71,14 @@ class ThumbnailService
       file_path
     end
 
+    def create_valkyrie_file(file_path)
+      Valkyrie.config.storage_adapter.upload(
+        file: File.open(file_path), # tei, png, txt
+        resource: @file_set,
+        original_filename: file_path.split('/').last
+      )
+    end
+
     def find_path
       path = ''
       if determine_mime(@upload.file).subtype == 'pdf'
