@@ -13,8 +13,7 @@ describe 'discovery' do
     create_solr_doc(id: '999',
                     read_access_group_ssim: ['public'],
                     title_tesim: ['find me!'],
-                    thumbnail_tesim: ['id-123']
-                  )
+                    thumbnail_tesim: ['id-123'])
   end
 
   it 'should respond to catalog path' do
