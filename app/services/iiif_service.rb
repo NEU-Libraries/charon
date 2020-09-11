@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class IiifService
+  include ApplicationHelper
   include MimeHelper
 
   def initialize(params)
@@ -77,7 +78,7 @@ class IiifService
 
     def generate_resource
       resource = IIIF::Presentation::Resource.new('@id' =>
-        "http://localhost:8182/iiif/2/#{@blob.noid}/full/full/0/default.jpg")
+        "#{iiif_url}/2/#{@blob.noid}/full/full/0/default.jpg")
       resource['@type'] = 'dctypes:Image'
       resource['format'] = 'image/jpeg'
       resource['width'] = img.columns
