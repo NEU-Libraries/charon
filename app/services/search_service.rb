@@ -5,7 +5,8 @@
 class SearchService < Blacklight::SearchService
   attr_reader :current_ability
 
-  def initialize(config:, user_params: {}, search_builder_class: config.search_builder_class, current_ability:)
+  def initialize(config:, current_ability:, user_params: {}, search_builder_class: config.search_builder_class)
+    super
     @blacklight_config = config
     @user_params = user_params
     @search_builder_class = search_builder_class

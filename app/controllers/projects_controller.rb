@@ -79,12 +79,12 @@ class ProjectsController < CatalogController
 
   def user_registry
     authorize! :oversee, @project
-    @roles = @project.roles.order(sort_column + ' ' + sort_direction)
+    @roles = @project.roles.order("#{sort_column} #{sort_direction}")
   end
 
   def users
     params[:sort] = 'last_name' # Only value
-    @users = @project.users.order(sort_column + ' ' + sort_direction)
+    @users = @project.users.order("#{sort_column} #{sort_direction}")
   end
 
   def new_user

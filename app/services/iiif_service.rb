@@ -45,7 +45,7 @@ class IiifService
 
     def generate_sequence
       sequence = IIIF::Presentation::Sequence.new
-      sequence['@id'] = 'http://' + SecureRandom.uuid
+      sequence['@id'] = "http://#{SecureRandom.uuid}"
       sequence['@type'] = 'sc:Sequence'
       sequence['label'] = 'Current order'
       sequence['viewingDirection'] = 'left-to-right'
@@ -54,7 +54,7 @@ class IiifService
 
     def generate_canvas(index)
       canvas = IIIF::Presentation::Canvas.new
-      canvas_id = 'http://' + SecureRandom.uuid
+      canvas_id = "http://#{SecureRandom.uuid}"
       canvas['@id'] = canvas_id
       canvas['width'] = img.columns
       canvas['height'] = img.rows
@@ -67,7 +67,7 @@ class IiifService
     end
 
     def generate_image(canvas_id)
-      image = IIIF::Presentation::Resource.new('@id' => 'http://' + SecureRandom.uuid)
+      image = IIIF::Presentation::Resource.new('@id' => "http://#{SecureRandom.uuid}")
       image['@type'] = 'oa:Annotation'
       image['motivation'] = 'sc:painting'
       image['on'] = canvas_id

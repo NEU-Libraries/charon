@@ -14,7 +14,7 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
   def roles_edit
     breadcrumb(objects[:role].project.title, actions_path(objects[:role].project))
     breadcrumb('User Registry', project_user_registry_path(objects[:role].project))
-    breadcrumb(objects[:role].user.first_name + '\'s Role')
+    breadcrumb("#{objects[:role].user.first_name}'s Role")
   end
 
   def projects_available_users

@@ -56,7 +56,7 @@ class ThumbnailService
     end
 
     def process_pdf
-      pdf = Magick::ImageList.new(@upload.file.path + '[0]') do
+      pdf = Magick::ImageList.new("#{@upload.file.path}[0]") do
         self.density = 300
         self.quality = 100
       end

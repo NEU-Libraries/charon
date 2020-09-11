@@ -13,9 +13,9 @@ RSpec.describe MimeHelper, type: :helper do
   describe '#determine_classification' do
     it 'returns an appropiate enumeration for a file set' do
       base_path = Rails.root.join('spec/fixtures/files/example').to_s
-      expect(helper.determine_classification(base_path + '.xlsx')).to eql(Classification.spreadsheet.name)
-      expect(helper.determine_classification(base_path + '.pptx')).to eql(Classification.presentation.name)
-      expect(helper.determine_classification(base_path + '.docx')).to eql(Classification.text.name)
+      expect(helper.determine_classification("#{base_path}.xlsx")).to eql(Classification.spreadsheet.name)
+      expect(helper.determine_classification("#{base_path}.pptx")).to eql(Classification.presentation.name)
+      expect(helper.determine_classification("#{base_path}.docx")).to eql(Classification.text.name)
     end
   end
 end
