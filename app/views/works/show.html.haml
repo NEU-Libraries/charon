@@ -12,11 +12,18 @@
       #mods
         = @mods_html.html_safe
 
+%br
+
+%h5 Downloads
 - @work.file_sets.each do |fs|
   = render 'download', locals: {file_set: fs}
 
-- @work.stacks.each do |s|
-  Stack!
+%br
+%br
 
-.viewer-wrapper
-  %iframe{:allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=&config=#{universal_viewer_config_url}"}
+- @work.stacks.each do |s|
+  %h5 IIIF
+  .viewer-wrapper
+    %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{manifest_path(s.noid)}&config=#{universal_viewer_config_url}"}
+
+

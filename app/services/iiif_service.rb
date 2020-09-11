@@ -4,7 +4,7 @@ class IiifService
   include MimeHelper
 
   def initialize(params)
-    @file_set = FileSet.find(params[:file_set_id])
+    @stack = Stack.find(params[:stack_id])
   end
 
   def run
@@ -32,10 +32,10 @@ class IiifService
     def populate_sequence(sequence)
       # canvas loop
       canvases = []
-      @file_set.files.each_with_index do |b, i|
+      @stack.children[0].files.each_with_index do |b, i|
         @blob = b
         # need to check if blob is image-y
-        next unless determine_mime(@blob.file_path).image?
+        next unless determine_mime(@blob.file_path).image? && @blob.extension.casecmp('jp2')
 
         canvas = generate_canvas(i)
         canvases.append(canvas)
