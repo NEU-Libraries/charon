@@ -3,14 +3,18 @@
 require 'rails_helper'
 
 describe ImagesController do
-  let(:stack) { FactoryBot.create_for_repository(:stack) }
+  let(:work) { FactoryBot.create_for_repository(:work) }
+  let(:blob) { FactoryBot.create_for_repository(:blob, :pdf) }
+  let(:libera_service) { LiberaService.new({ work_id: work.id, blob_id: blob.id }) }
 
   describe 'manifest' do
     it 'generates a IIIF manifest' do
-      expect(stack.children.count).to eq(1)
+      expect { libera_service.run }.to change { work.children.count }.from(0).to(1)
+      expect(work.children[0].class).to eq(Stack)
+
+      stack = work.children[0]
       get :manifest, params: { id: stack.noid }
-      # expect(JSON.parse(response.body)['sequences'][0]['canvases'][0]['label']).to eq('Image 1')
-      # TODO - fix
+      expect(JSON.parse(response.body)['sequences'][0]['canvases'][0]['label']).to eq('Image 1')
     end
   end
 end
