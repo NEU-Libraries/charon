@@ -33,13 +33,15 @@ class IiifService
     def populate_sequence(sequence)
       # canvas loop
       canvases = []
-      @stack.children[0].files.each_with_index do |b, i|
-        @blob = b
-        # need to check if blob is image-y
-        next unless determine_mime(@blob.file_path).image? && @blob.extension.casecmp?('jp2')
+      @stack.children.each_with_index do |fs, i|
+        fs.files.each do |b|
+          @blob = b
+          # need to check if blob is image-y
+          next unless determine_mime(@blob.file_path).image? && @blob.extension.casecmp?('jp2')
 
-        canvas = generate_canvas(i)
-        canvases.append(canvas)
+          canvas = generate_canvas(i)
+          canvases.append(canvas)
+        end
       end
       sequence['canvases'] = canvases
     end
