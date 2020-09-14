@@ -14,9 +14,9 @@ class SearchBarPresenter
   end
 
   def render
-    unless controller.is_a?(Blacklight::Catalog) &&
-           controller.action_name == 'index' &&
-           !controller.instance_variable_get(:@searchable)
+    unless (controller.is_a?(Blacklight::Catalog) &&
+           controller.action_name == 'index') ||
+           controller.instance_variable_get(:@searchable)
       return
     end
 
