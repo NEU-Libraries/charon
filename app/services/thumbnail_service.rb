@@ -60,6 +60,7 @@ class ThumbnailService
         self.density = 300
         self.quality = 100
       end
+
       page_img = pdf.first
 
       page_img.border!(0, 0, 'white')

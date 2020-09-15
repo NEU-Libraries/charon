@@ -46,7 +46,11 @@ class LiberaService
     end
 
     def make_png
-      pdf = Magick::ImageList.new(@blob.file_path + "[#{@page_number}]")
+      pdf = Magick::ImageList.new(@blob.file_path + "[#{@page_number}]") do
+        self.density = 300
+        self.quality = 100
+      end
+
       page_img = pdf.first
 
       page_img.border!(0, 0, 'white')
@@ -62,7 +66,7 @@ class LiberaService
       jp2 = Image.read(image_file_path).first
       jp2.format = 'JP2'
       jp2_file_name = "pdf-page-#{@page_number}.jp2"
-      jp2_path = "/home/charon/storage/scratch/#{jp2_file_name}"
+      jp2_path = "#{Libera.configuration.working_dir}/#{jp2_file_name}"
       jp2.write(jp2_path)
 
       populate_file_set(jp2_path)
