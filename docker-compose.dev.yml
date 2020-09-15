@@ -6,10 +6,8 @@ services:
     volumes:
       - ./:/home/charon/web
       - storage:/home/charon/storage
-      - images:/home/charon/images
   web:
     build: .
     volumes:
       - ./:/home/charon/web
       - storage:/home/charon/storage
-      - images:/home/charon/images

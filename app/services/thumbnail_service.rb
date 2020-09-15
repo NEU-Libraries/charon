@@ -35,7 +35,7 @@ class ThumbnailService
       i = Image.read(find_path).first
 
       i.format = 'JP2'
-      thumbnail_path = Rails.root.join('tmp').to_s + "/#{SecureRandom.uuid}.jp2"
+      thumbnail_path = "/home/charon/storage/scratch/#{SecureRandom.uuid}.jp2"
       i.write(thumbnail_path)
       thumbnail_path
     end
@@ -65,7 +65,7 @@ class ThumbnailService
       page_img.border!(0, 0, 'white')
       page_img.alpha(Magick::DeactivateAlphaChannel)
 
-      file_path = Rails.root.join('tmp').to_s + "/#{SecureRandom.uuid}.png"
+      file_path = "/home/charon/storage/scratch/#{SecureRandom.uuid}.png"
 
       page_img.write(file_path) { self.depth = 8 }
       file_path
