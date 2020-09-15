@@ -13,6 +13,7 @@ RUN useradd -ms /bin/bash charon
 USER charon
 RUN mkdir -p /home/charon/web
 RUN mkdir -p /home/charon/images
+RUN mkdir -p /home/charon/storage/scratch
 COPY Gemfile* /tmp/
 WORKDIR /tmp
 RUN bundle install
