@@ -20,7 +20,7 @@ class LiberaService
 
     (0..@page_count).each do |i|
       @page_number = i
-      make_file_set
+      make_page
       make_png
       make_jp2
       make_txt
@@ -45,6 +45,12 @@ class LiberaService
       @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: fs)
     end
 
+    def make_page
+      p = Page.new type: Classification.derivative.name
+      p.a_member_of = @stack.id
+      @page = Valkyrie.config.metadata_adapter.persister.save(resource: p)
+    end
+
     def make_png
       pdf = Magick::ImageList.new(@blob.file_path + "[#{@page_number}]") do
         self.density = 300
@@ -59,7 +65,7 @@ class LiberaService
       @file_list << image_file_path
       page_img.write(image_file_path) { self.depth = 8 }
 
-      populate_file_set(image_file_path)
+      populate_page(image_file_path)
     end
 
     def make_jp2
@@ -69,7 +75,7 @@ class LiberaService
       jp2_path = "#{Libera.configuration.working_dir}/#{jp2_file_name}"
       jp2.write(jp2_path)
 
-      populate_file_set(jp2_path)
+      populate_page(jp2_path)
     end
 
     def make_txt
@@ -79,7 +85,7 @@ class LiberaService
       text_file_name = "pdf-page-#{@page_number}.txt"
       text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
 
-      populate_file_set(text_file_path)
+      populate_page(text_file_path)
     end
 
     def make_tei
@@ -112,7 +118,7 @@ class LiberaService
     def create_valkyrie_file(file_path)
       Valkyrie.config.storage_adapter.upload(
         file: File.open(file_path), # tei, png, txt
-        resource: @file_set,
+        resource: @page,
         original_filename: file_path.split('/').last
       )
     end
@@ -123,5 +129,13 @@ class LiberaService
                                file_path.split('/').last).id
       ]
       @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
+    end
+
+    def populate_page(file_path)
+      @page.member_ids += [
+        create_derivative_blob(create_valkyrie_file(file_path).id,
+                               file_path.split('/').last).id
+      ]
+      @page = Valkyrie.config.metadata_adapter.persister.save(resource: @page)
     end
 end
