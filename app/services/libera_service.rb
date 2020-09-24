@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class LiberaService
+  include ValkyrieHelper
+
   def initialize(params)
     @work = Work.find(params[:work_id])
     @blob = Blob.find(params[:blob_id])
 
-    @stack = make_stack
+    @stack = create_stack(@work.id)
 
     Libera.configuration.working_dir = Rails.root.join('tmp').to_s + "/libera-#{Time.now.to_f.to_s.gsub!('.', '')}"
     @parser = Libera::Parser.new
@@ -98,43 +100,16 @@ class LiberaService
       populate_file_set(tei_path)
     end
 
-    def make_stack
-      Valkyrie.config.metadata_adapter.persister.save(
-        resource: Stack.new(
-          type: Classification.text.name,
-          a_member_of: @work.id
-        )
-      )
-    end
-
-    def create_derivative_blob(file_id, file_name)
-      blob_derivative = Blob.new
-      blob_derivative.original_filename = file_name
-      blob_derivative.file_identifier = file_id # what does this mean in this context?
-      blob_derivative.use = [Valkyrie::Vocab::PCDMUse.ServiceFile]
-      Valkyrie.config.metadata_adapter.persister.save(resource: blob_derivative)
-    end
-
-    def create_valkyrie_file(file_path)
-      Valkyrie.config.storage_adapter.upload(
-        file: File.open(file_path), # tei, png, txt
-        resource: @page,
-        original_filename: file_path.split('/').last
-      )
-    end
-
     def populate_file_set(file_path)
       @file_set.member_ids += [
-        create_derivative_blob(create_valkyrie_file(file_path).id,
-                               file_path.split('/').last).id
+        create_blob(create_file(file_path, @page).id, file_path.split('/').last).id
       ]
       @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
     end
 
     def populate_page(file_path)
       @page.member_ids += [
-        create_derivative_blob(create_valkyrie_file(file_path).id,
-                               file_path.split('/').last).id
+        create_blob(create_file(file_path, @page).id, file_path.split('/').last).id
       ]
       @page = Valkyrie.config.metadata_adapter.persister.save(resource: @page)
     end
