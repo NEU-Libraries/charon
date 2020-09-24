@@ -9,11 +9,11 @@ module ValkyrieHelper
     )
   end
 
-  def create_blob(valkyrie_id, file_name)
+  def create_blob(valkyrie_id, file_name, use = Valkyrie::Vocab::PCDMUse.ServiceFile)
     blob = Blob.new
     blob.original_filename = file_name
     blob.file_identifier = valkyrie_id
-    blob.use = [Valkyrie::Vocab::PCDMUse.ServiceFile]
+    blob.use = [use]
     Valkyrie.config.metadata_adapter.persister.save(resource: blob)
   end
 

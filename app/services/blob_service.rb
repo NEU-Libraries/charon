@@ -2,6 +2,7 @@
 
 class BlobService
   include MimeHelper
+  include ValkyrieHelper
 
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
@@ -15,28 +16,21 @@ class BlobService
     return if @upload.nil? || @work.nil? || @file_set.nil?
     return if @file_set.original_file? # idempotent step
 
-    @file_set.member_ids += [create_blob.id]
+    @blob = create_blob(create_file(@upload.file_path,
+                                    @file_set, @upload.file_name).id,
+                        @upload.file_name,
+                        Valkyrie::Vocab::PCDMUse.OriginalFile)
+
+    @file_set.member_ids += [@blob.id]
+
     Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
-    CreateThumbnailJob.perform_later(@upload.id, @work.noid, @file_set.noid)
+    run_jobs
   end
 
   private
 
-    def create_blob
-      blob = Blob.new
-      blob.file_identifier = create_file.id
-      blob.original_filename = @upload.file_name
-      blob.use = [Valkyrie::Vocab::PCDMUse.OriginalFile]
-      saved_blob = Valkyrie.config.metadata_adapter.persister.save(resource: blob)
-      LiberaJob.perform_later(@work.noid, saved_blob.noid) if determine_mime(saved_blob.file_path).subtype == 'pdf'
-      saved_blob
-    end
-
-    def create_file
-      Valkyrie.config.storage_adapter.upload(
-        file: @upload.file,
-        resource: @file_set,
-        original_filename: @upload.file_name
-      )
+    def run_jobs
+      CreateThumbnailJob.perform_later(@upload.id, @work.noid, @file_set.noid)
+      LiberaJob.perform_later(@work.noid, @blob.noid) if determine_mime(@blob.file_path).subtype == 'pdf'
     end
 end
