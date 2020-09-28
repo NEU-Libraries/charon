@@ -30,7 +30,10 @@ class TasksController < ApplicationController
     redirect_to work_path(saved_work)
   end
 
-  def transcribe; end
+  def transcribe
+    stack = @work.stacks.first
+    @pages = stack.children.select { |c| c.class == Page }
+  end
 
   def encode; end
 

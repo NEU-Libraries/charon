@@ -20,7 +20,7 @@ module ValkyrieHelper
   def create_stack(work_id)
     Valkyrie.config.metadata_adapter.persister.save(
       resource: Stack.new(
-        type: Classification.text.name,
+        type: Classification.derivative.name,
         a_member_of: work_id
       )
     )

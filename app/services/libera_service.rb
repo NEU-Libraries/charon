@@ -87,6 +87,9 @@ class LiberaService
       text_file_name = "pdf-page-#{@page_number}.txt"
       text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
 
+      @page.text = txt
+      @page = Valkyrie.config.metadata_adapter.persister.save(resource: @page)
+
       populate_page(text_file_path)
     end
 
