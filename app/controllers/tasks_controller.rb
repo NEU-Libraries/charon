@@ -31,8 +31,10 @@ class TasksController < ApplicationController
   end
 
   def transcribe
-    stack = @work&.stacks&.first
-    @pages = stack&.children&.select { |c| c.class == Page }
+    stack = @work.stacks&.first
+    return if stack.nil?
+
+    @pages = stack.children.select { |c| c.class == Page }
   end
 
   def encode; end
