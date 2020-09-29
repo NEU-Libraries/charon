@@ -57,8 +57,7 @@ class CatalogController < ApplicationController
            '-internal_resource_tesim:FileSet',
            '-internal_resource_tesim:Blob',
            '-internal_resource_tesim:Stack',
-           '-internal_resource_tesim:Page'
-          ]
+           '-internal_resource_tesim:Page']
     }
 
     # solr field configuration for search results/index views

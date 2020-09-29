@@ -2,4 +2,7 @@
   Transcribe
   = @work.title
 
-= @pages.inspect
+- @pages.each do |page|
+  = page.text
+  %br
+  %br
