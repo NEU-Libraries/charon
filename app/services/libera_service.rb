@@ -67,7 +67,7 @@ class LiberaService
       @file_list << image_file_path
       page_img.write(image_file_path) { self.depth = 8 }
 
-      populate_page(image_file_path)
+      populate_resource(image_file_path, @page)
     end
 
     def make_jp2
@@ -77,7 +77,7 @@ class LiberaService
       jp2_path = "#{Libera.configuration.working_dir}/#{jp2_file_name}"
       jp2.write(jp2_path)
 
-      populate_page(jp2_path)
+      populate_resource(jp2_path, @page, Valkyrie::Vocab::PCDMUse.ThumbnailImage)
     end
 
     def make_txt
@@ -90,7 +90,7 @@ class LiberaService
       @page.text = txt
       @page = Valkyrie.config.metadata_adapter.persister.save(resource: @page)
 
-      populate_page(text_file_path)
+      populate_resource(text_file_path, @page)
     end
 
     def make_tei
@@ -100,20 +100,13 @@ class LiberaService
 
       tei_path = "#{Libera.configuration.working_dir}/tei.xml"
 
-      populate_file_set(tei_path)
+      populate_resource(tei_path, @file_set)
     end
 
-    def populate_file_set(file_path)
-      @file_set.member_ids += [
-        create_blob(create_file(file_path, @page).id, file_path.split('/').last).id
+    def populate_resource(file_path, resource, use = Valkyrie::Vocab::PCDMUse.ServiceFile)
+      resource.member_ids += [
+        create_blob(create_file(file_path, resource).id, file_path.split('/').last, use).id
       ]
-      @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
-    end
-
-    def populate_page(file_path)
-      @page.member_ids += [
-        create_blob(create_file(file_path, @page).id, file_path.split('/').last).id
-      ]
-      @page = Valkyrie.config.metadata_adapter.persister.save(resource: @page)
+      Valkyrie.config.metadata_adapter.persister.save(resource: resource)
     end
 end
