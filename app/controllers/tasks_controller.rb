@@ -34,7 +34,8 @@ class TasksController < ApplicationController
     stack = @work.stacks&.first
     return if stack.nil?
 
-    @pages = stack.children.select { |c| c.class == Page }
+    page_array = stack.children.select { |c| c.class == Page }
+    @pages = Kaminari.paginate_array(page_array).page(params[:page]).per(1)
   end
 
   def encode; end
