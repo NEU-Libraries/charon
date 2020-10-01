@@ -2,10 +2,21 @@
   Transcribe
   = @work.title
 
-- @pages&.each do |page|
-  = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
-  = page.text
-  %br
-  %br
+.row
+  %div.mx-auto
+    = paginate @pages
 
-= paginate @pages
+- @pages&.each do |page|
+  .container-lg.work-metadata
+  .row
+    .col.border
+      = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
+    .col
+      = page.text
+  .row
+    .col
+      %br
+
+.row
+  %div.mx-auto
+    = paginate @pages
