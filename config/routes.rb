@@ -97,6 +97,7 @@ Rails.application.routes.draw do
   get '/tasks/:id/publish', to: 'tasks#publish', as: 'publish'
   get '/tasks/:id/review', to: 'tasks#review', as: 'review'
   get '/tasks/:id/transcribe', to: 'tasks#transcribe', as: 'transcribe'
+  put '/tasks/:id/update_page', to: 'tasks#update_page', as: 'update_page'
 
   # works
   get '/works/:id/history', to: 'works#history', as: 'history'

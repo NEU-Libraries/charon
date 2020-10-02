@@ -3,25 +3,26 @@
   = @work.title
 
 - if !@pages.blank?
-  %form
+  - page = @pages.first
+  = form_tag update_page_path(page), :method => :put do
     .row
       %div.mx-auto
         = paginate @pages
 
-    - @pages&.each do |page|
-      .container-lg.work-metadata
-      .row
-        .col
-          .border
-            = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
-        .col
-          .form-group
-            %textarea.form-control.min-vh-100{:rows => "3"}
-              = page.text
-      .row
-        .col
-          %br
+    .container-lg.work-metadata
+    .row
+      .col
+        .border
+          = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
+      .col
+        .form-group
+          %textarea.form-control.min-vh-100{:rows => "3"}
+            = page.text
+    .row
+      .col
+      .col
+        %input.btn.btn-primary.float-right{:href => "#", :role => "button", :type => "submit", :value => "Update"}
 
-  .row
-    %div.mx-auto
-      = paginate @pages
+    .row
+      %div.mx-auto
+        = paginate @pages

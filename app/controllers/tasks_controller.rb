@@ -3,7 +3,7 @@
 class TasksController < ApplicationController
   include ModsDisplay::ControllerExtension
 
-  before_action :find_work
+  before_action :find_work, except: [:update_page]
 
   def catalog
     @mods_html = render_mods_display(@work).to_html
@@ -38,7 +38,10 @@ class TasksController < ApplicationController
     @pages = Kaminari.paginate_array(page_array).page(params[:page]).per(1)
   end
 
-  def update_page; end
+  def update_page
+    page = Page.find(params[:id])
+    redirect_to work_path(page.parent.parent.noid)
+  end
 
   def encode; end
 
