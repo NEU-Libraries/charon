@@ -16,7 +16,7 @@
           = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
       .col
         .form-group
-          %textarea.form-control.min-vh-100{:rows => "3"}
+          %textarea.form-control.min-vh-100{:name => "page_text", :rows => "3"}
             = page.text
     .row
       .col
