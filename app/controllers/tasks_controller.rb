@@ -43,7 +43,7 @@ class TasksController < ApplicationController
     page.text = params[:page_text]
     saved_page = metadata_adapter.persister.save(resource: page)
 
-    flash[:notice] = "Updated page"
+    flash[:notice] = 'Updated page'
     redirect_to work_path(saved_page.parent.parent.noid)
   end
 
