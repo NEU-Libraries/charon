@@ -38,6 +38,8 @@ class TasksController < ApplicationController
     @pages = Kaminari.paginate_array(page_array).page(params[:page]).per(1)
   end
 
+  def update_page; end
+
   def encode; end
 
   def review; end

@@ -2,21 +2,22 @@
   Transcribe
   = @work.title
 
-.row
-  %div.mx-auto
-    = paginate @pages
-
-- @pages&.each do |page|
-  .container-lg.work-metadata
+- if !@pages.blank?
   .row
-    .col.border
-      = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
-    .col
-      = page.text
-  .row
-    .col
-      %br
+    %div.mx-auto
+      = paginate @pages
 
-.row
-  %div.mx-auto
-    = paginate @pages
+  - @pages&.each do |page|
+    .container-lg.work-metadata
+    .row
+      .col.border
+        = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
+      .col
+        = page.text
+    .row
+      .col
+        %br
+
+  .row
+    %div.mx-auto
+      = paginate @pages
