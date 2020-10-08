@@ -4,6 +4,8 @@ require 'rails_helper'
 
 describe TasksController do
   let(:work) { FactoryBot.create_for_repository(:work) }
+  let(:blob) { FactoryBot.create_for_repository(:blob, :pdf) }
+  let(:libera_service) { LiberaService.new({ work_id: work.id, blob_id: blob.id }) }
 
   describe 'claim' do
     render_views
@@ -49,6 +51,7 @@ describe TasksController do
   describe 'transcribe' do
     render_views
     it 'renders' do
+      libera_service.run
       get :transcribe, params: { id: work.noid }
       expect(response).to render_template('tasks/transcribe')
       # TODO: further testing
