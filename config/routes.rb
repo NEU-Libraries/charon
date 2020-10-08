@@ -109,6 +109,7 @@ Rails.application.routes.draw do
 
   # iiif manifest for file set
   get '/manifest/:id', to: 'images#manifest', as: 'manifest'
+  get '/manifest/single/:id', to: 'images#single_manifest', as: 'single_manifest'
 
   resources :users, only: [:index, :show]
 end

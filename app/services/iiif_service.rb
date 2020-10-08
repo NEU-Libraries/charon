@@ -5,7 +5,8 @@ class IiifService
   include MimeHelper
 
   def initialize(params)
-    @stack = Stack.find(params[:stack_id])
+    @single_blob = Blob.find(params[:blob_id]) if params[:blob_id].present?
+    @stack = Stack.find(params[:stack_id]) if params[:stack_id].present?
   end
 
   def run
@@ -16,9 +17,7 @@ class IiifService
 
     manifest = IIIF::Presentation::Manifest.new(seed)
     sequence = generate_sequence
-
-    populate_sequence(sequence)
-
+    single_or_multi(sequence)
     manifest.sequences << sequence
 
     manifest.to_json(pretty: true)
@@ -28,6 +27,16 @@ class IiifService
 
     def img
       Magick::Image.ping(@blob.file_path).first
+    end
+
+    def single_or_multi(sequence)
+      if !@single_blob.nil?
+        @blob = @single_blob
+        canvas = generate_canvas(0)
+        sequence['canvases'] = [canvas]
+      else
+        populate_sequence(sequence)
+      end
     end
 
     def populate_sequence(sequence)

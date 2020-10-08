@@ -48,23 +48,17 @@ describe TasksController do
     end
   end
 
-  describe 'update_page' do
-    it 'updates the page object with new transcribed text' do
-      libera_service.run unless work.children.count > 0
-      stack = work.children[0]
-      page = stack.children.select { |c| c.class == Page }.first
-      put :update_page, params: { id: page.id, page_text: 'foo' }
-      expect(Page.find(page.id).text).to eq('foo')
-    end
-  end
-
   describe 'transcribe' do
     render_views
     it 'renders' do
       libera_service.run unless work.children.count > 0
       get :transcribe, params: { id: work.noid }
       expect(response).to render_template('tasks/transcribe')
-      # TODO: further testing
+
+      stack = work.children[0]
+      page = stack.children.select { |c| c.class == Page }.first
+      put :update_page, params: { id: page.id, page_text: 'foo' }
+      expect(Page.find(page.id).text).to eq('foo')
     end
   end
 

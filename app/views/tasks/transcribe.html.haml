@@ -12,8 +12,8 @@
     .container-lg.work-metadata
     .row
       .col
-        .border
-          = image_tag "#{iiif_url}/2/#{page.thumbnail}/full/!500,500/0/default.jpg"
+        .viewer-wrapper
+          %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{single_manifest_path(page.thumbnail)}&config=#{universal_viewer_config_url}"}
       .col
         .form-group
           %textarea.form-control.min-vh-100{:name => "page_text", :rows => "3"}
