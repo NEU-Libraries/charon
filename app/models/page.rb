@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Page < FileSet
-  attribute :text, Valkyrie::Types::String
+  attribute :text, Valkyrie::Types::Set.of(String)
 
   def thumbnail
     files.select do |f|
