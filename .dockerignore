@@ -7,4 +7,3 @@ Makefile
 docker-compose.yml
 docs
 **/node_modules
-public/packs*
