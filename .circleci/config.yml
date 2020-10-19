@@ -24,11 +24,6 @@ jobs:
             - v1-{{ .Branch }}
           paths:
             - ~/caches/charon.tar
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}-assets
-          paths:
-            - ./public/
       - run:
           name: Load Docker image layer cache
           command: |
@@ -84,14 +79,6 @@ jobs:
           name: Run Rubocop
           command: |
             docker-compose exec web rubocop
-      - run:
-          name: Copy assets
-          command: |
-              docker cp "$(docker-compose ps -q web)":/home/charon/web/public .
-      - save_cache:
-          key: v1-{{ .Branch }}-assets-{{ epoch }}
-          paths:
-            - ./public/
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
