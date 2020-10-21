@@ -28,7 +28,8 @@ class LiberaService
       make_txt
     end
 
-    make_tei
+    # make_tei
+    TeiService.new({ stack_id: @stack.noid, page_list: @page_list }).run
   end
 
   private
@@ -41,11 +42,11 @@ class LiberaService
       "#{Libera.configuration.working_dir}/#{image_file_name}"
     end
 
-    def make_file_set
-      fs = FileSet.new type: Classification.derivative.name
-      fs.a_member_of = @stack.id
-      @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: fs)
-    end
+    # def make_file_set
+    #   fs = FileSet.new type: Classification.derivative.name
+    #   fs.a_member_of = @stack.id
+    #   @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: fs)
+    # end
 
     def make_page
       p = Page.new type: Classification.derivative.name
@@ -93,15 +94,15 @@ class LiberaService
       populate_resource(text_file_path, @page)
     end
 
-    def make_tei
-      make_file_set # TEI needs it's own file_set
+    # def make_tei
+    #   make_file_set # TEI needs it's own file_set
 
-      @parser.generate_tei(@page_list)
+    #   @parser.generate_tei(@page_list)
 
-      tei_path = "#{Libera.configuration.working_dir}/tei.xml"
+    #   tei_path = "#{Libera.configuration.working_dir}/tei.xml"
 
-      populate_resource(tei_path, @file_set)
-    end
+    #   populate_resource(tei_path, @file_set)
+    # end
 
     def populate_resource(file_path, resource, use = Valkyrie::Vocab::PCDMUse.ServiceFile)
       resource.member_ids += [
