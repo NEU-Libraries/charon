@@ -5,4 +5,8 @@ class Stack < Resource
   attribute :member_ids, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
   attribute :a_member_of, Valkyrie::Types::ID
   attribute :tei, Valkyrie::Types::String
+
+  def pages
+    children.select { |c| c.class == Page }
+  end
 end

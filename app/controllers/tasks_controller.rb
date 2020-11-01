@@ -39,10 +39,8 @@ class TasksController < ApplicationController
   end
 
   def update_page
-    page = Page.find(params[:id])
-    page.text = params[:page_text]
-    saved_page = metadata_adapter.persister.save(resource: page)
-
+    saved_page = update_text
+    TeiService.new({ stack_id: saved_page.parent.noid }).run
     flash[:notice] = 'Updated page'
     redirect_to work_path(saved_page.parent.parent.noid)
   end
@@ -62,5 +60,11 @@ class TasksController < ApplicationController
 
     def find_work
       @work = Work.find(params[:id])
+    end
+
+    def update_text
+      page = Page.find(params[:id])
+      page.text = params[:page_text]
+      metadata_adapter.persister.save(resource: page)
     end
 end

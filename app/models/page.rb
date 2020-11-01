@@ -16,4 +16,8 @@ class Page < FileSet
   def text=(text_value)
     self.versioned_text += [text_value]
   end
+
+  def png
+    children.select { |c| c.original_filename.first.end_with?('png') }.first
+  end
 end

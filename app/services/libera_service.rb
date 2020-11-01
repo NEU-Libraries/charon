@@ -13,7 +13,6 @@ class LiberaService
     @parser = Libera::Parser.new
     @parser.mk_working_dir
     @file_list = []
-    @page_list = {}
   end
 
   def run
@@ -29,7 +28,7 @@ class LiberaService
     end
 
     # make_tei
-    TeiService.new({ stack_id: @stack.noid, page_list: @page_list }).run
+    TeiService.new({ stack_id: @stack.noid }).run
   end
 
   private
@@ -41,12 +40,6 @@ class LiberaService
     def image_file_path
       "#{Libera.configuration.working_dir}/#{image_file_name}"
     end
-
-    # def make_file_set
-    #   fs = FileSet.new type: Classification.derivative.name
-    #   fs.a_member_of = @stack.id
-    #   @file_set = Valkyrie.config.metadata_adapter.persister.save(resource: fs)
-    # end
 
     def make_page
       p = Page.new type: Classification.derivative.name
@@ -83,7 +76,6 @@ class LiberaService
 
     def make_txt
       txt = @parser.parse_image(image_file_path, @page_number)
-      @page_list[image_file_name] = txt
 
       text_file_name = "pdf-page-#{@page_number}.txt"
       text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
@@ -93,16 +85,6 @@ class LiberaService
 
       populate_resource(text_file_path, @page)
     end
-
-    # def make_tei
-    #   make_file_set # TEI needs it's own file_set
-
-    #   @parser.generate_tei(@page_list)
-
-    #   tei_path = "#{Libera.configuration.working_dir}/tei.xml"
-
-    #   populate_resource(tei_path, @file_set)
-    # end
 
     def populate_resource(file_path, resource, use = Valkyrie::Vocab::PCDMUse.ServiceFile)
       resource.member_ids += [
