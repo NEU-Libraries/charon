@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     logger.info('No breadcrumbs found') && (return)
   end
 
+  def user_check
+    render_401 && return unless current_user
+  end
+
   def render_401
     render template: '/pages/401', layout: 'error', formats: [:html], status: :unauthorized
   end

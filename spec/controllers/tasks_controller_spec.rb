@@ -10,6 +10,7 @@ describe TasksController do
   describe 'claim' do
     render_views
     it 'renders a list of actions available from the workflow' do
+      sign_in FactoryBot.create(:user)
       get :claim, params: { id: work.noid }
       expect(response).to render_template('tasks/claim')
       # TODO: test permissions
@@ -31,11 +32,13 @@ describe TasksController do
 
   describe 'update_work' do
     it 'alters a work\'s title' do
+      sign_in FactoryBot.create(:user)
       put :update_work, params: { id: work.id, work: { title: 'new title' } }
       expect(Work.find(work.noid).title).to eq('new title')
     end
 
     it 'alters a work\'s MODS' do
+      sign_in FactoryBot.create(:user)
       new_mods = '<?xml version="1.0" encoding="UTF-8"?>
         <mods:mods xmlns:drs="https://repository.neu.edu/spec/v1" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:niec="http://repository.neu.edu/schema/niec" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dwc="http://rs.tdwg.org/dwc/terms/" xmlns:dwr="http://rs.tdwg.org/dwc/xsd/simpledarwincore/" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
           <mods:titleInfo usage="primary">
@@ -51,6 +54,7 @@ describe TasksController do
   describe 'transcribe' do
     render_views
     it 'renders' do
+      sign_in FactoryBot.create(:user)
       libera_service.run unless work.children.count > 0
       get :transcribe, params: { id: work.noid }
       expect(response).to render_template('tasks/transcribe')
@@ -65,6 +69,7 @@ describe TasksController do
   describe 'encode' do
     render_views
     it 'renders' do
+      sign_in FactoryBot.create(:user)
       get :encode, params: { id: work.noid }
       expect(response).to render_template('tasks/encode')
       # TODO: further testing
@@ -74,6 +79,7 @@ describe TasksController do
   describe 'review' do
     render_views
     it 'renders' do
+      sign_in FactoryBot.create(:user)
       get :review, params: { id: work.noid }
       expect(response).to render_template('tasks/review')
       # TODO: further testing
@@ -83,6 +89,7 @@ describe TasksController do
   describe 'publish' do
     render_views
     it 'renders' do
+      sign_in FactoryBot.create(:user)
       get :publish, params: { id: work.noid }
       expect(response).to render_template('tasks/publish')
       # TODO: further testing

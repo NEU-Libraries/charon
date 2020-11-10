@@ -52,8 +52,4 @@ class UsersController < ApplicationController
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to users_dashboard_url
   end
-
-  def user_check
-    render_401 && return unless current_user
-  end
 end

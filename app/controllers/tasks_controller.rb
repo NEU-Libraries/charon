@@ -3,6 +3,7 @@
 class TasksController < ApplicationController
   include ModsDisplay::ControllerExtension
 
+  before_action :user_check
   before_action :find_work, except: [:update_page]
 
   def catalog
@@ -15,7 +16,7 @@ class TasksController < ApplicationController
       status: Status.in_progress.name
     )
 
-    raise StandardError, state.errors.full_messages unless catalog_state.save
+    raise StandardError, catalog_state.errors.full_messages unless catalog_state.save
   end
 
   def update_work
@@ -65,6 +66,18 @@ class TasksController < ApplicationController
     def update_text
       page = Page.find(params[:id])
       page.text = params[:page_text]
-      metadata_adapter.persister.save(resource: page)
+      page = metadata_adapter.persister.save(resource: page)
+      log_text_update(page)
+      page
+    end
+
+    def log_text_update(page)
+      edit_state = Minerva::State.new(
+        creator_id: minerva_user_id(current_user.id),
+        work_id: minerva_work_id(page.parent.parent.noid),
+        status: Status.edited.name
+      )
+
+      raise StandardError, edit_state.errors.full_messages unless edit_state.save
     end
 end
