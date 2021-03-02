@@ -16,7 +16,7 @@ describe ImagesController do
       get :manifest, params: { id: stack.noid }
       expect(JSON.parse(response.body)['sequences'][0]['canvases'][0]['label']).to eq('Image 1')
 
-      page = stack.children.select { |c| c.class == Page }.first
+      page = stack.children.select { |c| c.instance_of?(Page) }.first
       get :single_manifest, params: { id: page.thumbnail }
       expect(JSON.parse(response.body)['sequences'][0]['canvases'][0]['label']).to eq('Image 1')
     end

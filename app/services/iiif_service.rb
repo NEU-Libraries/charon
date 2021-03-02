@@ -30,12 +30,12 @@ class IiifService
     end
 
     def single_or_multi(sequence)
-      if !@single_blob.nil?
+      if @single_blob.nil?
+        populate_sequence(sequence)
+      else
         @blob = @single_blob
         canvas = generate_canvas(0)
         sequence['canvases'] = [canvas]
-      else
-        populate_sequence(sequence)
       end
     end
 

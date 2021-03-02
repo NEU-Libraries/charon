@@ -7,6 +7,6 @@ class Stack < Resource
   attribute :tei, Valkyrie::Types::String
 
   def pages
-    children.select { |c| c.class == Page }
+    children.select { |c| c.instance_of?(Page) }
   end
 end

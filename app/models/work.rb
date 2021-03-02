@@ -13,11 +13,11 @@ class Work < Resource
   mods_xml_source(&:mods_xml)
 
   def stacks
-    children.select { |c| c.class == Stack }
+    children.select { |c| c.instance_of?(Stack) }
   end
 
   def file_sets
-    children.select { |c| c.class == FileSet }
+    children.select { |c| c.instance_of?(FileSet) }
   end
 
   def history

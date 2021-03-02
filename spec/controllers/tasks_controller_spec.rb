@@ -60,7 +60,7 @@ describe TasksController do
       expect(response).to render_template('tasks/transcribe')
 
       stack = work.children[0]
-      page = stack.children.select { |c| c.class == Page }.first
+      page = stack.children.select { |c| c.instance_of?(Page) }.first
       put :update_page, params: { id: page.id, page_text: 'foo' }
       expect(Page.find(page.id).text).to eq('foo')
     end

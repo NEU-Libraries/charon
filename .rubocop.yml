@@ -15,7 +15,7 @@ Layout/LineLength:
   Include:
     - 'app/**/*'
 Metrics/MethodLength:
-  ExcludedMethods: ['role_permissions']
+  IgnoredMethods: ['role_permissions']
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.5
@@ -50,3 +50,9 @@ Style/HashTransformKeys:
   Enabled: true
 Style/HashTransformValues:
   Enabled: true
+Naming/VariableNumber:
+  Enabled: false
+Lint/EmptyBlock:
+  Enabled: false
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
