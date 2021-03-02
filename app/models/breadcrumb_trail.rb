@@ -24,11 +24,13 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
   end
 
   def shared_new_user
-    if objects[:project].present?
-      breadcrumb(objects[:project].title, actions_path(objects[:project]))
-      breadcrumb('User Registry', project_user_registry_path(objects[:project]))
-    else # admin create
-      breadcrumb('Admin Dashboard', admin_dashboard_path)
+    if objects[:current_user].present?
+      if objects[:project].present?
+        breadcrumb(objects[:project].title, actions_path(objects[:project]))
+        breadcrumb('User Registry', project_user_registry_path(objects[:project]))
+      else # admin create
+        breadcrumb('Admin Dashboard', admin_dashboard_path)
+      end
     end
     breadcrumb('New User')
   end

@@ -65,9 +65,11 @@ Rails.application.routes.draw do
   get '/projects/:id/user_registry', to: 'projects#user_registry', as: 'project_user_registry'
   get '/projects/:id/users', to: 'projects#users', as: 'project_users'
   get '/projects/:id/new_user', to: 'projects#new_user', as: 'project_new_user'
+  get '/projects/:id/sign_up', to: 'projects#sign_up', as: 'project_sign_up'
   get '/projects/:id/available_users', to: 'projects#available_users', as: 'project_available_users'
   get '/projects/:id/remove_user/:user_id', to: 'projects#remove_user', as: 'project_remove_user'
   post '/projects/:id/create_user', to: 'projects#create_user', as: 'project_create_user'
+  post '/projects/:id/sign_up_user', to: 'projects#sign_up_user', as: 'project_sign_up_user'
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
   # project workflows
   get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'

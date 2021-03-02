@@ -94,12 +94,27 @@ class ProjectsController < CatalogController
     render 'shared/new_user'
   end
 
+  def sign_up
+    @user = User.new
+    @create_user_path = project_sign_up_user_path
+    render 'shared/sign_up'
+  end
+
+  def sign_up_user
+    @user = manufacture_user(params)
+    @project.attach_user(@user)
+    UserMailer.with(user: @user).system_created_user_email.deliver_now
+    flash[:notice] = "User successfully created and attached to #{@project.title}. "\
+                     "Email sent to #{@user.email} for notification."
+    redirect_to actions_path(@project)
+  end
+
   def create_user
     authorize! :oversee, @project
     @user = manufacture_user(params)
     @project.attach_user(@user)
     UserMailer.with(user: @user).system_created_user_email.deliver_now
-    flash[:notice] = "User successfully created and attached to #{@project.title}."\
+    flash[:notice] = "User successfully created and attached to #{@project.title}. "\
                      "Email sent to #{@user.email} for notification."
     redirect_to actions_path(@project)
   end
