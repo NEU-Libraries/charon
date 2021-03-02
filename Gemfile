@@ -11,7 +11,7 @@ gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'pg'
 gem 'puma'
-gem 'rails'
+gem 'rails', '6.0.3.5'
 gem 'valkyrie'
 
 # NEU gems
@@ -55,7 +55,7 @@ gem 'twitter-typeahead-rails'
 # Blacklight
 group :test do
   gem 'database_cleaner'
-  gem 'factory_bot_rails', '5.0.1' # pinning due to Strategy not registered error
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
 
