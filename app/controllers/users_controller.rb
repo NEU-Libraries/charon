@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def actions
     @project = find_resource
+    @manager = current_user.manager?(@project)
 
     # TODO: - flash an error if the below isn't true. A redirect to the same page without
     # causes confusion

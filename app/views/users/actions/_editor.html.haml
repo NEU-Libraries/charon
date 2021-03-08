@@ -1,5 +1,6 @@
 %tr
-  %td.table-success
+  - if @manager
+    %td.table-success
   %td
     Review all works
   %td
@@ -7,7 +8,8 @@
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => project_works_path(@project), :role => "button"} Review
 %tr
-  %td.table-success
+  - if @manager
+    %td.table-success
   %td
     Review user history
   %td
@@ -15,7 +17,8 @@
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => project_users_path(@project), :role => "button"} Review
 %tr
-  %td.table-success
+  - if @manager
+    %td.table-success
   %td
     Review completed tasks
   %td
@@ -23,7 +26,8 @@
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => "#", :role => "button"} Review
 %tr
-  %td.table-success
+  - if @manager
+    %td.table-success
   %td
     Review uploads
   %td

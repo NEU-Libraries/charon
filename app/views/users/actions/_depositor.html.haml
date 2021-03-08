@@ -1,5 +1,6 @@
 %tr
-  %td.table-warning
+  - if @manager
+    %td.table-warning
   %td
     Upload a file
   %td
@@ -7,7 +8,8 @@
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => new_generic_upload_url(project_id: @project.noid), :role => "button"} Submit
 %tr
-  %td.table-warning
+  - if @manager
+    %td.table-warning
   %td
     Review my history
   %td
