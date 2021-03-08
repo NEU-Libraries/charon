@@ -29,14 +29,14 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
         breadcrumb(objects[:project].title, actions_path(objects[:project]))
         breadcrumb('User Registry', project_user_registry_path(objects[:project]))
       else # admin create
-        breadcrumb('Admin Dashboard', admin_dashboard_path)
+        breadcrumb('System Dashboard', admin_dashboard_path)
       end
     end
     breadcrumb('New User')
   end
 
   def projects_new
-    breadcrumb('Admin Dashboard', admin_dashboard_path)
+    breadcrumb('System Dashboard', admin_dashboard_path)
     breadcrumb('New Project')
   end
 
