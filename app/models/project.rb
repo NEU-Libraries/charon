@@ -5,6 +5,7 @@ class Project < Resource
   attribute :title, Valkyrie::Types::String
   attribute :description, Valkyrie::Types::String
   attribute :user_registry_id, Valkyrie::Types::Integer
+  attribute :thumbnail, Valkyrie::Types::ID
 
   # Minerva crossover
   def marked_for_destruction?

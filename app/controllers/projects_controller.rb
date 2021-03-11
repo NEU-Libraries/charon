@@ -6,7 +6,7 @@ class ProjectsController < CatalogController
 
   before_action :searchable, only: [:show]
   before_action :admin_check, only: %i[new create edit update]
-  load_resource except: %i[new create edit update]
+  load_resource except: %i[new create update]
   helper_method :sort_column, :sort_direction
 
   # Blacklight incantations

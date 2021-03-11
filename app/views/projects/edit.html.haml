@@ -1,0 +1,4 @@
+= form_for @project, :method => :patch do |f|
+  = f.text_field :title
+  = f.text_field :description
+  = file_field_tag 'thumbnail'
