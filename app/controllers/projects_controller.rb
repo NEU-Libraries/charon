@@ -6,7 +6,7 @@ class ProjectsController < CatalogController
 
   before_action :searchable, only: [:show]
   before_action :admin_check, only: %i[new create edit update]
-  load_resource except: %i[new create update]
+  load_resource except: %i[new create]
   helper_method :sort_column, :sort_direction
 
   # Blacklight incantations
@@ -41,7 +41,20 @@ class ProjectsController < CatalogController
 
   def edit; end
 
-  def update; end
+  def update
+    flash[:notice] = params.inspect.to_s
+    change_set = ProjectChangeSet.new(@project)
+    if change_set.validate(params[:project])
+      change_set.sync
+      @project = metadata_adapter.persister.save(resource: change_set.resource)
+    end
+
+    if !params[:project][:thumbnail].blank?
+
+    end
+
+    redirect_to project_path(@project)
+  end
 
   def show
     authorize! :read, @project

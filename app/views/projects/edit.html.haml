@@ -2,6 +2,7 @@
   = f.input :title, required: true
   = f.input :description, required: true
   .form-group
+    %label Thumbnail *
     .custom-file
       = f.file_field :thumbnail, multiple: false, class: "custom-file-input"
       %label.custom-file-label{:for => "binary"} Choose file
