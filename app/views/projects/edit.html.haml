@@ -1,4 +1,16 @@
-= form_for @project, :method => :patch do |f|
-  = f.text_field :title
-  = f.text_field :description
-  = file_field_tag 'thumbnail'
+= simple_form_for(@project, method: :patch) do |f|
+  = f.input :title, required: true
+  = f.input :description, required: true
+  .form-group
+    .custom-file
+      = f.file_field :thumbnail, multiple: false, class: "custom-file-input"
+      %label.custom-file-label{:for => "binary"} Choose file
+  = f.button :submit, class: 'btn btn-primary'
+
+  :javascript
+    $('#project_thumbnail').on('change',function(){
+        //get the file name
+        var fileName = $(this).val().replace("C:\\fakepath\\", "");
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    })
