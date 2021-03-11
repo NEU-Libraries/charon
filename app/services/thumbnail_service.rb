@@ -5,15 +5,15 @@ class ThumbnailService
 
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
-    @work = Work.find(params[:work_id])
+    @resource = Resource.find(params[:resource_id])
     @file_set = FileSet.find(params[:file_set_id])
   rescue Valkyrie::Persistence::ObjectNotFoundError, ActiveRecord::RecordNotFound => e
     Rails.logger.error(e)
   end
 
   def run
-    return if @upload.nil? || @work.nil? || @file_set.nil?
-    return if @work.thumbnail.present? # idempotent step
+    return if @upload.nil? || @resource.nil? || @file_set.nil?
+    return if @resource.thumbnail.present? # idempotent step
 
     thumbnail_path = make_jp2
 
@@ -21,8 +21,8 @@ class ThumbnailService
 
     blob_id = make_thumbnail_blob(thumbnail_path)
     add_thumbnail_blob_to_work(blob_id)
-    @work.thumbnail = blob_id
-    Valkyrie.config.metadata_adapter.persister.save(resource: @work)
+    @resource.thumbnail = blob_id
+    Valkyrie.config.metadata_adapter.persister.save(resource: @resource)
     GenericUpload.find(@upload.id).destroy!
   end
 
@@ -51,7 +51,7 @@ class ThumbnailService
 
     def add_thumbnail_blob_to_work(blob_id)
       @file_set.member_ids += [blob_id]
-      @file_set.a_member_of = @work.id
+      @file_set.a_member_of = @resource.id
       Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)
     end
 
