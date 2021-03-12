@@ -6,9 +6,9 @@
     %tr
       %th{:scope => "col"} First Name
       %th{:scope => "col"}
-        = sortable "users.last_name", "Last Name"
+        = column_sort "users.last_name", "Last Name"
       %th{:scope => "col"}
-        = sortable "designation", "Role"
+        = column_sort "designation", "Role"
       %th{:scope => "col"} Change Role
       %th{:scope => "col"} Remove User
   %tbody

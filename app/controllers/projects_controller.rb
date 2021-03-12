@@ -3,6 +3,8 @@
 class ProjectsController < CatalogController
   include UserCreatable
   include Searchable
+  include Sortable
+  include ThumbnailHelper
 
   before_action :searchable, only: [:show]
   before_action :admin_check, only: %i[new create edit update]
@@ -42,16 +44,13 @@ class ProjectsController < CatalogController
   def edit; end
 
   def update
-    flash[:notice] = params.inspect.to_s
     change_set = ProjectChangeSet.new(@project)
     if change_set.validate(params[:project])
       change_set.sync
       @project = metadata_adapter.persister.save(resource: change_set.resource)
     end
 
-    if !params[:project][:thumbnail].blank?
-
-    end
+    make_thumbnail(@project, params[:project].permit(:binary))
 
     redirect_to project_path(@project)
   end
@@ -59,9 +58,7 @@ class ProjectsController < CatalogController
   def show
     authorize! :read, @project
     @response, @document_list = search_service.fetch(
-      metadata_adapter.query_service.find_inverse_references_by(
-        resource: @project, property: :a_member_of
-      ).map(&:id).map(&:to_s).to_a
+      @project.filtered_children
     )
   end
 
@@ -131,16 +128,4 @@ class ProjectsController < CatalogController
   end
 
   def works; end
-
-  private
-
-    def sort_column
-      return 'designation' unless params[:sort]
-
-      (User.column_names + Role.column_names).include?(params[:sort].split('.').last) ? params[:sort] : 'designation'
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-    end
 end

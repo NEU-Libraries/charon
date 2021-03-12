@@ -4,12 +4,12 @@
   .form-group
     %label Thumbnail *
     .custom-file
-      = f.file_field :thumbnail, multiple: false, class: "custom-file-input"
+      = f.file_field :binary, multiple: false, class: "custom-file-input"
       %label.custom-file-label{:for => "binary"} Choose file
   = f.button :submit, class: 'btn btn-primary'
 
   :javascript
-    $('#project_thumbnail').on('change',function(){
+    $('#project_binary').on('change',function(){
         //get the file name
         var fileName = $(this).val().replace("C:\\fakepath\\", "");
         //replace the "Choose a file" label

@@ -20,7 +20,7 @@ class ThumbnailService
     return if thumbnail_path.blank?
 
     blob_id = make_thumbnail_blob(thumbnail_path)
-    add_thumbnail_blob_to_work(blob_id)
+    add_thumbnail_blob_to_resource(blob_id)
     @resource.thumbnail = blob_id
     Valkyrie.config.metadata_adapter.persister.save(resource: @resource)
     GenericUpload.find(@upload.id).destroy!
@@ -49,7 +49,7 @@ class ThumbnailService
       saved_thumbnail_blob.id
     end
 
-    def add_thumbnail_blob_to_work(blob_id)
+    def add_thumbnail_blob_to_resource(blob_id)
       @file_set.member_ids += [blob_id]
       @file_set.a_member_of = @resource.id
       Valkyrie.config.metadata_adapter.persister.save(resource: @file_set)

@@ -6,7 +6,7 @@
     %tr
       %th{:scope => "col"} ID
       %th{:scope => "col"}
-        = sortable "last_name", "Name"
+        = column_sort "last_name", "Name"
       %th{:scope => "col"} Last Action
   %tbody
     - @users.each_with_index do |user, i|

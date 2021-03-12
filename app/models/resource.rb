@@ -36,4 +36,8 @@ class Resource < Valkyrie::Resource
     result.concat Valkyrie.config.metadata_adapter.query_service.find_members(resource: self).to_a
     result.uniq
   end
+
+  def filtered_children
+    children.select { |c| c.instance_of?((SystemCollection || Collection || Work)) }.map(&:id).map(&:to_s).to_a
+  end
 end

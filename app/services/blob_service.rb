@@ -6,14 +6,14 @@ class BlobService
 
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
-    @work = Work.find(params[:work_id])
+    @resource = Resource.find(params[:resource_id])
     @file_set = FileSet.find(params[:file_set_id])
   rescue Valkyrie::Persistence::ObjectNotFoundError, ActiveRecord::RecordNotFound => e
     Rails.logger.error(e)
   end
 
   def run
-    return if @upload.nil? || @work.nil? || @file_set.nil?
+    return if @upload.nil? || @resource.nil? || @file_set.nil?
     return if @file_set.original_file? # idempotent step
 
     @blob = create_blob(create_file(@upload.file_path,
@@ -30,7 +30,7 @@ class BlobService
   private
 
     def run_jobs
-      CreateThumbnailJob.perform_later(@upload.id, @work.noid, @file_set.noid)
-      LiberaJob.perform_later(@work.noid, @blob.noid) if determine_mime(@blob.file_path).subtype == 'pdf'
+      CreateThumbnailJob.perform_later(@upload.id, @resource.noid, @file_set.noid)
+      LiberaJob.perform_later(@resource.noid, @blob.noid) if determine_mime(@blob.file_path).subtype == 'pdf'
     end
 end
