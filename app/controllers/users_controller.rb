@@ -11,6 +11,10 @@ class UsersController < ApplicationController
     @user_actions = State.where(creator_id: minerva_user_id(params[:id]))
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def index
     @users = User.all
   end
