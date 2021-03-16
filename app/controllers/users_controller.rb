@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   include UserCreatable
+  include ThumbnailHelper
 
   before_action :user_check
 
@@ -16,6 +17,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    @user.assign_attributes(params[:user].permit(:binary, :first_name, :last_name))
+    @user.save!
+
+    flash[:notice] = params.inspect
+    redirect_to user_path(@user)
   end
 
   def index
