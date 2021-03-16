@@ -4,6 +4,7 @@ class User < ApplicationRecord
   acts_as_messageable
   enumeration :capacity
   has_many :roles, dependent: :destroy
+  has_one_attached :binary
 
   include RoleChecker
   include Blacklight::User
