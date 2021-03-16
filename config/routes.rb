@@ -113,5 +113,5 @@ Rails.application.routes.draw do
   get '/manifest/:id', to: 'images#manifest', as: 'manifest'
   get '/manifest/single/:id', to: 'images#single_manifest', as: 'single_manifest'
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:show, :edit, :update]
 end
