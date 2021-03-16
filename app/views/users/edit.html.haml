@@ -1,1 +1,19 @@
 = @user.inspect
+
+= simple_form_for(@user, method: :patch) do |f|
+  = f.input :first_name, required: true
+  = f.input :last_name, required: true
+  .form-group
+    %label Thumbnail *
+    .custom-file
+      = f.file_field :binary, multiple: false, class: "custom-file-input"
+      %label.custom-file-label{:for => "binary"} Choose file
+  = f.button :submit, class: 'btn btn-primary'
+
+  :javascript
+    $('#user_binary').on('change',function(){
+        //get the file name
+        var fileName = $(this).val().replace("C:\\fakepath\\", "");
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    })
