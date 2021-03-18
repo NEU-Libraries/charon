@@ -18,6 +18,8 @@
 import 'bootstrap/dist/js/bootstrap';
 import 'ace-builds';
 import 'ace-builds/webpack-resolver';
+import 'leaflet/dist/leaflet';
+import 'leaflet-iiif/leaflet-iiif';
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()

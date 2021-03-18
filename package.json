@@ -9,6 +9,8 @@
     "blacklight-frontend": "^7.7.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "leaflet": "^1.7.1",
+    "leaflet-iiif": "^3.0.0",
     "picturefill": "^3.0.3",
     "popper.js": "^1.16.1",
     "webpack": "^4.0.0"
