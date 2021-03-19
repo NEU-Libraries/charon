@@ -12,8 +12,9 @@
     .container-lg.work-metadata
     .row
       .col
-        .viewer-wrapper
-          %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{single_manifest_path(page.thumbnail)}&config=#{universal_viewer_config_url}"}
+        #map{ :style => "height: 800px" }
+        -# .viewer-wrapper
+        -#   %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{single_manifest_path(page.thumbnail)}&config=#{universal_viewer_config_url}"}
       .col
         .form-group
           %textarea.form-control.min-vh-100{:name => "page_text", :rows => "3"}
@@ -26,3 +27,16 @@
     .row
       %div.mx-auto
         = paginate @pages
+
+:javascript
+  var map;
+
+  map = L.map('map', {
+    center: [0, 0],
+    crs: L.CRS.Simple,
+    zoom: 0
+  });
+
+  var baseLayer = L.tileLayer.iiif(
+    'https://stacks.stanford.edu/image/iiif/cv770rd9515%2F0767_23A_SM/info.json'
+  ).addTo(map);
