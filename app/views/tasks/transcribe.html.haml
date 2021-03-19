@@ -38,7 +38,7 @@
   });
 
   var baseLayer = L.tileLayer.iiif(
-    'https://stacks.stanford.edu/image/iiif/cv770rd9515%2F0767_23A_SM/info.json'
+    "http://localhost:8182/iiif/2/#{page.thumbnail}/info.json"
   ).addTo(map);
 
   // Initialise the FeatureGroup to store editable layers
