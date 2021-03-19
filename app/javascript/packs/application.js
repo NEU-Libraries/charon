@@ -20,6 +20,7 @@ import 'ace-builds';
 import 'ace-builds/webpack-resolver';
 import 'leaflet/dist/leaflet';
 import 'leaflet-iiif/leaflet-iiif';
+import 'leaflet-draw/dist/leaflet.draw';
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
