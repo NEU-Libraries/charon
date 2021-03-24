@@ -39,7 +39,7 @@
   });
 
   var baseLayer = L.tileLayer.iiif(
-    "http://localhost:8182/iiif/2/#{page.thumbnail}/info.json"
+    "#{iiif_url}/2/#{page.thumbnail}/info.json"
   ).addTo(map);
 
   // Initialise the FeatureGroup to store editable layers
