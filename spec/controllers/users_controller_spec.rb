@@ -17,20 +17,6 @@ describe UsersController do
     end
   end
 
-  describe 'index' do
-    render_views
-    it 'displays the user' do
-      sign_in user
-      get :index
-      expect(CGI.unescapeHTML(response.body)).to include(user.last_name)
-    end
-    it '401s unless signed in' do
-      sign_out user
-      get :index
-      expect(response.status).to eq(401)
-    end
-  end
-
   describe 'dashboard' do
     render_views
 
