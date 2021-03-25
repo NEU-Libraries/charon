@@ -30,6 +30,7 @@
 
 :javascript
   var map;
+  var drawControl;
 
   window.onload = function() {
     map = L.map('map', {
@@ -48,7 +49,15 @@
     map.addLayer(drawnItems);
 
     // Initialise the draw control and pass it the FeatureGroup of editable layers
-    var drawControl = new L.Control.Draw({
+    drawControl = new L.Control.Draw({
+      draw : {
+        position : 'topleft',
+        polygon : false,
+        polyline : false,
+        marker : false,
+        circlemarker : false,
+        circle : false
+      },
       edit: {
         featureGroup: drawnItems
       }
@@ -61,7 +70,17 @@
       var layer = e.layer;
 
       // Do whatever else you need to. (save to db, add to map etc)
+      const corners = e.layer.getBounds();
+
+      const northwest = corners.getNorthWest();
+      const northeast = corners.getNorthEast();
+      const southeast = corners.getSouthEast();
+      const southwest = corners.getSouthWest();
+
+      console.log([northwest, northeast, southeast, southwest]);
 
       drawnItems.addLayer(layer);
     });
   }
+
+-# new L.Draw.Rectangle(map, drawControl.options.rectangle).enable();
