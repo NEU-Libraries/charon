@@ -29,37 +29,39 @@
         = paginate @pages
 
 :javascript
-  var map;
+  window.onload = function() {
+    var map;
 
-  map = L.map('map', {
-    center: [0, 0],
-    crs: L.CRS.Simple,
-    scrollWheelZoom: false,
-    zoom: 0
-  });
+    map = L.map('map', {
+      center: [0, 0],
+      crs: L.CRS.Simple,
+      scrollWheelZoom: false,
+      zoom: 0
+    });
 
-  var baseLayer = L.tileLayer.iiif(
-    "#{iiif_url}/2/#{page.thumbnail}/info.json"
-  ).addTo(map);
+    var baseLayer = L.tileLayer.iiif(
+      "#{iiif_url}/2/#{page.thumbnail}/info.json"
+    ).addTo(map);
 
-  // Initialise the FeatureGroup to store editable layers
-  var drawnItems = new L.FeatureGroup();
-  map.addLayer(drawnItems);
+    // Initialise the FeatureGroup to store editable layers
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
 
-  // Initialise the draw control and pass it the FeatureGroup of editable layers
-  var drawControl = new L.Control.Draw({
-    edit: {
-      featureGroup: drawnItems
-    }
-  });
+    // Initialise the draw control and pass it the FeatureGroup of editable layers
+    var drawControl = new L.Control.Draw({
+      edit: {
+        featureGroup: drawnItems
+      }
+    });
 
-  map.addControl(drawControl);
+    map.addControl(drawControl);
 
-  map.on(L.Draw.Event.CREATED, function (e) {
-    var type = e.layerType
-    var layer = e.layer;
+    map.on(L.Draw.Event.CREATED, function (e) {
+      var type = e.layerType
+      var layer = e.layer;
 
-    // Do whatever else you need to. (save to db, add to map etc)
+      // Do whatever else you need to. (save to db, add to map etc)
 
-    drawnItems.addLayer(layer);
-  });
+      drawnItems.addLayer(layer);
+    });
+  }
