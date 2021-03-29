@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Annotation < Resource
+class Note < Resource
   attribute :region, Valkyrie::Types::String
   attribute :color, Valkyrie::Types::String
   attribute :certainty, Valkyrie::Types::String
@@ -9,6 +9,6 @@ class Annotation < Resource
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
 
   def comments
-    # TODO: helper method to load all comments on an annotation
+    # TODO: helper method to load all comments on a Note
   end
 end
