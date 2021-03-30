@@ -35,7 +35,7 @@
             %th{:scope => "col"} Certainty
         %tbody
           - page.notes.each_with_index do |note|
-            %tr.clickable{"data-target" => "#accordion", "data-toggle" => "collapse"}
+            %tr
               %td.align-middle
                 Blue
               %td.align-middle
@@ -43,8 +43,11 @@
               %td.align-middle
                 Sure
             %tr
-              %td.hidden-row{:colspan => "3"}
-                #accordion.collapse Hidden by default
+              %td{:colspan => "3"}
+                .input-group.mb-3
+                  %input.form-control{"aria-describedby" => "basic-addon2", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
+                  .input-group-append
+                    %button.btn.btn-outline-primary{:type => "button"} Add Comment
 
     .row
       %div.mx-auto
