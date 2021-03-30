@@ -41,7 +41,7 @@
               %td.align-middle
                 2
               %td.align-middle
-                Sure
+                = select_tag('user[id]', options_for_select(['Sure', 'Unsure', 'Unknown'], ''), {:include_blank => true, class: "form-control"})
             %tr
               %td{:colspan => "3"}
                 .input-group.mb-3
