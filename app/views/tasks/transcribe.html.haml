@@ -24,6 +24,28 @@
       .col
         %input.btn.btn-primary.float-right{:href => "#", :role => "button", :type => "submit", :value => "Update"}
 
+    %br
+
+    .row
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th{:scope => "col"} Color
+            %th{:scope => "col"} ID
+            %th{:scope => "col"} Certainty
+        %tbody
+          - page.notes.each_with_index do |note|
+            %tr.clickable{"data-target" => "#accordion", "data-toggle" => "collapse"}
+              %td.align-middle
+                Blue
+              %td.align-middle
+                2
+              %td.align-middle
+                Sure
+            %tr
+              %td.hidden-row{:colspan => "3"}
+                #accordion.collapse Hidden by default
+
     .row
       %div.mx-auto
         = paginate @pages

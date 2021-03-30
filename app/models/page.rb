@@ -20,4 +20,8 @@ class Page < FileSet
   def png
     children.select { |c| c.original_filename.first.end_with?('png') }.first
   end
+
+  def notes
+    children.select { |c| c.instance_of?(Note) }
+  end
 end
