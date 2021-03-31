@@ -30,22 +30,30 @@
       %table.table.table-bordered
         %thead
           %tr
-            %th{:scope => "col"} Color
             %th{:scope => "col"} ID
             %th{:scope => "col"} Certainty
+            %th.text-right{:scope => "col"} Update
         %tbody
           - page.notes.each_with_index do |note|
             %tr
               %td.align-middle
-                Blue
-              %td.align-middle
                 2
               %td.align-middle
                 = select_tag('user[id]', options_for_select(['Sure', 'Unsure', 'Unknown'], ''), {:include_blank => true, class: "form-control"})
+              %td.align-middle
+                %button.btn.btn-success.float-right{:type => "button"} Save
             %tr
               %td{:colspan => "3"}
+                %h6 Possible Meanings
                 .input-group.mb-3
-                  %input.form-control{"aria-describedby" => "basic-addon2", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
+                  %input.form-control{"aria-describedby" => "basic-addon2", "aria-label" => "Possible Meaning", :placeholder => "Possible Meaning", :type => "text"}/
+                  .input-group-append
+                    %button.btn.btn-outline-primary{:type => "button"} Add Meaning
+            %tr
+              %td{:colspan => "3"}
+                %h6 Comments
+                .input-group.mb-3
+                  %input.form-control{"aria-describedby" => "basic-addon3", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
                   .input-group-append
                     %button.btn.btn-outline-primary{:type => "button"} Add Comment
 
