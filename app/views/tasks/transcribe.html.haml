@@ -49,6 +49,14 @@
   var map;
   var drawControl;
 
+  function getRandomColor() {
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += Math.floor(Math.random() * 10);
+    }
+    return color;
+  }
+
   window.onload = function() {
     map = L.map('map', {
       center: [0, 0],
@@ -83,9 +91,8 @@
       var type = e.layerType
       var layer = e.layer;
 
-      var randomColor = Math.floor(Math.random()*16777215).toString(16);
-
-      e.layer.options.color = "#" + randomColor;
+      e.layer.options.color = getRandomColor();
+      e.layer.bindTooltip('Hi There!');
 
       // Do whatever else you need to. (save to db, add to map etc)
       //const corners = e.layer.getBounds();
@@ -97,10 +104,13 @@
 
       //console.log([northwest, northeast, southeast, southwest]);
 
-      console.log(e.layer.toGeoJSON());
+      //console.log(e.layer.toGeoJSON());
+      //console.log(e.layer.getLatLngs());
 
       drawnItems.addLayer(layer);
     });
+
+
   }
 
 -# new L.Draw.Rectangle(map, drawControl.options.rectangle).enable();
