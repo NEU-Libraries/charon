@@ -83,15 +83,21 @@
       var type = e.layerType
       var layer = e.layer;
 
+      var randomColor = Math.floor(Math.random()*16777215).toString(16);
+
+      e.layer.options.color = "#" + randomColor;
+
       // Do whatever else you need to. (save to db, add to map etc)
-      const corners = e.layer.getBounds();
+      //const corners = e.layer.getBounds();
 
-      const northwest = corners.getNorthWest();
-      const northeast = corners.getNorthEast();
-      const southeast = corners.getSouthEast();
-      const southwest = corners.getSouthWest();
+      //const northwest = corners.getNorthWest();
+      //const northeast = corners.getNorthEast();
+      //const southeast = corners.getSouthEast();
+      //const southwest = corners.getSouthWest();
 
-      console.log([northwest, northeast, southeast, southwest]);
+      //console.log([northwest, northeast, southeast, southwest]);
+
+      console.log(e.layer.toGeoJSON());
 
       drawnItems.addLayer(layer);
     });
