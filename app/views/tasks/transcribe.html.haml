@@ -49,12 +49,16 @@
   var map;
   var drawControl;
 
-  function getRandomColor() {
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += Math.floor(Math.random() * 10);
+  function getUniqueColor(n) {
+    const rgb = [0, 0, 0];
+
+    for (let i = 0; i < 24; i++) {
+      rgb[i%3] <<= 1;
+      rgb[i%3] |= n & 0x01;
+      n >>= 1;
     }
-    return color;
+
+    return '#' + rgb.reduce((a, c) => (c > 0x0f ? c.toString(16) : '0' + c.toString(16)) + a, '');
   }
 
   window.onload = function() {
@@ -91,7 +95,7 @@
       var type = e.layerType
       var layer = e.layer;
 
-      e.layer.options.color = getRandomColor();
+      e.layer.options.color = getUniqueColor(Math.floor(Math.random() * 1024) + 1);
       e.layer.bindTooltip('Hi There!');
 
       // Do whatever else you need to. (save to db, add to map etc)
