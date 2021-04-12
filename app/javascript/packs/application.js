@@ -22,6 +22,13 @@ import 'leaflet/dist/leaflet';
 import 'leaflet-iiif/leaflet-iiif';
 import 'leaflet-draw/dist/leaflet.draw';
 
+// Import TinyMCE
+import tinymce from 'tinymce/tinymce';
+// Default icons are required for TinyMCE 5.3 or above
+import 'tinymce/icons/default';
+// A theme is also required
+import 'tinymce/themes/silver';
+
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 
