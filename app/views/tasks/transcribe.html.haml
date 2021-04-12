@@ -17,7 +17,7 @@
         -#   %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{single_manifest_path(page.thumbnail)}&config=#{universal_viewer_config_url}"}
       .col
         .form-group
-          %textarea.form-control.min-vh-100{:name => "page_text", :rows => "3"}
+          %textarea#transcription.form-control.min-vh-100{:name => "page_text", :rows => "3"}
             = page.text
     .row
       .col
@@ -62,6 +62,10 @@
   }
 
   window.onload = function() {
+    tinymce.init({
+      selector: 'textarea#transcription'
+    });
+
     map = L.map('map', {
       center: [0, 0],
       crs: L.CRS.Simple,
