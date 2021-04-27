@@ -1,2 +1,12 @@
 %h2.py-2
   Projects
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"} #
+  %tbody
+    - @projects.each_with_index do |project, i|
+      %tr
+        %td.align-middle
+          = @project.inspect

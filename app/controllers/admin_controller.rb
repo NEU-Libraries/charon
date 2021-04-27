@@ -31,10 +31,12 @@ class AdminController < ApplicationController
   end
 
   def users
+    @users = User.all
     render 'admin/users/index'
   end
 
   def projects
+    @projects = metadata_adapter.query_service.find_all_of_model(model: Project)
     render 'admin/projects/index'
   end
 end
