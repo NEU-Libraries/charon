@@ -1,0 +1,19 @@
+emstart {
+  background: url(emstart.png) no-repeat;
+  background-position: left -3px top -3px;
+  padding: 10px 10px 5px 10px;
+  background-color:#aabbcc;
+  border:1px dotted #CCCCCC;
+  height:50px;
+  width:100px;
+}
+
+emend {
+  background: url(emend.png) no-repeat;
+  background-position: left -3px bottom -3px;
+  padding: 5px 10px 10px 10px;
+  background-color:#aabbcc;
+  border:1px dotted #CCCCCC;
+  height:50px;
+  width:100px;
+}
