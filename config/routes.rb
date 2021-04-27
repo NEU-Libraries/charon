@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   # admin
   get '/admin/new_user' => 'admin#new_user'
   post '/admin/create_user' => 'admin#create_user'
+  get '/admin/users', to: 'admin#users', as: 'admin_users'
+  get '/admin/projects', to: 'admin#projects', as: 'admin_projects'
 
   # manager
   get '/users/new_user' => 'users#new_user'

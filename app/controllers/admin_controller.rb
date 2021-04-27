@@ -29,4 +29,12 @@ class AdminController < ApplicationController
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to admin_dashboard_url
   end
+
+  def users
+    render 'admin/users/index'
+  end
+
+  def projects
+    render 'admin/projects/index'
+  end
 end
