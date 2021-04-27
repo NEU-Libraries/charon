@@ -4,9 +4,15 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{:scope => "col"} #
+      %th{:scope => "col"} ID
+      %th{:scope => "col"} Title
+      %th{:scope => "col"} Description
   %tbody
     - @projects.each_with_index do |project, i|
       %tr
         %td.align-middle
-          = @project.inspect
+          = project.noid
+        %td.align-middle
+          = project.title
+        %td.align-middle
+          = project.description
