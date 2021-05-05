@@ -15,7 +15,10 @@ class AdminController < ApplicationController
 
   def show; end
 
-  def dashboard; end
+  def dashboard
+    @users = User.all
+    @projects = metadata_adapter.query_service.find_all_of_model(model: Project)
+  end
 
   def new_user
     @user = User.new
@@ -28,15 +31,5 @@ class AdminController < ApplicationController
     UserMailer.with(user: @user).system_created_user_email.deliver_now
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to admin_dashboard_url
-  end
-
-  def users
-    @users = User.all
-    render 'admin/users/index'
-  end
-
-  def projects
-    @projects = metadata_adapter.query_service.find_all_of_model(model: Project)
-    render 'admin/projects/index'
   end
 end

@@ -1,6 +1,21 @@
 %h2.py-2
   System Dashboard
 
+%ul#myTab.nav.nav-tabs{:role => "tablist"}
+  %li.nav-item
+    %a#home-tab.nav-link.active{"aria-controls" => "home", "aria-selected" => "true", "data-toggle" => "tab", :href => "#home", :role => "tab"} Home
+  %li.nav-item
+    %a#profile-tab.nav-link{"aria-controls" => "profile", "aria-selected" => "false", "data-toggle" => "tab", :href => "#profile", :role => "tab"} Profile
+  %li.nav-item
+    %a#contact-tab.nav-link{"aria-controls" => "contact", "aria-selected" => "false", "data-toggle" => "tab", :href => "#contact", :role => "tab"} Contact
+#myTabContent.tab-content
+  #home.tab-pane.fade.show.active{"aria-labelledby" => "home-tab", :role => "tabpanel"}
+    = render 'admin/projects/index'
+  #profile.tab-pane.fade{"aria-labelledby" => "profile-tab", :role => "tabpanel"}
+    = render 'admin/projects/index'
+  #contact.tab-pane.fade{"aria-labelledby" => "contact-tab", :role => "tabpanel"}
+    = render 'admin/projects/index'
+
 .card-deck.pt-3
   .card
     .card-body
