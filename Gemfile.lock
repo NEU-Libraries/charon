@@ -284,14 +284,13 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.10)
+    mimemagic (0.3.8)
       nokogiri (~> 1)
-      rake
     minerva (0.1.33)
       rails (> 5.2)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
+    mini_portile2 (2.5.1)
     minitest (5.14.4)
     mods (2.4.1)
       edtf
@@ -309,7 +308,7 @@ GEM
     noid-rails (3.0.2)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     nom-xml (1.1.0)
@@ -567,7 +566,7 @@ DEPENDENCIES
   libera
   listen
   mailboxer
-  mimemagic
+  mimemagic (= 0.3.8)
   minerva
   mods_display
   noid-rails
