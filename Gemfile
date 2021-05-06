@@ -11,7 +11,7 @@ gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'pg'
 gem 'puma'
-gem 'rails', '6.0.3.5'
+gem 'rails'
 gem 'valkyrie'
 
 # NEU gems
