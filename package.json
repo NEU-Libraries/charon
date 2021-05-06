@@ -4,7 +4,7 @@
   "dependencies": {
     "@rails/activestorage": "^6.0.3-2",
     "@rails/ujs": "^6.0.3-2",
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "5.3.0",
     "ace-builds": "^1.4.12",
     "blacklight-frontend": "^7.7.0",
     "bootstrap": "^4.5.2",
