@@ -82,9 +82,9 @@ class ThumbnailService
 
     def find_path
       path = ''
-      if determine_mime(@upload.file).subtype == 'pdf'
+      if determine_mime(@upload.file).split("/")[1] == 'pdf'
         path = process_pdf
-      elsif determine_mime(@upload.file).image?
+      elsif determine_mime(@upload.file).split("/")[0] == 'image'
         path = @upload.file.path
       end
       path

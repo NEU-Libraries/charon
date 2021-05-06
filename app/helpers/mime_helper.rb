@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require 'mimemagic/overlay'
-
 module MimeHelper
   def determine_mime(file_path)
-    mime = MimeMagic.by_magic(File.open(file_path))
-    mime = MimeMagic.by_path(file_path) if mime.blank?
-    return MimeMagic.new('application/octet-stream') if mime.blank?
+    mime = Marcel::MimeType.for(File.open(file_path))
+    mime = Marcel::MimeType.for(Pathname.new(file_path)) if mime.blank?
+    return 'application/octet-stream' if mime.blank?
 
     mime
   end
 
   def determine_classification(file_path)
-    mime = determine_mime(file_path)
-    return Classification.text.name if mime.subtype == 'pdf'
+    mime_array = determine_mime(file_path).split("/")
+    subtype = mime_array[1]
+    mediatype = mime_array[0]
+    return Classification.text.name if subtype == 'pdf'
 
     extension = File.extname(file_path).delete!('.')
-    result = by_extension(extension) if mime.subtype.start_with?('vnd')
-    result = Classification.find(mime.mediatype) if result.nil?
+    result = by_extension(extension) if subtype.start_with?('vnd')
+    result = Classification.find(mediatype) if result.nil?
     result.nil? ? Classification.work.name : result.name
   end
 

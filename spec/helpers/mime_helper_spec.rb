@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe MimeHelper, type: :helper do
   describe '#determine_mime' do
-    it 'returns a MimeMagic object' do
+    it 'returns a mime type string' do
       file_path = Rails.root.join('spec/fixtures/files/example.pdf').to_s
-      expect(helper.determine_mime(file_path).subtype).to eql 'pdf'
+      expect(helper.determine_mime(file_path).split("/")[1]).to eql 'pdf'
     end
   end
 
