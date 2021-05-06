@@ -46,7 +46,7 @@ class IiifService
         fs.files.each do |b|
           @blob = b
           # need to check if blob is image-y
-          next unless determine_mime(@blob.file_path).split("/")[0] == 'image' && @blob.extension.casecmp?('jp2')
+          next unless determine_mime(@blob.file_path).split('/')[0] == 'image' && @blob.extension.casecmp?('jp2')
 
           canvas = generate_canvas(i)
           canvases.append(canvas)

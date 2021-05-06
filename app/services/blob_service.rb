@@ -31,6 +31,6 @@ class BlobService
 
     def run_jobs
       CreateThumbnailJob.perform_later(@upload.id, @resource.noid, @file_set.noid)
-      LiberaJob.perform_later(@resource.noid, @blob.noid) if determine_mime(@blob.file_path).split("/")[1] == 'pdf'
+      LiberaJob.perform_later(@resource.noid, @blob.noid) if determine_mime(@blob.file_path).split('/')[1] == 'pdf'
     end
 end

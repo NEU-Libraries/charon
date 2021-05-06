@@ -10,7 +10,7 @@ module MimeHelper
   end
 
   def determine_classification(file_path)
-    mime_array = determine_mime(file_path).split("/")
+    mime_array = determine_mime(file_path).split('/')
     subtype = mime_array[1]
     mediatype = mime_array[0]
     return Classification.text.name if subtype == 'pdf'
