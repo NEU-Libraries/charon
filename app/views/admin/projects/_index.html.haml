@@ -7,6 +7,9 @@
       %th{:scope => "col"} ID
       %th{:scope => "col"} Title
       %th{:scope => "col"} Description
+      %th{:scope => "col"} Users
+      %th{:scope => "col"} Works
+      %th{:scope => "col"} Action
   %tbody
     - @projects.each_with_index do |project, i|
       %tr
@@ -16,3 +19,9 @@
           = project.title
         %td.align-middle
           = project.description
+        %td.align-middle
+          = project.users.count
+        %td.align-middle
+          = project.works.count
+        %td.align-middle
+          %a.btn.btn-sm.btn-block.btn-danger{:href => "#", :role => "button"} Delete
