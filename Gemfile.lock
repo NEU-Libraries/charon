@@ -7,6 +7,15 @@ GIT
       cancancan (>= 1.8)
       deprecation (~> 1.0)
 
+GIT
+  remote: https://github.com/samvera/noid-rails.git
+  revision: 5a7d9135c406c41de21b6b373d5caf9bba912a45
+  branch: master
+  specs:
+    noid-rails (3.0.2)
+      actionpack (>= 5.0.0, < 7)
+      noid (~> 0.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -312,9 +321,6 @@ GEM
     multipart-post (2.1.1)
     nio4r (2.5.7)
     noid (0.9.0)
-    noid-rails (3.0.2)
-      actionpack (>= 5.0.0, < 7)
-      noid (~> 0.9)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
@@ -575,7 +581,7 @@ DEPENDENCIES
   mailboxer
   minerva
   mods_display
-  noid-rails
+  noid-rails!
   pdf-reader
   pg
   pry
