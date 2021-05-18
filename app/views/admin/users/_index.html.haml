@@ -1,31 +1,32 @@
 %h4.py-3
   Users
 
-%table.table.table-bordered
-  %thead
-    %tr
-      %th{:scope => "col"} Select
-      %th{:scope => "col"} First Name
-      %th{:scope => "col"} Last Name
-      %th{:scope => "col"} Capacity
-      %th{:scope => "col"} Created
-      %th{:scope => "col"} Last Sign In
-  %tbody
-    - @users.each_with_index do |user, i|
+= form_tag admin_delete_users_path do
+  %table.table.table-bordered
+    %thead
       %tr
-        %td.align-middle
-          %input{:type => "checkbox", :value => "#{user.id}", :name => "user_ids[]"}/
-        %td.align-middle
-          = user.first_name
-        %td.align-middle
-          = user.last_name
-        %td.align-middle
-          = user.capacity
-        %td.align-middle
-          = user.created_at
-        %td.align-middle
-          = user.last_sign_in_at
+        %th{:scope => "col"} Select
+        %th{:scope => "col"} First Name
+        %th{:scope => "col"} Last Name
+        %th{:scope => "col"} Capacity
+        %th{:scope => "col"} Created
+        %th{:scope => "col"} Last Sign In
+    %tbody
+      - @users.each_with_index do |user, i|
+        %tr
+          %td.align-middle
+            %input{:type => "checkbox", :value => "#{user.id}", :name => "user_ids[]"}/
+          %td.align-middle
+            = user.first_name
+          %td.align-middle
+            = user.last_name
+          %td.align-middle
+            = user.capacity
+          %td.align-middle
+            = user.created_at
+          %td.align-middle
+            = user.last_sign_in_at
 
-%input.btn.btn-lg.btn-danger.float-right{:href => "#", :role => "button", :type => "submit", :value => "Delete"}
+  %input.btn.btn-lg.btn-danger.float-right{:href => "#", :role => "button", :type => "submit", :value => "Delete"}
 
 %div.clearfix
