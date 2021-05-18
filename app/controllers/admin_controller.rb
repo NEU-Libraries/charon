@@ -33,5 +33,12 @@ class AdminController < ApplicationController
     redirect_to admin_dashboard_url
   end
 
-  def delete_users; end
+  def delete_users
+    users = params[:user_ids].map{|i| User.find(i)}
+    names = users.map{|u| u.to_s}
+
+    flash[:alert] = "Deleted: #{names.join(" and ")}"
+
+    redirect_to admin_dashboard_url
+  end
 end
