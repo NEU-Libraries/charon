@@ -3,13 +3,13 @@
 
 %ul#myTab.nav.nav-tabs{:role => "tablist"}
   %li.nav-item
-    %a#home-tab.nav-link.active{"aria-controls" => "home", "aria-selected" => "true", "data-toggle" => "tab", :href => "#home", :role => "tab"} Projects
+    %a#projects-tab.nav-link.active{"aria-controls" => "projects", "aria-selected" => "true", "data-toggle" => "tab", :href => "#projects", :role => "tab"} Projects
   %li.nav-item
-    %a#profile-tab.nav-link{"aria-controls" => "profile", "aria-selected" => "false", "data-toggle" => "tab", :href => "#profile", :role => "tab"} Users
+    %a#users-tab.nav-link{"aria-controls" => "users", "aria-selected" => "false", "data-toggle" => "tab", :href => "#users", :role => "tab"} Users
 #myTabContent.tab-content
-  #home.tab-pane.fade.show.active{"aria-labelledby" => "home-tab", :role => "tabpanel"}
+  #projects.tab-pane.fade.show.active{"aria-labelledby" => "projects-tab", :role => "tabpanel"}
     = render 'admin/projects/index'
-  #profile.tab-pane.fade{"aria-labelledby" => "profile-tab", :role => "tabpanel"}
+  #users.tab-pane.fade{"aria-labelledby" => "users-tab", :role => "tabpanel"}
     = render 'admin/users/index'
 
 .card-deck.pt-3

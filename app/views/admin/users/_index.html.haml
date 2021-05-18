@@ -6,7 +6,8 @@
     %thead
       %tr
         %th{:scope => "col"} Select
-        %th{:scope => "col"} Name
+        %th{:scope => "col"}
+          = column_sort "last_name", "Name"
         %th{:scope => "col"} Capacity
         %th{:scope => "col"} Created
         %th{:scope => "col"} Last Sign In

@@ -2,6 +2,9 @@
 
 class AdminController < ApplicationController
   include UserCreatable
+  include Sortable
+
+  helper_method :sort_column, :sort_direction
 
   before_action :admin_check
 
@@ -16,7 +19,8 @@ class AdminController < ApplicationController
   def show; end
 
   def dashboard
-    @users = User.all
+    params[:sort] = 'last_name' # Only value
+    @users = User.all.order("#{sort_column} #{sort_direction}")
     @projects = metadata_adapter.query_service.find_all_of_model(model: Project)
   end
 
