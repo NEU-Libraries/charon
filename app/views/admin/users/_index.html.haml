@@ -10,7 +10,6 @@
       %th{:scope => "col"} Capacity
       %th{:scope => "col"} Created
       %th{:scope => "col"} Last Sign In
-      %th{:scope => "col"} Action
   %tbody
     - @users.each_with_index do |user, i|
       %tr
@@ -26,5 +25,7 @@
           = user.created_at
         %td.align-middle
           = user.last_sign_in_at
-        %td.align-middle
-          %a.btn.btn-sm.btn-block.btn-danger{:href => "#", :role => "button"} Delete
+
+%input.btn.btn-lg.btn-danger.float-right{:href => "#", :role => "button", :type => "submit", :value => "Delete"}
+
+%div.clearfix
