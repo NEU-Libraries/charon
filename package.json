@@ -2,6 +2,7 @@
   "name": "charon",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.14.3",
     "@rails/activestorage": "^6.0.3-2",
     "@rails/ujs": "^6.0.3-2",
     "@rails/webpacker": "5.3.0",
@@ -9,6 +10,7 @@
     "blacklight-frontend": "^7.7.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "jquery-ui-dist": "^1.12.1",
     "leaflet": "^1.7.1",
     "leaflet-draw": "^1.0.4",
     "leaflet-iiif": "^3.0.0",
