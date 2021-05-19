@@ -17,8 +17,8 @@ RUN mkdir -p /home/charon/storage/scratch
 WORKDIR /home/charon/web
 COPY Gemfile* package.json yarn.lock /home/charon/web/
 RUN bundle install
-RUN yarn install
 COPY ./public/ /home/charon/web/
+RUN yarn install
 COPY --chown=charon:charon . /home/charon/web
 RUN bundle install
 RUN bundle exec rake assets:precompile
