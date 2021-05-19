@@ -32,7 +32,9 @@
 .nfs*
 
 /public/uploads
-/public/uv
+
+/public/uv/*
+!/public/uv/.gitkeep
 
 /coverage/
 
