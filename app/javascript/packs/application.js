@@ -24,7 +24,10 @@ import 'leaflet-draw/dist/leaflet.draw';
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
-require("jquery")
+
+// Following advice from https://stackoverflow.com/questions/57555708/rails-6-how-to-add-jquery-ui-through-webpacker
+global.$ = require("jquery")
+require("jquery-ui")
 
 // Local
 require('blacklight-frontend/app/javascript/blacklight/core')
