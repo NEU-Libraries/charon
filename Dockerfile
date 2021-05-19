@@ -15,11 +15,12 @@ RUN mkdir -p /home/charon/web
 RUN mkdir -p /home/charon/images
 RUN mkdir -p /home/charon/storage/scratch
 WORKDIR /home/charon/web
-COPY Gemfile* package.json yarn.lock /home/charon/web/
+COPY Gemfile* /home/charon/web/
 RUN bundle install
 COPY ./public/ /home/charon/web/
 RUN yarn install
 COPY --chown=charon:charon . /home/charon/web
 RUN bundle install
+RUN yarn install
 RUN bundle exec rake assets:precompile
 RUN cp /home/charon/web/scripts/msmtprc /home/charon/.msmtprc
