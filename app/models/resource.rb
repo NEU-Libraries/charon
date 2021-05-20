@@ -38,6 +38,6 @@ class Resource < Valkyrie::Resource
   end
 
   def filtered_children
-    children.select { |c| c.instance_of?((SystemCollection || Collection || Work)) }.map(&:id).map(&:to_s).to_a
+    children.select { |c| c.is_a?(SystemCollection) || is_a?(Collection) || is_a?(Work) }.map(&:id).map(&:to_s).to_a
   end
 end
