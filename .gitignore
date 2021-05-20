@@ -34,7 +34,7 @@
 /public/uploads
 
 /public/uv/*
-!/public/uv/.gitkeep
+!/public/uv/.keep
 
 /coverage/
 
