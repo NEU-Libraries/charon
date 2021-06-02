@@ -25,3 +25,12 @@
       %p.card-text Make a new user.
     .card-footer
       %a.btn.btn-lg.btn-block.btn-primary{:href => admin_new_user_path, :role => "button"} Create
+
+:javascript
+  window.onload = function() {
+    // Javascript to enable link to tab
+    var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab('show');
+    }
+  }
