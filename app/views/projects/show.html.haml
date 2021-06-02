@@ -1,4 +1,6 @@
 .jumbotron.jumbotron-small
+  %div.float-left.mr-3
+    = image_tag("#{iiif_url}/2/#{@project.thumbnail}/full/!100,100/0/default.jpg", :class => "img-thumbnail")
   %h2
     = @project.title
   %p.lead
