@@ -9,6 +9,9 @@
       - @projects.each_with_index do |project|
         %tr
           %td.align-middle
+            - if project.thumbnail
+              %div.float-left.mr-3
+                = image_tag("#{iiif_url}/2/#{project.thumbnail}/full/!50,50/0/default.jpg", :class => "img-thumbnail")
             = project.title
           %td.align-middle
             %a.btn.btn-sm.btn-primary.float-right{:href => actions_path(project), :role => "button"} Select
