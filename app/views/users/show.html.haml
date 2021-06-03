@@ -1,8 +1,9 @@
 %h2.py-2
   Profile for
   = @user.name
-  %div.float-right
-    = image_tag @user.binary.representation(resize_to_limit: [100, 100]), :class => "img-thumbnail"
+  - if @user.binary.present?
+    %div.float-right
+      = image_tag @user.binary.representation(resize_to_limit: [100, 100]), :class => "img-thumbnail"
 
 %h4.py-2
   Task Assignments
