@@ -8,9 +8,12 @@
         %th{:scope => "col"} Select
         %th{:scope => "col"}
           = column_sort "last_name", "Name", "users"
-        %th{:scope => "col"} Capacity
-        %th{:scope => "col"} Created
-        %th{:scope => "col"} Last Sign In
+        %th{:scope => "col"}
+          = column_sort "capacity", "Capacity", "users"
+        %th{:scope => "col"}
+          = column_sort "created_at", "Created", "users"
+        %th{:scope => "col"}
+          = column_sort "last_sign_in_at", "Last Sign In", "users"
     %tbody
       - @users.each_with_index do |user, i|
         %tr
