@@ -67,4 +67,21 @@ class UsersController < ApplicationController
     flash[:notice] = "User successfully created. Email sent to #{@user.email} for notification."
     redirect_to users_dashboard_url
   end
+
+  def upload; end
+
+  def create_users
+    # CSV Mass Ingestion
+    csv = CSV.parse params[:csv].read
+    flash[:notice] = "#{csv.count} users successfully created."
+    csv.each do |row|
+      # ["lacy@franecki.net", "Tiara", "Hand"]
+      User.create(password: Devise.friendly_token.first(10),
+                  email: row[0],
+                  first_name: row[1],
+                  last_name: row[2])
+    end
+
+    redirect_to admin_dashboard_url
+  end
 end

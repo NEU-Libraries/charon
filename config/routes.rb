@@ -63,6 +63,8 @@ Rails.application.routes.draw do
   # manager
   get '/users/new_user' => 'users#new_user'
   post '/users/create_user' => 'users#create_user'
+  get '/users/upload' => 'users#upload'
+  post '/users/create_users' => 'users#create_users', as: 'create_users'
 
   # project user registry
   get '/projects/:id/user_registry', to: 'projects#user_registry', as: 'project_user_registry'

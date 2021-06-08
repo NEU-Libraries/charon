@@ -134,6 +134,7 @@ GEM
     crass (1.0.6)
     croutons (0.0.2)
       rails (>= 4.1.0)
+    csv (1.0.0)
     daemons (1.4.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -560,6 +561,7 @@ DEPENDENCIES
   capybara
   coffee-script
   croutons
+  csv
   database_cleaner
   devise
   devise-guests
