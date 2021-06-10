@@ -127,5 +127,7 @@ class ProjectsController < CatalogController
     @uploads = GenericUpload.where(project_id: @project.noid)
   end
 
+  def supplemental_uploads; end
+
   def works; end
 end

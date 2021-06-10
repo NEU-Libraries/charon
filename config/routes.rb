@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'
   # project uploads
   get '/projects/:id/uploads', to: 'projects#uploads', as: 'project_uploads'
+  get '/projects/:id/supplemental_uploads', to: 'projects#supplemental_uploads', as: 'project_supplemental_uploads'
   # all project works (no collection nesting)
   get '/projects/:id/works', to: 'projects#works', as: 'project_works'
 
