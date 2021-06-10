@@ -25,6 +25,12 @@
       %p.card-text Make a new user.
     .card-footer
       %a.btn.btn-lg.btn-block.btn-primary{:href => admin_new_user_path, :role => "button"} Create
+  .card
+    .card-body
+      %h4.card-title Create multiple users
+      %p.card-text Upload a CSV containing user information.
+    .card-footer
+      %a.btn.btn-lg.btn-block.btn-primary{:href => upload_users_path, :role => "button"} Upload
 
 :javascript
   window.onload = function() {
