@@ -34,3 +34,12 @@
     Vet a binary for approval or denial.
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => project_uploads_path(@project), :role => "button"} Review
+%tr
+  - if @manager
+    %td.table-success
+  %td
+    Add Supplementary Project Files
+  %td
+    Upload files to the system created collections for this project.
+  %td
+    %a.btn.btn-sm.btn-block.btn-outline-primary{:href => project_uploads_path(@project), :role => "button"} Upload
