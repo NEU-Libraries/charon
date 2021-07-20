@@ -131,5 +131,7 @@ class ProjectsController < CatalogController
     @generic_upload = GenericUpload.new
   end
 
+  def create_supplemental_file; end
+
   def works; end
 end
