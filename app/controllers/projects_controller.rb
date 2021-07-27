@@ -131,7 +131,11 @@ class ProjectsController < CatalogController
     @generic_upload = GenericUpload.new
   end
 
-  def create_supplemental_file; end
+  def create_supplemental_file
+    flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
+    FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}")
+    redirect_to(root_path)
+  end
 
   def works; end
 end

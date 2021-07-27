@@ -1,13 +1,13 @@
 = form_tag project_create_supplemental_file_path, :multipart => true do
   .form-group
     .custom-file
-      = file_field_tag :csv, multiple: false, class: "custom-file-input"
-      %label.custom-file-label{:for => "csv"} Choose file
+      = file_field_tag :supplemental_file, multiple: false, class: "custom-file-input"
+      %label.custom-file-label{:for => "supplemental_file"} Choose file
   .form-group
     = submit_tag "Upload", class: 'btn btn-primary'
 
 :javascript
-  $('#csv').on('change',function(){
+  $('#supplemental_file').on('change',function(){
       //get the file name
       var fileName = $(this).val().replace("C:\\fakepath\\", "");
       //replace the "Choose a file" label
