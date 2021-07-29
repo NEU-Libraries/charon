@@ -135,6 +135,10 @@ class ProjectsController < CatalogController
     flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
     FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}")
     redirect_to(root_path)
+
+    # Create new work
+    # Attach binary
+    # Make system collection the parent
   end
 
   def works; end

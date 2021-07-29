@@ -44,6 +44,8 @@ services:
       - 5432:5432
   web:
     image: nakatomi/charon_web
+    tmpfs:
+      - /tmp
     ports:
       - 3000:3000
     entrypoint: /home/charon/web/docker-entrypoint.sh
