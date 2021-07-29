@@ -133,7 +133,10 @@ class ProjectsController < CatalogController
 
   def create_supplemental_file
     flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
-    FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}")
+    extension = File.extname(
+      params[:supplemental_file].original_filename
+    ).delete!('.')
+    FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{SecureRandom.uuid}.#{extension}")
     redirect_to(root_path)
 
     # Create new work
