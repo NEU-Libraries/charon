@@ -6,7 +6,8 @@
   .input-group
     %select#collection.custom-select
       %option{:selected => "selected"} Choose System Collection
-      - SystemCollectionType.all.map{ |x| x.name }.each do |collection|
+      -# - SystemCollectionType.all.map{ |x| x.name }.each do |collection|
+      - @project.system_collections.each do |collection|
         %option{:value => "#{collection}"}
           = collection
   %br
