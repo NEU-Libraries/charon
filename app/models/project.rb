@@ -51,7 +51,7 @@ class Project < Resource
   end
 
   def system_collections
-    children.select { |c| c.is_a?(SystemCollection) }.map(&:id).map(&:to_s).to_a
+    children.select { |c| c.is_a?(SystemCollection) }
   end
 
   def workflows
