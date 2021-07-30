@@ -4,7 +4,7 @@
       = file_field_tag :supplemental_file, multiple: false, class: "custom-file-input"
       %label.custom-file-label{:for => "supplemental_file"} Choose file
   .input-group
-    %select#collection.custom-select
+    %select#system_collection.custom-select{:name => "system_collection"}
       %option{:selected => "selected"} Choose System Collection
       - @project.system_collections.each do |collection|
         %option{:value => "#{collection.noid}"}

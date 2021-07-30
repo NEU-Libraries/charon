@@ -132,21 +132,22 @@ class ProjectsController < CatalogController
   end
 
   def create_supplemental_file
-    flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
-    extension = File.extname(
-      params[:supplemental_file].original_filename
-    ).delete!('.')
-    FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{SecureRandom.uuid}.#{extension}")
-    redirect_to(root_path)
+    # flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
+    # extension = File.extname(
+    #   params[:supplemental_file].original_filename
+    # ).delete!('.')
+    # FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{SecureRandom.uuid}.#{extension}")
 
     # Create new work
-    # @generic_upload.project.incoming_collection.id
-    new_work = Work.new(title: title,
-      project_id: @project.id,
-      a_member_of: parent_id)
-    metadata_adapter.persister.save(resource: new_work)
+    # new_work = Work.new(title: title,
+    #   project_id: @project.id,
+    #   a_member_of: parent_id)
+    # metadata_adapter.persister.save(resource: new_work)
     # Attach binary
     # Make system collection the parent
+
+    flash[:notice] = params.inspect
+    redirect_to(root_path)
   end
 
   def works; end
