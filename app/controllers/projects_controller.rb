@@ -140,6 +140,11 @@ class ProjectsController < CatalogController
     redirect_to(root_path)
 
     # Create new work
+    # @generic_upload.project.incoming_collection.id
+    new_work = Work.new(title: title,
+      project_id: @project.id,
+      a_member_of: parent_id)
+    metadata_adapter.persister.save(resource: new_work)
     # Attach binary
     # Make system collection the parent
   end
