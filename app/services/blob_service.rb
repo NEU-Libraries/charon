@@ -6,7 +6,7 @@ class BlobService
 
   def initialize(params)
     @upload = GenericUpload.find(params[:upload_id])
-    @resource = Resource.find(params[:resource_id])
+    @resource = Resource.find(params[:resource_id]) # Work
     @file_set = FileSet.find(params[:file_set_id])
   rescue Valkyrie::Persistence::ObjectNotFoundError, ActiveRecord::RecordNotFound => e
     Rails.logger.error(e)

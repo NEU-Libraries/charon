@@ -133,21 +133,35 @@ class ProjectsController < CatalogController
 
   def create_supplemental_file
     # flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
-    # extension = File.extname(
-    #   params[:supplemental_file].original_filename
-    # ).delete!('.')
-    # FileUtils.cp(params[:supplemental_file].path, "/home/charon/storage/scratch/#{SecureRandom.uuid}.#{extension}")
+    extension = File.extname(
+      params[:supplemental_file].original_filename
+    ).delete!('.')
+    file_path = "/home/charon/storage/scratch/#{SecureRandom.uuid}.#{extension}"
+    FileUtils.cp(params[:supplemental_file].path, file_path)
+
+    original_filename = params[:supplemental_file].original_filename
 
     # Create new work
-    # new_work = Work.new(title: title,
-    #   project_id: @project.id,
-    #   a_member_of: parent_id)
-    # metadata_adapter.persister.save(resource: new_work)
+    new_work = Work.new(title: original_filename,
+                        project_id: @project.id,
+                        a_member_of: params[:system_collection])
+    saved_work = metadata_adapter.persister.save(resource: new_work)
+
+    # Create file set
+    file_set = FileSet.new type: determine_classification(file_path)
+    saved_file_set = Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
+
+    # Create generic upload
+    generic_upload = GenericUpload.new
+    generic_upload.user = current_user
+    generic_upload.binary.attach(params[:supplemental_file]) # Correct?
+
     # Attach binary
+    CreateBlobJob.perform_later(saved_work.noid, generic_upload.id, saved_file_set.noid)
     # Make system collection the parent
 
     flash[:notice] = params.inspect
-    redirect_to(root_path)
+    redirect_to(collections_path(id: params[:system_collection]))
   end
 
   def works; end

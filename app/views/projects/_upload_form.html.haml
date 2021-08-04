@@ -7,7 +7,7 @@
     %select#system_collection.custom-select{:name => "system_collection"}
       %option{:selected => "selected"} Choose System Collection
       - @project.system_collections.each do |collection|
-        %option{:value => "#{collection.noid}"}
+        %option{:value => "#{collection.id}"}
           = collection.title
   %br
   .form-group
