@@ -6,10 +6,10 @@ class ProjectsController < CatalogController
   include Sortable
   include ThumbnailHelper
 
+  load_resource except: %i[new create]
   before_action :searchable, only: [:show]
   before_action :admin_check, only: %i[new create edit update]
   before_action :oversee_check, only: %i[available_users add_users remove_user user_registry new_user]
-  load_resource except: %i[new create]
   helper_method :sort_column, :sort_direction
 
   configure_blacklight do |config|

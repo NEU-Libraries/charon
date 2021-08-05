@@ -52,6 +52,7 @@ describe ProjectsController do
     render_views
     it 'lists the user registry for a given project' do
       project.attach_user(user, Designation.manager)
+      expect(Ability.new(user).can?(:oversee, project)).to eq(true)
       sign_in user
       get :user_registry, params: { id: project.noid }
       expect(CGI.unescapeHTML(response.body)).to include("User Registry for #{project.title}")

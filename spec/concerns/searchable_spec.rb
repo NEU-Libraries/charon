@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Searchable do
   before do
-    class FakesController < ApplicationController
+    class FakesController < CatalogController
       include Searchable
     end
   end
