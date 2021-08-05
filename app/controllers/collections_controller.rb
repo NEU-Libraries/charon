@@ -6,10 +6,6 @@ class CollectionsController < CatalogController
   load_resource except: %i[new create edit update]
   before_action :searchable, only: [:show]
 
-  # Blacklight incantations
-  blacklight_config.track_search_session = false
-  layout 'application'
-
   def new; end
 
   def create; end

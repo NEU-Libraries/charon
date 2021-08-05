@@ -8,12 +8,9 @@ class ProjectsController < CatalogController
 
   before_action :searchable, only: [:show]
   before_action :admin_check, only: %i[new create edit update]
+  before_action :oversee_check, only: %i[available_users add_users remove_user user_registry new_user]
   load_resource except: %i[new create]
   helper_method :sort_column, :sort_direction
-
-  # Blacklight incantations
-  blacklight_config.track_search_session = false
-  layout 'application'
 
   configure_blacklight do |config|
     # CatalogController has a fq for hiding SystemCollections
@@ -63,14 +60,12 @@ class ProjectsController < CatalogController
   end
 
   def available_users
-    authorize! :oversee, @project
     # Need to filter down to users not already attached to project
     already_attached_users = @project.users
     @users = User.all.reject { |u| already_attached_users.include? u }
   end
 
   def add_users
-    authorize! :oversee, @project
     user_ids = params[:user_ids]
     user_ids.each do |id|
       @project.attach_user(User.find(id))
@@ -80,7 +75,6 @@ class ProjectsController < CatalogController
   end
 
   def remove_user
-    authorize! :oversee, @project
     user = User.find(params[:user_id])
     @project.remove_user(user)
     flash[:notice] = "Successfully removed #{user.first_name} #{user.last_name} from #{@project.title}."
@@ -88,7 +82,6 @@ class ProjectsController < CatalogController
   end
 
   def user_registry
-    authorize! :oversee, @project
     @roles = @project.roles.order("#{sort_column} #{sort_direction}")
   end
 
@@ -98,7 +91,6 @@ class ProjectsController < CatalogController
   end
 
   def new_user
-    authorize! :oversee, @project
     @user = User.new
     @create_user_path = project_create_user_path
     render 'shared/new_user'
@@ -131,38 +123,11 @@ class ProjectsController < CatalogController
     @generic_upload = GenericUpload.new
   end
 
-  def create_supplemental_file
-    # flash[:notice] = "/home/charon/storage/scratch/#{params[:supplemental_file].original_filename}"
-    extension = File.extname(
-      params[:supplemental_file].original_filename
-    ).delete!('.')
-    file_path = "/home/charon/storage/scratch/#{SecureRandom.uuid}.#{extension}"
-    FileUtils.cp(params[:supplemental_file].path, file_path)
-
-    original_filename = params[:supplemental_file].original_filename
-
-    # Create new work
-    new_work = Work.new(title: original_filename,
-                        project_id: @project.id,
-                        a_member_of: params[:system_collection])
-    saved_work = metadata_adapter.persister.save(resource: new_work)
-
-    # Create file set
-    file_set = FileSet.new type: determine_classification(file_path)
-    saved_file_set = Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
-
-    # Create generic upload
-    generic_upload = GenericUpload.new
-    generic_upload.user = current_user
-    generic_upload.binary.attach(params[:supplemental_file]) # Correct?
-
-    # Attach binary
-    CreateBlobJob.perform_later(saved_work.noid, generic_upload.id, saved_file_set.noid)
-    # Make system collection the parent
-
-    flash[:notice] = params.inspect
-    redirect_to(collections_path(id: params[:system_collection]))
-  end
-
   def works; end
+
+  private
+
+    def oversee_check
+      authorize! :oversee, @project
+    end
 end
