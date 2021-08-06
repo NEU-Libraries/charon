@@ -8,10 +8,11 @@ class SystemCollectionsController < CatalogController
 
   def create_supplemental_file
     # Attach binary
-    CreateBlobJob.perform_later(create_work.noid, create_generic_upload.id, create_file_set.noid)
+    work_noid = create_work.noid
+    CreateBlobJob.perform_later(work_noid, create_generic_upload.id, create_file_set.noid)
 
     flash[:notice] = params.inspect
-    redirect_to(collections_path(id: params[:system_collection]))
+    redirect_to(work_path(work_noid))
   end
 
   private
