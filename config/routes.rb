@@ -76,14 +76,16 @@ Rails.application.routes.draw do
   post '/projects/:id/create_user', to: 'projects#create_user', as: 'project_create_user'
   post '/projects/:id/sign_up_user', to: 'projects#sign_up_user', as: 'project_sign_up_user'
   post '/projects/:id/add_users', to: 'projects#add_users', as: 'project_add_users'
-  post '/projects/:id/create_supplemental_file', to: 'projects#create_supplemental_file', as: 'project_create_supplemental_file'
   # project workflows
   get '/projects/:id/workflows', to: 'projects#workflows', as: 'project_workflows'
   # project uploads
   get '/projects/:id/uploads', to: 'projects#uploads', as: 'project_uploads'
-  get '/projects/:id/supplemental_uploads', to: 'projects#supplemental_uploads', as: 'project_supplemental_uploads'
   # all project works (no collection nesting)
   get '/projects/:id/works', to: 'projects#works', as: 'project_works'
+
+  # system collections
+  get '/projects/:id/supplemental_uploads', to: 'system_collections#supplemental_uploads', as: 'supplemental_uploads'
+  post '/projects/:id/create_supplemental_file', to: 'system_collections#create_supplemental_file', as: 'create_supplemental_file'
 
   # mailboxer
   get '/notifications' => 'notifications#index'

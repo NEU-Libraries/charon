@@ -119,10 +119,6 @@ class ProjectsController < CatalogController
     @uploads = GenericUpload.where(project_id: @project.noid)
   end
 
-  def supplemental_uploads
-    @generic_upload = GenericUpload.new
-  end
-
   def works; end
 
   private

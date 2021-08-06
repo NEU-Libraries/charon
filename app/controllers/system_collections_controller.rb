@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-class ProjectsController < CatalogController
+class SystemCollectionsController < CatalogController
+  def supplemental_uploads
+    @project = Project.find(params[:id])
+    @generic_upload = GenericUpload.new
+  end
+
   def create_supplemental_file
     # Attach binary
     CreateBlobJob.perform_later(create_work.noid, create_generic_upload.id, create_file_set.noid)
@@ -12,14 +17,15 @@ class ProjectsController < CatalogController
   private
 
     def create_work
+      @project = Project.find(params[:id])
       new_work = Work.new(title: params[:supplemental_file].original_filename,
                           project_id: @project.id,
                           a_member_of: params[:system_collection])
       metadata_adapter.persister.save(resource: new_work)
     end
 
-    def create_fileset
-      file_set = FileSet.new type: determine_classification(file_path)
+    def create_file_set
+      file_set = FileSet.new type: determine_classification(params[:supplemental_file].path)
       Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
     end
 
