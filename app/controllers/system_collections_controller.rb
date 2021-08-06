@@ -33,6 +33,7 @@ class SystemCollectionsController < CatalogController
       generic_upload = GenericUpload.new
       generic_upload.user = current_user
       generic_upload.binary.attach(params[:supplemental_file]) # Correct?
+      generic_upload.save!
       generic_upload
     end
 end
