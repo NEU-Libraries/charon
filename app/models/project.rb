@@ -54,6 +54,10 @@ class Project < Resource
     children.select { |c| c.is_a?(SystemCollection) }
   end
 
+  def supplemental_collections
+    system_collections.delete_if { |c| c.system_collection_type == 'works' || c.system_collection_type == 'incoming' }
+  end
+
   def workflows
     Workflow.where(project_id: Minerva::Project.find_by(auid: noid)&.id)
   end

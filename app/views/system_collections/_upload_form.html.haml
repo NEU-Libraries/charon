@@ -6,7 +6,7 @@
   .input-group
     %select#system_collection.custom-select{:name => "system_collection"}
       %option{:selected => "selected"} Choose System Collection
-      - @project.system_collections.each do |collection|
+      - @project.supplemental_collections.each do |collection|
         %option{:value => "#{collection.id}"}
           = collection.title
   %br
