@@ -26,4 +26,9 @@
   .viewer-wrapper
     %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{manifest_path(s.noid)}&config=#{universal_viewer_config_url}"}
 
+:javascript
+  $("img").on("error", function() {
+    $(this).replaceWith('<span class="fa fa-file"></span>');
+  });
+
 
