@@ -10,6 +10,7 @@ class SystemCollectionsController < CatalogController
     # Attach binary
     work_noid = create_work.noid
     CreateBlobJob.perform_later(work_noid, create_generic_upload.id, create_file_set.noid)
+    flash[:alert] = 'File uploaded - thumbnail and download links will appear when background processing completed.'
     redirect_to(work_path(work_noid))
   end
 
