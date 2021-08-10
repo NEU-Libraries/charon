@@ -28,7 +28,8 @@
 
 :javascript
   $("img").on("error", function() {
-    $(this).replaceWith('<span class="fa fa-file"></span>');
+    $(this).parent().removeClass('border');
+    $(this).replaceWith('<span class="fa fa-file-o fa-5x"></span>');
   });
 
 
