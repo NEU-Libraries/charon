@@ -94,5 +94,16 @@ describe UsersController do
   end
 
   describe 'update' do
+    render_views
+    it 'updates a user' do
+      sign_in admin_user
+      post :update, params: { id: user.id, user: { first_name: 'Skippy', last_name: 'McGee' } }
+      expect(User.find(user.id).first_name).to eq('Skippy')
+    end
+  end
+
+  describe 'create_users' do
+    it 'accepts a User CSV file and ingests them' do
+    end
   end
 end

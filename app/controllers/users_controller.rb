@@ -21,7 +21,6 @@ class UsersController < ApplicationController
     @user.assign_attributes(params[:user].permit(:binary, :first_name, :last_name))
     @user.save!
 
-    flash[:notice] = params.inspect
     redirect_to user_path(@user)
   end
 
