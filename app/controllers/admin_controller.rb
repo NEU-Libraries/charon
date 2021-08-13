@@ -19,7 +19,6 @@ class AdminController < ApplicationController
   def show; end
 
   def dashboard
-    # params[:sort] = 'last_name' # Only value
     @users = User.all.order("#{sort_column} #{sort_direction}")
     @projects = metadata_adapter.query_service.find_all_of_model(model: Project)
   end
