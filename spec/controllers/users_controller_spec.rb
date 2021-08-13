@@ -104,6 +104,9 @@ describe UsersController do
 
   describe 'create_users' do
     it 'accepts a User CSV file and ingests them' do
+      file = fixture_file_upload(Rails.root.join('spec/fixtures/files/example.csv'), 'text/csv')
+      sign_in admin_user
+      post :create_users, params: { csv: file } # TODO check users created as expected
     end
   end
 end
