@@ -145,4 +145,14 @@ describe ProjectsController do
       # TODO: when none uploaded, check that partial indicates none
     end
   end
+
+  describe 'update' do
+  end
+
+  describe 'sign_up' do
+    it 'uses project affiliated path' do # need to serach for this in partial TODO
+      get :sign_up, params: { id: project.noid }
+      expect(response).to render_template('shared/sign_up')
+    end
+  end
 end
