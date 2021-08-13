@@ -69,7 +69,7 @@ describe UsersController do
   describe 'new_user' do
     render_views
     it 'renders new user form' do
-      sign_in FactoryBot.create(:user)
+      sign_in user
       get :new_user
       expect(CGI.unescapeHTML(response.body)).to include('Create a user')
     end
@@ -77,10 +77,22 @@ describe UsersController do
 
   describe 'create_user' do
     it 'creates a user and emails them a notification' do
-      sign_in FactoryBot.create(:user)
+      sign_in user
       post :create_user, params: { id: project.noid, user: { email: 'test@email.com', first_name: 'Doug', last_name: 'Dimmadome' } }
       mail = ActionMailer::Base.deliveries.last
       expect(mail['to'].to_s).to eq('test@email.com')
     end
+  end
+
+  describe 'edit' do
+    render_views
+    it 'displays the user form' do
+      sign_in user
+      get :edit, params: { id: user.id }
+      expect(CGI.unescapeHTML(response.body)).to include(user.last_name)
+    end
+  end
+
+  describe 'update' do
   end
 end

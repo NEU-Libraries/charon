@@ -25,10 +25,6 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
-  def index
-    @users = User.all
-  end
-
   def actions
     @project = find_resource
     @manager = current_user.manager?(@project)
