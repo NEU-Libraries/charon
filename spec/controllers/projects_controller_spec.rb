@@ -147,6 +147,12 @@ describe ProjectsController do
   end
 
   describe 'update' do
+    it 'modifies a project' do
+      sign_in admin_user
+      file = fixture_file_upload(Rails.root.join('public/apple-touch-icon.png'), 'image/png')
+      post :update, params: { id: project.noid, project: { title: 'Duck', description: 'Goes quack!', binary: file } }
+      expect(assigns(:project).title).to eq('Duck')
+    end
   end
 
   describe 'sign_up' do
