@@ -45,6 +45,12 @@ describe ProjectsController do
         post :create, params: { project: { title: 'Cat', description: 'In the hat' } }
         expect(assigns(:project).title).to eq('Cat')
       end
+
+      it 'creates a project with a manager' do
+        sign_in admin_user
+        post :create, params: { project: { title: 'Cat', description: 'In the hat', manager: user.id } }
+        expect(assigns(:project).users.length).to eq(1) # Also test role TODO
+      end
     end
   end
 
