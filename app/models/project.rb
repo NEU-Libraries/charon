@@ -42,6 +42,10 @@ class Project < Resource
     User.where(id: roles.select(:user_id))
   end
 
+  def manager
+    roles.find_by(designation: 'manager').user
+  end
+
   def incoming_collection
     children.find { |c| c.system_collection_type == 'incoming' }
   end

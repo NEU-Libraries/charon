@@ -35,7 +35,14 @@ class ProjectsController < CatalogController
     user_registry.save!
     @project.generate_system_collections
 
-    redirect_to project_path(@project)
+    # redirect_to project_path(@project) # change to dashboard with info blurb re: #18
+    flash[:notice] = "Successfully created #{@project.title}.
+                      #{@project.roles.find_by(designation: Designation.manager.to_s).user}
+                      is this project's manager.
+                      Proceed to #{view_context.link_to 'log out', destroy_user_session_path, method: :delete}
+                      and direct them to this #{view_context.link_to 'dashboard', actions_path(@project)}
+                      to begin proceedings.".html_safe
+    redirect_to actions_path(@project)
   end
 
   def edit; end
