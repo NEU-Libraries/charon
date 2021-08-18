@@ -1,3 +1,8 @@
+- if params[:new].present?
+  %div.flash_messages
+    %div.alert.alert-success
+      = "Successfully created the project #{@project.title}. #{@project.roles.find_by(designation: Designation.manager.to_s).user} is this project\'s manager. Proceed to #{link_to('log out', destroy_user_session_path, method: :delete)} and direct them to this #{link_to('dashboard', actions_path(@project))} to begin proceedings.".html_safe
+
 %h2.pb-3
   - if current_user.admin?
     = "Actions for #{@project.title} - Administrator"
