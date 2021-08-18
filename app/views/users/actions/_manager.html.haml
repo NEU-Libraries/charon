@@ -1,5 +1,6 @@
 %tr
-  %td.table-primary
+  - if @manager
+    %td.table-primary
   %td
     Create a workflow
   %td
@@ -7,7 +8,8 @@
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => new_workflow_path(:project_id => params[:id]), :role => "button"} Create
 %tr
-  %td.table-primary
+  - if @manager
+    %td.table-primary
   %td
     Manage users
   %td
@@ -15,7 +17,8 @@
   %td
     %a.btn.btn-sm.btn-block.btn-outline-primary{:href => project_user_registry_path(params[:id]), :role => "button"} Manage
 %tr
-  %td.table-primary
+  - if @manager
+    %td.table-primary
   %td
     Manage workflows
   %td
