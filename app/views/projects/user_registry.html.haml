@@ -15,6 +15,8 @@
     - @roles.each_with_index do |role, i|
       %tr
         %td.align-middle
+          %input{:type => "checkbox", :value => "#{role.user.id}", :name => "user_ids[]"}/
+        %td.align-middle
           = role.user.first_name
         %td.align-middle
           = role.user.last_name
