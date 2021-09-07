@@ -25,6 +25,14 @@ class ProjectsController < CatalogController
     @roles = @project.roles.order("#{sort_column} #{sort_direction}")
   end
 
+  def update_user_registry
+    flash[:notice] = params.inspect
+    # params[:user_ids]
+    # if modify -> redirect
+    # if delete, scrub em
+    redirect_to(root_path)
+  end
+
   def create
     user_registry = UserRegistry.create
     change_set = ProjectChangeSet.new(Project.new(user_registry_id: user_registry.id))

@@ -1,34 +1,37 @@
 %h2.py-3
   = "User Registry for #{@project.title}"
 
-%table.table.table-bordered.table-responsive
-  %thead
-    %tr
-      %th{:scope => "col"} Select
-      %th{:scope => "col"} First Name
-      %th{:scope => "col"}
-        = column_sort "users.last_name", "Last Name"
-      %th{:scope => "col"}
-        = column_sort "designation", "Role"
-  %tbody
-    - @roles.each_with_index do |role, i|
+= form_tag update_user_registry_path do
+  %table.table.table-bordered.table-responsive
+    %thead
       %tr
-        %td.align-middle
-          %input{:type => "checkbox", :value => "#{role.user.id}", :name => "user_ids[]"}/
-        %td.align-middle
-          = role.user.first_name
-        %td.align-middle
-          = role.user.last_name
-        %td.align-middle
-          = role.designation.name
-        -# %td.align-middle
-        -#   %a.btn.btn-sm.btn-warning{:href => edit_role_path(role), :role => "button"} Modify
-        -# %td.align-middle
-        -#   %a.btn.btn-sm.btn-danger{:href => project_remove_user_path(@project, role.user.id), :role => "button"} Remove
+        %th{:scope => "col"} Select
+        %th{:scope => "col"} First Name
+        %th{:scope => "col"}
+          = column_sort "users.last_name", "Last Name"
+        %th{:scope => "col"}
+          = column_sort "designation", "Role"
+    %tbody
+      - @roles.each_with_index do |role, i|
+        %tr
+          %td.align-middle
+            %input{:type => "checkbox", :value => "#{role.user.id}", :name => "user_ids[]"}/
+          %td.align-middle
+            = role.user.first_name
+          %td.align-middle
+            = role.user.last_name
+          %td.align-middle
+            = role.designation.name
+          -# %td.align-middle
+          -#   %a.btn.btn-sm.btn-warning{:href => edit_role_path(role), :role => "button"} Modify
+          -# %td.align-middle
+          -#   %a.btn.btn-sm.btn-danger{:href => project_remove_user_path(@project, role.user.id), :role => "button"} Remove
 
-.clearfix.text-right
-  %a.btn.btn-warning{:href => edit_role_path("ducks"), :role => "button"} Modify
-  %a.btn.btn-danger{:href => project_remove_user_path(@project, "ducks"), :role => "button"} Remove
+  .clearfix.text-right
+    -# %a.btn.btn-warning{:href => edit_role_path("ducks"), :role => "button"} Modify
+    -# %a.btn.btn-danger{:href => project_remove_user_path(@project, "ducks"), :role => "button"} Remove
+    = submit_tag "Edit", class: 'btn btn-primary'
+    = submit_tag "Delete", class: 'btn btn-danger'
 
 .card-deck.py-3
   .card

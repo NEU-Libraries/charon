@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
   # project user registry
   get '/projects/:id/user_registry', to: 'projects#user_registry', as: 'project_user_registry'
+  post '/projects/:id/user_registry', to: 'projects#update_user_registry', as: 'update_user_registry'
   get '/projects/:id/users', to: 'projects#users', as: 'project_users'
   get '/projects/:id/new_user', to: 'projects#new_user', as: 'project_new_user'
   get '/projects/:id/sign_up', to: 'projects#sign_up', as: 'project_sign_up'
