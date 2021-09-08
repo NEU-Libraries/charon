@@ -62,12 +62,32 @@
   }
 
   window.onload = function() {
+    tinymce.PluginManager.add('example', function(editor, url) {
+      // Add a button that opens a window
+      editor.ui.registry.addButton('gap_btn', {
+        text: 'Gap',
+        onAction: function () {
+          // Open window
+          editor.selection.setContent("<gap>" + editor.selection.getContent() + "</gap>");
+        }
+      });
+
+      return {
+        getMetadata: function () {
+          return  {
+            name: "Example plugin",
+            url: "http://exampleplugindocsurl.com"
+          };
+        }
+      };
+    });
+
     tinymce.init({
       selector: 'textarea#transcription',
       branding: false,
       statusbar: false,
-      plugins: false,
-      toolbar: "removeformat",
+      plugins: ["example"],
+      toolbar: "gap_btn removeformat",
       menubar: false,
       protect: [/[\n\f\r\t\v]/g],
       extended_valid_elements : "gap,unclear,hi,special",
@@ -81,7 +101,7 @@
       content_css: "/editor.css"
     });
 
-    ed = tinymce.activeEditor;
+    //editor.insertContent('<gap>BUTTS</gap>');
 
     map = L.map('map', {
       center: [0, 0],
