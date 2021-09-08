@@ -67,11 +67,17 @@
       branding: false,
       statusbar: false,
       plugins: false,
-      toolbar: false,
+      toolbar: "removeformat",
       menubar: false,
       protect: [/[\n\f\r\t\v]/g],
       extended_valid_elements : "gap,unclear,hi,special",
       custom_elements: "gap,unclear,hi,special",
+      formats: {
+        removeformat: [
+          // Configures `clear formatting` to remove specified elements regardless of its attributes
+          { selector: 'gap,unclear,hi,special', remove: 'all' }
+        ]
+      },
       content_css: "/editor.css"
     });
 
