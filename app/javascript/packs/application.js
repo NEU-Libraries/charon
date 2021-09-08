@@ -28,6 +28,7 @@ import tinymce from 'tinymce/tinymce';
 import 'tinymce/icons/default';
 // A theme is also required
 import 'tinymce/themes/silver';
+import 'tinymce/plugins/code';
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
