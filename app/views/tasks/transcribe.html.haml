@@ -63,8 +63,19 @@
 
   window.onload = function() {
     tinymce.init({
-      selector: 'textarea#transcription'
+      selector: 'textarea#transcription',
+      branding: false,
+      statusbar: false,
+      plugins: false,
+      toolbar: false,
+      menubar: false,
+      protect: [/[\n\f\r\t\v]/g],
+      extended_valid_elements : "gap,unclear,hi,special",
+      custom_elements: "gap,unclear,hi,special",
+      content_css: "/editor.css"
     });
+
+    ed = tinymce.activeEditor;
 
     map = L.map('map', {
       center: [0, 0],
