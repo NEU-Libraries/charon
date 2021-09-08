@@ -63,12 +63,33 @@
 
   window.onload = function() {
     tinymce.PluginManager.add('example', function(editor, url) {
-      // Add a button that opens a window
+
       editor.ui.registry.addButton('gap_btn', {
         text: 'Gap',
         onAction: function () {
           // Open window
           editor.selection.setContent("<gap>" + editor.selection.getContent() + "</gap>");
+        }
+      });
+      editor.ui.registry.addButton('unclear_btn', {
+        text: 'Unclear',
+        onAction: function () {
+          // Open window
+          editor.selection.setContent("<unclear>" + editor.selection.getContent() + "</unclear>");
+        }
+      });
+      editor.ui.registry.addButton('hi_btn', {
+        text: 'Highlight',
+        onAction: function () {
+          // Open window
+          editor.selection.setContent("<hi>" + editor.selection.getContent() + "</hi>");
+        }
+      });
+      editor.ui.registry.addButton('special_btn', {
+        text: 'Special',
+        onAction: function () {
+          // Open window
+          editor.selection.setContent("<special>" + editor.selection.getContent() + "</special>");
         }
       });
 
@@ -87,7 +108,7 @@
       branding: false,
       statusbar: false,
       plugins: ["example"],
-      toolbar: "gap_btn removeformat",
+      toolbar: "gap_btn | unclear_btn | hi_btn | special_btn | removeformat",
       menubar: false,
       protect: [/[\n\f\r\t\v]/g],
       extended_valid_elements : "gap,unclear,hi,special",
