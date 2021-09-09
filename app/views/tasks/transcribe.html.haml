@@ -29,10 +29,11 @@
     .row
       %table.table.table-bordered
         %tbody
-          - page.notes.each_with_index do |note|
+          - page.notes.each_with_index do |note, i|
             %tr
               %td.align-middle
-                %h6 2
+                %h6
+                  = i + 1
             %tr
               %td{:colspan => "3"}
                 %h6 Comments
