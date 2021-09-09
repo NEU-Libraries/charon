@@ -173,6 +173,15 @@
       //console.log(e.layer.toGeoJSON());
       //console.log(e.layer.getLatLngs());
 
+      $.ajax( {
+        url: "#{notes_path(page_id: page.id)}",
+        type: 'POST',
+        async: false,
+        success: function(result) {
+          console.log('DGC DEBUG' + result)
+        }
+      });
+
       drawnItems.addLayer(layer);
     });
 

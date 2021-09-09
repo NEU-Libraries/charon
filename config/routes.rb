@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :workflows
   resources :works
   resources :interfaces
+  resources :notes
 
   root to: 'pages#home'
 
