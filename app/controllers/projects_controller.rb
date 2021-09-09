@@ -30,9 +30,10 @@ class ProjectsController < CatalogController
     # params[:user_ids]
     # if modify -> redirect
     # if delete, scrub em
-    if params[:commit] == 'Edit'
+    case params[:commit]
+    when 'Edit'
       # take to edit partial with pid list
-    elsif params[:commit] == 'Delete'
+    when 'Delete'
       # delete pid list
     end
     redirect_to(root_path)

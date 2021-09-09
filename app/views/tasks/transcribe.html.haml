@@ -177,9 +177,11 @@
       $.ajax( {
         url: "#{notes_path(page_id: page.id)}",
         type: 'POST',
-        async: false,
-        success: function(result) {
-          console.log('DGC DEBUG' + result)
+        success: function(json) {
+            console.log(json);
+        },
+        error: function(e) {
+            console.log(e.message);
         }
       });
 
