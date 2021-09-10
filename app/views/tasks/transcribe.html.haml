@@ -3,8 +3,8 @@
   = @work.title
 
 - if !@pages.blank?
-  - page = @pages.first
-  = form_tag update_page_path(page), :method => :put do
+  - @page = @pages.first
+  = form_tag update_page_path(@page), :method => :put do
     .row
       %div.mx-auto
         = paginate @pages
@@ -18,7 +18,7 @@
       .col
         .form-group
           %textarea#transcription.form-control.min-vh-100{:name => "page_text", :rows => "3"}
-            = page.text
+            = @page.text
     .row
       .col
       .col
@@ -27,20 +27,7 @@
     %br
 
     .row
-      %table.table.table-bordered
-        %tbody
-          - page.notes.each_with_index do |note, i|
-            %tr
-              %td.align-middle
-                %h6
-                  = i + 1
-            %tr
-              %td{:colspan => "3"}
-                %h6 Comments
-                .input-group.mb-3
-                  %input.form-control{"aria-describedby" => "basic-addon3", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
-                  .input-group-append
-                    %button.btn.btn-outline-primary{:type => "button"} Add Comment
+      = render 'notes/table'
 
     .row
       %div.mx-auto
@@ -133,7 +120,7 @@
     });
 
     var baseLayer = L.tileLayer.iiif(
-      "#{iiif_url}/2/#{page.thumbnail}/info.json"
+      "#{iiif_url}/2/#{@page.thumbnail}/info.json"
     ).addTo(map);
 
     // Initialise the FeatureGroup to store editable layers
@@ -174,15 +161,8 @@
       //console.log(e.layer.toGeoJSON());
       //console.log(e.layer.getLatLngs());
 
-      $.ajax( {
-        url: "#{notes_path(page_id: page.id)}",
-        type: 'POST',
-        success: function(json) {
-            console.log(json);
-        },
-        error: function(e) {
-            console.log(e.message);
-        }
+      $.post( "#{notes_path(page_id: @page.id)}", function( data ) {
+        console.log( JSON.stringify(data) );
       });
 
       drawnItems.addLayer(layer);

@@ -1,0 +1,8 @@
+%table.table.table-bordered
+  %tbody
+    - @page.notes.each_with_index do |note, i|
+      %tr
+        %td.align-middle
+          %h6
+            = i + 1
+      = render 'notes/note'
