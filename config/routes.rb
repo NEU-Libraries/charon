@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :works
   resources :interfaces
   resources :notes
+  resources :comments
 
   root to: 'pages#home'
 
