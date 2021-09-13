@@ -26,7 +26,7 @@
 
     %br
 
-    .row
+    #notes.row
       = render 'notes/table'
 
     .row
@@ -162,7 +162,10 @@
       //console.log(e.layer.getLatLngs());
 
       $.post( "#{notes_path(page_id: @page.id)}", function( data ) {
-        console.log( JSON.stringify(data) );
+        //console.log( JSON.stringify(data) );
+        //data is new html?
+        $('div#notes').html(data);
+        console.log(data);
       });
 
       drawnItems.addLayer(layer);
