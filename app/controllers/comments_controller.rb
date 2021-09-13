@@ -8,4 +8,13 @@ class CommentsController < ApplicationController
       format.json { render json: { id: saved_comment.noid } }
     end
   end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+
+    respond_to do |format|
+      format.json { render json: { deleted: 'true' } }
+    end
+  end
 end

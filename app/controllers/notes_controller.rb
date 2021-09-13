@@ -8,4 +8,13 @@ class NotesController < ApplicationController
       format.json { render json: { id: saved_note.noid } }
     end
   end
+
+  def destroy
+    note = Note.find(params[:id])
+    note.destroy
+
+    respond_to do |format|
+      format.json { render json: { deleted: 'true' } }
+    end
+  end
 end
