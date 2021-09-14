@@ -124,7 +124,7 @@
     ).addTo(map);
 
     // Initialise the FeatureGroup to store editable layers
-    var drawnItems = new L.FeatureGroup();
+    drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
 
     // Initialise the draw control and pass it the FeatureGroup of editable layers
@@ -158,14 +158,14 @@
 
       //console.log([northwest, northeast, southeast, southwest]);
 
-      //console.log(e.layer.toGeoJSON());
+      console.log(e.layer.toGeoJSON());
       //console.log(e.layer.getLatLngs());
 
-      $.post( "#{notes_path(page_id: @page.id)}", function( data ) {
-        //console.log( JSON.stringify(data) );
-        //data is new html?
-        $('div#notes').html(data);
-        console.log(data);
+      $.post({
+        url: "#{notes_path(page_id: @page.id)}",
+        dataType: "html"
+      }).done(function(response) {
+          $('div#notes').html(response);
       });
 
       drawnItems.addLayer(layer);
