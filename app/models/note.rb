@@ -3,9 +3,7 @@
 class Note < Resource
   attribute :region, Valkyrie::Types::String
   attribute :color, Valkyrie::Types::String
-  attribute :certainty, Valkyrie::Types::String
-  attribute :meaning, Valkyrie::Types::String
-  attribute :alternate_meanings, Valkyrie::Types::Set.of(Valkyrie::Types::String).meta(ordered: true)
+  attribute :leaflet_id, Valkyrie::Types::String
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
 
   def comments

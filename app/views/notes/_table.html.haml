@@ -5,4 +5,15 @@
         %td.align-middle
           %h6
             = i + 1
+      %tr
+        %td.align-middle
+          = note.inspect
+          = "#{note.region}"
+          :javascript
+            $(document).ready(function() {
+              layer =  new L.rectangle(JSON.parse('#{note.region.html_safe}'));
+              layer.bindTooltip('#{note.leaflet_id}');
+              layer.options.color = '#{note.color}';
+              drawnItems.addLayer(layer);
+            });
       = render 'notes/note'

@@ -3,9 +3,11 @@
 class NotesController < ApplicationController
   def create
     @page = Page.find(params[:page_id])
-    note = Note.new(a_member_of: params[:page_id])
+    note = Note.new(a_member_of: params[:page_id],
+                    region: params[:latlng],
+                    color: params[:color],
+                    leaflet_id: params[:lid])
     Valkyrie.config.metadata_adapter.persister.save(resource: note)
-    logger.info(params.inspect)
     respond_to do |format|
       format.js { render 'notes/_table', layout: false and return }
     end

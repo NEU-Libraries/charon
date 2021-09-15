@@ -151,13 +151,11 @@
       e.layer.options.color = color;
       e.layer.bindTooltip(lid.toString());
 
-      //setLatLngs
-
       var exportObject = {
         "lid": lid,
         "color": color,
-        "page_id": @page.id,
-        "latlng": layer.toGeoJSON().geometry.coordinates
+        "page_id": "#{@page.id}",
+        "latlng": JSON.stringify(layer._latlngs)
       };
 
       console.log(exportObject);
