@@ -156,6 +156,7 @@
       var exportObject = {
         "lid": lid,
         "color": color,
+        "page_id": @page.id,
         "latlng": layer.toGeoJSON().geometry.coordinates
       };
 
@@ -165,7 +166,7 @@
       //console.log(e.layer._leaflet_id);
 
       $.post({
-        url: "#{notes_path(page_id: @page.id)}",
+        url: "#{notes_path}",
         data : exportObject,
         dataType: "html"
       }).done(function(response) {
