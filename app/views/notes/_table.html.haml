@@ -11,9 +11,13 @@
           = "#{note.region}"
           :javascript
             $(document).ready(function() {
-              layer =  new L.rectangle(JSON.parse('#{note.region.html_safe}'));
-              layer.bindTooltip('#{note.leaflet_id}');
-              layer.options.color = '#{note.color}';
-              drawnItems.addLayer(layer);
+              console.log(drawnItems.getLayer(parseInt('#{note.leaflet_id}')));
+              if(drawnItems.getLayer(parseInt('#{note.leaflet_id}')) == null){
+                layer =  new L.rectangle(JSON.parse('#{note.region.html_safe}'));
+                layer._leaflet_id = parseInt('#{note.leaflet_id}')
+                layer.bindTooltip('#{note.leaflet_id}');
+                layer.options.color = '#{note.color}';
+                drawnItems.addLayer(layer);
+              }
             });
       = render 'notes/note'
