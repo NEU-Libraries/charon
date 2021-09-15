@@ -145,30 +145,32 @@
       var type = e.layerType
       var layer = e.layer;
 
-      e.layer.options.color = getUniqueColor(Math.floor(Math.random() * 1024) + 1);
-      e.layer.bindTooltip('Hi There!');
+      var lid = L.stamp(layer);
+      var color = getUniqueColor(Math.floor(Math.random() * 1024) + 1);
 
-      // Do whatever else you need to. (save to db, add to map etc)
-      //const corners = e.layer.getBounds();
+      e.layer.options.color = color;
+      e.layer.bindTooltip(lid.toString());
 
-      //const northwest = corners.getNorthWest();
-      //const northeast = corners.getNorthEast();
-      //const southeast = corners.getSouthEast();
-      //const southwest = corners.getSouthWest();
+      //setLatLngs
 
-      //console.log([northwest, northeast, southeast, southwest]);
+      var exportObject = {
+        "lid": lid,
+        "color": color,
+        "latlng": layer.toGeoJSON().geometry.coordinates
+      };
 
-      console.log(e.layer.toGeoJSON());
-      //console.log(e.layer.getLatLngs());
+      console.log(exportObject);
+
+      drawnItems.addLayer(layer);
+      //console.log(e.layer._leaflet_id);
 
       $.post({
         url: "#{notes_path(page_id: @page.id)}",
+        data : exportObject,
         dataType: "html"
       }).done(function(response) {
           $('div#notes').html(response);
       });
-
-      drawnItems.addLayer(layer);
     });
 
 
