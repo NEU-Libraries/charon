@@ -4,7 +4,7 @@
       %tr{ :style => "background-color: #{note.color}; color: white" }
         %td.align-middle
           = note.noid
-          %a.btn.btn-sm.btn-danger.float-right{:href => "#", :role => "button"}
+          = link_to note_path(note), method: :delete, remote: true, class: "btn btn-sm btn-danger float-right" do
             %span.fa.fa-times
           :javascript
             $(document).ready(function() {
