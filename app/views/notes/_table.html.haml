@@ -4,6 +4,8 @@
       %tr{ :style => "background-color: #{note.color}; color: white" }
         %td.align-middle
           = note.noid
+          %a.btn.btn-sm.btn-danger.float-right{:href => "#", :role => "button"}
+            %span.fa.fa-times
           :javascript
             $(document).ready(function() {
               //console.log(drawnItems.getLayer('#{note.noid}'));
@@ -15,4 +17,4 @@
                 drawnItems.addLayer(layer);
               }
             });
-      = render 'notes/note'
+      = render 'notes/comments'
