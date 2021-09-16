@@ -153,9 +153,9 @@
         dataType: "text"
       }).done(function(response) {
         noid = response;
-
         var color = getUniqueColor(Math.floor(Math.random() * 1024) + 1);
 
+        e.layer._leaflet_id = noid;
         e.layer.options.color = color;
         e.layer.bindTooltip(noid.toString());
 

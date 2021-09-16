@@ -11,7 +11,7 @@
               //console.log(drawnItems.getLayer('#{note.noid}'));
               if(drawnItems.getLayer('#{note.noid}') == null){
                 layer =  new L.rectangle(JSON.parse('#{note.region.html_safe}'));
-                layer._leaflet_id = '#{note.noid}'
+                layer._leaflet_id = '#{note.noid}';
                 layer.bindTooltip('#{note.noid}');
                 layer.options.color = '#{note.color}';
                 drawnItems.addLayer(layer);
