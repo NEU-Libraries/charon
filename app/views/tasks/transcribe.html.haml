@@ -151,6 +151,8 @@
       e.layer.options.color = color;
       e.layer.bindTooltip(lid.toString());
 
+      drawnItems.addLayer(layer);
+
       var exportObject = {
         "lid": lid,
         "color": color,
@@ -158,9 +160,7 @@
         "latlng": JSON.stringify(layer._latlngs)
       };
 
-      console.log(exportObject);
-
-      drawnItems.addLayer(layer);
+      //console.log(exportObject);
       //console.log(e.layer._leaflet_id);
 
       $.post({
