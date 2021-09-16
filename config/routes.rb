@@ -48,6 +48,9 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
+  # mint id
+  post '/mint_id' => 'application#mint_id', as: 'mint_id'
+
   # dashboards
   get '/admin/dashboard' => 'admin#dashboard'
   get '/users/dashboard' => 'users#dashboard'

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   helper_method :mint_id
 
   def mint_id
-    Minter.mint
+    render inline: Minter.mint
   end
 
   # Best to ask for breadcrumbs everywhere

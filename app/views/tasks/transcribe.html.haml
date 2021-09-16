@@ -146,30 +146,38 @@
       var layer = e.layer;
 
       //var lid = L.stamp(layer);
-      var noid = "#{mint_id}";
-      var color = getUniqueColor(Math.floor(Math.random() * 1024) + 1);
-
-      e.layer.options.color = color;
-      e.layer.bindTooltip(noid.toString());
-
-      drawnItems.addLayer(layer);
-
-      var exportObject = {
-        "noid": noid,
-        "color": color,
-        "page_id": "#{@page.id}",
-        "latlng": JSON.stringify(layer._latlngs)
-      };
-
-      //console.log(exportObject);
-      //console.log(e.layer._leaflet_id);
-
+      //var noid = "#{mint_id}";
+      var noid;
       $.post({
-        url: "#{notes_path}",
-        data : exportObject,
-        dataType: "html"
+        url: "#{mint_id_path}",
+        dataType: "text"
       }).done(function(response) {
-          $('div#notes').html(response);
+        noid = response;
+
+        var color = getUniqueColor(Math.floor(Math.random() * 1024) + 1);
+
+        e.layer.options.color = color;
+        e.layer.bindTooltip(noid.toString());
+
+        drawnItems.addLayer(layer);
+
+        var exportObject = {
+          "noid": noid,
+          "color": color,
+          "page_id": "#{@page.id}",
+          "latlng": JSON.stringify(layer._latlngs)
+        };
+
+        //console.log(exportObject);
+        //console.log(e.layer._leaflet_id);
+
+        $.post({
+          url: "#{notes_path}",
+          data : exportObject,
+          dataType: "html"
+        }).done(function(response) {
+            $('div#notes').html(response);
+        });
       });
     });
 
