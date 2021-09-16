@@ -1,21 +1,16 @@
 %table.table.table-bordered
   %tbody
     - @page.notes.each_with_index do |note, i|
-      %tr
+      %tr{ :style => "background-color: #{note.color}; color: white" }
         %td.align-middle
-          %h6
-            = i + 1
-      %tr
-        %td.align-middle
-          = note.inspect
-          = "#{note.region}"
+          = note.noid
           :javascript
             $(document).ready(function() {
-              console.log(drawnItems.getLayer(parseInt('#{note.leaflet_id}')));
-              if(drawnItems.getLayer(parseInt('#{note.leaflet_id}')) == null){
+              //console.log(drawnItems.getLayer('#{note.noid}'));
+              if(drawnItems.getLayer('#{note.noid}') == null){
                 layer =  new L.rectangle(JSON.parse('#{note.region.html_safe}'));
-                layer._leaflet_id = parseInt('#{note.leaflet_id}')
-                layer.bindTooltip('#{note.leaflet_id}');
+                layer._leaflet_id = '#{note.noid}'
+                layer.bindTooltip('#{note.noid}');
                 layer.options.color = '#{note.color}';
                 drawnItems.addLayer(layer);
               }

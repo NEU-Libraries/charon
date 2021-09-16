@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
   include MimeHelper
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :mint_id
+
+  def mint_id
+    Minter.mint
+  end
 
   # Best to ask for breadcrumbs everywhere
   # and just avoid Croutons NotImplementedError
