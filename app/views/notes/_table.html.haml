@@ -1,8 +1,9 @@
-%table.table.table-bordered
-  %tbody
-    - @page.notes.each_with_index do |note, i|
-      %tr{ :style => "background-color: #{note.color}; color: white" }
-        %td.align-middle
+- @page.notes.each_with_index do |note, i|
+  %table.table.table-bordered
+    %tbody
+      %tr
+        %td{ :style => "background-color: #{note.color}; color: white; width: 10px" }
+        %td.align-middle{:colspan => "4"}
           = note.noid
           = link_to note_path(note), method: :delete, remote: true, class: "btn btn-sm btn-danger float-right" do
             %span.fa.fa-times
@@ -17,4 +18,4 @@
                 drawnItems.addLayer(layer);
               }
             });
-      = render 'notes/comments'
+        = render 'notes/comments'
