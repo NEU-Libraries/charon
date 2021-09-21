@@ -50,12 +50,6 @@
   }
 
   window.onload = function() {
-
-    $(document).on('ajax:success', '.delete-button', event => {
-      const [response, status, xhr] = event.detail;
-      $('div#notes').html(xhr.responseText);
-    });
-
     tinymce.PluginManager.add('example', function(editor, url) {
 
       editor.ui.registry.addButton('gap_btn', {
@@ -187,7 +181,13 @@
       });
     });
 
-
+    $(document).on('ajax:success', '.delete-button', event => {
+      const [response, status, xhr] = event.detail;
+      drawnItems.eachLayer(function (layer) {
+        drawnItems.removeLayer(layer);
+      });
+      $('div#notes').html(xhr.responseText);
+    });
   }
 
 -# new L.Draw.Rectangle(map, drawControl.options.rectangle).enable();
