@@ -50,6 +50,12 @@
   }
 
   window.onload = function() {
+
+    $(document).on('ajax:success', '.delete-button', event => {
+      const [response, status, xhr] = event.detail;
+      $('div#notes').html(xhr.responseText);
+    });
+
     tinymce.PluginManager.add('example', function(editor, url) {
 
       editor.ui.registry.addButton('gap_btn', {

@@ -15,10 +15,11 @@ class NotesController < ApplicationController
 
   def destroy
     note = Note.find(params[:id])
+    @page = Page.find("ffbg8md")
     Valkyrie.config.metadata_adapter.persister.delete(resource: note)
 
     respond_to do |format|
-      format.json { render json: { deleted: 'true' } }
+      format.js { render 'notes/_table', content_type: 'text/html', layout: false and return }
     end
   end
 end
