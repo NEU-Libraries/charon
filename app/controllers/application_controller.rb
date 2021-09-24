@@ -14,7 +14,9 @@ class ApplicationController < ActionController::Base
   helper_method :mint_id
 
   def mint_id
-    render plain: Minter.mint
+    respond_to do |format|
+      format.html { render plain: Minter.mint }
+    end
   end
 
   # Best to ask for breadcrumbs everywhere
