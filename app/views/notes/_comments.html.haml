@@ -3,7 +3,7 @@
     %h6 Comments
     = form_tag comments_path do
       .input-group.mb-3
-        %input.form-control{"aria-describedby" => "basic-addon3", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
+        %input.form-control{:name => "comment", "aria-describedby" => "basic-addon3", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
         .input-group-append
           %button.btn.btn-outline-primary{:href => "#", :role => "button", :type => "submit", :remote => "true"} Add Comment
           //%a.btn.btn-danger{:href => "#", :role => "button"} ×
