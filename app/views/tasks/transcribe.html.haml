@@ -4,12 +4,13 @@
 
 - if !@pages.blank?
   - @page = @pages.first
-  = form_tag update_page_path(@page), :method => :put do
-    .row
-      %div.mx-auto
-        = paginate @pages
 
-    .container-lg.work-metadata
+  .row
+    %div.mx-auto
+      = paginate @pages
+
+  .container-lg.work-metadata
+  = form_tag update_page_path(@page), :method => :put do
     .row
       .col
         #map{ :style => "height: 800px" }
@@ -24,14 +25,14 @@
       .col
         %input.btn.btn-primary.float-right{:href => "#", :role => "button", :type => "submit", :value => "Update"}
 
-    %br
+  %br
 
-    #notes.row
-      = render 'notes/table'
+  #notes.row
+    = render 'notes/table'
 
-    .row
-      %div.mx-auto
-        = paginate @pages
+  .row
+    %div.mx-auto
+      = paginate @pages
 
 :javascript
   var map;
