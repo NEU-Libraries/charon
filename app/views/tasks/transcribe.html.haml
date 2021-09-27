@@ -38,6 +38,18 @@
   var map;
   var drawControl;
 
+  function drawRegions() {
+    $.get( "#{page_path(@page)}", function( data ) {
+      data["notes"].forEach((note, index) => {
+        layer =  new L.rectangle(note.region);
+        layer._leaflet_id = note.noid;
+        layer.bindTooltip(note.noid);
+        layer.options.color = note.color;
+        drawnItems.addLayer(layer);
+      });
+    });
+  }
+
   function getUniqueColor(n) {
     const rgb = [0, 0, 0];
 
@@ -181,6 +193,8 @@
         });
       });
     });
+
+    drawRegions();
   }
 
 -# new L.Draw.Rectangle(map, drawControl.options.rectangle).enable();
