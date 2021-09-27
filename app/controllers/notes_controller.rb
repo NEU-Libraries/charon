@@ -17,9 +17,5 @@ class NotesController < ApplicationController
     note = Note.find(params[:id])
     @page = note.parent
     Valkyrie.config.metadata_adapter.persister.delete(resource: note)
-
-    respond_to do |format|
-      format.js { render 'notes/_table', content_type: 'text/html', layout: false and return }
-    end
   end
 end

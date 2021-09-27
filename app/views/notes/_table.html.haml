@@ -2,20 +2,5 @@
   %table.table.table-bordered
     %tbody
       %tr
-        %td{ :style => "background-color: #{note.color}; color: white; width: 10px" }
-        %td.align-middle{:colspan => "4"}
-          = note.noid
-          = link_to note_path(note), method: :delete, remote: true, class: "btn btn-sm btn-danger float-right delete-button" do
-            %span.fa.fa-times
-          :javascript
-            $(document).ready(function() {
-              //console.log(drawnItems.getLayer('#{note.noid}'));
-              if(drawnItems.getLayer('#{note.noid}') == null){
-                layer =  new L.rectangle(JSON.parse('#{note.region.html_safe}'));
-                layer._leaflet_id = '#{note.noid}';
-                layer.bindTooltip('#{note.noid}');
-                layer.options.color = '#{note.color}';
-                drawnItems.addLayer(layer);
-              }
-            });
+        = render note
         = render 'notes/comments', note: note

@@ -1,0 +1,5 @@
+%td{ :style => "background-color: #{note.color}; color: white; width: 10px" }
+%td.align-middle{:colspan => "4"}
+  = note.noid
+  = link_to note_path(note), method: :delete, remote: true, class: "btn btn-sm btn-danger float-right delete-button" do
+    %span.fa.fa-times

@@ -6,6 +6,10 @@ class Note < Resource
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
 
   def comments
-    # TODO: helper method to load all comments on a Note
+    children.select { |c| c.instance_of?(Comment) }
+  end
+
+  def to_partial_path
+    "notes/note"
   end
 end

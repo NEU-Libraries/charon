@@ -181,14 +181,6 @@
         });
       });
     });
-
-    $(document).on('ajax:success', '.delete-button', event => {
-      const [response, status, xhr] = event.detail;
-      drawnItems.eachLayer(function (layer) {
-        drawnItems.removeLayer(layer);
-      });
-      $('div#notes').html(xhr.responseText);
-    });
   }
 
 -# new L.Draw.Rectangle(map, drawControl.options.rectangle).enable();

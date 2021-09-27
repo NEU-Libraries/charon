@@ -1,10 +1,12 @@
-%tr
+%tr#comments
   %td{:colspan => "3"}
     %h6 Comments
-    = form_tag comments_path do
-      = hidden_field_tag 'note_id', note.noid
+    = form_tag comments_path, remote: true, class: 'comment-form' do
+      = hidden_field_tag 'note_id', note.id
       .input-group.mb-3
         %input.form-control{:name => "comment", "aria-describedby" => "basic-addon3", "aria-label" => "Comment Text", :placeholder => "Comment Text", :type => "text"}/
         .input-group-append
-          %button.btn.btn-outline-primary{:href => "#", :role => "button", :type => "submit", :remote => "true"} Add Comment
+          %button.btn.btn-outline-primary.comment-button{:href => "#", :role => "button", :type => "submit"} Add Comment
           //%a.btn.btn-danger{:href => "#", :role => "button"} ×
+    - note.comments.each do |comment|
+      = render comment
