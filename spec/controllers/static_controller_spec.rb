@@ -2,5 +2,5 @@
 
 require 'rails_helper'
 
-describe PagesController do
+describe StaticController do
 end

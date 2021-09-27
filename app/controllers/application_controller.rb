@@ -33,11 +33,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_401
-    render template: '/pages/401', layout: 'error', formats: [:html], status: :unauthorized
+    render template: '/static/401', layout: 'error', formats: [:html], status: :unauthorized
   end
 
   def render_403
-    render template: '/pages/403', layout: 'error', formats: [:html], status: :forbidden
+    render template: '/static/403', layout: 'error', formats: [:html], status: :forbidden
   end
 
   def find_resource

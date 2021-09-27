@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PagesController < CatalogController
+class StaticController < CatalogController
   include Searchable
 
   before_action :searchable, only: [:home]

@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   resources :notes
   resources :comments
 
-  root to: 'pages#home'
+  root to: 'static#home'
 
   # mint id
   post '/mint_id' => 'application#mint_id', as: 'mint_id'
