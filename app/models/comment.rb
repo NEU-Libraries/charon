@@ -6,6 +6,6 @@ class Comment < Resource
   attribute :a_member_of, Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true)
 
   def to_partial_path
-    "comments/comment"
+    'comments/comment'
   end
 end

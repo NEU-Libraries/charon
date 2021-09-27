@@ -8,5 +8,6 @@
         .input-group-append
           %button.btn.btn-outline-primary.comment-button{:href => "#", :role => "button", :type => "submit"} Add Comment
           //%a.btn.btn-danger{:href => "#", :role => "button"} ×
-    - note.comments.each do |comment|
-      = render comment
+
+- note.comments.each do |comment|
+  = render comment

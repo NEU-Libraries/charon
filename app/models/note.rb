@@ -10,6 +10,6 @@ class Note < Resource
   end
 
   def to_partial_path
-    "notes/note"
+    'notes/note'
   end
 end
