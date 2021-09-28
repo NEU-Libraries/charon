@@ -1,2 +1,3 @@
 console.log("DGC DEBUG - #{@saved_comment.noid}");
-$('#comments').after("#{j render @saved_comment}");
+console.log('DGC DEBUG 2 #' + "#{@note.noid}")
+$('#' + "#{@note.noid}").after("#{j render @saved_comment}");
