@@ -1,5 +1,7 @@
 %tr
   %td{:colspan => "2"}
     .small{:style => "margin-bottom: 5px;"}
+      = comment.user_name
+      = " - "
       = comment.created_at.strftime('%a, %d %b %Y %H:%M:%S')
     = comment.message

@@ -3,7 +3,7 @@
 class CommentsController < ApplicationController
   def create
     @note = Note.find(params[:note_id])
-    comment = Comment.new(a_member_of: params[:note_id], message: params[:comment])
+    comment = Comment.new(a_member_of: params[:note_id], message: params[:comment], user_id: current_user.id)
     @saved_comment = Valkyrie.config.metadata_adapter.persister.save(resource: comment)
   end
 

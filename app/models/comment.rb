@@ -8,4 +8,10 @@ class Comment < Resource
   def to_partial_path
     'comments/comment'
   end
+
+  def user_name
+    return User.find(user_id).to_s if user_id.present?
+
+    ''
+  end
 end
