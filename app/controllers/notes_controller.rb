@@ -14,8 +14,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    note = Note.find(params[:id])
-    @page = note.parent
-    Valkyrie.config.metadata_adapter.persister.delete(resource: note)
+    @note = Note.find(params[:id])
+    Valkyrie.config.metadata_adapter.persister.delete(resource: @note)
   end
 end

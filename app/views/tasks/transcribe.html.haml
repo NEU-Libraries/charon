@@ -39,6 +39,9 @@
   var drawControl;
 
   function drawRegions() {
+    drawnItems.eachLayer(function (layer) {
+      drawnItems.removeLayer(layer);
+    });
     $.get( "#{page_path(@page)}", function( data ) {
       data["notes"].forEach((note, index) => {
         layer =  new L.rectangle(note.region);
