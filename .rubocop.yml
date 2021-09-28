@@ -1,4 +1,6 @@
 require: rubocop-rails
+Metrics/ClassLength:
+  Max: 120
 Metrics/AbcSize:
   Max: 20
   Exclude:
