@@ -3,3 +3,4 @@ $('#' + "#{@note.noid}").after("#{j render @saved_comment}");
 } else {
 $('#' + "#{@note.noid}").siblings(":last").after("#{j render @saved_comment}");
 }
+$('#' + "#{@note.noid}" + '-text').val('');
