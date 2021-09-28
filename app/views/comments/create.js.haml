@@ -1,3 +1,5 @@
-console.log("DGC DEBUG - #{@saved_comment.noid}");
-console.log('DGC DEBUG 2 #' + "#{@note.noid}")
+if ($('#' + "#{@note.noid}").next().length == 0) {
 $('#' + "#{@note.noid}").after("#{j render @saved_comment}");
+} else {
+$('#' + "#{@note.noid}").siblings(":last").after("#{j render @saved_comment}");
+}
