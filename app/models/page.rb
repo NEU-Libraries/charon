@@ -18,10 +18,14 @@ class Page < FileSet
   end
 
   def png
-    children.select { |c| !c.instance_of?(Note) && c.original_filename.first.end_with?('png') }.first
+    blobs.select { |c| c.original_filename.first.end_with?('png') }.first
   end
 
   def notes
     children.select { |c| c.instance_of?(Note) }
+  end
+
+  def blobs
+    children.select { |c| c.instance_of?(Blob) }
   end
 end
