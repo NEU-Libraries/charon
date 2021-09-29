@@ -18,7 +18,7 @@ class Page < FileSet
   end
 
   def png
-    children.select { |c| c.original_filename.first.end_with?('png') }.first
+    children.select { |c| !c.instance_of?(Note) && c.original_filename.first.end_with?('png') }.first
   end
 
   def notes
