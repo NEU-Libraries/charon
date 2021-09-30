@@ -193,6 +193,8 @@
           dataType: "html"
         }).done(function(response) {
             $('div#notes').html(response);
+            $('#' + noid)[0].scrollIntoView();
+            $('#' + noid).parent().parent().delay(100).fadeOut().fadeIn('slow');
         });
       });
     });
