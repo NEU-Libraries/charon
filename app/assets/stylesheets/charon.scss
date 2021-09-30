@@ -190,3 +190,13 @@ footer {
 .table>tbody .hidden-row {
   padding: 0 8px;
 }
+
+/* basic positioning */
+.legend { list-style: none; padding: 0px; }
+.legend li { float: left; margin-right: 10px; }
+.legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 7px 7px 7px 0px; }
+/* your colors */
+.legend .gap { background-color: red; }
+.legend .unclear { background-color: blue; }
+.legend .hi { background-color: green; }
+.legend .special { background-color: orange; }

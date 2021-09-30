@@ -17,6 +17,20 @@
         -# .viewer-wrapper
         -#   %iframe{:height => "800", :width => "600", :allowfullscreen => "true", "aria-label" => "image view", :frameborder => "0", :src => "#{universal_viewer_base_url}#?manifest=#{single_manifest_path(page.thumbnail)}&config=#{universal_viewer_config_url}"}
       .col
+        %ul.legend
+          %li
+            %span.gap
+            %small Gap
+          %li
+            %span.unclear
+            %small Unclear
+          %li
+            %span.hi
+            %small Highlight
+          %li
+            %span.special
+            %small Special
+        .clearfix
         .form-group
           %textarea#transcription.form-control.min-vh-100{:name => "page_text", :rows => "3"}
             = @page.text
