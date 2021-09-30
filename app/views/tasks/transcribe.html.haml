@@ -184,8 +184,7 @@
           "latlng": JSON.stringify(layer._latlngs)
         };
 
-        //console.log(exportObject);
-        //console.log(e.layer._leaflet_id);
+        $('div#notes').html("<div class='col text-center'><div class='spinner-border' role='status'><span class='sr-only'>Loading...</span></div></div><br/><br/>");
 
         $.post({
           url: "#{notes_path}",
