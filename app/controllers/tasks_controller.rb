@@ -43,8 +43,6 @@ class TasksController < ApplicationController
     saved_page = update_text
     TeiService.new({ stack_id: saved_page.parent.noid }).run
     flash[:notice] = 'Updated page'
-    # redirect_to work_path(saved_page.parent.parent.noid)
-    # redirect_back(fallback_location: fallback_location)
     redirect_back fallback_location: work_path(saved_page.parent.parent.noid)
   end
 
