@@ -32,6 +32,7 @@ class TasksController < ApplicationController
   end
 
   def transcribe
+    # Claim work
     stack = @work.stacks&.first
     return if stack.nil?
 
