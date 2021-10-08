@@ -61,7 +61,7 @@ class LiberaService
       @file_list << image_file_path
       page_img.write(image_file_path) { self.depth = 8 }
 
-      populate_resource(image_file_path, @page)
+      populate_resource(image_file_path, @page.id)
     end
 
     def make_jp2
@@ -71,7 +71,7 @@ class LiberaService
       jp2_path = "#{Libera.configuration.working_dir}/#{jp2_file_name}"
       jp2.write(jp2_path)
 
-      populate_resource(jp2_path, @page, Valkyrie::Vocab::PCDMUse.ThumbnailImage)
+      populate_resource(jp2_path, @page.id, Valkyrie::Vocab::PCDMUse.ThumbnailImage)
     end
 
     def make_txt
@@ -80,13 +80,15 @@ class LiberaService
       text_file_name = "pdf-page-#{@page_number}.txt"
       text_file_path = "#{Libera.configuration.working_dir}/#{text_file_name}"
 
+      @page = @page.reload
       @page.text = txt
       @page = Valkyrie.config.metadata_adapter.persister.save(resource: @page)
 
-      populate_resource(text_file_path, @page)
+      populate_resource(text_file_path, @page.id)
     end
 
-    def populate_resource(file_path, resource, use = Valkyrie::Vocab::PCDMUse.ServiceFile)
+    def populate_resource(file_path, resource_id, use = Valkyrie::Vocab::PCDMUse.ServiceFile)
+      resource = Resource.find(resource_id)
       resource.member_ids += [
         create_blob(create_file(file_path, resource).id, file_path.split('/').last, use).id
       ]

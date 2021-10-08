@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Resource < Valkyrie::Resource
+  enable_optimistic_locking
   include Charon::Resource::AccessControls
 
   attribute :alternate_ids,
@@ -14,6 +15,10 @@ class Resource < Valkyrie::Resource
 
   def to_param
     noid
+  end
+
+  def reload
+    Resource.find(id)
   end
 
   def self.find(id)
