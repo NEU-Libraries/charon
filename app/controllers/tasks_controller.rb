@@ -64,6 +64,14 @@ class TasksController < ApplicationController
     def assign_claimant
       @work.claimant = current_user.id
       metadata_adapter.persister.save(resource: @work)
+
+      claim_state = Minerva::State.new(
+        creator_id: minerva_user_id(current_user.id),
+        work_id: minerva_work_id(@work.noid),
+        status: Status.claimed.name
+      )
+
+      raise StandardError, claim_state.errors.full_messages unless claim_state.save
     end
 
     def find_work
