@@ -2,6 +2,7 @@
 
 class Status < Enumerations::Base
   value :assigned,      name: 'Assigned'
+  value :claimed,       name: 'Claimed'
   value :in_progress,   name: 'In Progress'
   value :inactive,      name: 'Inactive'
   value :complete,      name: 'Complete'

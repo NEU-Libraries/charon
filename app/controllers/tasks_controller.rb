@@ -33,6 +33,7 @@ class TasksController < ApplicationController
 
   def transcribe
     # Claim work
+    assign_claimant
     stack = @work.stacks&.first
     return if stack.nil?
 
@@ -59,6 +60,11 @@ class TasksController < ApplicationController
   end
 
   private
+
+    def assign_claimant
+      @work.claimant = current_user.id
+      metadata_adapter.persister.save(resource: @work)
+    end
 
     def find_work
       @work = Work.find(params[:id])
