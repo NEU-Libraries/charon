@@ -14,7 +14,7 @@ class FindByLocker
   end
 
   def find_by_locker(locker)
-    internal_array = "[\"#{locker}\"]"
+    internal_array = "[#{locker}]"
     run_query(query, internal_array)
   end
 
