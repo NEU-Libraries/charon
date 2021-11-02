@@ -4,10 +4,23 @@ class Resource < Valkyrie::Resource
   enable_optimistic_locking
   include Charon::Resource::AccessControls
 
+  attribute :locked, Valkyrie::Types::Hash
   attribute :alternate_ids,
             Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true).default {
               [Valkyrie::ID.new(Minter.mint)]
             }
+
+  def lock(user_id)
+    self.locked = { user_id: user_id, time: DateTime.now, duration: 1.hour }
+  end
+
+  def unlock
+    self.locked = nil
+  end
+
+  def locked?
+    !locked.nil?
+  end
 
   def noid
     alternate_ids.first.to_s

@@ -21,7 +21,9 @@ class User < ApplicationRecord
 
   def projects; end
 
-  def claims; end
+  def claims
+    # TODO
+  end
 
   def last_action(project)
     minerva_work_ids = Minerva::Work.where(auid: project.works.map(&:noid).to_a).ids
