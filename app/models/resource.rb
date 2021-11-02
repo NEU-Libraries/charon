@@ -4,14 +4,16 @@ class Resource < Valkyrie::Resource
   enable_optimistic_locking
   include Charon::Resource::AccessControls
 
-  attribute :locked, Valkyrie::Types::Hash
+  attribute :locker, Valkyrie::Types::Integer.optional # need to be able to search by this
+  attribute :lock_date, Valkyrie::Types::DateTime.optional
   attribute :alternate_ids,
             Valkyrie::Types::Set.of(Valkyrie::Types::ID).meta(ordered: true).default {
               [Valkyrie::ID.new(Minter.mint)]
             }
 
   def lock(user_id)
-    self.locked = { user_id: user_id, time: DateTime.now, duration: 1.hour }
+    self.locker = user_id
+    self.lock_date = DateTime.now
   end
 
   def unlock
@@ -20,7 +22,7 @@ class Resource < Valkyrie::Resource
 
   def locked?
     # if not nil, check time
-    return DateTime.now < locked[:time] + locked[:duration] unless locked.nil?
+    return DateTime.now < lock_date + 1.hour unless locked.nil?
 
     false
   end
