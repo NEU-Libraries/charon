@@ -19,7 +19,10 @@ class Resource < Valkyrie::Resource
   end
 
   def locked?
-    !locked.nil?
+    # if not nil, check time
+    return DateTime.now < locked[:time] + locked[:duration] unless locked.nil?
+
+    false
   end
 
   def noid
