@@ -17,7 +17,8 @@ class Resource < Valkyrie::Resource
   end
 
   def unlock
-    self.locked = nil
+    self.locker = nil
+    self.lock_date = nil
   end
 
   def locked?
