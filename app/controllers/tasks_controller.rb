@@ -32,8 +32,6 @@ class TasksController < ApplicationController
   end
 
   def transcribe
-    # Claim work
-    assign_claimant
     stack = @work.stacks&.first
     return if stack.nil?
 
@@ -55,8 +53,7 @@ class TasksController < ApplicationController
   def publish; end
 
   def claim
-    # get list of tasks from workflow
-    # search work history for in progress and completed tasks
+    assign_claimant
   end
 
   private
