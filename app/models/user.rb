@@ -19,11 +19,6 @@ class User < ApplicationRecord
     user.capacity = Capacity.user if user.capacity.nil?
   end
 
-  def release_locks
-    # TODO: search DB for soft locks and let them go
-    # Lock on interface launch, unlock when paginating etc.
-  end
-
   def projects; end
 
   def claims
