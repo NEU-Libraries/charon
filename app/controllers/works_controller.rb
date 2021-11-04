@@ -38,7 +38,8 @@ class WorksController < ApplicationController
         user_id: minerva_user_id(params[:user][:id]),
         work_id: minerva_work_id(params[:id]),
         interface_id: @task.id,
-        status: Status.assigned.name
+        status: Status.assigned.name,
+        message: 'assigned'
       )
       notify_user
     end

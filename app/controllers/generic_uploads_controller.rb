@@ -93,7 +93,8 @@ class GenericUploadsController < ApplicationController
         creator_id: minerva_user_id(@generic_upload.user.id),
         work_id: minerva_work_id(@saved_work.noid),
         interface_id: upload_interface.id,
-        status: Status.complete.name
+        status: Status.complete.name,
+        message: 'completed'
       )
       raise StandardError, state.errors.full_messages unless upload_state.save
     end
@@ -102,7 +103,8 @@ class GenericUploadsController < ApplicationController
       upload_approval_state = Minerva::State.new(
         creator_id: minerva_user_id(current_user.id),
         work_id: minerva_work_id(@saved_work.noid),
-        status: Status.available.name
+        status: Status.available.name,
+        message: 'available'
       )
       upload_approval_state.created_at = Time.zone.now + 1
       raise StandardError, state.errors.full_messages unless upload_approval_state.save

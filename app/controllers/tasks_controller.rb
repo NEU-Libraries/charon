@@ -13,7 +13,8 @@ class TasksController < ApplicationController
       creator_id: minerva_user_id(current_user.id),
       work_id: minerva_work_id(@work.noid),
       interface_id: catalog_interface.id,
-      status: Status.in_progress.name
+      status: Status.in_progress.name,
+      message: 'In Progress'
     )
 
     raise StandardError, catalog_state.errors.full_messages unless catalog_state.save
@@ -65,7 +66,8 @@ class TasksController < ApplicationController
       claim_state = Minerva::State.new(
         creator_id: minerva_user_id(current_user.id),
         work_id: minerva_work_id(@work.noid),
-        status: Status.claimed.name
+        status: Status.claimed.name,
+        message: 'Claimed'
       )
 
       raise StandardError, claim_state.errors.full_messages unless claim_state.save
@@ -87,7 +89,8 @@ class TasksController < ApplicationController
       edit_state = Minerva::State.new(
         creator_id: minerva_user_id(current_user.id),
         work_id: minerva_work_id(page.parent.parent.noid),
-        status: Status.edited.name
+        status: Status.edited.name,
+        message: 'Edited'
       )
 
       raise StandardError, edit_state.errors.full_messages unless edit_state.save
