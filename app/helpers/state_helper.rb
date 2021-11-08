@@ -7,15 +7,15 @@ module StateHelper
       work_id: minerva_work_id(work.noid),
       interface_id: upload_interface.id,
       status: Status.complete.name,
-      message: "#{upload.user.name} has uploaded #{work.title}" # Test Admin has uploaded test_pic.jpeg
+      message: "#{upload.user.name} has uploaded #{work.title}"
     )
     raise StandardError, upload_state.errors.full_messages unless upload_state.save
   end
 
-  def make_approval_state
+  def make_approval_state(user_id, work_id)
     upload_approval_state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(saved_work.noid),
+      creator_id: minerva_user_id(user_id),
+      work_id: minerva_work_id(work_id),
       status: Status.available.name,
       message: 'available'
     )
@@ -23,10 +23,10 @@ module StateHelper
     raise StandardError, upload_approval_state.errors.full_messages unless upload_approval_state.save
   end
 
-  def make_edit_state
+  def make_edit_state(user_id, work_id)
     edit_state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(page.parent.parent.noid),
+      creator_id: minerva_user_id(user_id),
+      work_id: minerva_work_id(work_id),
       status: Status.edited.name,
       message: 'Edited'
     )
@@ -34,10 +34,10 @@ module StateHelper
     raise StandardError, edit_state.errors.full_messages unless edit_state.save
   end
 
-  def make_claim_state
+  def make_claim_state(user_id, work_id)
     claim_state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(work.noid),
+      creator_id: minerva_user_id(user_id),
+      work_id: minerva_work_id(work_id),
       status: Status.claimed.name,
       message: 'Claimed'
     )
@@ -45,10 +45,10 @@ module StateHelper
     raise StandardError, claim_state.errors.full_messages unless claim_state.save
   end
 
-  def make_catalog_state
+  def make_catalog_state(user_id, work_id)
     catalog_state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(work.noid),
+      creator_id: minerva_user_id(user_id),
+      work_id: minerva_work_id(work_id),
       interface_id: catalog_interface.id,
       status: Status.in_progress.name,
       message: 'In Progress'
