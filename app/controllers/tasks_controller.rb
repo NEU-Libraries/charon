@@ -8,6 +8,7 @@ class TasksController < ApplicationController
 
   def catalog
     @mods_html = render_mods_display(@work).to_html
+    make_catalog_state(current_user.id, @work.noid)
   end
 
   def update_work
@@ -52,6 +53,7 @@ class TasksController < ApplicationController
     def assign_claimant
       @work.claimant = current_user.id
       metadata_adapter.persister.save(resource: @work)
+      make_claim_state(current_user.id, @work.noid)
     end
 
     def find_work
@@ -66,5 +68,7 @@ class TasksController < ApplicationController
       page
     end
 
-    def log_text_update(page); end
+    def log_text_update(page)
+      make_edit_state(current_user.id, page.parent.parent.noid)
+    end
 end
