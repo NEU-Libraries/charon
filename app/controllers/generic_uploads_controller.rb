@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class GenericUploadsController < ApplicationController
+  include StateHelper
   load_resource except: %i[new create edit update]
 
   before_action :file_presence_check, only: [:create]
-  after_action :make_upload_state, :make_approval_state, only: [:attach]
+  # after_action :make_upload_state, :make_approval_state, only: [:attach]
 
   def new
     @project = Project.find(params[:project_id])
@@ -41,6 +42,7 @@ class GenericUploadsController < ApplicationController
 
     notify_of_attachment
     CreateBlobJob.perform_later(@saved_work.noid, @generic_upload.id, create_file_set(@generic_upload.file_path).noid)
+    make_upload_state(@generic_upload, @saved_work)
 
     redirect_to(work_path(@saved_work))
   end
@@ -86,27 +88,5 @@ class GenericUploadsController < ApplicationController
     def create_file_set(file_path)
       file_set = FileSet.new type: determine_classification(file_path)
       Valkyrie.config.metadata_adapter.persister.save(resource: file_set)
-    end
-
-    def make_upload_state
-      upload_state = Minerva::State.new(
-        creator_id: minerva_user_id(@generic_upload.user.id),
-        work_id: minerva_work_id(@saved_work.noid),
-        interface_id: upload_interface.id,
-        status: Status.complete.name,
-        message: 'completed'
-      )
-      raise StandardError, state.errors.full_messages unless upload_state.save
-    end
-
-    def make_approval_state
-      upload_approval_state = Minerva::State.new(
-        creator_id: minerva_user_id(current_user.id),
-        work_id: minerva_work_id(@saved_work.noid),
-        status: Status.available.name,
-        message: 'available'
-      )
-      upload_approval_state.created_at = Time.zone.now + 1
-      raise StandardError, state.errors.full_messages unless upload_approval_state.save
     end
 end

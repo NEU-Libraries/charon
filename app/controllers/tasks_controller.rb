@@ -8,16 +8,6 @@ class TasksController < ApplicationController
 
   def catalog
     @mods_html = render_mods_display(@work).to_html
-
-    catalog_state = Minerva::State.new(
-      creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(@work.noid),
-      interface_id: catalog_interface.id,
-      status: Status.in_progress.name,
-      message: 'In Progress'
-    )
-
-    raise StandardError, catalog_state.errors.full_messages unless catalog_state.save
   end
 
   def update_work
@@ -62,15 +52,6 @@ class TasksController < ApplicationController
     def assign_claimant
       @work.claimant = current_user.id
       metadata_adapter.persister.save(resource: @work)
-
-      claim_state = Minerva::State.new(
-        creator_id: minerva_user_id(current_user.id),
-        work_id: minerva_work_id(@work.noid),
-        status: Status.claimed.name,
-        message: 'Claimed'
-      )
-
-      raise StandardError, claim_state.errors.full_messages unless claim_state.save
     end
 
     def find_work
@@ -85,14 +66,5 @@ class TasksController < ApplicationController
       page
     end
 
-    def log_text_update(page)
-      edit_state = Minerva::State.new(
-        creator_id: minerva_user_id(current_user.id),
-        work_id: minerva_work_id(page.parent.parent.noid),
-        status: Status.edited.name,
-        message: 'Edited'
-      )
-
-      raise StandardError, edit_state.errors.full_messages unless edit_state.save
-    end
+    def log_text_update(page); end
 end
