@@ -15,7 +15,7 @@ module StateHelper
   def make_approval_state
     upload_approval_state = Minerva::State.new(
       creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(@saved_work.noid),
+      work_id: minerva_work_id(saved_work.noid),
       status: Status.available.name,
       message: 'available'
     )
@@ -37,7 +37,7 @@ module StateHelper
   def make_claim_state
     claim_state = Minerva::State.new(
       creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(@work.noid),
+      work_id: minerva_work_id(work.noid),
       status: Status.claimed.name,
       message: 'Claimed'
     )
@@ -48,7 +48,7 @@ module StateHelper
   def make_catalog_state
     catalog_state = Minerva::State.new(
       creator_id: minerva_user_id(current_user.id),
-      work_id: minerva_work_id(@work.noid),
+      work_id: minerva_work_id(work.noid),
       interface_id: catalog_interface.id,
       status: Status.in_progress.name,
       message: 'In Progress'
