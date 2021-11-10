@@ -17,7 +17,7 @@ module StateHelper
       creator_id: minerva_user_id(user_id),
       work_id: minerva_work_id(work_id),
       status: Status.available.name,
-      message: 'available'
+      message: "#{User.find(user_id).name} has made #{Work.find(work_id).title} available"
     )
     upload_approval_state.created_at = Time.zone.now + 1
     raise StandardError, upload_approval_state.errors.full_messages unless upload_approval_state.save
@@ -28,18 +28,18 @@ module StateHelper
       creator_id: minerva_user_id(user_id),
       work_id: minerva_work_id(work_id),
       status: Status.edited.name,
-      message: 'Edited'
+      message: "#{User.find(user_id).name} has edited #{Work.find(work_id).title}"
     )
 
     raise StandardError, edit_state.errors.full_messages unless edit_state.save
   end
 
-  def make_claim_state(user_id, work_id)
+  def make_claim_state(user_id, work_id) # task not work id?
     claim_state = Minerva::State.new(
       creator_id: minerva_user_id(user_id),
       work_id: minerva_work_id(work_id),
       status: Status.claimed.name,
-      message: 'Claimed'
+      message: "#{User.find(user_id).name} has claimed #{Work.find(work_id).title}"
     )
 
     raise StandardError, claim_state.errors.full_messages unless claim_state.save
@@ -51,7 +51,7 @@ module StateHelper
       work_id: minerva_work_id(work_id),
       interface_id: catalog_interface.id,
       status: Status.in_progress.name,
-      message: 'In Progress'
+      message: "#{User.find(user_id).name} is cataloging #{Work.find(work_id).title}"
     )
 
     raise StandardError, catalog_state.errors.full_messages unless catalog_state.save
