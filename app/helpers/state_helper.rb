@@ -34,7 +34,7 @@ module StateHelper
     raise StandardError, edit_state.errors.full_messages unless edit_state.save
   end
 
-  def make_claim_state(user_id, work_id) # task not work id?
+  def make_claim_state(user_id, work_id)
     claim_state = Minerva::State.new(
       creator_id: minerva_user_id(user_id),
       work_id: minerva_work_id(work_id),
